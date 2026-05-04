@@ -235,7 +235,7 @@ export default function DashboardPage() {
                                 <Tooltip cursor={{fill: 'var(--openpos-bg-subtle)'}} contentStyle={{ borderRadius: '12px', border: 'none' }} />
                                 <Bar dataKey="value" radius={[6, 6, 0, 0]} barSize={40}>
                                     {[0, 1, 2, 3].map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={['#10B981', '#2563EB', '#8B5CF6', '#F59E0B'][index]} />
+                                        <Cell key={`cell-${index}`} fill={['#2563EB', '#3B82F6', '#6366F1', '#94A3B8'][index]} />
                                     ))}
                                 </Bar>
                             </BarChart>
@@ -282,9 +282,9 @@ export default function DashboardPage() {
 function StatCard({ title, value, change, isPositive, icon: Icon, color }) {
     const colorClasses = {
         blue: "text-openpos-blue bg-openpos-blue/10",
-        blue: "text-openpos-blue bg-openpos-blue/10",
+        indigo: "text-indigo-600 bg-indigo-50",
         red: "text-openpos-red bg-openpos-red/10",
-        purple: "text-openpos-purple bg-openpos-purple/10",
+        purple: "text-purple-600 bg-purple-50",
     }
 
     return (
