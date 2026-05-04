@@ -6,6 +6,7 @@ import {
     MoreVertical, ShoppingCart, RefreshCcw,
     XCircle, AlertTriangle
 } from 'lucide-react'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 // Mock Data
@@ -78,8 +79,12 @@ export default function OutOfStockPage() {
                                 <tr key={item.id} className="group hover:bg-openpos-red/[0.02] transition-colors">
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-lg bg-openpos-red/5 flex items-center justify-center text-openpos-red">
-                                                <XCircle size={20} />
+                                            <div className="w-10 h-10 rounded-lg overflow-hidden bg-openpos-bg-subtle shrink-0 relative border border-openpos-border shadow-sm">
+                                                {item.image ? (
+                                                    <Image src={item.image} alt={item.name} fill className="object-cover" />
+                                                ) : (
+                                                    <div className="w-full h-full flex items-center justify-center text-admin-dim"><Package size={18} /></div>
+                                                )}
                                             </div>
                                             <div>
                                                 <p className="text-[14px] font-bold text-admin-value">{item.name}</p>
