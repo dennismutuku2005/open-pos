@@ -64,7 +64,7 @@ export default function PaymentTypesPage() {
                                     <td className="p-4">
                                         <span className={cn(
                                             "px-2.5 py-1 text-[10px] font-bold rounded-md uppercase tracking-wider",
-                                            method.status === 'Active' ? "bg-openpos-green/10 text-openpos-green" : "bg-openpos-red/10 text-openpos-red"
+                                            method.status === 'Active' ? "bg-openpos-blue/10 text-openpos-blue" : "bg-openpos-red/10 text-openpos-red"
                                         )}>
                                             {method.status}
                                         </span>
