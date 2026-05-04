@@ -27,7 +27,7 @@ export default function LedgersPage() {
                         onClick={() => setActiveTab('customers')}
                         className={cn(
                             "px-6 py-2 rounded-lg font-bold text-[12px] uppercase tracking-widest transition-all",
-                            activeTab === 'customers' ? "bg-white text-openpos-blue shadow-sm" : "text-admin-dim"
+                            activeTab === 'customers' ? "bg-card-bg text-openpos-blue shadow-sm" : "text-admin-dim"
                         )}
                     >
                         Customers
@@ -36,7 +36,7 @@ export default function LedgersPage() {
                         onClick={() => setActiveTab('suppliers')}
                         className={cn(
                             "px-6 py-2 rounded-lg font-bold text-[12px] uppercase tracking-widest transition-all",
-                            activeTab === 'suppliers' ? "bg-white text-openpos-blue shadow-sm" : "text-admin-dim"
+                            activeTab === 'suppliers' ? "bg-card-bg text-openpos-blue shadow-sm" : "text-admin-dim"
                         )}
                     >
                         Suppliers
@@ -46,7 +46,7 @@ export default function LedgersPage() {
 
             {/* Quick Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-white border border-openpos-border rounded-2xl p-5 shadow-sm">
+                <div className="bg-card-bg border border-openpos-border rounded-2xl p-5 shadow-sm">
                     <div className="flex items-center gap-3 mb-2">
                         <div className="w-8 h-8 rounded-lg bg-openpos-blue/10 flex items-center justify-center text-openpos-blue">
                             <ArrowUpRight size={16} />
@@ -55,7 +55,7 @@ export default function LedgersPage() {
                     </div>
                     <p className="text-2xl font-bold text-admin-value">KES 145,000</p>
                 </div>
-                <div className="bg-white border border-openpos-border rounded-2xl p-5 shadow-sm">
+                <div className="bg-card-bg border border-openpos-border rounded-2xl p-5 shadow-sm">
                     <div className="flex items-center gap-3 mb-2">
                         <div className="w-8 h-8 rounded-lg bg-openpos-red/10 flex items-center justify-center text-openpos-red">
                             <ArrowDownRight size={16} />
@@ -64,7 +64,7 @@ export default function LedgersPage() {
                     </div>
                     <p className="text-2xl font-bold text-admin-value">KES 42,500</p>
                 </div>
-                <div className="bg-white border border-openpos-border rounded-2xl p-5 shadow-sm">
+                <div className="bg-card-bg border border-openpos-border rounded-2xl p-5 shadow-sm">
                     <div className="flex items-center gap-3 mb-2">
                         <div className="w-8 h-8 rounded-lg bg-openpos-blue/10 flex items-center justify-center text-openpos-blue">
                             <FileText size={16} />
@@ -76,7 +76,7 @@ export default function LedgersPage() {
             </div>
 
             {/* Ledger Table */}
-            <div className="bg-white rounded-2xl border border-openpos-border shadow-sm overflow-hidden">
+            <div className="bg-card-bg rounded-2xl border border-openpos-border shadow-sm overflow-hidden">
                 <div className="p-4 border-b border-openpos-border flex flex-col md:flex-row items-center gap-4 justify-between">
                     <div className="relative w-full md:w-80">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-admin-dim" size={16} />
@@ -86,7 +86,7 @@ export default function LedgersPage() {
                             className="w-full bg-openpos-bg-subtle border-none rounded-xl pl-10 pr-4 py-2 text-[13px] outline-none"
                         />
                     </div>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-openpos-bg-subtle text-admin-value rounded-xl text-[12px] font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors">
+                    <button className="flex items-center gap-2 px-4 py-2 bg-openpos-bg-subtle text-admin-value rounded-xl text-[12px] font-bold uppercase tracking-widest hover:bg-openpos-bg-subtle/50 transition-colors">
                         <Filter size={16} />
                         Filter
                     </button>
