@@ -63,8 +63,17 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
 
     const navigation = [
         { id: 'dashboard', name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-        { id: 'pos', name: 'POS Terminal', href: '/dashboard/pos', icon: Smartphone, badge: 'Live' },
-        { id: 'sales', name: 'Sales Management', href: '/dashboard/sales', icon: ShoppingBag },
+        { id: 'pos', name: 'POS', href: '/dashboard/pos', icon: Smartphone, badge: 'Live' },
+        { 
+            id: 'sales', 
+            name: 'Sales', 
+            icon: ShoppingBag,
+            children: [
+                { name: 'Overview', href: '/dashboard/sales' },
+                { name: 'Transactions', href: '/dashboard/sales/list' },
+                { name: 'Analytics', href: '/dashboard/sales/analytics' },
+            ]
+        },
         
         {
             id: 'inventory',
