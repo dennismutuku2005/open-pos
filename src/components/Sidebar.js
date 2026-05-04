@@ -75,6 +75,17 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
                 { name: 'Stock Corrections', href: '/dashboard/stock-adjustment' },
             ]
         },
+        
+        {
+            id: 'stock',
+            name: 'Stock Management',
+            icon: Layers,
+            children: [
+                { name: 'In Stock', href: '/dashboard/stock/in-stock' },
+                { name: 'Out of Stock', href: '/dashboard/stock/out-of-stock' },
+                { name: 'Expired Products', href: '/dashboard/stock/expired' },
+            ]
+        },
 
         {
             id: 'relations',
