@@ -193,7 +193,7 @@ export default function StaffManagementPage() {
             {/* Page Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-b border-openpos-border pb-6">
                 <div>
-                    <h1 className="text-xl font-medium text-openpos-blue uppercase tracking-tight">Staff Management</h1>
+                    <h1 className="text-xl font-bold text-admin-value uppercase tracking-tight">Staff Management</h1>
                     <p className="text-[10px] font-medium text-gray-400 mt-0.5 tracking-widest uppercase">Admin Access & Policy Control</p>
                 </div>
                 <div className="flex flex-col sm:flex-row items-center gap-3">

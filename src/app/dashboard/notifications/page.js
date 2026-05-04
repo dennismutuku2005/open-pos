@@ -110,7 +110,7 @@ export default function NotificationsPage() {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-openpos-border pb-5">
                 <div>
-                    <h1 className="text-xl font-medium text-openpos-blue flex items-center gap-2 uppercase tracking-tight">
+                    <h1 className="text-xl font-bold text-admin-value flex items-center gap-2 uppercase tracking-tight">
                         <Bell size={20} />
                         System Notifications
                         {unreadCount > 0 && (
@@ -257,7 +257,7 @@ export default function NotificationsPage() {
                                 {selectedNotif.type === 'alert' ? <AlertCircle className="text-openpos-red" size={24} /> :
                                  selectedNotif.type === 'success' ? <CheckCircle2 className="text-openpos-blue" size={24} /> :
                                  <Info className="text-openpos-blue" size={24} />}
-                                <h2 className="text-lg font-bold text-admin-value uppercase tracking-tighter">Notification Details</h2>
+                                <h1 className="text-xl font-bold text-admin-value uppercase tracking-tight">Notification Details</h1>
                             </div>
                             <button onClick={() => setSelectedNotif(null)} className="p-2 hover:bg-white rounded-xl text-admin-dim transition-colors"><X size={20} /></button>
                         </div>
