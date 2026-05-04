@@ -153,7 +153,7 @@ export default function InvoicePDFGenerator({ invoice, account, mode = 'invoice'
                             <div className="py-2">
                                 <p className="text-[9px] font-black text-[#9CA3AF] uppercase tracking-widest mb-1">Status</p>
                                 {invoice.status === 'paid' ? (
-                                    <p className="text-[11px] font-bold text-green-600 flex items-center gap-1.5 uppercase transition-all">
+                                    <p className="text-[11px] font-bold text-openpos-blue flex items-center gap-1.5 uppercase transition-all">
                                         <CheckCircle2 className="w-3.5 h-3.5" /> Verified & Paid
                                     </p>
                                 ) : (
