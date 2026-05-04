@@ -43,6 +43,7 @@ export default function ProductsPage() {
         buyPrice: '',
         sellPrice: '',
         stock: '',
+        hasExpiry: false,
         expiry: '',
         barcode: '',
         desc: '',
@@ -51,8 +52,11 @@ export default function ProductsPage() {
     })
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target
-        setFormData(prev => ({ ...prev, [name]: value }))
+        const { name, value, type, checked } = e.target
+        setFormData(prev => ({ 
+            ...prev, 
+            [name]: type === 'checkbox' ? checked : value 
+        }))
     }
 
     const handleImageUpload = (e) => {
@@ -103,6 +107,7 @@ export default function ProductsPage() {
             buyPrice: '',
             sellPrice: '',
             stock: '',
+            hasExpiry: false,
             expiry: '',
             barcode: '',
             desc: '',
@@ -296,10 +301,15 @@ export default function ProductsPage() {
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="py-2.5 px-6">
+                                     <td className="py-2.5 px-6">
                                         <div className="flex flex-col">
-                                            <span className="text-[12px] font-semibold text-admin-value">{product.expiry}</span>
-                                            <span className="text-[9px] text-admin-dim uppercase">Expires</span>
+                                            <span className={cn(
+                                                "text-[12px] font-semibold",
+                                                product.hasExpiry ? "text-admin-value" : "text-admin-dim"
+                                            )}>
+                                                {product.hasExpiry ? product.expiry : 'No Expiry'}
+                                            </span>
+                                            {product.hasExpiry && <span className="text-[9px] text-admin-dim uppercase">Expires</span>}
                                         </div>
                                     </td>
                                     <td className="py-2.5 px-6 text-right">
@@ -444,15 +454,42 @@ export default function ProductsPage() {
                         />
                     </div>
 
-                    <div className="space-y-1.5">
-                        <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Expiry Date</label>
-                        <input 
-                            name="expiry"
-                            type="date"
-                            value={formData.expiry}
-                            onChange={handleInputChange}
-                            className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
-                        />
+                    <div className="md:col-span-2 space-y-4 bg-openpos-bg-subtle/50 p-4 rounded-2xl border border-openpos-border/50">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-lg bg-white border border-openpos-border flex items-center justify-center text-admin-dim">
+                                    <Calendar size={16} />
+                                </div>
+                                <div>
+                                    <p className="text-[11px] font-bold text-admin-value uppercase tracking-widest">Expiration Tracking</p>
+                                    <p className="text-[9px] text-admin-dim font-medium uppercase mt-0.5">Track shelf-life of this product</p>
+                                </div>
+                            </div>
+                            <label className="relative inline-flex items-center cursor-pointer">
+                                <input 
+                                    type="checkbox" 
+                                    name="hasExpiry"
+                                    checked={formData.hasExpiry}
+                                    onChange={handleInputChange}
+                                    className="sr-only peer" 
+                                />
+                                <div className="w-11 h-6 bg-admin-dim/20 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-openpos-blue"></div>
+                            </label>
+                        </div>
+
+                        {formData.hasExpiry && (
+                            <div className="animate-in slide-in-from-top-2 duration-300">
+                                <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Expiry Date *</label>
+                                <input 
+                                    name="expiry"
+                                    type="date"
+                                    value={formData.expiry}
+                                    onChange={handleInputChange}
+                                    className="w-full bg-white border-none rounded-xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border mt-1.5 focus:ring-openpos-blue/30 transition-all"
+                                    required={formData.hasExpiry}
+                                />
+                            </div>
+                        )}
                     </div>
 
                     <div className="md:col-span-2 space-y-1.5">
