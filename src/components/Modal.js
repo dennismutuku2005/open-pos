@@ -69,10 +69,10 @@ export function Modal({
         },
         success: {
             icon: CheckCircle2,
-            color: 'text-green-500',
-            bg: 'bg-green-500/10',
-            border: 'border-green-500/20',
-            btn: 'bg-green-600 hover:bg-green-700 shadow-green-500/20'
+            color: 'text-openpos-blue',
+            bg: 'bg-openpos-blue/10',
+            border: 'border-openpos-blue/20',
+            btn: 'bg-openpos-blue hover:bg-openpos-blue/90 shadow-openpos-blue/20'
         },
         error: {
             icon: AlertCircle,
