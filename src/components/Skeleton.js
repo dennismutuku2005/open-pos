@@ -46,3 +46,29 @@ export function SkeletonRow({ cols = 5 }) {
     </div>
   );
 }
+
+export function TableRowSkeleton({ cols = 5, rows = 5 }) {
+    return (
+        <>
+            {Array.from({ length: rows }).map((_, rowIndex) => (
+                <tr key={rowIndex} className="border-b border-openpos-border last:border-0">
+                    <td colSpan={cols} className="p-0">
+                        <div className="flex items-center gap-4 py-4 px-6">
+                            {Array.from({ length: cols }).map((_, colIndex) => (
+                                <div 
+                                    key={colIndex} 
+                                    className={cn(
+                                        "h-3 bg-openpos-bg-subtle animate-pulse rounded-full",
+                                        colIndex === 0 ? "w-12" : 
+                                        colIndex === 1 ? "w-24" :
+                                        colIndex === cols - 1 ? "w-16 ml-auto" : "flex-1"
+                                    )}
+                                />
+                            ))}
+                        </div>
+                    </td>
+                </tr>
+            ))}
+        </>
+    );
+}
