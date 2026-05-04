@@ -38,6 +38,7 @@ export default function ProductsPage() {
  const [showDeleteModal, setShowDeleteModal] = useState(false)
  const [editingProduct, setEditingProduct] = useState(null)
  const [deletingProduct, setDeletingProduct] = useState(null)
+ const [isSubmitting, setIsSubmitting] = useState(false)
  
  const [formData, setFormData] = useState({
  name:'',
@@ -89,6 +90,8 @@ export default function ProductsPage() {
  return toast.error('Please fill in required fields')
  }
 
+ setIsSubmitting(true)
+ setTimeout(() => {
  if (editingProduct) {
  setProducts(prev => prev.map(p => p.id === editingProduct.id ? { ...formData, id: p.id } : p))
  toast.success('Product updated')
@@ -98,8 +101,10 @@ export default function ProductsPage() {
  toast.success('Product added')
  }
 
+ setIsSubmitting(false)
  setShowFormModal(false)
  resetForm()
+ }, 1000)
  }
 
  const resetForm = () => {
@@ -132,10 +137,14 @@ export default function ProductsPage() {
 
  const confirmDelete = () => {
  if (!deletingProduct) return
+ setIsSubmitting(true)
+ setTimeout(() => {
  setProducts(prev => prev.filter(p => p.id !== deletingProduct.id))
  toast.success('Product removed from inventory')
+ setIsSubmitting(false)
  setShowDeleteModal(false)
  setDeletingProduct(null)
+ }, 1000)
  }
 
  const exportProducts = (format) => {
@@ -357,6 +366,7 @@ export default function ProductsPage() {
  description="Manage your inventory item details"
  confirmText={editingProduct ?'Update Product':'Create Product'}
  onConfirm={handleSave}
+ isLoading={isSubmitting}
  maxWidth="max-w-2xl"
  type="primary"
  icon={ShoppingBag}
@@ -547,6 +557,7 @@ export default function ProductsPage() {
  confirmText="Delete"
  confirmCountdown={5}
  onConfirm={confirmDelete}
+ isLoading={isSubmitting}
  >
  <div className="p-4 bg-openpos-red/5 rounded-2xl border border-openpos-red/10">
  <p className="text-[12px] text-openpos-red font-medium leading-relaxed">
