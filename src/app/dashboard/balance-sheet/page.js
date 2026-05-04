@@ -13,7 +13,7 @@ export default function BalanceSheetPage() {
     }
 
     return (
-        <div className="sopenpos-y-6 animate-in fade-in duration-500 font-figtree max-w-5xl mx-auto">
+        <div className="space-y-6 animate-in fade-in duration-500 font-figtree max-w-5xl mx-auto">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
@@ -49,14 +49,14 @@ export default function BalanceSheetPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                     
                     {/* ASSETS (Left Side) */}
-                    <div className="sopenpos-y-6">
+                    <div className="space-y-6">
                         <div>
                             <h3 className="text-[16px] font-bold text-admin-value uppercase border-b-2 border-admin-value pb-2 mb-4">Assets</h3>
                             
-                            <div className="sopenpos-y-4">
+                            <div className="space-y-4">
                                 <div>
                                     <h4 className="text-[12px] font-bold text-openpos-blue uppercase tracking-widest mb-2">Current Assets</h4>
-                                    <div className="sopenpos-y-2">
+                                    <div className="space-y-2">
                                         <div className="flex justify-between text-[14px]">
                                             <span className="text-admin-dim">Cash & Equivalents</span>
                                             <span className="font-semibold text-admin-value">125,500</span>
@@ -78,7 +78,7 @@ export default function BalanceSheetPage() {
 
                                 <div>
                                     <h4 className="text-[12px] font-bold text-openpos-blue uppercase tracking-widest mb-2 mt-6">Fixed Assets</h4>
-                                    <div className="sopenpos-y-2">
+                                    <div className="space-y-2">
                                         <div className="flex justify-between text-[14px]">
                                             <span className="text-admin-dim">Equipment</span>
                                             <span className="font-semibold text-admin-value">250,000</span>
@@ -103,14 +103,14 @@ export default function BalanceSheetPage() {
                     </div>
 
                     {/* LIABILITIES & EQUITY (Right Side) */}
-                    <div className="sopenpos-y-6">
+                    <div className="space-y-6">
                         <div>
                             <h3 className="text-[16px] font-bold text-admin-value uppercase border-b-2 border-admin-value pb-2 mb-4">Liabilities & Equity</h3>
                             
-                            <div className="sopenpos-y-4">
+                            <div className="space-y-4">
                                 <div>
                                     <h4 className="text-[12px] font-bold text-openpos-blue uppercase tracking-widest mb-2">Liabilities</h4>
-                                    <div className="sopenpos-y-2">
+                                    <div className="space-y-2">
                                         <div className="flex justify-between text-[14px]">
                                             <span className="text-admin-dim">Accounts Payable</span>
                                             <span className="font-semibold text-admin-value">42,500</span>
@@ -132,7 +132,7 @@ export default function BalanceSheetPage() {
 
                                 <div>
                                     <h4 className="text-[12px] font-bold text-openpos-blue uppercase tracking-widest mb-2 mt-6">Owner's Equity</h4>
-                                    <div className="sopenpos-y-2">
+                                    <div className="space-y-2">
                                         <div className="flex justify-between text-[14px]">
                                             <span className="text-admin-dim">Owner's Capital</span>
                                             <span className="font-semibold text-admin-value">500,000</span>

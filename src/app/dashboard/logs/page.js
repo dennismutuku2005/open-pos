@@ -101,7 +101,7 @@ export default function SystemLogsPage() {
 
 
     return (
-        <div className="sopenpos-y-6 font-figtree animate-in fade-in duration-700 max-w-[1600px] mx-auto pb-20">
+        <div className="space-y-6 font-figtree animate-in fade-in duration-700 max-w-[1600px] mx-auto pb-20">
             {/* Header Section */}
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-openpos-border pb-6">
                 <div>
@@ -172,7 +172,7 @@ export default function SystemLogsPage() {
                                             <div className="w-16 h-16 bg-openpos-bg-subtle rounded-full flex items-center justify-center text-admin-dim/40 opacity-50">
                                                 <Activity size={32} />
                                             </div>
-                                            <div className="sopenpos-y-1">
+                                            <div className="space-y-1">
                                                 <p className="text-[12px] font-bold text-admin-value uppercase tracking-widest">No Logs Found</p>
                                                 <p className="text-[10px] text-admin-dim uppercase">Try refining your search or filters</p>
                                             </div>

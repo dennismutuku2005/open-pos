@@ -54,7 +54,7 @@ export default function DashboardPage() {
     if (!mounted) return null
 
     return (
-        <div className="sopenpos-y-6 animate-in fade-in duration-500 font-figtree">
+        <div className="space-y-6 animate-in fade-in duration-500 font-figtree">
             {/* Welcome Section */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
@@ -76,7 +76,7 @@ export default function DashboardPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Left Column: Graph & Carousel */}
-                <div className="lg:col-span-2 sopenpos-y-6">
+                <div className="lg:col-span-2 space-y-6">
                     {/* Sales Graph */}
                     <div className="bg-card-bg border border-openpos-border rounded-2xl p-6 relative overflow-hidden shadow-sm">
                         <div className="flex items-center justify-between mb-8">
@@ -148,7 +148,7 @@ export default function DashboardPage() {
                 </div>
 
                 {/* Right Column: Notifications & Staff */}
-                <div className="sopenpos-y-6">
+                <div className="space-y-6">
                     {/* Notifications */}
                     <div className="bg-card-bg border border-openpos-border rounded-2xl p-5 shadow-sm">
                         <div className="flex items-center justify-between mb-5">
@@ -158,7 +158,7 @@ export default function DashboardPage() {
                             </h3>
                             <Link href="/dashboard/notifications" className="text-[10px] font-bold text-openpos-blue uppercase tracking-widest">See All</Link>
                         </div>
-                        <div className="sopenpos-y-4">
+                        <div className="space-y-4">
                             {[
                                 { title: 'Shift Started', desc: 'Staff Richard started shift', time: '5m ago' },
                                 { title: 'New Stock Added', desc: '100 units of Pastries', time: '1h ago' },
@@ -185,7 +185,7 @@ export default function DashboardPage() {
                             <h3 className="text-sm font-bold text-admin-value">Staffs</h3>
                             <Link href="/dashboard/staff" className="text-[10px] font-bold text-openpos-blue uppercase tracking-widest">See All</Link>
                         </div>
-                        <div className="sopenpos-y-3">
+                        <div className="space-y-3">
                             {[
                                 { name: 'Mike', role: 'Kitchen Hand', time: '10:00 AM' },
                                 { name: 'Billie', role: 'Cashier', time: '08:45 AM' },
@@ -251,7 +251,7 @@ export default function DashboardPage() {
                             Activity History
                         </h3>
                     </div>
-                    <div className="flex-1 sopenpos-y-5">
+                    <div className="flex-1 space-y-5">
                         {recentHistory.map((act) => (
                             <div key={act.id} className="flex gap-4">
                                 <div className={cn(
@@ -263,7 +263,7 @@ export default function DashboardPage() {
                                 <div className="flex-1 min-w-0">
                                     <div className="flex justify-between items-start">
                                         <h4 className="text-[13px] font-bold text-admin-value truncate">{act.item}</h4>
-                                        <span className="text-[10px] font-bold text-admin-dim uppercase whitesopenpos-nowrap ml-2">{act.time}</span>
+                                        <span className="text-[10px] font-bold text-admin-dim uppercase whitespace-nowrap ml-2">{act.time}</span>
                                     </div>
                                     <div className="flex justify-between items-center mt-0.5">
                                         <p className="text-[11px] text-admin-dim font-medium uppercase tracking-tight">{act.type}</p>
@@ -299,7 +299,7 @@ function StatCard({ title, value, change, isPositive, icon: Icon, color }) {
                         <p className="text-lg font-bold text-admin-value leading-none truncate tracking-tight">{value}</p>
                         <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 mt-1">
                             <span className={cn(
-                                "text-[9px] font-bold px-1.5 py-0.5 rounded-md uppercase tracking-tight whitesopenpos-nowrap",
+                                "text-[9px] font-bold px-1.5 py-0.5 rounded-md uppercase tracking-tight whitespace-nowrap",
                                 isPositive ? "bg-openpos-green/10 text-openpos-green" : "bg-openpos-red/10 text-openpos-red"
                             )}>
                                 {change}

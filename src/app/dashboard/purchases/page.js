@@ -58,7 +58,7 @@ export default function PurchasesPage() {
     }
 
     return (
-        <div className="sopenpos-y-6 animate-in fade-in duration-500">
+        <div className="space-y-6 animate-in fade-in duration-500">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
@@ -141,7 +141,7 @@ export default function PurchasesPage() {
                         </div>
                         <div className="p-6 max-h-[70vh] overflow-y-auto custom-scrollbar">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
-                                <div className="sopenpos-y-1.5">
+                                <div className="space-y-1.5">
                                     <label className="text-[11px] font-bold text-admin-label uppercase tracking-widest">Supplier Name</label>
                                     <input 
                                         value={formData.supplier}
@@ -150,7 +150,7 @@ export default function PurchasesPage() {
                                         placeholder="e.g. Flour Suppliers Ltd"
                                     />
                                 </div>
-                                <div className="sopenpos-y-1.5">
+                                <div className="space-y-1.5">
                                     <label className="text-[11px] font-bold text-admin-label uppercase tracking-widest">Order Date</label>
                                     <input 
                                         type="date"
@@ -161,14 +161,14 @@ export default function PurchasesPage() {
                                 </div>
                             </div>
 
-                            <div className="sopenpos-y-4">
+                            <div className="space-y-4">
                                 <div className="flex items-center justify-between">
                                     <h3 className="text-[11px] font-bold text-admin-label uppercase tracking-widest">Items Order</h3>
                                     <button onClick={addItem} className="text-openpos-blue font-bold text-[11px] flex items-center gap-1 hover:underline">
                                         <Plus size={14} /> Add Item
                                     </button>
                                 </div>
-                                <div className="sopenpos-y-3">
+                                <div className="space-y-3">
                                     {formData.items.map((item, index) => (
                                         <div key={index} className="grid grid-cols-12 gap-3 items-center">
                                             <div className="col-span-6">

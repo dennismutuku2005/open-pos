@@ -198,7 +198,7 @@ export default function StaffManagementPage() {
     }
 
     return (
-        <div className="sopenpos-y-6 font-figtree animate-in fade-in duration-700 max-w-[1600px] mx-auto pb-10">
+        <div className="space-y-6 font-figtree animate-in fade-in duration-700 max-w-[1600px] mx-auto pb-10">
             {/* Page Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-b border-openpos-border pb-6">
                 <div>
@@ -243,7 +243,7 @@ export default function StaffManagementPage() {
             {/* Staff Table Container */}
             <div className="border border-openpos-border rounded-2xl overflow-hidden bg-card-bg shadow-sm">
                 <div className="overflow-x-auto custom-scrollbar">
-                    <table className="w-full text-left whitesopenpos-nowrap border-collapse text-[11px]">
+                    <table className="w-full text-left whitespace-nowrap border-collapse text-[11px]">
                         <thead>
                             <tr className="bg-openpos-bg-subtle border-b border-openpos-border font-bold text-admin-dim uppercase tracking-widest text-[9px]">
                                 <th className="px-6 py-4">Team Member</th>
@@ -358,9 +358,9 @@ export default function StaffManagementPage() {
                 maxWidth="max-w-md"
                 footer={null}
             >
-                <form onSubmit={handleSubmit} className="sopenpos-y-4 pt-2">
+                <form onSubmit={handleSubmit} className="space-y-4 pt-2">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="sopenpos-y-1">
+                        <div className="space-y-1">
                             <label className="text-[9px] font-bold text-admin-dim uppercase ml-1">Full Name</label>
                             <input
                                 required
@@ -371,7 +371,7 @@ export default function StaffManagementPage() {
                                 placeholder="Full Name"
                             />
                         </div>
-                        <div className="sopenpos-y-1">
+                        <div className="space-y-1">
                             <label className="text-[9px] font-bold text-admin-dim uppercase ml-1">Username</label>
                             <input
                                 required
@@ -386,7 +386,7 @@ export default function StaffManagementPage() {
                     </div>
                                 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="sopenpos-y-1">
+                        <div className="space-y-1">
                             <label className="text-[9px] font-bold text-admin-dim uppercase ml-1">Phone</label>
                             <input
                                 autoComplete="off"
@@ -396,7 +396,7 @@ export default function StaffManagementPage() {
                                 placeholder="+254..."
                             />
                         </div>
-                        <div className="sopenpos-y-1">
+                        <div className="space-y-1">
                             <label className="text-[9px] font-medium text-gray-400 uppercase ml-1">
                                 {editingStaff ? "New Password" : "Password"}
                             </label>
@@ -423,7 +423,7 @@ export default function StaffManagementPage() {
                     </div>
                                 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="sopenpos-y-1">
+                        <div className="space-y-1">
                             <label className="text-[9px] font-medium text-gray-400 uppercase ml-1">Role</label>
                             <select
                                 value={formData.type}
@@ -434,7 +434,7 @@ export default function StaffManagementPage() {
                                 <option value="admin">ADMIN</option>
                             </select>
                         </div>
-                        <div className="sopenpos-y-1">
+                        <div className="space-y-1">
                             <label className="text-[9px] font-medium text-gray-400 uppercase ml-1">Status</label>
                             <select
                                 value={formData.status}
@@ -449,7 +449,7 @@ export default function StaffManagementPage() {
                     </div>
                                 
                     {formData.type === 'user' ? (
-                        <div className="sopenpos-y-3 pt-2 animate-in slide-in-from-top-2 duration-300">
+                        <div className="space-y-3 pt-2 animate-in slide-in-from-top-2 duration-300">
                             <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest flex items-center gap-2">
                                 <Shield size={12} className="text-openpos-blue" />
                                 System Policies & Permissions
@@ -526,7 +526,7 @@ export default function StaffManagementPage() {
                 footer={null}
             >
                 {selectedStaff && (
-                    <div className="sopenpos-y-6 text-center py-4">
+                    <div className="space-y-6 text-center py-4">
                         <div className="w-16 h-16 bg-openpos-bg-subtle rounded-full flex items-center justify-center mx-auto border border-openpos-border text-admin-dim">
                             <Fingerprint size={32} />
                         </div>
@@ -554,7 +554,7 @@ export default function StaffManagementPage() {
                         </div>
                                 
                         {selectedStaff.policies && selectedStaff.policies.length > 0 && (
-                            <div className="sopenpos-y-3 text-left">
+                            <div className="space-y-3 text-left">
                                 <p className="text-[9px] font-bold text-admin-dim uppercase tracking-widest flex items-center gap-2">
                                     <ShieldAlert size={12} className="text-openpos-blue" />
                                     Active Permissions
@@ -592,7 +592,7 @@ export default function StaffManagementPage() {
                 icon={Trash2}
                 footer={null}
             >
-                <div className="sopenpos-y-4 pt-2">
+                <div className="space-y-4 pt-2">
                     <div className="flex-1 bg-card-bg border border-openpos-border rounded-xl p-3 flex items-center gap-3">
                         <UserX className="text-red-400 shrink-0" size={16} />
                         <p className="text-[10px] text-red-700/70 font-medium leading-relaxed uppercase tracking-tight">

@@ -162,7 +162,7 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
 
                 {/* Navigation - Flex-1 with scroll */}
                 <nav className={cn(
-                    "flex-1 overflow-y-auto custom-scrollbar sopenpos-y-1",
+                    "flex-1 overflow-y-auto custom-scrollbar space-y-1",
                     showText ? "p-3" : "px-2 py-3"
                 )}>
                     {navigation.map((item) => {
@@ -170,9 +170,9 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
                         const isExpanded = openMenus.includes(item.id);
 
                         return (
-                            <div key={item.id} className="sopenpos-y-0.5">
+                            <div key={item.id} className="space-y-0.5">
                                 {item.children ? (
-                                    <div className="sopenpos-y-0.5">
+                                    <div className="space-y-0.5">
                                         <button
                                             onClick={() => toggleMenu(item.id)}
                                             className={cn(
@@ -191,7 +191,7 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
                                         </button>
                                         {/* Submenu */}
                                         {showText && isExpanded && (
-                                            <div className="ml-4 sopenpos-y-0.5 border-l border-openpos-border pl-2 my-1">
+                                            <div className="ml-4 space-y-0.5 border-l border-openpos-border pl-2 my-1">
                                                 {item.children.map((child) => {
                                                     const isChildActive = pathname === child.href;
                                                     return (
@@ -233,7 +233,7 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
                                     >
                                         <item.icon size={18} className={cn("shrink-0 transition-colors", isActive ? "text-white" : "text-admin-dim group-hover:text-admin-label")} />
                                         {showText && (
-                                            <div className="flex-1 flex items-center justify-between whitesopenpos-nowrap overflow-hidden transition-opacity duration-200">
+                                            <div className="flex-1 flex items-center justify-between whitespace-nowrap overflow-hidden transition-opacity duration-200">
                                                 <span>{item.name}</span>
                                                 {item.badge && (
                                                     <span className={cn(
@@ -254,7 +254,7 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
 
                 {/* Footer Section */}
                 <div className={cn(
-                    "mt-auto border-t border-openpos-border py-2 sopenpos-y-1",
+                    "mt-auto border-t border-openpos-border py-2 space-y-1",
                     showText ? "px-3" : "px-2"
                 )}>
                     {/* Zen Mode Toggle */}

@@ -173,7 +173,7 @@ export default function ProductsPage() {
     }
 
     return (
-        <div className="sopenpos-y-6 animate-in fade-in duration-500 font-figtree">
+        <div className="space-y-6 animate-in fade-in duration-500 font-figtree">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
@@ -329,7 +329,7 @@ export default function ProductsPage() {
                 icon={ShoppingBag}
             >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5 py-2">
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Product Name *</label>
                         <div className="relative">
                             <Package className="absolute left-4 top-1/2 -translate-y-1/2 text-admin-dim" size={16} />
@@ -343,7 +343,7 @@ export default function ProductsPage() {
                         </div>
                     </div>
 
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Category *</label>
                         <select 
                             name="category"
@@ -356,7 +356,7 @@ export default function ProductsPage() {
                         </select>
                     </div>
 
-                    <div className="md:col-span-2 sopenpos-y-1.5">
+                    <div className="md:col-span-2 space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Product Image</label>
                         <div className="flex items-center gap-4 p-4 bg-openpos-bg-subtle rounded-2xl ring-1 ring-openpos-border">
                             <div className="w-16 h-16 rounded-xl bg-white border border-openpos-border overflow-hidden flex items-center justify-center shrink-0 relative group">
@@ -394,7 +394,7 @@ export default function ProductsPage() {
                         </div>
                     </div>
 
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Buying Price (KES)</label>
                         <input 
                             name="buyPrice"
@@ -406,7 +406,7 @@ export default function ProductsPage() {
                         />
                     </div>
 
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Selling Price (KES) *</label>
                         <input 
                             name="sellPrice"
@@ -418,7 +418,7 @@ export default function ProductsPage() {
                         />
                     </div>
 
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Stock Level</label>
                         <input 
                             name="stock"
@@ -430,7 +430,7 @@ export default function ProductsPage() {
                         />
                     </div>
 
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Discount (%)</label>
                         <input 
                             name="discount"
@@ -444,7 +444,7 @@ export default function ProductsPage() {
                         />
                     </div>
 
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Expiry Date</label>
                         <input 
                             name="expiry"
@@ -455,7 +455,7 @@ export default function ProductsPage() {
                         />
                     </div>
 
-                    <div className="md:col-span-2 sopenpos-y-1.5">
+                    <div className="md:col-span-2 space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Barcode</label>
                         <div className="flex gap-2">
                             <input 

@@ -51,7 +51,7 @@ export default function ProfilePage() {
     if (!user) return null
 
     return (
-        <div className="max-w-4xl mx-auto pb-10 sopenpos-y-5 animate-in fade-in slide-in-from-bottom-2 duration-500 font-figtree">
+        <div className="max-w-4xl mx-auto pb-10 space-y-5 animate-in fade-in slide-in-from-bottom-2 duration-500 font-figtree">
             {/* Main Identity Card */}
             <div className="bg-white border border-openpos-border rounded-2xl overflow-hidden shadow-sm">
                 <div className="h-24 bg-gradient-to-r from-openpos-blue/5 via-openpos-blue/[0.02] to-transparent relative">
@@ -122,10 +122,10 @@ export default function ProfilePage() {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-openpos-border pt-8">
-                        <div className="sopenpos-y-4">
+                        <div className="space-y-4">
                             <h3 className="text-[9px] font-bold text-admin-dim uppercase tracking-[2.5px]">Personal Credentials</h3>
                             
-                            <div className="sopenpos-y-3">
+                            <div className="space-y-3">
                                 <div className="group">
                                     <label className="text-[8px] font-bold text-admin-dim uppercase tracking-widest ml-1 mb-1 block">Official Name</label>
                                     <div className={cn(
@@ -160,10 +160,10 @@ export default function ProfilePage() {
                             </div>
                         </div>
 
-                        <div className="sopenpos-y-4">
+                        <div className="space-y-4">
                             <h3 className="text-[9px] font-bold text-admin-dim uppercase tracking-[2.5px]">Contact & Reach</h3>
                             
-                            <div className="sopenpos-y-3">
+                            <div className="space-y-3">
                                 <div className="group">
                                     <label className="text-[8px] font-bold text-admin-dim uppercase tracking-widest ml-1 mb-1 block">Phone Number</label>
                                     <div className={cn(

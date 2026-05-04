@@ -71,7 +71,7 @@ export default function SalesReportPage() {
     }
 
     return (
-        <div className="sopenpos-y-6 animate-in fade-in duration-500 font-figtree">
+        <div className="space-y-6 animate-in fade-in duration-500 font-figtree">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
@@ -164,7 +164,7 @@ export default function SalesReportPage() {
                                 Top 5 Products
                             </h3>
                         </div>
-                        <div className="sopenpos-y-4">
+                        <div className="space-y-4">
                             {topProducts.map((p, i) => (
                                 <div key={p.id} className="flex items-center justify-between p-3 rounded-xl hover:bg-openpos-bg-subtle transition-colors">
                                     <div className="flex items-center gap-3">
@@ -188,7 +188,7 @@ export default function SalesReportPage() {
                                 Least 5 Products
                             </h3>
                         </div>
-                        <div className="sopenpos-y-4">
+                        <div className="space-y-4">
                             {leastProducts.map((p, i) => (
                                 <div key={p.id} className="flex items-center justify-between p-3 rounded-xl hover:bg-openpos-bg-subtle transition-colors">
                                     <div className="flex items-center gap-3">

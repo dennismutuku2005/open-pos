@@ -48,7 +48,7 @@ export default function DaybooksPage() {
     }
 
     return (
-        <div className="sopenpos-y-6 animate-in fade-in duration-500 font-figtree">
+        <div className="space-y-6 animate-in fade-in duration-500 font-figtree">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
@@ -195,8 +195,8 @@ export default function DaybooksPage() {
                 icon={Plus}
                 maxWidth="max-w-md"
             >
-                <div className="sopenpos-y-4">
-                    <div className="sopenpos-y-1.5">
+                <div className="space-y-4">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Transaction Type</label>
                         <div className="flex bg-openpos-bg-subtle rounded-2xl p-1 ring-1 ring-openpos-border">
                             <button 
@@ -216,7 +216,7 @@ export default function DaybooksPage() {
                         </div>
                     </div>
 
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Category</label>
                         <select 
                             className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
@@ -231,7 +231,7 @@ export default function DaybooksPage() {
                         </select>
                     </div>
 
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Amount (KES) *</label>
                         <input 
                             type="number"
@@ -242,7 +242,7 @@ export default function DaybooksPage() {
                         />
                     </div>
 
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Notes / Narration</label>
                         <textarea 
                             rows="2"

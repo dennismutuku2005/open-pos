@@ -76,7 +76,7 @@ export default function ExpensesPage() {
     }
 
     return (
-        <div className="sopenpos-y-6 animate-in fade-in duration-500">
+        <div className="space-y-6 animate-in fade-in duration-500">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
@@ -242,9 +242,9 @@ export default function ExpensesPage() {
                 icon={Receipt}
                 maxWidth="max-w-md"
             >
-                <div className="sopenpos-y-5">
+                <div className="space-y-5">
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="sopenpos-y-1.5">
+                        <div className="space-y-1.5">
                             <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Date</label>
                             <input 
                                 type="date"
@@ -253,7 +253,7 @@ export default function ExpensesPage() {
                                 onChange={(e) => setFormData(prev => ({ ...prev, date: e.target.value }))}
                             />
                         </div>
-                        <div className="sopenpos-y-1.5">
+                        <div className="space-y-1.5">
                             <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Category</label>
                             <select 
                                 className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
@@ -264,7 +264,7 @@ export default function ExpensesPage() {
                             </select>
                         </div>
                     </div>
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Expense Detail</label>
                         <input 
                             className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
@@ -273,7 +273,7 @@ export default function ExpensesPage() {
                             onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
                         />
                     </div>
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Amount (KES)</label>
                         <div className="relative">
                             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-admin-dim font-bold text-[14px]">KES</span>

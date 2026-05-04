@@ -147,7 +147,7 @@ export default function POSPage() {
                 )
             }
             return (
-                <div className="sopenpos-y-4">
+                <div className="space-y-4">
                     {cart.map((item, idx) => (
                         <div key={idx} className="flex gap-4">
                             <div className="w-14 h-14 bg-openpos-bg-subtle rounded-xl overflow-hidden shrink-0 border border-openpos-border relative">
@@ -170,7 +170,7 @@ export default function POSPage() {
 
         if (checkoutStep === 'payment') {
             return (
-                <div className="sopenpos-y-4 animate-in fade-in slide-in-from-right-4 duration-300 h-full">
+                <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300 h-full">
                     <div className="flex items-center gap-2 mb-6">
                         <button onClick={() => setCheckoutStep('cart')} className="p-1 text-admin-dim hover:text-admin-value transition-colors">
                             <ArrowLeft size={18} />
@@ -221,7 +221,7 @@ export default function POSPage() {
 
         if (checkoutStep === 'mpesa') {
             return (
-                <div className="sopenpos-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
+                <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
                     <div className="flex items-center gap-2 mb-2">
                         <button onClick={() => setCheckoutStep('payment')} className="p-1 text-admin-dim hover:text-admin-value transition-colors">
                             <ArrowLeft size={18} />
@@ -239,7 +239,7 @@ export default function POSPage() {
                         </div>
                     </div>
 
-                    <div className="sopenpos-y-2">
+                    <div className="space-y-2">
                         <label className="text-[12px] font-bold text-admin-value uppercase tracking-widest ml-1">Customer Mobile Number</label>
                         <div className="relative">
                             <input 
@@ -259,7 +259,7 @@ export default function POSPage() {
 
         if (checkoutStep === 'processing') {
             return (
-                <div className="h-full flex flex-col items-center justify-center sopenpos-y-6 animate-in fade-in duration-300 mt-10">
+                <div className="h-full flex flex-col items-center justify-center space-y-6 animate-in fade-in duration-300 mt-10">
                     <div className="relative w-20 h-20">
                         <div className="absolute inset-0 border-4 border-openpos-border rounded-full"></div>
                         <div className="absolute inset-0 border-4 border-openpos-blue rounded-full border-t-transparent animate-spin"></div>
@@ -279,16 +279,16 @@ export default function POSPage() {
 
         if (checkoutStep === 'success') {
             return (
-                <div className="h-full flex flex-col items-center justify-center sopenpos-y-6 animate-in zoom-in-95 duration-500 mt-4">
+                <div className="h-full flex flex-col items-center justify-center space-y-6 animate-in zoom-in-95 duration-500 mt-4">
                     <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-openpos-green shadow-lg shadow-openpos-green/20">
                         <CheckCircle2 size={40} />
                     </div>
-                    <div className="text-center sopenpos-y-1">
+                    <div className="text-center space-y-1">
                         <h3 className="text-[22px] font-bold text-admin-value tracking-tight">Sale Complete</h3>
                         <p className="text-[12px] font-bold text-admin-dim uppercase tracking-widest">Sale ID: #{lastSaleId}</p>
                     </div>
                     
-                    <div className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-2xl p-4 sopenpos-y-3">
+                    <div className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-2xl p-4 space-y-3">
                         <div className="flex justify-between text-[12px] font-bold">
                             <span className="text-admin-dim uppercase">Total Amount</span>
                             <span className="text-admin-value">KES {total}</span>
@@ -396,7 +396,7 @@ export default function POSPage() {
                                         <Info size={14} />
                                     </button>
                                 </div>
-                                <div className="sopenpos-y-1.5">
+                                <div className="space-y-1.5">
                                     <h4 className="text-[12px] font-bold text-admin-value truncate">{product.name}</h4>
                                     <div className="flex items-center justify-between">
                                         <span className="text-[9px] font-bold px-1.5 py-0.5 bg-openpos-blue/5 text-openpos-blue rounded-md uppercase">
@@ -441,7 +441,7 @@ export default function POSPage() {
                 </div>
 
                 {/* Footer */}
-                <div className="p-6 bg-white border-t border-dashed border-openpos-border sopenpos-y-4 shrink-0">
+                <div className="p-6 bg-white border-t border-dashed border-openpos-border space-y-4 shrink-0">
                     {checkoutStep !== 'processing' && checkoutStep !== 'success' && (
                         <div className="flex justify-between items-center mb-2">
                             <span className="text-[14px] font-bold text-admin-value uppercase">Total</span>
@@ -486,11 +486,11 @@ export default function POSPage() {
                 maxWidth="max-w-sm"
             >
                 {infoModalProduct && (
-                    <div className="sopenpos-y-4">
+                    <div className="space-y-4">
                         <div className="relative h-48 w-full bg-openpos-bg-subtle rounded-2xl overflow-hidden">
                             <Image src={infoModalProduct.image} alt={infoModalProduct.name} fill className="object-cover" />
                         </div>
-                        <div className="sopenpos-y-4">
+                        <div className="space-y-4">
                             <div>
                                 <div className="flex items-center justify-between mb-1">
                                     <h3 className="text-[18px] font-bold text-admin-value">{infoModalProduct.name}</h3>

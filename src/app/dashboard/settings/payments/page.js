@@ -13,7 +13,7 @@ export default function PaymentTypesPage() {
     ])
 
     return (
-        <div className="sopenpos-y-6 animate-in fade-in duration-500 font-figtree max-w-4xl">
+        <div className="space-y-6 animate-in fade-in duration-500 font-figtree max-w-4xl">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
                     <h1 className="text-2xl font-bold tracking-tight text-admin-value">Payment Methods</h1>

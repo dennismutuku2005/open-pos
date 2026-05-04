@@ -15,7 +15,7 @@ export default function LedgersPage() {
     const [activeTab, setActiveTab] = useState('customers')
 
     return (
-        <div className="sopenpos-y-6 animate-in fade-in duration-500 font-figtree">
+        <div className="space-y-6 animate-in fade-in duration-500 font-figtree">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>

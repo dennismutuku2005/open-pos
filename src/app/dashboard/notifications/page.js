@@ -106,7 +106,7 @@ export default function NotificationsPage() {
     const unreadCount = notifications.filter(n => n.is_read == 0).length
 
     return (
-        <div className="sopenpos-y-6 animate-in fade-in duration-700 max-w-6xl mx-auto pb-20">
+        <div className="space-y-6 animate-in fade-in duration-700 max-w-6xl mx-auto pb-20">
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-openpos-border pb-5">
                 <div>
@@ -207,7 +207,7 @@ export default function NotificationsPage() {
                                                 <span className="text-admin-dim font-medium line-clamp-1 group-hover:text-admin-value transition-colors">{notif.message}</span>
                                             </td>
                                             <td className="px-6 py-4 text-admin-dim">
-                                                <div className="flex items-center gap-1.5 whitesopenpos-nowrap font-bold">
+                                                <div className="flex items-center gap-1.5 whitespace-nowrap font-bold">
                                                     <Clock size={12} />
                                                     {format(new Date(notif.created_at), 'MMM d, HH:mm')}
                                                 </div>
@@ -261,7 +261,7 @@ export default function NotificationsPage() {
                             </div>
                             <button onClick={() => setSelectedNotif(null)} className="p-2 hover:bg-white rounded-xl text-admin-dim transition-colors"><X size={20} /></button>
                         </div>
-                        <div className="p-6 sopenpos-y-5">
+                        <div className="p-6 space-y-5">
                             <div>
                                 <h3 className="text-xl font-bold text-admin-value tracking-tight mb-2">{selectedNotif.title}</h3>
                                 <p className="text-[13px] font-medium text-admin-label leading-relaxed bg-openpos-bg-subtle p-4 rounded-xl border border-openpos-border">

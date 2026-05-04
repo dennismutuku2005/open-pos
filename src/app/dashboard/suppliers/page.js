@@ -52,7 +52,7 @@ export default function SuppliersPage() {
     }
 
     return (
-        <div className="sopenpos-y-6 animate-in fade-in duration-500">
+        <div className="space-y-6 animate-in fade-in duration-500">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
@@ -142,7 +142,7 @@ export default function SuppliersPage() {
                 maxWidth="max-w-lg"
             >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="md:col-span-2 sopenpos-y-1.5">
+                    <div className="md:col-span-2 space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Company Name *</label>
                         <input 
                             className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
@@ -150,7 +150,7 @@ export default function SuppliersPage() {
                             onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                         />
                     </div>
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Contact Person</label>
                         <input 
                             className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
@@ -158,7 +158,7 @@ export default function SuppliersPage() {
                             onChange={(e) => setFormData(prev => ({ ...prev, contact: e.target.value }))}
                         />
                     </div>
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Category</label>
                         <select 
                             className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
@@ -172,7 +172,7 @@ export default function SuppliersPage() {
                             <option>Services</option>
                         </select>
                     </div>
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Phone Number</label>
                         <input 
                             className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
@@ -180,7 +180,7 @@ export default function SuppliersPage() {
                             onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                         />
                     </div>
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Email Address</label>
                         <input 
                             type="email"

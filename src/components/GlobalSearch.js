@@ -198,7 +198,7 @@ export function GlobalSearch() {
             {/* Floating Results List */}
             {isOpen && (
                 <div className="absolute top-full mt-2 left-0 right-0 bg-card-bg border border-openpos-border rounded-xl shadow-2xl overflow-hidden z-[60] animate-in fade-in slide-in-from-top-2 duration-200">
-                    <div className="p-1 sopenpos-y-1">
+                    <div className="p-1 space-y-1">
                         {results.map((item, idx) => (
                             <button
                                 key={item.id}

@@ -105,7 +105,7 @@ export default function CategoriesPage() {
     }
 
     return (
-        <div className="sopenpos-y-6 animate-in fade-in duration-500">
+        <div className="space-y-6 animate-in fade-in duration-500">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
@@ -215,8 +215,8 @@ export default function CategoriesPage() {
                 icon={Layers}
                 maxWidth="max-w-lg"
             >
-                <div className="sopenpos-y-5">
-                    <div className="sopenpos-y-1.5">
+                <div className="space-y-5">
+                    <div className="space-y-1.5">
                         <label className="text-[11px] font-bold text-admin-label uppercase tracking-widest ml-1">Category Name *</label>
                         <input 
                             name="name"
@@ -227,7 +227,7 @@ export default function CategoriesPage() {
                         />
                     </div>
 
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[11px] font-bold text-admin-label uppercase tracking-widest ml-1">Category Image</label>
                         <div className="flex items-center gap-4 p-4 bg-openpos-bg-subtle rounded-2xl ring-1 ring-openpos-border">
                             <div className="w-16 h-16 rounded-xl bg-white border border-openpos-border overflow-hidden flex items-center justify-center shrink-0 relative group">
@@ -259,7 +259,7 @@ export default function CategoriesPage() {
                         </div>
                     </div>
 
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[11px] font-bold text-admin-label uppercase tracking-widest ml-1">Category Type</label>
                         <div className="grid grid-cols-2 gap-3">
                             {['Product', 'Service'].map(type => (
@@ -279,7 +279,7 @@ export default function CategoriesPage() {
                         </div>
                     </div>
 
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[11px] font-bold text-admin-label uppercase tracking-widest ml-1">Description</label>
                         <textarea 
                             name="desc"

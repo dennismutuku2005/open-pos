@@ -45,7 +45,7 @@ const settingsGroups = [
 
 export default function SettingsPage() {
     return (
-        <div className="max-w-5xl mx-auto sopenpos-y-8 animate-in fade-in duration-500 pb-20">
+        <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500 pb-20">
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
@@ -56,9 +56,9 @@ export default function SettingsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {settingsGroups.map((group, groupIdx) => (
-                    <div key={groupIdx} className="sopenpos-y-4">
+                    <div key={groupIdx} className="space-y-4">
                         <h3 className="text-[11px] font-bold text-admin-dim uppercase tracking-[3px] ml-1">{group.title}</h3>
-                        <div className="sopenpos-y-3">
+                        <div className="space-y-3">
                             {group.items.map((item) => (
                                 <Link 
                                     key={item.id} 
@@ -87,7 +87,7 @@ export default function SettingsPage() {
             {/* Support/Info Card */}
             <div className="bg-openpos-blue rounded-3xl p-8 relative overflow-hidden shadow-2xl shadow-openpos-blue/20">
                 <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
-                    <div className="sopenpos-y-2">
+                    <div className="space-y-2">
                         <h2 className="text-2xl font-bold text-white">Need help with configuration?</h2>
                         <p className="text-white/70 text-[14px] max-w-lg">Our support team is available 24/7 to help you set up your POS system for maximum efficiency.</p>
                     </div>

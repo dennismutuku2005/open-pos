@@ -85,12 +85,12 @@ export default function LoginPage() {
                         />
                     </div>
 
-                    <div className="sopenpos-y-2 mb-10 text-center">
+                    <div className="space-y-2 mb-10 text-center">
                         <h1 className="text-2xl font-bold text-admin-value tracking-tight">System Login</h1>
                         <p className="text-[11px] font-medium text-admin-label uppercase tracking-widest">Access your Open POS administration panel</p>
                     </div>
 
-                    <form onSubmit={enterDashboard} className="sopenpos-y-5">
+                    <form onSubmit={enterDashboard} className="space-y-5">
                         {error && (
                             <motion.div 
                                 initial={{ opacity: 0, y: -10 }}
@@ -102,7 +102,7 @@ export default function LoginPage() {
                             </motion.div>
                         )}
 
-                        <div className="sopenpos-y-2">
+                        <div className="space-y-2">
                             <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Username</label>
                             <input
                                 type="text"
@@ -116,7 +116,7 @@ export default function LoginPage() {
                             />
                         </div>
 
-                        <div className="sopenpos-y-2">
+                        <div className="space-y-2">
                             <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Password</label>
                             <div className="relative">
                                 <input
@@ -155,7 +155,7 @@ export default function LoginPage() {
 
                 <div className="mt-auto pt-10 border-t border-openpos-border">
                     <div className="flex items-center justify-between">
-                        <div className="sopenpos-y-1">
+                        <div className="space-y-1">
                             <p className="text-[10px] text-admin-dim font-bold uppercase tracking-widest">© 2026 Open POS</p>
                             <p className="text-[9px] text-admin-dim/60 font-bold uppercase tracking-widest">Version {APP_VERSION}</p>
                         </div>

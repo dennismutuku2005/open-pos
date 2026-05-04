@@ -52,7 +52,7 @@ export default function StockAdjustmentPage() {
     }
 
     return (
-        <div className="sopenpos-y-6 animate-in fade-in duration-500">
+        <div className="space-y-6 animate-in fade-in duration-500">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
@@ -184,8 +184,8 @@ export default function StockAdjustmentPage() {
                 icon={PackageCheck}
                 maxWidth="max-w-lg"
             >
-                <div className="sopenpos-y-5">
-                    <div className="sopenpos-y-1.5">
+                <div className="space-y-5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Select Product</label>
                         <select 
                             className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
@@ -200,7 +200,7 @@ export default function StockAdjustmentPage() {
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="sopenpos-y-1.5">
+                        <div className="space-y-1.5">
                             <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Adjustment Type</label>
                             <div className="flex bg-openpos-bg-subtle rounded-2xl p-1 ring-1 ring-openpos-border">
                                 <button 
@@ -219,7 +219,7 @@ export default function StockAdjustmentPage() {
                                 >Decrease</button>
                             </div>
                         </div>
-                        <div className="sopenpos-y-1.5">
+                        <div className="space-y-1.5">
                             <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Quantity</label>
                             <input 
                                 type="number"
@@ -231,7 +231,7 @@ export default function StockAdjustmentPage() {
                         </div>
                     </div>
 
-                    <div className="sopenpos-y-1.5">
+                    <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Reason / Detail</label>
                         <textarea 
                             className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30 resize-none"

@@ -58,24 +58,24 @@ export default function InvoicePDFGenerator({ invoice, account, mode = 'invoice'
             <div 
                 ref={invoiceRef} 
                 id="invoice-paper" 
-                className="p-8 sopenpos-y-4 min-h-[792px] flex flex-col bg-white"
+                className="p-8 space-y-4 min-h-[792px] flex flex-col bg-white"
                 style={{ width: '560px', color: '#111827', fontFamily: 'sans-serif' }}
             >
                 {/* Header Section */}
                 <div className="flex justify-between items-start pt-6 border-b border-[#F3F4F6] pb-10">
-                    <div className="sopenpos-y-4">
+                    <div className="space-y-4">
                         <h3 className="text-[11px] font-black text-[#9CA3AF] uppercase tracking-widest mb-2">Issued By</h3>
-                        <div className="sopenpos-y-2">
+                        <div className="space-y-2">
                             <div className="w-24 h-10">
                                 <img src="/logoc.png" alt="Open POS" className="w-full h-full object-contain object-left" />
                             </div>
-                            <div className="sopenpos-y-0.5 text-[11px]">
+                            <div className="space-y-0.5 text-[11px]">
                                 <p className="text-purple-700 font-black uppercase tracking-tight">Open POS Services</p>
                                 <p className="text-[#374151] font-bold">Contact: 0741390949</p>
                             </div>
                         </div>
                     </div>
-                    <div className="text-right sopenpos-y-1">
+                    <div className="text-right space-y-1">
                         <h1 className="text-2xl font-black text-[#111827] tracking-tight mb-1 uppercase">{docType}</h1>
                         <p className="text-[10px] text-[#6B7280] font-bold">#{invoice.invoice_number}</p>
                         <p className="text-[10px] text-[#6B7280] font-bold">{new Date(date).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })}</p>
@@ -84,10 +84,10 @@ export default function InvoicePDFGenerator({ invoice, account, mode = 'invoice'
 
                 {/* Bill To Section */}
                 <div className="grid grid-cols-2 gap-12 mt-12">
-                    <div className="sopenpos-y-4"></div>
-                    <div className="sopenpos-y-4">
+                    <div className="space-y-4"></div>
+                    <div className="space-y-4">
                         <h3 className="text-[10px] font-black text-[#9CA3AF] uppercase tracking-widest text-right mb-2">{mode === 'receipt' ? 'Received From' : 'Bill To'}</h3>
-                        <div className="sopenpos-y-0.5 text-sm text-right">
+                        <div className="space-y-0.5 text-sm text-right">
                             <p className="font-extrabold text-[#111827] text-lg leading-tight">{account?.name || 'Customer'}</p>
                             <p className="text-[#374151] font-black">{account?.phone || ''}</p>
                         </div>
@@ -97,7 +97,7 @@ export default function InvoicePDFGenerator({ invoice, account, mode = 'invoice'
                 <div className="flex-1 pt-10">
                     <div className="w-full border-t-[1.5px] border-[#111827] mb-6"></div>
                     
-                    <div className="sopenpos-y-8">
+                    <div className="space-y-8">
                         {/* Default Headers */}
                         <div className="flex justify-between items-end border-b pb-2">
                             <h4 className="text-[10px] font-black text-[#9CA3AF] uppercase tracking-widest mb-1">Description</h4>
@@ -106,7 +106,7 @@ export default function InvoicePDFGenerator({ invoice, account, mode = 'invoice'
                         
                         {/* Base Package */}
                         <div className="flex justify-between items-end mt-1">
-                            <div className="sopenpos-y-1 max-w-[70%]">
+                            <div className="space-y-1 max-w-[70%]">
                                 <p className="text-sm font-bold text-[#111827]">Billing Service Monthly Subscription</p>
                             </div>
                             <div className="text-right">
@@ -117,7 +117,7 @@ export default function InvoicePDFGenerator({ invoice, account, mode = 'invoice'
                         {/* Extra Users Items if any */}
                         {extraUsers > 0 && (
                             <div className="flex justify-between items-end mt-2">
-                                <div className="sopenpos-y-1 max-w-[70%]">
+                                <div className="space-y-1 max-w-[70%]">
                                     <p className="text-sm font-bold text-[#111827]">Extra Users ({extraUsers} users @ KES 5/ea)</p>
                                 </div>
                                 <div className="text-right">
@@ -128,7 +128,7 @@ export default function InvoicePDFGenerator({ invoice, account, mode = 'invoice'
 
                         {/* Total Row */}
                         <div className="w-full border-t border-[#E5E7EB] mt-4 pt-4 flex justify-between items-end">
-                            <div className="sopenpos-y-1 max-w-[70%]">
+                            <div className="space-y-1 max-w-[70%]">
                                 <p className="text-lg font-black text-purple-700 tracking-tight uppercase">{mode === 'receipt' ? 'Amount Received' : 'Total Amount'}</p>
                             </div>
                             <div className="text-right">
@@ -136,14 +136,14 @@ export default function InvoicePDFGenerator({ invoice, account, mode = 'invoice'
                             </div>
                         </div>
 
-                        <div className="py-4 overflow-hidden select-none opacity-20 text-[#6B7280] text-xs tracking-[0.5em] whitesopenpos-nowrap">
+                        <div className="py-4 overflow-hidden select-none opacity-20 text-[#6B7280] text-xs tracking-[0.5em] whitespace-nowrap">
                             ----------------------------------------------------------------------------------------------------------------------------------------------------------------
                         </div>
 
                         <div className="grid grid-cols-3 gap-6">
                             <div className="py-2">
                                 <p className="text-[9px] font-black text-[#9CA3AF] uppercase tracking-widest mb-1">Payment Method</p>
-                                <div className="sopenpos-y-0.5">
+                                <div className="space-y-0.5">
                                     <p className="text-xs font-bold text-[#111827]">MPESA Till: 3018584</p>
                                     {mode === 'receipt' && invoice.mpesa_receipt_number && (
                                         <p className="text-[9px] font-bold text-admin-dim">Ref: {invoice.mpesa_receipt_number}</p>
