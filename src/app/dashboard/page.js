@@ -14,6 +14,7 @@ import {
 } from 'recharts'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { Card, StatCard } from '@/components/Card'
 
 // Mock Data for Charts
 const salesData = [
@@ -54,7 +55,7 @@ export default function DashboardPage() {
     if (!mounted) return null
 
     return (
-        <div className="space-y-6 animate-in fade-in duration-500 font-figtree">
+        <div className="space-y-6 animate-in fade-in duration-500 font-figtree pb-10">
             {/* Welcome Section */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
@@ -67,7 +68,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <StatCard title="Total Sales Today" value="KES 124,050" change="+12.5%" isPositive={true} icon={DollarSign} color="blue" />
                 <StatCard title="Products In" value="1,420" change="+3.2%" isPositive={true} icon={Package} color="blue" />
                 <StatCard title="Products Expired" value="12" change="+2 since yesterday" isPositive={false} icon={AlertTriangle} color="red" />
@@ -78,18 +79,17 @@ export default function DashboardPage() {
                 {/* Left Column: Graph & Carousel */}
                 <div className="lg:col-span-2 space-y-6">
                     {/* Sales Graph */}
-                    <div className="bg-card-bg border border-openpos-border rounded-2xl p-6 relative overflow-hidden shadow-sm">
-                        <div className="flex items-center justify-between mb-8">
-                            <div>
-                                <h3 className="text-lg font-bold text-admin-value">Sales Overview</h3>
-                                <p className="text-[11px] text-admin-label font-medium mt-0.5">Performance of the day</p>
-                            </div>
+                    <Card 
+                        title="Sales Overview" 
+                        subtitle="Performance of the day"
+                        headerAction={
                             <select className="bg-openpos-bg-subtle border-none rounded-xl text-[11px] font-bold px-4 py-2 focus:ring-1 focus:ring-openpos-blue/30 outline-none transition-all cursor-pointer">
                                 <option>Today</option>
                                 <option>Yesterday</option>
                                 <option>Last 7 Days</option>
                             </select>
-                        </div>
+                        }
+                    >
                         <div className="h-[320px] w-full">
                             <ResponsiveContainer width="100%" height="100%">
                                 <AreaChart data={salesData}>
@@ -107,7 +107,7 @@ export default function DashboardPage() {
                                 </AreaChart>
                             </ResponsiveContainer>
                         </div>
-                    </div>
+                    </Card>
 
                     {/* Activity Carousel */}
                     <div className="bg-openpos-blue/[0.03] border border-openpos-blue/10 rounded-2xl p-6 relative overflow-hidden flex items-center h-32">
@@ -124,7 +124,7 @@ export default function DashboardPage() {
                                         transition={{ duration: 0.4 }}
                                         className="absolute inset-0 flex items-center gap-4"
                                     >
-                                        <div className="w-12 h-12 rounded-xl bg-white border border-openpos-border flex items-center justify-center shrink-0">
+                                        <div className="w-12 h-12 rounded-xl bg-card-bg border border-openpos-border flex items-center justify-center shrink-0">
                                             <div className="w-6 h-6 bg-openpos-bg-subtle rounded-md" />
                                         </div>
                                         <div>
@@ -150,14 +150,10 @@ export default function DashboardPage() {
                 {/* Right Column: Notifications & Staff */}
                 <div className="space-y-6">
                     {/* Notifications */}
-                    <div className="bg-card-bg border border-openpos-border rounded-2xl p-5 shadow-sm">
-                        <div className="flex items-center justify-between mb-5">
-                            <h3 className="text-sm font-bold text-admin-value flex items-center gap-2">
-                                <Bell size={16} className="text-openpos-blue" />
-                                Notifications
-                            </h3>
-                            <Link href="/dashboard/notifications" className="text-[10px] font-bold text-openpos-blue uppercase tracking-widest">See All</Link>
-                        </div>
+                    <Card 
+                        title="Notifications" 
+                        headerAction={<Link href="/dashboard/notifications" className="text-[10px] font-bold text-openpos-blue uppercase tracking-widest">See All</Link>}
+                    >
                         <div className="space-y-4">
                             {[
                                 { title: 'Shift Started', desc: 'Staff Richard started shift', time: '5m ago' },
@@ -177,21 +173,20 @@ export default function DashboardPage() {
                                 </div>
                             ))}
                         </div>
-                    </div>
+                    </Card>
 
                     {/* Staffs Section */}
-                    <div className="bg-card-bg border border-openpos-border rounded-2xl p-5 shadow-sm">
-                        <div className="flex items-center justify-between mb-5">
-                            <h3 className="text-sm font-bold text-admin-value">Staffs</h3>
-                            <Link href="/dashboard/staff" className="text-[10px] font-bold text-openpos-blue uppercase tracking-widest">See All</Link>
-                        </div>
+                    <Card 
+                        title="Staff Directory" 
+                        headerAction={<Link href="/dashboard/staff" className="text-[10px] font-bold text-openpos-blue uppercase tracking-widest">See All</Link>}
+                    >
                         <div className="space-y-3">
                             {[
                                 { name: 'Mike', role: 'Kitchen Hand', time: '10:00 AM' },
                                 { name: 'Billie', role: 'Cashier', time: '08:45 AM' },
                                 { name: 'Richard', role: 'Server', time: '08:15 AM' },
                             ].map((staff, i) => (
-                                <div key={i} className="flex items-center justify-between p-3 rounded-xl border border-openpos-border">
+                                <div key={i} className="flex items-center justify-between p-3 rounded-xl border border-openpos-border hover:bg-openpos-bg-subtle transition-all cursor-default">
                                     <div className="flex items-center gap-3">
                                         <div className="w-9 h-9 rounded-lg bg-openpos-blue/10 flex items-center justify-center text-openpos-blue font-bold text-xs">
                                             {staff.name.charAt(0)}
@@ -208,19 +203,16 @@ export default function DashboardPage() {
                                 </div>
                             ))}
                         </div>
-                    </div>
+                    </Card>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-10">
                 {/* Payment Methods Chart */}
-                <div className="bg-card-bg border border-openpos-border rounded-2xl p-6 shadow-sm">
-                    <div className="flex items-center justify-between mb-6">
-                        <h3 className="text-sm font-bold text-admin-value flex items-center gap-2 uppercase tracking-widest">
-                            <CreditCard size={16} className="text-openpos-blue" />
-                            Payment Channels
-                        </h3>
-                    </div>
+                <Card 
+                    title="Settlement Channels" 
+                    subtitle="Distribution of daily revenue"
+                >
                     <div className="h-[250px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={[
@@ -241,22 +233,19 @@ export default function DashboardPage() {
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
-                </div>
+                </Card>
 
-                {/* REPLACEMENT: Recent Activities (Sales & Purchases) */}
-                <div className="bg-card-bg border border-openpos-border rounded-2xl p-6 shadow-sm flex flex-col">
-                    <div className="flex items-center justify-between mb-6">
-                        <h3 className="text-sm font-bold text-admin-value flex items-center gap-2 uppercase tracking-widest">
-                            <Activity size={16} className="text-openpos-blue" />
-                            Activity History
-                        </h3>
-                    </div>
+                {/* Recent Activities */}
+                <Card 
+                    title="Administrative Trail" 
+                    subtitle="Recent system logs & operations"
+                >
                     <div className="flex-1 space-y-5">
                         {recentHistory.map((act) => (
-                            <div key={act.id} className="flex gap-4">
+                            <div key={act.id} className="flex gap-4 group">
                                 <div className={cn(
-                                    "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border",
-                                    act.type === 'Sale' ? "bg-openpos-blue/10 text-openpos-blue border-openpos-blue/20" : "bg-openpos-blue/10 text-openpos-blue border-openpos-blue/20"
+                                    "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-all",
+                                    act.type === 'Sale' ? "bg-openpos-blue/10 text-openpos-blue border-openpos-blue/20 group-hover:bg-openpos-blue group-hover:text-white" : "bg-openpos-blue/10 text-openpos-blue border-openpos-blue/20 group-hover:bg-openpos-blue group-hover:text-white"
                                 )}>
                                     {act.type === 'Sale' ? <ShoppingBasket size={18} /> : <ArrowRightLeft size={18} />}
                                 </div>
@@ -273,43 +262,7 @@ export default function DashboardPage() {
                             </div>
                         ))}
                     </div>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-function StatCard({ title, value, change, isPositive, icon: Icon, color }) {
-    const colorClasses = {
-        blue: "text-openpos-blue bg-openpos-blue/10",
-        indigo: "text-indigo-600 bg-indigo-50",
-        red: "text-openpos-red bg-openpos-red/10",
-        purple: "text-purple-600 bg-purple-50",
-    }
-
-    return (
-        <div className="bg-white border border-openpos-border rounded-2xl p-4 shadow-sm hover:border-openpos-blue/30 transition-all group overflow-hidden relative">
-            <div className="flex items-center gap-3">
-                <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-all group-hover:scale-105", colorClasses[color] || colorClasses.blue, "border-transparent group-hover:border-current/20")}>
-                    <Icon size={18} />
-                </div>
-                <div className="flex-1 min-w-0">
-                    <p className="text-[10px] font-bold text-admin-dim uppercase tracking-wider">{title}</p>
-                    <div className="flex flex-col mt-0.5">
-                        <p className="text-lg font-bold text-admin-value leading-none truncate tracking-tight">{value}</p>
-                        <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 mt-1">
-                            <span className={cn(
-                                "text-[9px] font-bold px-1.5 py-0.5 rounded-md uppercase tracking-tight whitespace-nowrap",
-                                isPositive ? "bg-openpos-blue/10 text-openpos-blue" : "bg-openpos-red/10 text-openpos-red"
-                            )}>
-                                {change}
-                            </span>
-                            <span className="text-[10px] font-bold text-admin-dim">
-                                {isPositive ? '+' : '-'}
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                </Card>
             </div>
         </div>
     )

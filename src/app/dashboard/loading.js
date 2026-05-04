@@ -29,7 +29,7 @@ export default function Loading() {
         </div>
       </div>
 
-      <div className="bg-white border border-openpos-border rounded-3xl overflow-hidden">
+      <div className="bg-card-bg border border-openpos-border rounded-3xl overflow-hidden">
         <div className="p-6 border-b border-openpos-border">
           <Skeleton className="h-6 w-48 rounded" />
         </div>
