@@ -35,10 +35,10 @@ export default function InStockPage() {
                     <p className="text-admin-label mt-1">Real-time overview of your current inventory levels.</p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <button className="bg-white border border-openpos-border text-admin-dim px-4 py-2.5 rounded-xl font-bold text-[12px] uppercase flex items-center gap-2 hover:bg-openpos-bg-subtle transition-all">
+                    <button className="bg-card-bg border border-openpos-border text-admin-dim px-4 py-2.5 rounded-xl font-bold text-[12px] uppercase flex items-center gap-2 hover:bg-openpos-bg-subtle transition-all">
                         <Download size={16} /> Export
                     </button>
-                    <button className="bg-white border border-openpos-border text-admin-dim px-4 py-2.5 rounded-xl font-bold text-[12px] uppercase flex items-center gap-2 hover:bg-openpos-bg-subtle transition-all">
+                    <button className="bg-card-bg border border-openpos-border text-admin-dim px-4 py-2.5 rounded-xl font-bold text-[12px] uppercase flex items-center gap-2 hover:bg-openpos-bg-subtle transition-all">
                         <Printer size={16} /> Print
                     </button>
                 </div>
@@ -49,9 +49,9 @@ export default function InStockPage() {
                 {[
                     { label: 'Total Items', value: '99+', icon: Package, color: 'text-openpos-blue', bg: 'bg-openpos-blue/10' },
                     { label: 'Total Value', value: 'KES 1.2M', icon: CheckCircle2, color: 'text-openpos-blue', bg: 'bg-openpos-blue/10' },
-                    { label: 'Inventory Health', value: 'Excellent', icon: Clock, color: 'text-purple-600', bg: 'bg-purple-100' },
+                    { label: 'Inventory Health', value: 'Excellent', icon: Clock, color: 'text-purple-600', bg: 'bg-purple-900/20' },
                 ].map((stat, i) => (
-                    <div key={i} className="bg-white border border-openpos-border rounded-2xl p-4 shadow-sm">
+                    <div key={i} className="bg-card-bg border border-openpos-border rounded-2xl p-4 shadow-sm">
                         <div className="flex items-center gap-4">
                             <div className={cn("w-12 h-12 rounded-xl flex items-center justify-center", stat.bg, stat.color)}>
                                 <stat.icon size={22} />
@@ -66,7 +66,7 @@ export default function InStockPage() {
             </div>
 
             {/* Inventory Table */}
-            <div className="bg-white border border-openpos-border rounded-[2rem] overflow-hidden shadow-sm">
+            <div className="bg-card-bg border border-openpos-border rounded-[2rem] overflow-hidden shadow-sm">
                 <div className="p-5 border-b border-openpos-border flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="relative w-full md:w-96">
                         <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim" size={16} />

@@ -70,7 +70,7 @@ export default function StockAdjustmentPage() {
 
             {/* Quick Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-white border border-openpos-border rounded-xl p-4 shadow-sm hover:border-openpos-blue/20 transition-all">
+                <div className="bg-card-bg border border-openpos-border rounded-xl p-4 shadow-sm hover:border-openpos-blue/20 transition-all">
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-lg flex items-center justify-center text-openpos-red bg-openpos-red/5 shrink-0">
                             <ArrowDownRight size={18} />
@@ -85,7 +85,7 @@ export default function StockAdjustmentPage() {
                     </div>
                 </div>
 
-                <div className="bg-white border border-openpos-border rounded-xl p-4 shadow-sm hover:border-openpos-blue/20 transition-all">
+                <div className="bg-card-bg border border-openpos-border rounded-xl p-4 shadow-sm hover:border-openpos-blue/20 transition-all">
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-lg flex items-center justify-center text-openpos-blue bg-openpos-blue/5 shrink-0">
                             <History size={18} />
@@ -100,7 +100,7 @@ export default function StockAdjustmentPage() {
                     </div>
                 </div>
 
-                <div className="bg-white border border-openpos-border rounded-xl p-4 shadow-sm hover:border-openpos-blue/20 transition-all">
+                <div className="bg-card-bg border border-openpos-border rounded-xl p-4 shadow-sm hover:border-openpos-blue/20 transition-all">
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-lg flex items-center justify-center text-orange-600 bg-orange-50 shrink-0">
                             <ShieldAlert size={18} />
@@ -207,14 +207,14 @@ export default function StockAdjustmentPage() {
                                     onClick={() => setFormData(prev => ({ ...prev, type: 'Increase' }))}
                                     className={cn(
                                         "flex-1 py-2 rounded-xl text-[11px] font-bold uppercase transition-all", 
-                                        formData.type === 'Increase' ? "bg-openpos-blue text-white shadow-lg shadow-openpos-blue/20" : "text-admin-dim hover:bg-white"
+                                        formData.type === 'Increase' ? "bg-openpos-blue text-white shadow-lg shadow-openpos-blue/20" : "text-admin-dim hover:bg-card-bg"
                                     )}
                                 >Increase</button>
                                 <button 
                                     onClick={() => setFormData(prev => ({ ...prev, type: 'Decrease' }))}
                                     className={cn(
                                         "flex-1 py-2 rounded-xl text-[11px] font-bold uppercase transition-all", 
-                                        formData.type === 'Decrease' ? "bg-openpos-red text-white shadow-lg shadow-openpos-red/20" : "text-admin-dim hover:bg-white"
+                                        formData.type === 'Decrease' ? "bg-openpos-red text-white shadow-lg shadow-openpos-red/20" : "text-admin-dim hover:bg-card-bg"
                                     )}
                                 >Decrease</button>
                             </div>
@@ -256,8 +256,8 @@ export default function StockAdjustmentPage() {
                 confirmCountdown={5}
                 onConfirm={confirmDelete}
             >
-                <div className="p-4 bg-red-50 rounded-2xl border border-red-100">
-                    <p className="text-[12px] text-red-600 font-medium leading-relaxed">
+                <div className="p-4 bg-openpos-red/5 rounded-2xl border border-openpos-red/10">
+                    <p className="text-[12px] text-openpos-red font-medium leading-relaxed">
                         This will permanently remove this record from your adjustment history. Please note that this action will NOT reverse any changes previously made to the stock levels.
                     </p>
                 </div>

@@ -50,7 +50,7 @@ export default function OutOfStockPage() {
             </div>
 
             {/* List */}
-            <div className="bg-white border border-openpos-border rounded-[2rem] overflow-hidden shadow-sm">
+            <div className="bg-card-bg border border-openpos-border rounded-[2rem] overflow-hidden shadow-sm">
                 <div className="p-5 border-b border-openpos-border flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="relative w-full md:w-96">
                         <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim" size={16} />

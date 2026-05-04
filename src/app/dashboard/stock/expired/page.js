@@ -62,7 +62,7 @@ export default function ExpiredPage() {
             </div>
 
             {/* List */}
-            <div className="bg-white border border-openpos-border rounded-[2rem] overflow-hidden shadow-sm">
+            <div className="bg-card-bg border border-openpos-border rounded-[2rem] overflow-hidden shadow-sm">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
                         <thead>
@@ -76,7 +76,7 @@ export default function ExpiredPage() {
                         </thead>
                         <tbody className="divide-y divide-openpos-border">
                             {filteredStock.length > 0 ? filteredStock.map((item) => (
-                                <tr key={item.id} className="group hover:bg-orange-50/30 transition-colors">
+                                <tr key={item.id} className="group hover:bg-openpos-bg-subtle transition-colors">
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
                                             <div className="w-10 h-10 rounded-lg overflow-hidden bg-openpos-bg-subtle shrink-0 relative border border-openpos-border shadow-sm">
@@ -136,8 +136,8 @@ export default function ExpiredPage() {
                 confirmText="Write-off"
                 onConfirm={confirmWriteOff}
             >
-                <div className="p-4 bg-red-50 rounded-2xl border border-red-100">
-                    <p className="text-[12px] text-red-600 font-medium">This action will record a financial loss of KES {selectedItem?.value.toLocaleString()} and remove the items from your inventory inventory permanently.</p>
+                <div className="p-4 bg-openpos-red/5 rounded-2xl border border-openpos-red/10">
+                    <p className="text-[12px] text-openpos-red font-medium">This action will record a financial loss of KES {selectedItem?.value.toLocaleString()} and remove the items from your inventory inventory permanently.</p>
                 </div>
             </Modal>
         </div>
