@@ -140,7 +140,7 @@ export default function SettingsPage() {
                     <div className="flex-1 space-y-4 text-center md:text-left">
                         <div className="flex items-center justify-center md:justify-start gap-2">
                             <div className="w-8 h-8 rounded-lg bg-openpos-blue text-white flex items-center justify-center shadow-lg shadow-openpos-blue/20">
-                                <Shield size={16} />
+                                <Lock size={16} />
                             </div>
                             <span className="text-[10px] font-bold text-openpos-blue uppercase tracking-widest">Security Status</span>
                         </div>

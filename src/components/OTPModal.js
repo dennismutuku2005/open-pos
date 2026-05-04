@@ -121,7 +121,7 @@ export function OTPModal({ isOpen, onClose, onVerify, phoneNumber, isLoading, ac
             title="Two-Step Verification"
             description="High Priority Security Check"
             type="primary"
-            icon={ShieldCheck}
+            icon={Lock}
             confirmText="Verify Action"
             onConfirm={handleSubmit}
             isLoading={isLoading}

@@ -264,18 +264,13 @@ export default function StaffManagementPage() {
                                 filteredStaff.map((user) => (
                                     <tr key={user.id} className="hover:bg-openpos-bg-subtle/40 transition-colors group cursor-default">
                                         <td className="px-6 py-4">
-                                            <div className="flex items-center gap-4">
-                                                <div className="w-10 h-10 rounded-xl bg-openpos-blue/5 border border-openpos-blue/10 flex items-center justify-center text-openpos-blue group-hover:scale-105 transition-transform">
-                                                    <Fingerprint size={20} />
-                                                </div>
-                                                <div className="flex flex-col">
-                                                    <span className="font-bold text-admin-value leading-none uppercase text-[12px] group-hover:text-openpos-blue transition-colors">{user.name}</span>
-                                                    <span className="text-[9px] font-bold text-admin-dim mt-1.5 uppercase tracking-tight flex items-center gap-1.5 opacity-80">
-                                                        <AtSign size={10} className="text-openpos-blue" /> {user.username}
-                                                        <span className="mx-0.5 opacity-30">•</span>
-                                                        UID: {user.id.substring(0, 8)}
-                                                    </span>
-                                                </div>
+                                            <div className="flex flex-col">
+                                                <span className="font-bold text-admin-value leading-none uppercase text-[12px] group-hover:text-openpos-blue transition-colors">{user.name}</span>
+                                                <span className="text-[9px] font-bold text-admin-dim mt-1.5 uppercase tracking-tight flex items-center gap-1.5 opacity-80">
+                                                    <AtSign size={10} className="text-openpos-blue" /> {user.username}
+                                                    <span className="mx-0.5 opacity-30">•</span>
+                                                    UID: {user.id.substring(0, 8)}
+                                                </span>
                                             </div>
                                         </td>
                                         <td className="px-6 py-4 text-center">
@@ -313,7 +308,7 @@ export default function StaffManagementPage() {
                                                     className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-admin-value hover:border-openpos-blue/30 hover:bg-openpos-blue/5 transition-all"
                                                     title="Security Profile"
                                                 >
-                                                    <Shield size={12} />
+                                                    <Lock size={12} />
                                                 </button>
                                 
                                                 {!user.is_primary && (user.type !== 'admin' || isSuperAdmin || user.id === currentUser?.id) ? (
@@ -452,7 +447,7 @@ export default function StaffManagementPage() {
                     {formData.type === 'user' ? (
                         <div className="space-y-3 pt-2 animate-in slide-in-from-top-2 duration-300">
                             <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest flex items-center gap-2">
-                                <Shield size={12} className="text-openpos-blue" />
+                                <Lock size={12} className="text-openpos-blue" />
                                 System Policies & Permissions
                             </label>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -529,7 +524,7 @@ export default function StaffManagementPage() {
                 {selectedStaff && (
                     <div className="space-y-6 text-center py-4">
                         <div className="w-16 h-16 bg-openpos-bg-subtle rounded-full flex items-center justify-center mx-auto border border-openpos-border text-admin-dim">
-                            <Fingerprint size={32} />
+                            <UserCheck size={32} />
                         </div>
                         <div>
                             <h3 className="text-base font-bold text-admin-value uppercase leading-none">{selectedStaff.name}</h3>

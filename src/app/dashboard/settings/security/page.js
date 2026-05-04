@@ -31,7 +31,7 @@ export default function SecuritySettingsPage() {
                     </Link>
                     <div>
                         <h1 className="text-xl font-bold tracking-tight text-admin-value uppercase flex items-center gap-2">
-                            <ShieldCheck size={20} className="text-openpos-blue" />
+                            <Lock size={20} className="text-openpos-blue" />
                             Security Shield
                         </h1>
                         <p className="text-[13px] font-medium text-admin-label mt-0.5">Configure biometric access, 2FA, and encryption keys.</p>
@@ -42,7 +42,7 @@ export default function SecuritySettingsPage() {
                     disabled={loading}
                     className="w-full sm:w-auto bg-openpos-blue text-white px-8 py-2.5 rounded-xl font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest disabled:opacity-50"
                 >
-                    {loading ? <RefreshCw size={16} className="animate-spin" /> : <Shield size={16} />}
+                    {loading ? <RefreshCw size={16} className="animate-spin" /> : <Lock size={16} />}
                     Harden Security
                 </button>
             </div>
@@ -124,7 +124,7 @@ export default function SecuritySettingsPage() {
                     <Card title="Encryption Status" subtitle="System-wide protection" noPadding>
                         <div className="p-6 flex flex-col items-center text-center space-y-4">
                             <div className="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500">
-                                <ShieldCheck size={32} />
+                                <Lock size={32} />
                             </div>
                             <div>
                                 <p className="text-[13px] font-bold text-admin-value">AES-256 BIT ACTIVE</p>

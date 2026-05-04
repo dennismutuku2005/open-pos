@@ -206,13 +206,13 @@ export default function ProfilePage() {
                 <div className="px-8 py-4 border-b border-openpos-border bg-openpos-bg-subtle/30 flex items-center justify-between">
                     <h3 className="text-[9px] font-bold text-admin-value uppercase tracking-[2.5px]">System Security</h3>
                     <div className="flex items-center gap-1.5 text-[9px] font-bold text-openpos-blue bg-openpos-blue/10 px-2.5 py-1 rounded-lg uppercase tracking-widest">
-                        <Shield size={10} /> Protected
+                        <Activity size={10} /> Protected
                     </div>
                 </div>
                 <div className="divide-y divide-openpos-border">
                     {[
                         { title: 'Password Protection', desc: 'Secure your login credentials', icon: Key },
-                        { title: 'Two-Factor Authentication', desc: 'Multi-layer security enabled', icon: Shield, active: true },
+                        { title: 'Two-Factor Authentication', desc: 'Multi-layer security enabled', icon: Activity, active: true },
                         { title: 'Active Sessions', desc: 'Manage devices currently logged in', icon: Smartphone }
                     ].map((item, i) => (
                         <div key={i} className="px-8 py-4 flex items-center justify-between hover:bg-openpos-bg-subtle/30 transition-all cursor-pointer group">
