@@ -45,14 +45,7 @@ export default function AnalyticsReportPage() {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                 <div className="flex flex-col gap-2">
-                    <Link 
-                        href="/dashboard/reports" 
-                        className="flex items-center gap-2 text-[10px] font-bold text-admin-dim hover:text-openpos-blue uppercase tracking-[2px] transition-colors w-fit"
-                    >
-                        <ArrowLeft size={12} /> Back to Hub
-                    </Link>
                     <h1 className="text-xl font-bold tracking-tight text-admin-value uppercase flex items-center gap-2">
-                        <BarChart3 size={20} className="text-openpos-blue" />
                         Market Analytics
                     </h1>
                     <p className="text-[13px] font-medium text-admin-label mt-0.5">Real-time market trends and customer behavior modeling.</p>
@@ -148,37 +141,6 @@ export default function AnalyticsReportPage() {
                                 <span className="text-[11px] font-bold text-admin-value">{item.value}%</span>
                             </div>
                         ))}
-                    </div>
-                </Card>
-            </div>
-
-            {/* Bottom Insight Area */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <Card title="Predictive Trends" subtitle="Forecasting future demand">
-                    <div className="p-4 space-y-4">
-                        <div className="flex items-center justify-between p-4 bg-openpos-blue/5 border border-openpos-blue/10 rounded-2xl">
-                            <div className="flex items-center gap-3">
-                                <TrendingUp className="text-openpos-blue" size={18} />
-                                <span className="text-[11px] font-bold text-admin-value uppercase tracking-tight">Projected Weekend Growth: +14%</span>
-                            </div>
-                            <span className="text-[9px] font-bold text-openpos-blue uppercase tracking-widest">Confidence: High</span>
-                        </div>
-                        <p className="text-[11px] text-admin-dim font-medium leading-relaxed px-1">
-                            Based on historical patterns for the first week of June, we anticipate a surge in Bakery demand between 05:00 PM and 07:00 PM. Recommend increasing production of "Beef Crowich" by 20%.
-                        </p>
-                    </div>
-                </Card>
-
-                <Card title="Customer Loyalty Identity" subtitle="Engagement metrics">
-                    <div className="grid grid-cols-2 gap-4 mt-2">
-                        <div className="p-4 rounded-2xl bg-openpos-bg-subtle/50 border border-openpos-border text-center">
-                            <p className="text-[20px] font-bold text-admin-value">842</p>
-                            <p className="text-[9px] font-bold text-admin-dim uppercase tracking-widest mt-1">Returning Customers</p>
-                        </div>
-                        <div className="p-4 rounded-2xl bg-openpos-bg-subtle/50 border border-openpos-border text-center">
-                            <p className="text-[20px] font-bold text-openpos-blue">12.8%</p>
-                            <p className="text-[9px] font-bold text-admin-dim uppercase tracking-widest mt-1">Churn Rate</p>
-                        </div>
                     </div>
                 </Card>
             </div>
