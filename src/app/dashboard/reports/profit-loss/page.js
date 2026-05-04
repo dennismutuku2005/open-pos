@@ -4,7 +4,7 @@ import React, { useState } from'react'
 import { 
  TrendingUp, TrendingDown, ArrowLeft, Download, 
  Calendar, DollarSign, Wallet, ArrowUpRight, 
- ArrowDownRight, RefreshCw, BarChart3, PieChart
+ ArrowDownRight, RefreshCw, BarChart3, PieChart, Loader2
 } from'lucide-react'
 import Link from'next/link'
 import { 
@@ -49,9 +49,22 @@ export default function ProfitLossPage() {
  >
  <RefreshCw size={16} className={cn(loading &&"animate-spin")} />
  </button>
- <button className="bg-openpos-blue text-white px-6 py-2.5 rounded-xl font-bold text-[11px] flex items-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest">
+ <button 
+ onClick={() => {
+ setLoading(true);
+ setTimeout(() => setLoading(false), 2000);
+ }}
+ disabled={loading}
+ className="bg-openpos-blue text-white px-6 py-2.5 rounded-xl font-bold text-[11px] flex items-center gap-2 transition-all uppercase tracking-widest min-w-[140px] justify-center"
+ >
+ {loading ? (
+ <Loader2 size={16} className="animate-spin" />
+ ) : (
+ <>
  <Download size={16} />
  Export Audit
+ </>
+ )}
  </button>
  </div>
  </div>
