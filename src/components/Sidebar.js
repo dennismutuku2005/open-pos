@@ -126,10 +126,8 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
         {
             id: 'reports',
             name: 'Reports',
-            href: '/dashboard/reports',
             icon: BarChart3,
             children: [
-                { name: 'Intelligence Hub', href: '/dashboard/reports' },
                 { name: 'Market Analytics', href: '/dashboard/reports/analytics' },
                 { name: 'Profit & Loss', href: '/dashboard/reports/profit-loss' },
                 { name: 'Inventory Perf.', href: '/dashboard/reports/inventory' },
