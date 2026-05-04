@@ -131,7 +131,7 @@ export default function POSPage() {
     }
 
     const getButtonColor = () => {
-        if (checkoutStep === 'success') return "bg-openpos-green"
+        if (checkoutStep === 'success') return "bg-openpos-blue"
         if (checkoutStep === 'processing') return "bg-admin-dim cursor-not-allowed opacity-80"
         return "bg-openpos-blue"
     }
@@ -182,11 +182,11 @@ export default function POSPage() {
                         onClick={() => setPaymentMethod('mpesa')}
                         className={cn(
                             "w-full flex items-center justify-between p-4 rounded-2xl border-2 transition-all",
-                            paymentMethod === 'mpesa' ? "border-openpos-green bg-openpos-green/5" : "border-openpos-border bg-white hover:border-openpos-blue/30"
+                            paymentMethod === 'mpesa' ? "border-openpos-blue bg-openpos-blue/5" : "border-openpos-border bg-white hover:border-openpos-blue/30"
                         )}
                     >
                         <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-green-100 text-openpos-green flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-xl bg-blue-100 text-openpos-blue flex items-center justify-center">
                                 <Smartphone size={20} />
                             </div>
                             <div className="text-left">
@@ -194,7 +194,7 @@ export default function POSPage() {
                                 <p className="text-[11px] text-admin-dim font-medium">Pay via STK Push</p>
                             </div>
                         </div>
-                        {paymentMethod === 'mpesa' && <CheckCircle2 className="text-openpos-green" size={20} />}
+                        {paymentMethod === 'mpesa' && <CheckCircle2 className="text-openpos-blue" size={20} />}
                     </button>
 
                     <button 
@@ -231,7 +231,7 @@ export default function POSPage() {
                     
                     <div className="bg-openpos-bg-subtle/50 border border-openpos-border p-4 rounded-2xl flex items-center gap-4">
                         <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center border border-openpos-border">
-                            <Smartphone className="text-openpos-green" size={24} />
+                            <Smartphone className="text-openpos-blue" size={24} />
                         </div>
                         <div>
                             <p className="text-[11px] text-admin-dim font-bold uppercase tracking-widest">Amount to Pay</p>
@@ -245,7 +245,7 @@ export default function POSPage() {
                             <input 
                                 type="text"
                                 placeholder="e.g. 0712345678"
-                                className="w-full bg-white border border-openpos-border rounded-xl pl-11 pr-4 py-3 text-[14px] font-bold outline-none shadow-sm focus:ring-2 focus:ring-openpos-green/20 focus:border-openpos-green transition-all"
+                                className="w-full bg-white border border-openpos-border rounded-xl pl-11 pr-4 py-3 text-[14px] font-bold outline-none shadow-sm focus:ring-2 focus:ring-openpos-blue/20 focus:border-openpos-blue transition-all"
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                                 autoFocus
@@ -280,7 +280,7 @@ export default function POSPage() {
         if (checkoutStep === 'success') {
             return (
                 <div className="h-full flex flex-col items-center justify-center space-y-6 animate-in zoom-in-95 duration-500 mt-4">
-                    <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-openpos-green shadow-lg shadow-openpos-green/20">
+                    <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center text-openpos-blue shadow-lg shadow-openpos-blue/20">
                         <CheckCircle2 size={40} />
                     </div>
                     <div className="text-center space-y-1">
