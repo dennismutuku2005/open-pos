@@ -6,16 +6,17 @@ import {
     MoreVertical, Download, Printer, CheckCircle2,
     Clock, AlertTriangle
 } from 'lucide-react'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { Modal } from '@/components/Modal'
 
 // Mock Data
 const stockData = [
-    { id: 1, name: 'Logitech MX Master 3S', category: 'Accessories', stock: 12, price: 12500, value: 150000, status: 'Healthy' },
-    { id: 2, name: 'USB-C Hub Multiport', category: 'Computing', stock: 24, price: 4500, value: 108000, status: 'Healthy' },
-    { id: 3, name: 'Portable SSD 1TB', category: 'Storage', stock: 18, price: 15500, value: 279000, status: 'Healthy' },
-    { id: 4, name: 'Webcam 4K Ultra HD', category: 'Peripherals', stock: 15, price: 18000, value: 270000, status: 'Healthy' },
-    { id: 5, name: 'Bluetooth Earbuds', category: 'Audio', stock: 30, price: 6500, value: 195000, status: 'Healthy' },
+    { id: 1, name: 'Logitech MX Master 3S', category: 'Accessories', stock: 12, price: 12500, value: 150000, status: 'Healthy', image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&q=80' },
+    { id: 2, name: 'USB-C Hub Multiport', category: 'Computing', stock: 24, price: 4500, value: 108000, status: 'Healthy', image: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&q=80' },
+    { id: 3, name: 'Portable SSD 1TB', category: 'Storage', stock: 18, price: 15500, value: 279000, status: 'Healthy', image: 'https://images.unsplash.com/photo-1597872200370-493dea23936a?w=400&q=80' },
+    { id: 4, name: 'Webcam 4K Ultra HD', category: 'Peripherals', stock: 15, price: 18000, value: 270000, status: 'Healthy', image: 'https://images.unsplash.com/photo-1610483178766-8092dcc6f36a?w=400&q=80' },
+    { id: 5, name: 'Bluetooth Earbuds', category: 'Audio', stock: 30, price: 6500, value: 195000, status: 'Healthy', image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&q=80' },
 ]
 
 export default function InStockPage() {
@@ -98,8 +99,12 @@ export default function InStockPage() {
                                 <tr key={item.id} className="group hover:bg-openpos-bg-subtle/20 transition-colors">
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-lg bg-openpos-bg-subtle flex items-center justify-center text-openpos-blue">
-                                                <Package size={20} />
+                                            <div className="w-10 h-10 rounded-lg overflow-hidden bg-openpos-bg-subtle shrink-0 relative border border-openpos-border shadow-sm">
+                                                {item.image ? (
+                                                    <Image src={item.image} alt={item.name} fill className="object-cover" />
+                                                ) : (
+                                                    <div className="w-full h-full flex items-center justify-center text-admin-dim"><Package size={18} /></div>
+                                                )}
                                             </div>
                                             <div>
                                                 <p className="text-[14px] font-bold text-admin-value">{item.name}</p>
@@ -123,7 +128,7 @@ export default function InStockPage() {
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 text-right">
-                                        <button className="p-2 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/10 rounded-lg transition-all opacity-0 group-hover:opacity-100">
+                                        <button className="p-2 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/10 rounded-lg transition-all">
                                             <MoreVertical size={16} />
                                         </button>
                                     </td>
