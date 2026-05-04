@@ -8,12 +8,12 @@
   --openpos-blue: #2563EB;
   --openpos-blue-light: #EFF6FF;
   --openpos-blue-dark: #1E40AF;
-  
+
   --openpos-green: #10B981;
   --openpos-green-light: #ECFDF5;
   --openpos-red: #EF4444;
   --openpos-red-light: #FEF2F2;
-  
+
   --openpos-border: #E2E8F0;
   --openpos-bg-subtle: #F1F5F9;
 
@@ -58,12 +58,12 @@
   --color-openpos-blue: var(--openpos-blue);
   --color-openpos-blue-light: var(--openpos-blue-light);
   --color-openpos-blue-dark: var(--openpos-blue-dark);
-  
+
   --color-openpos-green: var(--openpos-green);
   --color-openpos-green-light: var(--openpos-green-light);
   --color-openpos-red: var(--openpos-red);
   --color-openpos-red-light: var(--openpos-red-light);
-  
+
   --color-openpos-border: var(--openpos-border);
   --color-openpos-bg-subtle: var(--openpos-bg-subtle);
 
