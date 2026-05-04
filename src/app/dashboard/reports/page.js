@@ -1,0 +1,130 @@
+"use client"
+
+import React from 'react'
+import Link from 'next/link'
+import { 
+    BarChart3, TrendingUp, PieChart, ShoppingBag, 
+    Layers, Wallet, ArrowRight, Activity, 
+    FileText, Calendar
+} from 'lucide-react'
+import { Card } from '@/components/Card'
+
+export default function ReportsIndexPage() {
+    const reportModules = [
+        {
+            id: 'analytics',
+            name: 'Market Analytics',
+            description: 'Advanced sales trends & revenue growth projection',
+            href: '/dashboard/reports/analytics',
+            icon: BarChart3,
+            tag: 'Real-time',
+            color: 'blue'
+        },
+        {
+            id: 'profit-loss',
+            name: 'Profit & Loss',
+            description: 'Net income analysis vs operational expenditure',
+            href: '/dashboard/reports/profit-loss',
+            icon: TrendingUp,
+            tag: 'Fiscal',
+            color: 'blue'
+        },
+        {
+            id: 'inventory',
+            name: 'Inventory Performance',
+            description: 'Top movers & slow-moving product analysis',
+            href: '/dashboard/reports/inventory',
+            icon: ShoppingBag,
+            tag: 'Stock',
+            color: 'blue'
+        },
+        {
+            id: 'activity',
+            name: 'Audit Logs',
+            description: 'System-wide activity & security audit trails',
+            href: '/dashboard/logs',
+            icon: FileText,
+            tag: 'Compliance',
+            color: 'blue'
+        }
+    ]
+
+    return (
+        <div className="space-y-8 animate-in fade-in duration-500 font-figtree pb-20">
+            {/* Header */}
+            <div>
+                <h1 className="text-xl font-bold tracking-tight text-admin-value uppercase">Intelligence Hub</h1>
+                <p className="text-[13px] font-medium text-admin-label mt-1">Advanced reporting and data-driven insights for organizational growth.</p>
+            </div>
+
+            {/* Matrix Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {reportModules.map((module) => (
+                    <Link 
+                        key={module.id} 
+                        href={module.href}
+                        className="group relative bg-card-bg border border-openpos-border rounded-[24px] p-2 hover:border-openpos-blue/30 transition-all duration-300 flex flex-col"
+                    >
+                        <div className="aspect-square rounded-[18px] bg-openpos-bg-subtle flex items-center justify-center relative overflow-hidden">
+                            <module.icon size={48} className="text-openpos-blue group-hover:scale-110 transition-transform duration-500 opacity-80" />
+                            
+                            <div className="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-card-bg border border-openpos-border shadow-sm">
+                                <span className="text-[9px] font-bold text-openpos-blue uppercase tracking-widest">{module.tag}</span>
+                            </div>
+
+                            <div className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-openpos-blue text-white flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg shadow-openpos-blue/20">
+                                <ArrowRight size={16} />
+                            </div>
+                        </div>
+
+                        <div className="p-4 space-y-1">
+                            <h3 className="text-[14px] font-bold text-admin-value group-hover:text-openpos-blue transition-colors uppercase tracking-tight">
+                                {module.name}
+                            </h3>
+                            <p className="text-[11px] text-admin-dim font-medium leading-relaxed line-clamp-2">
+                                {module.description}
+                            </p>
+                        </div>
+                    </Link>
+                ))}
+            </div>
+
+            {/* Performance Summary Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <Card title="System Intelligence" subtitle="Automated insight engine" noPadding>
+                    <div className="p-6 space-y-4">
+                        <div className="flex items-start gap-4 p-4 bg-openpos-bg-subtle rounded-2xl border border-openpos-border">
+                            <Activity className="text-openpos-blue mt-1" size={20} />
+                            <div>
+                                <h4 className="text-[13px] font-bold text-admin-value uppercase">Auto-Analysis</h4>
+                                <p className="text-[11px] text-admin-dim font-medium mt-1">Our AI engine is currently analyzing weekend sales patterns to optimize stock levels.</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center justify-between px-2">
+                            <span className="text-[10px] font-bold text-admin-dim uppercase tracking-widest">Engine Status</span>
+                            <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest bg-emerald-500/10 px-2 py-0.5 rounded-md">Optimal</span>
+                        </div>
+                    </div>
+                </Card>
+                
+                <div className="lg:col-span-2 bg-openpos-blue/5 border border-openpos-blue/10 rounded-[32px] p-8 flex flex-col md:flex-row items-center gap-8">
+                    <div className="flex-1 space-y-4">
+                        <div className="flex items-center gap-2">
+                            <div className="w-8 h-8 rounded-lg bg-openpos-blue text-white flex items-center justify-center shadow-lg shadow-openpos-blue/20">
+                                <PieChart size={16} />
+                            </div>
+                            <span className="text-[10px] font-bold text-openpos-blue uppercase tracking-widest">Growth Analytics</span>
+                        </div>
+                        <h2 className="text-2xl font-bold text-admin-value leading-tight">Leverage <span className="text-openpos-blue">predictive data</span> to outpace market trends.</h2>
+                        <p className="text-[13px] text-admin-dim font-medium leading-relaxed">
+                            Access deep granular reports that dissect every transaction to reveal hidden opportunities for revenue expansion and cost optimization.
+                        </p>
+                    </div>
+                    <div className="hidden md:flex w-48 h-48 bg-card-bg border border-openpos-border rounded-3xl shadow-2xl items-center justify-center p-6 rotate-3 hover:rotate-0 transition-transform duration-500">
+                        <BarChart3 size={80} className="text-openpos-blue opacity-20" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
