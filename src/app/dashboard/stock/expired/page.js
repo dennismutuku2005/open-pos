@@ -4,23 +4,44 @@ import React, { useState } from 'react'
 import { 
     Package, Search, Trash2, Calendar, 
     MoreVertical, AlertCircle, History,
-    Ban, Info
+    Ban, Info, Edit2, Layers
 } from 'lucide-react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import { Modal } from '@/components/Modal'
+import { toast } from 'sonner'
 
 // Mock Data
-const expiredData = [
+const initialExpiredData = [
     { id: 9, name: 'Thermal Receipt Paper (Roll)', category: 'Consumables', expiredOn: '2026-03-15', stock: 5, value: 1200, image: 'https://images.unsplash.com/photo-1594122230689-45899d9e6f69?w=400&q=80' },
     { id: 10, name: 'Cleaning Solvent 500ml', category: 'Maintenance', expiredOn: '2026-04-20', stock: 2, value: 3500, image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400&q=80' },
 ]
 
 export default function ExpiredPage() {
+    const [stockData, setStockData] = useState(initialExpiredData)
     const [searchTerm, setSearchTerm] = useState('')
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [selectedItem, setSelectedItem] = useState(null)
 
-    const filteredStock = expiredData.filter(s => 
+    const filteredStock = stockData.filter(s => 
         s.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
+
+    const handleDelete = (item) => {
+        setSelectedItem(item)
+        setShowDeleteModal(true)
+    }
+
+    const confirmWriteOff = () => {
+        setStockData(prev => prev.filter(s => s.id !== selectedItem.id))
+        toast.success('Product written off from inventory')
+        setShowDeleteModal(false)
+    }
+
+    const writeOffAll = () => {
+        setStockData([])
+        toast.success('All expired items have been written off')
+    }
 
     return (
         <div className="space-y-6 animate-in fade-in duration-500">
@@ -28,23 +49,15 @@ export default function ExpiredPage() {
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
                     <h1 className="text-xl font-bold tracking-tight text-admin-value uppercase">Expired Inventory</h1>
-                    <p className="text-admin-label mt-1">Manage and write-off products past their shelf life.</p>
+                    <p className="text-admin-label mt-1 font-medium">Manage and write-off products past their shelf life.</p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <button className="bg-openpos-bg-subtle text-admin-dim px-5 py-2.5 rounded-xl font-bold text-[12px] uppercase flex items-center gap-2 hover:text-openpos-red hover:bg-openpos-red/5 transition-all">
+                    <button 
+                        onClick={writeOffAll}
+                        className="bg-openpos-bg-subtle text-admin-dim px-5 py-2.5 rounded-xl font-bold text-[12px] uppercase flex items-center gap-2 hover:text-openpos-red hover:bg-openpos-red/5 transition-all"
+                    >
                         <Trash2 size={16} /> Write-off All
                     </button>
-                </div>
-            </div>
-
-            {/* Warning Banner */}
-            <div className="bg-orange-50 border border-orange-100 rounded-2xl p-4 flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 shrink-0">
-                    <AlertCircle size={20} />
-                </div>
-                <div>
-                    <p className="text-[13px] font-bold text-orange-700 uppercase tracking-widest">Expiration Tracking</p>
-                    <p className="text-[12px] text-orange-600 font-medium">The following items have reached or passed their expiration dates and should be removed from active stock to maintain quality standards.</p>
                 </div>
             </div>
 
@@ -92,7 +105,7 @@ export default function ExpiredPage() {
                                         <span className="text-[14px] font-bold text-openpos-red">KES {item.value.toLocaleString()}</span>
                                     </td>
                                     <td className="px-6 py-4 text-right">
-                                        <button className="p-2 text-admin-dim hover:text-openpos-red hover:bg-openpos-red/5 rounded-lg transition-all">
+                                        <button onClick={() => handleDelete(item)} className="p-2 text-admin-dim hover:text-openpos-red hover:bg-openpos-red/5 rounded-lg transition-all">
                                             <Trash2 size={16} />
                                         </button>
                                     </td>
@@ -111,6 +124,22 @@ export default function ExpiredPage() {
                     </table>
                 </div>
             </div>
+
+            {/* Write-off Confirmation Modal */}
+            <Modal
+                isOpen={showDeleteModal}
+                onClose={() => setShowDeleteModal(false)}
+                title="Confirm Write-off"
+                description={`Are you sure you want to write off ${selectedItem?.stock} units of ${selectedItem?.name}?`}
+                type="danger"
+                icon={Trash2}
+                confirmText="Write-off"
+                onConfirm={confirmWriteOff}
+            >
+                <div className="p-4 bg-red-50 rounded-2xl border border-red-100">
+                    <p className="text-[12px] text-red-600 font-medium">This action will record a financial loss of KES {selectedItem?.value.toLocaleString()} and remove the items from your inventory inventory permanently.</p>
+                </div>
+            </Modal>
         </div>
     )
 }
