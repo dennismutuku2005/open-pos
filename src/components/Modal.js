@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect } from'react'
-import { X, AlertCircle, CheckCircle2, Info, AlertTriangle, Fingerprint, ShieldCheck } from'lucide-react'
+import { X, AlertCircle, CheckCircle2, Info, AlertTriangle, Fingerprint, ShieldCheck, Loader2 } from 'lucide-react'
 import { cn } from'@/lib/utils'
 
 export function Modal({
@@ -159,7 +159,7 @@ export function Modal({
  )}
  >
  {isLoading ? (
- <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"/>
+ <Loader2 className="animate-spin" size={16} />
  ) : (
  <>
  {confirmText}
