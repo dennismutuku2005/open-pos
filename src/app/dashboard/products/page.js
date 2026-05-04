@@ -186,7 +186,7 @@ export default function ProductsPage() {
                     <p className="text-admin-label mt-1 font-medium text-[13px]">Manage your inventory, prices, and stock levels.</p>
                 </div>
                 <div className="flex items-center gap-3 w-full sm:w-auto">
-                    <div className="flex items-center bg-white border border-openpos-border rounded-xl overflow-hidden shadow-sm">
+                    <div className="flex items-center bg-card-bg border border-openpos-border rounded-xl overflow-hidden shadow-sm">
                         <button 
                             onClick={() => exportProducts('PDF')}
                             className="px-4 py-2.5 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/5 transition-all flex items-center gap-2 border-r border-openpos-border"
@@ -369,7 +369,7 @@ export default function ProductsPage() {
                     <div className="md:col-span-2 space-y-1.5">
                         <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Product Image</label>
                         <div className="flex items-center gap-4 p-4 bg-openpos-bg-subtle rounded-2xl ring-1 ring-openpos-border">
-                            <div className="w-16 h-16 rounded-xl bg-white border border-openpos-border overflow-hidden flex items-center justify-center shrink-0 relative group">
+                            <div className="w-16 h-16 rounded-xl bg-card-bg border border-openpos-border overflow-hidden flex items-center justify-center shrink-0 relative group">
                                 {formData.image ? (
                                     <>
                                         <Image src={formData.image} alt="Preview" fill className="object-cover" />
@@ -385,7 +385,7 @@ export default function ProductsPage() {
                                 )}
                             </div>
                             <div className="flex-1">
-                                <label className="flex flex-col items-center justify-center w-full h-12 border-2 border-dashed border-openpos-border rounded-xl cursor-pointer hover:bg-white transition-all group">
+                                <label className="flex flex-col items-center justify-center w-full h-12 border-2 border-dashed border-openpos-border rounded-xl cursor-pointer hover:bg-card-bg transition-all group">
                                     <div className="flex items-center gap-2">
                                         <Upload size={14} className="text-admin-dim group-hover:text-openpos-blue transition-colors" />
                                         <span className="text-[11px] font-bold text-admin-dim group-hover:text-admin-value transition-colors uppercase tracking-widest">
@@ -457,7 +457,7 @@ export default function ProductsPage() {
                     <div className="md:col-span-2 space-y-4 bg-openpos-bg-subtle/50 p-4 rounded-2xl border border-openpos-border/50">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-lg bg-white border border-openpos-border flex items-center justify-center text-admin-dim">
+                                <div className="w-8 h-8 rounded-lg bg-card-bg border border-openpos-border flex items-center justify-center text-admin-dim">
                                     <Calendar size={16} />
                                 </div>
                                 <div>
@@ -485,7 +485,7 @@ export default function ProductsPage() {
                                     type="date"
                                     value={formData.expiry}
                                     onChange={handleInputChange}
-                                    className="w-full bg-white border-none rounded-xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border mt-1.5 focus:ring-openpos-blue/30 transition-all"
+                                    className="w-full bg-card-bg border-none rounded-xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border mt-1.5 focus:ring-openpos-blue/30 transition-all"
                                     required={formData.hasExpiry}
                                 />
                             </div>
@@ -525,8 +525,8 @@ export default function ProductsPage() {
                 confirmCountdown={5}
                 onConfirm={confirmDelete}
             >
-                <div className="p-4 bg-red-50 rounded-2xl border border-red-100">
-                    <p className="text-[12px] text-red-600 font-medium leading-relaxed">
+                <div className="p-4 bg-openpos-red/5 rounded-2xl border border-openpos-red/10">
+                    <p className="text-[12px] text-openpos-red font-medium leading-relaxed">
                         This will permanently remove the product from your inventory. All historical sales data will remain, but you won't be able to sell this item anymore.
                     </p>
                 </div>
