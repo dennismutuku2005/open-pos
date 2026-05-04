@@ -4,7 +4,7 @@ import React, { useState, useEffect } from'react'
 import Image from'next/image'
 import { useRouter } from'next/navigation'
 import { motion } from'framer-motion'
-import { Eye, EyeOff, AlertCircle } from'lucide-react'
+import { Eye, EyeOff, AlertCircle, Loader2 } from'lucide-react'
 import authService from'@/lib/auth'
 import { APP_VERSION } from'@/lib/version'
 
@@ -142,12 +142,12 @@ export default function LoginPage() {
  <button
  type="submit"
  disabled={isAuthenticating}
- className="w-full bg-openpos-blue text-white rounded-xl py-4 font-bold text-[13px] uppercase tracking-[2px] shadow-lg shadow-openpos-blue/20 transition-all"
+ className="w-full bg-openpos-blue text-white rounded-xl py-4 font-bold text-[13px] uppercase tracking-[2px] shadow-lg shadow-openpos-blue/20 transition-all flex items-center justify-center min-h-[52px]"
  >
  {isAuthenticating ? (
- <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+ <Loader2 className="animate-spin" size={20} />
  ) : (
-'Sign In'
+ 'Sign In'
  )}
  </button>
  </form>
