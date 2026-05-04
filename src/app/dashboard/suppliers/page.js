@@ -26,6 +26,7 @@ export default function SuppliersPage() {
  const [showDeleteModal, setShowDeleteModal] = useState(false)
  const [editingSupplier, setEditingSupplier] = useState(null)
  const [deletingSupplier, setDeletingSupplier] = useState(null)
+ const [isLoading, setIsLoading] = useState(false)
  const [formData, setFormData] = useState({ name:'', contact:'', phone:'', email:'', category:'Ingredients'})
 
  const handleAdd = () => {
@@ -49,19 +50,23 @@ export default function SuppliersPage() {
  const handleSave = () => {
  if (!formData.name) return toast.error('Supplier name is required')
  
- if (editingSupplier) {
- setSuppliers(prev => prev.map(s => s.id === editingSupplier.id ? { ...s, ...formData } : s))
- toast.success('Supplier details updated')
- } else {
- const newSup = {
- id: Date.now(),
- ...formData,
- rating: 5.0
- }
- setSuppliers(prev => [newSup, ...prev])
- toast.success('Supplier onboarded successfully')
- }
- setShowModal(false)
+ setIsLoading(true)
+ setTimeout(() => {
+   if (editingSupplier) {
+     setSuppliers(prev => prev.map(s => s.id === editingSupplier.id ? { ...s, ...formData } : s))
+     toast.success('Supplier details updated')
+   } else {
+     const newSup = {
+     id: Date.now(),
+     ...formData,
+     rating: 5.0
+     }
+     setSuppliers(prev => [newSup, ...prev])
+     toast.success('Supplier onboarded successfully')
+   }
+   setIsLoading(false)
+   setShowModal(false)
+ }, 1000)
  }
 
  const handleDelete = (sup) => {
@@ -71,10 +76,14 @@ export default function SuppliersPage() {
 
  const confirmDelete = () => {
  if (!deletingSupplier) return
- setSuppliers(prev => prev.filter(s => s.id !== deletingSupplier.id))
- toast.success('Supplier removed')
- setShowDeleteModal(false)
- setDeletingSupplier(null)
+ setIsLoading(true)
+ setTimeout(() => {
+   setSuppliers(prev => prev.filter(s => s.id !== deletingSupplier.id))
+   toast.success('Supplier removed')
+   setIsLoading(false)
+   setShowDeleteModal(false)
+   setDeletingSupplier(null)
+ }, 1000)
  }
 
  return (
@@ -180,6 +189,7 @@ export default function SuppliersPage() {
  description={editingSupplier ?"Update relationship details":"Register a new wholesale partner"}
  confirmText={editingSupplier ?"Save Changes":"Create Supplier"}
  onConfirm={handleSave}
+ isLoading={isLoading}
  icon={Truck}
  maxWidth="max-w-lg"
  >
@@ -245,6 +255,7 @@ export default function SuppliersPage() {
  confirmText="Delete Supplier"
  confirmCountdown={5}
  onConfirm={confirmDelete}
+ isLoading={isLoading}
  >
  <div className="p-4 bg-openpos-red/5 border border-openpos-red/10 rounded-2xl">
  <p className="text-[11px] text-openpos-red font-bold uppercase tracking-tight leading-relaxed">
