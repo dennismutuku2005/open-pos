@@ -1,30 +1,28 @@
 "use client"
 
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { 
-    BarChart3, Calendar, Download, Filter, 
-    Search, FileText, ArrowUpRight, ArrowDownRight,
-    TrendingUp, DollarSign, ShoppingBag, Receipt,
-    ChevronDown, Printer, BadgeCent, History,
-    ArrowRightLeft, Wallet, CheckCircle2, ShoppingCart,
-    Activity, Clock
+    Calendar, Search, ShoppingBag, ShoppingCart, 
+    TrendingUp, Package, History, ArrowUpRight,
+    ArrowDownRight, MoreVertical, Edit2, Trash2,
+    ChevronRight, Activity, DollarSign
 } from 'lucide-react'
 import { 
     AreaChart, Area, XAxis, YAxis, CartesianGrid, 
-    Tooltip, ResponsiveContainer, BarChart, Bar, Cell
+    Tooltip, ResponsiveContainer
 } from 'recharts'
 import { cn } from '@/lib/utils'
-import { generateReport } from '@/lib/pdf'
+import { Card, StatCard } from '@/components/Card'
+import { Modal } from '@/components/Modal'
 import { toast } from 'sonner'
-import { motion, AnimatePresence } from 'framer-motion'
 
-// Mock Data for the Sales Dashboard
+// Mock Data
 const recentTransactions = [
-    { id: 'SAL-001', date: 'Today, 10:30 AM', customer: 'Walking Customer', total: 2450, items: 3, payment: 'Cash' },
-    { id: 'SAL-002', date: 'Today, 11:15 AM', customer: 'John Doe', total: 1500, items: 1, payment: 'M-Pesa' },
-    { id: 'SAL-003', date: 'Today, 12:45 PM', customer: 'Walking Customer', total: 4275, items: 5, payment: 'Cash' },
-    { id: 'SAL-004', date: 'Today, 02:20 PM', customer: 'Jane Smith', total: 850, items: 2, payment: 'Card' },
-    { id: 'SAL-005', date: 'Today, 03:50 PM', customer: 'Walking Customer', total: 3120, items: 4, payment: 'M-Pesa' },
+    { id: 'SAL-001', date: '2024-05-04 10:30', customer: 'Walking Customer', total: 2450, items: 3, payment: 'Cash' },
+    { id: 'SAL-002', date: '2024-05-04 11:15', customer: 'John Doe', total: 1500, items: 1, payment: 'M-Pesa' },
+    { id: 'SAL-003', date: '2024-05-04 12:45', customer: 'Walking Customer', total: 4275, items: 5, payment: 'Cash' },
+    { id: 'SAL-004', date: '2024-05-04 14:20', customer: 'Jane Smith', total: 850, items: 2, payment: 'Card' },
+    { id: 'SAL-005', date: '2024-05-04 15:50', customer: 'Walking Customer', total: 3120, items: 4, payment: 'M-Pesa' },
 ]
 
 const todaySellingData = [
@@ -37,30 +35,37 @@ const todaySellingData = [
     { name: '20:00', sales: 7000 },
 ]
 
-const sellingByProduct = [
-    { name: 'Beef Crowich', value: 45 },
-    { name: 'Croissants', value: 30 },
-    { name: 'Donuts', value: 15 },
-    { name: 'Others', value: 10 },
-]
-
 export default function SalesManagementPage() {
-    const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0])
+    const [sales, setSales] = useState(recentTransactions)
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [deletingSale, setDeletingSale] = useState(null)
+
+    const handleDelete = (sale) => {
+        setDeletingSale(sale)
+        setShowDeleteModal(true)
+    }
+
+    const confirmDelete = () => {
+        setSales(prev => prev.filter(s => s.id !== deletingSale.id))
+        setShowDeleteModal(false)
+        setDeletingSale(null)
+        toast.success('Sale transaction record decommissioned')
+    }
 
     return (
         <div className="space-y-6 animate-in fade-in duration-500 font-figtree pb-10">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold tracking-tight text-admin-value uppercase">Sales Management</h1>
-                    <p className="text-admin-label mt-1 font-medium">Track transaction history and daily sales performance.</p>
+                    <h1 className="text-xl font-bold tracking-tight text-admin-value uppercase">Sales Ledger</h1>
+                    <p className="text-[13px] font-medium text-admin-label mt-1">Track financial transaction history and real-time revenue performance.</p>
                 </div>
                 <div className="flex items-center gap-3 w-full sm:w-auto">
-                    <div className="relative">
-                        <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-openpos-blue" size={18} />
+                    <div className="relative group">
+                        <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-openpos-blue transition-colors" size={16} />
                         <input 
                             type="date" 
-                            className="bg-card-bg border border-openpos-border text-admin-value pl-11 pr-5 py-3 rounded-xl font-bold text-[12px] hover:border-openpos-blue/30 transition-all uppercase tracking-widest shadow-sm outline-none focus:ring-2 focus:ring-openpos-blue/10"
+                            className="bg-card-bg border border-openpos-border text-admin-value pl-11 pr-5 py-2.5 rounded-xl font-bold text-[11px] hover:border-openpos-blue/30 transition-all uppercase tracking-widest shadow-sm outline-none focus:ring-2 focus:ring-openpos-blue/10"
                             defaultValue={new Date().toISOString().split('T')[0]}
                         />
                     </div>
@@ -69,199 +74,176 @@ export default function SalesManagementPage() {
 
             {/* Top Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <SaleStatCard title="Today's Sales" value="KES 124,050" sub="145 Transactions" icon={DollarSign} />
-                <SaleStatCard title="Average Order" value="KES 855" sub="+2% vs Yesterday" icon={ShoppingCart} />
-                <SaleStatCard title="Items Sold" value="342" sub="Across all categories" icon={PackageIcon} />
-                <SaleStatCard title="Net Profit" value="KES 48,200" sub="38.8% Margin" icon={TrendingUp} />
+                <StatCard title="Today's Sales" value="KES 124,050" change="+12% vs yesterday" isPositive={true} icon={DollarSign} color="blue" />
+                <StatCard title="Average Ticket" value="KES 855" change="+2% margin" isPositive={true} icon={ShoppingCart} color="blue" />
+                <StatCard title="Volume Sold" value="342 Units" change="Across 145 orders" isPositive={true} icon={Package} color="blue" />
+                <StatCard title="Projected Profit" value="KES 48,200" change="38.8% Gross margin" isPositive={true} icon={TrendingUp} color="blue" />
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Sales Chart */}
-                <div className="lg:col-span-2 bg-card-bg border border-openpos-border rounded-3xl p-6 shadow-sm">
-                    <div className="flex items-center justify-between mb-8">
-                        <div>
-                            <h3 className="text-sm font-bold text-admin-value uppercase tracking-widest flex items-center gap-2">
-                                <Activity size={18} className="text-openpos-blue" />
-                                Sales Velocity Today
-                            </h3>
-                            <p className="text-[10px] text-admin-dim font-bold mt-1 uppercase tracking-widest">Real-time revenue tracking</p>
+                <div className="lg:col-span-2">
+                    <Card 
+                        title="Revenue Velocity" 
+                        subtitle="Real-time financial performance tracking"
+                        headerAction={
+                            <div className="flex items-center gap-2 px-3 py-1 bg-openpos-blue/5 border border-openpos-blue/10 rounded-lg text-openpos-blue">
+                                <Activity size={14} className="animate-pulse" />
+                                <span className="text-[9px] font-bold uppercase tracking-widest">Live Monitoring</span>
+                            </div>
+                        }
+                    >
+                        <div className="h-[320px] w-full mt-4">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <AreaChart data={todaySellingData}>
+                                    <defs>
+                                        <linearGradient id="colorSales" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor="#2563EB" stopOpacity={0.1}/>
+                                            <stop offset="95%" stopColor="#2563EB" stopOpacity={0}/>
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--openpos-border)" />
+                                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fontSize: 10, fontWeight: 'bold', fill: 'var(--admin-dim)'}} dy={10} />
+                                    <YAxis axisLine={false} tickLine={false} tick={{fontSize: 10, fontWeight: 'bold', fill: 'var(--admin-dim)'}} />
+                                    <Tooltip 
+                                        contentStyle={{ 
+                                            backgroundColor: 'var(--card-bg)', 
+                                            borderRadius: '16px', 
+                                            border: '1px solid var(--openpos-border)',
+                                            fontSize: '11px',
+                                            fontWeight: 'bold'
+                                        }} 
+                                    />
+                                    <Area type="monotone" dataKey="sales" stroke="#2563EB" strokeWidth={3} fillOpacity={1} fill="url(#colorSales)" />
+                                </AreaChart>
+                            </ResponsiveContainer>
                         </div>
-                    </div>
-                    <div className="h-[300px] w-full">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={todaySellingData}>
-                                <defs>
-                                    <linearGradient id="colorSales" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#2563EB" stopOpacity={0.1}/>
-                                        <stop offset="95%" stopColor="#2563EB" stopOpacity={0}/>
-                                    </linearGradient>
-                                </defs>
-                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--openpos-border)" />
-                                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fontSize: 10, fontWeight: 'bold', fill: 'var(--admin-dim)'}} dy={10} />
-                                <YAxis axisLine={false} tickLine={false} tick={{fontSize: 10, fontWeight: 'bold', fill: 'var(--admin-dim)'}} />
-                                <Tooltip contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }} />
-                                <Area type="monotone" dataKey="sales" stroke="#2563EB" strokeWidth={4} fillOpacity={1} fill="url(#colorSales)" />
-                            </AreaChart>
-                        </ResponsiveContainer>
-                    </div>
+                    </Card>
                 </div>
 
                 {/* Best Selling Categories */}
-                <div className="bg-card-bg border border-openpos-border rounded-3xl p-6 shadow-sm flex flex-col">
-                    <h3 className="text-sm font-bold text-admin-value uppercase tracking-widest mb-6">Top Categories</h3>
-                    <div className="flex-1 space-y-6">
-                        {sellingByProduct.map((p, i) => (
+                <Card title="Market Share" subtitle="Category performance analysis">
+                    <div className="space-y-6 mt-4">
+                        {[
+                            { name: 'Beef Crowich', value: 45 },
+                            { name: 'Croissants', value: 30 },
+                            { name: 'Donuts', value: 15 },
+                            { name: 'Others', value: 10 },
+                        ].map((p, i) => (
                             <div key={p.name} className="space-y-2">
                                 <div className="flex justify-between items-center">
-                                    <span className="text-[11px] font-bold text-admin-label uppercase">{p.name}</span>
+                                    <span className="text-[10px] font-bold text-admin-label uppercase tracking-widest">{p.name}</span>
                                     <span className="text-[11px] font-bold text-admin-value">{p.value}%</span>
                                 </div>
-                                <div className="h-2 bg-openpos-bg-subtle rounded-full overflow-hidden">
-                                    <motion.div 
-                                        initial={{ width: 0 }}
-                                        animate={{ width: `${p.value}%` }}
-                                        className={cn(
-                                            "h-full rounded-full",
-                                            i === 0 ? "bg-openpos-blue" : "bg-openpos-blue/40"
-                                        )}
+                                <div className="h-1.5 bg-openpos-bg-subtle border border-openpos-border rounded-full overflow-hidden">
+                                    <div 
+                                        className={cn("h-full rounded-full transition-all duration-1000", i === 0 ? "bg-openpos-blue" : "bg-openpos-blue/30")} 
+                                        style={{ width: `${p.value}%` }} 
                                     />
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <div className="mt-8 p-4 bg-openpos-blue/5 rounded-2xl border border-openpos-blue/10">
-                        <p className="text-[10px] font-bold text-openpos-blue uppercase tracking-widest mb-1">Observation</p>
-                        <p className="text-[12px] text-admin-dim font-medium leading-relaxed">
-                            Beef Crowich is your star performer today, contributing nearly half of your revenue.
+                    <div className="mt-8 p-4 bg-openpos-bg-subtle border border-openpos-border rounded-2xl">
+                        <p className="text-[9px] font-bold text-openpos-blue uppercase tracking-widest mb-1">AI INSIGHT</p>
+                        <p className="text-[11px] text-admin-dim font-bold uppercase tracking-tight leading-relaxed">
+                            Beef Crowich is your primary liquidity driver today, contributing nearly 45% of gross revenue.
                         </p>
                     </div>
-                </div>
+                </Card>
             </div>
 
             {/* Recent Transactions Table */}
-            <div className="bg-card-bg border border-openpos-border rounded-3xl overflow-hidden shadow-sm">
-                <div className="p-6 border-b border-openpos-border flex items-center justify-between bg-openpos-bg-subtle/20">
-                    <h3 className="text-sm font-bold text-admin-value uppercase tracking-widest flex items-center gap-2">
-                        <History size={18} className="text-openpos-blue" />
-                        Recent Transactions
-                    </h3>
-                    <div className="relative">
-                        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim" size={16} />
-                        <input placeholder="Search orders..." className="bg-card-bg border border-openpos-border rounded-xl pl-9 pr-4 py-2 text-[12px] font-medium outline-none focus:ring-1 focus:ring-openpos-blue/30 w-64 transition-all" />
+            <Card 
+                noPadding 
+                title="Transaction History" 
+                subtitle="Recent financial settlement records"
+                headerAction={
+                    <div className="relative group">
+                        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors" size={14} />
+                        <input 
+                            placeholder="Search transactions..." 
+                            className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-10 pr-4 py-1.5 text-[11px] font-bold text-admin-value outline-none focus:ring-2 focus:ring-openpos-blue/10 focus:border-openpos-blue w-64 transition-all"
+                        />
                     </div>
-                </div>
-                
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
+                }
+            >
+                <div className="overflow-x-auto custom-scrollbar">
+                    <table className="w-full text-left whitespace-nowrap border-collapse text-[11px]">
                         <thead>
-                            <tr className="bg-openpos-bg-subtle/30">
-                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest border-b border-openpos-border">Transaction ID</th>
-                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest border-b border-openpos-border">Date & Time</th>
-                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest border-b border-openpos-border">Customer</th>
-                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest border-b border-openpos-border">Items</th>
-                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest border-b border-openpos-border">Method</th>
-                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest border-b border-openpos-border text-right">Amount</th>
+                            <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border text-[9px] font-bold text-admin-dim uppercase tracking-widest">
+                                <th className="px-6 py-4">Transaction ID</th>
+                                <th className="px-6 py-4">Date & Temporal Signature</th>
+                                <th className="px-6 py-4">Customer identity</th>
+                                <th className="px-6 py-4 text-center">Volume</th>
+                                <th className="px-6 py-4 text-center">Settlement Method</th>
+                                <th className="px-6 py-4 text-right">Net total</th>
+                                <th className="px-6 py-4 text-right">Ledger</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-openpos-border">
-                            {recentTransactions.map((sale) => (
-                                <tr key={sale.id} className="hover:bg-openpos-bg-subtle/40 transition-colors">
-                                    <td className="p-5 text-[13px] font-bold text-admin-value">{sale.id}</td>
-                                    <td className="p-5">
+                            {sales.map((sale) => (
+                                <tr key={sale.id} className="group hover:bg-openpos-bg-subtle/40 transition-colors cursor-default">
+                                    <td className="px-6 py-4 font-bold text-admin-value uppercase tracking-tight group-hover:text-openpos-blue transition-colors">{sale.id}</td>
+                                    <td className="px-6 py-4">
                                         <div className="flex flex-col">
-                                            <span className="text-[13px] font-bold text-admin-value">{sale.date.split(',')[0]}</span>
-                                            <span className="text-[10px] text-admin-dim font-medium uppercase">{sale.date.split(',')[1]}</span>
+                                            <span className="font-bold text-admin-value uppercase">{sale.date.split(' ')[0]}</span>
+                                            <span className="text-[9px] text-admin-dim font-bold uppercase tracking-tighter mt-0.5">{sale.date.split(' ')[1]}</span>
                                         </div>
                                     </td>
-                                    <td className="p-5 text-[13px] font-bold text-admin-value">{sale.customer}</td>
-                                    <td className="p-5 text-[13px] font-bold text-admin-value">
-                                        <span className="px-2 py-0.5 bg-openpos-bg-subtle rounded-md text-[11px]">{sale.items} Items</span>
+                                    <td className="px-6 py-4 text-admin-value font-bold uppercase tracking-tight">{sale.customer}</td>
+                                    <td className="px-6 py-4 text-center">
+                                        <span className="px-2 py-1 bg-openpos-bg-subtle border border-openpos-border rounded-md font-bold text-[10px] uppercase tracking-widest">
+                                            {sale.items} Items
+                                        </span>
                                     </td>
-                                    <td className="p-5">
-                                        <div className={cn(
-                                            "inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider",
-                                            sale.payment === 'Cash' ? "bg-blue-50 dark:bg-blue-900/30 text-openpos-blue" : "bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400"
+                                    <td className="px-6 py-4 text-center">
+                                        <span className={cn(
+                                            "inline-flex items-center px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-widest border",
+                                            sale.payment === 'Cash' ? "bg-openpos-blue/5 text-openpos-blue border-openpos-blue/10" : "bg-purple-500/5 text-purple-500 border-purple-500/10"
                                         )}>
                                             {sale.payment}
+                                        </span>
+                                    </td>
+                                    <td className="px-6 py-4 text-right font-bold text-admin-value">KES {sale.total.toLocaleString()}</td>
+                                    <td className="px-6 py-4 text-right">
+                                        <div className="flex items-center justify-end gap-1.5">
+                                            <button className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-openpos-blue hover:border-openpos-blue/30 transition-all">
+                                                <Printer size={12} />
+                                            </button>
+                                            <button 
+                                                onClick={() => handleDelete(sale)}
+                                                className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-openpos-red hover:border-openpos-red/30 transition-all"
+                                            >
+                                                <Trash2 size={12} />
+                                            </button>
                                         </div>
                                     </td>
-                                    <td className="p-5 text-right font-bold text-admin-value">KES {sale.total.toLocaleString()}</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </Card>
 
-            {/* Sales Activity Logs (Silogs) */}
-            <div className="bg-card-bg border border-openpos-border rounded-3xl p-6 shadow-sm">
-                <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-sm font-bold text-admin-value uppercase tracking-widest flex items-center gap-2">
-                        <Activity size={18} className="text-openpos-blue" />
-                        Sales Activity Logs
-                    </h3>
+            {/* Decommission Confirmation Modal */}
+            <Modal
+                isOpen={showDeleteModal}
+                onClose={() => setShowDeleteModal(false)}
+                title="Decommission Transaction Record"
+                description={`Are you sure you want to remove sale record "${deletingSale?.id}"?`}
+                type="danger"
+                icon={Trash2}
+                confirmText="Delete"
+                confirmCountdown={5}
+                onConfirm={confirmDelete}
+            >
+                <div className="p-4 bg-openpos-red/5 rounded-2xl border border-openpos-red/10">
+                    <p className="text-[12px] text-openpos-red font-bold uppercase tracking-tight leading-relaxed opacity-80">
+                        This action will permanently purge this transaction record from the financial ledger. This operation cannot be reversed.
+                    </p>
                 </div>
-                <div className="space-y-4">
-                    {[
-                        { type: 'Sale', msg: 'New sale completed by Admin', time: '2 mins ago', amount: 'KES 2,450' },
-                        { type: 'Update', msg: 'Sale record #SAL-004 was updated', time: '15 mins ago', amount: null },
-                        { type: 'M-Pesa', msg: 'STK Push sent to 0712***678', time: '1 hour ago', amount: 'KES 1,500' },
-                        { type: 'Export', msg: 'Monthly sales report exported to PDF', time: '3 hours ago', amount: null },
-                    ].map((log, i) => (
-                        <div key={i} className="flex items-center justify-between p-3 border-b border-openpos-border last:border-0">
-                            <div className="flex items-center gap-4">
-                                <div className={cn(
-                                    "w-2 h-2 rounded-full",
-                                    log.type === 'Sale' ? "bg-openpos-blue" : "bg-openpos-blue/40"
-                                )} />
-                                <div>
-                                    <p className="text-[13px] font-bold text-admin-value">{log.msg}</p>
-                                    <p className="text-[10px] text-admin-dim font-bold uppercase tracking-widest">{log.type} • {log.time}</p>
-                                </div>
-                            </div>
-                            {log.amount && <span className="text-[12px] font-bold text-openpos-blue">{log.amount}</span>}
-                        </div>
-                    ))}
-                </div>
-            </div>
+            </Modal>
         </div>
-    )
-}
-
-function SaleStatCard({ title, value, sub, icon: Icon }) {
-    return (
-        <div className="bg-white border border-openpos-border rounded-2xl p-5 shadow-sm">
-            <div className="flex items-center justify-between mb-3">
-                <div className="w-10 h-10 rounded-xl bg-openpos-blue/5 text-openpos-blue flex items-center justify-center">
-                    <Icon size={20} />
-                </div>
-                <ArrowUpRight size={16} className="text-openpos-blue" />
-            </div>
-            <p className="text-[10px] font-bold text-admin-dim uppercase tracking-widest mb-1">{title}</p>
-            <h4 className="text-[20px] font-bold text-admin-value tracking-tight mb-1">{value}</h4>
-            <p className="text-[11px] text-admin-dim font-medium">{sub}</p>
-        </div>
-    )
-}
-
-function PackageIcon(props) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <path d="M16.5 9.4 7.5 4.21" />
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-            <polyline points="3.29 7 12 12 20.71 7" />
-            <line x1="12" y1="22" x2="12" y2="12" />
-        </svg>
     )
 }

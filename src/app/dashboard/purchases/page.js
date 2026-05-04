@@ -8,22 +8,37 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { toast } from 'sonner'
+import { Card, StatCard } from '@/components/Card'
+import { Modal } from '@/components/Modal'
 
 // Mock Data
 const initialPurchases = [
-    { id: 1, reference: 'PUR-001', supplier: 'Artisan Flour Co.', date: '2024-05-01', total: 450.00, status: 'Received' },
-    { id: 2, reference: 'PUR-002', supplier: 'Sugar & Spice Wholesale', date: '2024-05-02', total: 280.50, status: 'Pending' },
-    { id: 3, reference: 'PUR-003', supplier: 'Dairy Fresh Ltd', date: '2024-05-03', total: 125.00, status: 'Ordered' },
+    { id: 1, reference: 'PUR-001', supplier: 'Artisan Flour Co.', date: '2024-05-01', total: 45000, status: 'Received' },
+    { id: 2, reference: 'PUR-002', supplier: 'Sugar & Spice Wholesale', date: '2024-05-02', total: 28050, status: 'Pending' },
+    { id: 3, reference: 'PUR-003', supplier: 'Dairy Fresh Ltd', date: '2024-05-03', total: 12500, status: 'Ordered' },
 ]
 
 export default function PurchasesPage() {
     const [purchases, setPurchases] = useState(initialPurchases)
     const [showAddModal, setShowAddModal] = useState(false)
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [editingPurchase, setEditingPurchase] = useState(null)
+    const [deletingPurchase, setDeletingPurchase] = useState(null)
+    
     const [formData, setFormData] = useState({
         supplier: '',
         date: new Date().toISOString().split('T')[0],
         items: [{ product: '', quantity: 1, price: 0 }],
     })
+
+    const resetForm = () => {
+        setFormData({
+            supplier: '',
+            date: new Date().toISOString().split('T')[0],
+            items: [{ product: '', quantity: 1, price: 0 }],
+        })
+        setEditingPurchase(null)
+    }
 
     const addItem = () => {
         setFormData(prev => ({
@@ -43,195 +58,321 @@ export default function PurchasesPage() {
         if (!formData.supplier) return toast.error('Supplier is required')
         
         const total = formData.items.reduce((sum, item) => sum + (item.quantity * item.price), 0)
-        const newPurchase = {
-            id: Date.now(),
-            reference: `PUR-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`,
-            supplier: formData.supplier,
-            date: formData.date,
-            total: total,
-            status: 'Ordered'
+        
+        if (editingPurchase) {
+            setPurchases(prev => prev.map(p => p.id === editingPurchase.id ? { ...formData, id: p.id, reference: p.reference, total, status: p.status } : p))
+            toast.success('Purchase record updated')
+        } else {
+            const newPurchase = {
+                id: Date.now(),
+                reference: `PUR-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`,
+                supplier: formData.supplier,
+                date: formData.date,
+                total: total,
+                status: 'Ordered'
+            }
+            setPurchases(prev => [newPurchase, ...prev])
+            toast.success('Procurement order initialized')
         }
         
-        setPurchases(prev => [newPurchase, ...prev])
         setShowAddModal(false)
-        toast.success('Purchase order created')
+        resetForm()
+    }
+
+    const handleEdit = (purchase) => {
+        setEditingPurchase(purchase)
+        setFormData({
+            supplier: purchase.supplier,
+            date: purchase.date,
+            items: [{ product: 'Batch Supply', quantity: 1, price: purchase.total }]
+        })
+        setShowAddModal(true)
+    }
+
+    const handleDelete = (purchase) => {
+        setDeletingPurchase(purchase)
+        setShowDeleteModal(true)
+    }
+
+    const confirmDelete = () => {
+        setPurchases(prev => prev.filter(p => p.id !== deletingPurchase.id))
+        setShowDeleteModal(false)
+        setDeletingPurchase(null)
+        toast.success('Procurement record decommissioned')
     }
 
     return (
-        <div className="space-y-6 animate-in fade-in duration-500">
+        <div className="space-y-6 animate-in fade-in duration-500 font-figtree pb-10">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold tracking-tight text-admin-value">Purchases</h1>
-                    <p className="text-admin-label mt-1">Track and manage your inventory supply orders.</p>
+                    <h1 className="text-xl font-bold tracking-tight text-admin-value uppercase">Purchases & Procurement</h1>
+                    <p className="text-[13px] font-medium text-admin-label mt-1">Manage vendor relations and inventory supply chain records.</p>
                 </div>
                 <button 
-                    onClick={() => setShowAddModal(true)}
-                    className="w-full sm:w-auto bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 hover:scale-[1.02] transition-all"
+                    onClick={() => { resetForm(); setShowAddModal(true); }}
+                    className="w-full sm:w-auto bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest"
                 >
                     <Plus size={18} />
-                    New Purchase Order
+                    New Order
                 </button>
             </div>
 
-            {/* List */}
-            <div className="grid grid-cols-1 gap-4">
-                {purchases.map((pur) => (
-                    <div key={pur.id} className="bg-card-bg border border-openpos-border rounded-2xl p-5 hover:border-openpos-blue/30 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div className="flex items-center gap-4">
-                            <div className={cn(
-                                "w-12 h-12 rounded-xl flex items-center justify-center shrink-0",
-                                pur.status === 'Received' ? "bg-openpos-blue/10 text-openpos-blue" : 
-                                pur.status === 'Pending' ? "bg-yellow-100 text-yellow-600" : "bg-openpos-blue-light text-openpos-blue"
-                            )}>
-                                <ShoppingBag size={24} />
-                            </div>
-                            <div>
-                                <div className="flex items-center gap-2">
-                                    <h3 className="text-[14px] font-bold text-admin-value">{pur.reference}</h3>
-                                    <span className={cn(
-                                        "text-[9px] font-bold uppercase px-2 py-0.5 rounded-lg",
-                                        pur.status === 'Received' ? "bg-openpos-blue/10 text-openpos-blue" : 
-                                        pur.status === 'Pending' ? "bg-yellow-100 text-yellow-600" : "bg-openpos-blue-light text-openpos-blue"
-                                    )}>
-                                        {pur.status}
-                                    </span>
-                                </div>
-                                <p className="text-[12px] text-admin-label font-medium mt-0.5">{pur.supplier}</p>
-                            </div>
-                        </div>
-                        
-                        <div className="flex items-center gap-8 md:gap-16">
-                            <div className="flex flex-col">
-                                <span className="text-[10px] font-bold text-admin-dim uppercase tracking-widest">Date</span>
-                                <span className="text-[12px] font-bold text-admin-value flex items-center gap-2 mt-1">
-                                    <Calendar size={14} className="text-openpos-blue" />
-                                    {pur.date}
-                                </span>
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="text-[10px] font-bold text-admin-dim uppercase tracking-widest">Total Amount</span>
-                                <span className="text-[15px] font-bold text-admin-value mt-1">${pur.total.toFixed(2)}</span>
-                            </div>
-                        </div>
-
-                        <div className="flex items-center gap-2 self-end md:self-center">
-                            <button className="p-2.5 bg-openpos-bg-subtle rounded-xl text-admin-dim hover:text-openpos-blue transition-colors">
-                                <Edit2 size={16} />
-                            </button>
-                            <button className="p-2.5 bg-openpos-bg-subtle rounded-xl text-admin-dim hover:text-openpos-red transition-colors">
-                                <Trash2 size={16} />
-                            </button>
-                            <button className="p-2.5 bg-openpos-blue text-white rounded-xl shadow-lg shadow-openpos-blue/10">
-                                <ChevronRight size={18} />
-                            </button>
-                        </div>
-                    </div>
-                ))}
+            {/* Procurement Metrics */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <StatCard 
+                    title="Procurement Volume" 
+                    value="KES 854,200" 
+                    change="+15% vs last month" 
+                    isPositive={true} 
+                    icon={ShoppingBag} 
+                    color="blue" 
+                    subtitle="TOTAL LIQUIDITY OUT"
+                />
+                <StatCard 
+                    title="Active Orders" 
+                    value="12 Orders" 
+                    change="5 Pending Delivery" 
+                    isPositive={true} 
+                    icon={Clock} 
+                    color="blue" 
+                    subtitle="SUPPLY CHAIN STATUS"
+                />
+                <StatCard 
+                    title="Inventory Inflow" 
+                    value="2,450 Units" 
+                    change="Received this week" 
+                    isPositive={true} 
+                    icon={Package} 
+                    color="blue" 
+                    subtitle="STOCK REPLENISHMENT"
+                />
             </div>
 
-            {/* Modal */}
-            {showAddModal && (
-                <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowAddModal(false)} />
-                    <div className="bg-card-bg border border-openpos-border rounded-3xl w-full max-w-2xl overflow-hidden relative shadow-2xl animate-in zoom-in-95 duration-300">
-                        <div className="p-6 border-b border-openpos-border flex items-center justify-between">
-                            <h2 className="text-xl font-bold text-admin-value">New Purchase Order</h2>
-                            <button onClick={() => setShowAddModal(false)} className="p-2 hover:bg-openpos-bg-subtle rounded-xl text-admin-dim transition-colors"><X size={20} /></button>
+            {/* Purchases Registry */}
+            <Card 
+                noPadding
+                title="Purchase Orders Ledger"
+                subtitle="Centralized management of supply chain procurement"
+                headerAction={
+                    <div className="flex items-center gap-3">
+                        <div className="relative group">
+                            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors" size={14} />
+                            <input 
+                                placeholder="Search orders..." 
+                                className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-10 pr-4 py-2 text-[11px] font-bold text-admin-value outline-none focus:ring-2 focus:ring-openpos-blue/10 focus:border-openpos-blue w-64 transition-all"
+                            />
                         </div>
-                        <div className="p-6 max-h-[70vh] overflow-y-auto custom-scrollbar">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
-                                <div className="space-y-1.5">
-                                    <label className="text-[11px] font-bold text-admin-label uppercase tracking-widest">Supplier Name</label>
-                                    <input 
-                                        value={formData.supplier}
-                                        onChange={(e) => setFormData(prev => ({ ...prev, supplier: e.target.value }))}
-                                        className="w-full bg-openpos-bg-subtle border-none rounded-xl px-4 py-3 text-[13px] outline-none"
-                                        placeholder="e.g. Flour Suppliers Ltd"
-                                    />
-                                </div>
-                                <div className="space-y-1.5">
-                                    <label className="text-[11px] font-bold text-admin-label uppercase tracking-widest">Order Date</label>
-                                    <input 
-                                        type="date"
-                                        value={formData.date}
-                                        onChange={(e) => setFormData(prev => ({ ...prev, date: e.target.value }))}
-                                        className="w-full bg-openpos-bg-subtle border-none rounded-xl px-4 py-3 text-[13px] outline-none"
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="space-y-4">
-                                <div className="flex items-center justify-between">
-                                    <h3 className="text-[11px] font-bold text-admin-label uppercase tracking-widest">Items Order</h3>
-                                    <button onClick={addItem} className="text-openpos-blue font-bold text-[11px] flex items-center gap-1 hover:underline">
-                                        <Plus size={14} /> Add Item
-                                    </button>
-                                </div>
-                                <div className="space-y-3">
-                                    {formData.items.map((item, index) => (
-                                        <div key={index} className="grid grid-cols-12 gap-3 items-center">
-                                            <div className="col-span-6">
-                                                <input 
-                                                    placeholder="Product Name"
-                                                    className="w-full bg-openpos-bg-subtle border-none rounded-xl px-4 py-2.5 text-[12px] outline-none"
-                                                    value={item.product}
-                                                    onChange={(e) => {
-                                                        const newItems = [...formData.items]
-                                                        newItems[index].product = e.target.value
-                                                        setFormData(prev => ({ ...prev, items: newItems }))
-                                                    }}
-                                                />
+                    </div>
+                }
+            >
+                <div className="overflow-x-auto custom-scrollbar">
+                    <table className="w-full text-left whitespace-nowrap border-collapse text-[11px]">
+                        <thead>
+                            <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border text-[9px] font-bold text-admin-dim uppercase tracking-widest">
+                                <th className="px-6 py-4">Transaction ID</th>
+                                <th className="px-6 py-4">Vendor Entity</th>
+                                <th className="px-6 py-4 text-center">Temporal Signature</th>
+                                <th className="px-6 py-4 text-center">Procurement Status</th>
+                                <th className="px-6 py-4 text-right">Settlement Total</th>
+                                <th className="px-6 py-4 text-right">Management</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-openpos-border">
+                            {purchases.length === 0 ? (
+                                <tr>
+                                    <td colSpan={6} className="py-20 text-center text-gray-400 font-bold text-[10px] uppercase tracking-widest bg-openpos-bg-subtle/20">
+                                        No purchase records indexed in ledger
+                                    </td>
+                                </tr>
+                            ) : (
+                                purchases.map((pur) => (
+                                    <tr key={pur.id} className="group hover:bg-openpos-bg-subtle/40 transition-colors cursor-default">
+                                        <td className="px-6 py-4">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-8 h-8 rounded-lg bg-openpos-bg-subtle border border-openpos-border flex items-center justify-center text-openpos-blue group-hover:scale-105 transition-transform">
+                                                    <ShoppingBag size={16} />
+                                                </div>
+                                                <span className="font-bold text-admin-value uppercase tracking-tight group-hover:text-openpos-blue transition-colors">{pur.reference}</span>
                                             </div>
-                                            <div className="col-span-2">
-                                                <input 
-                                                    type="number"
-                                                    placeholder="Qty"
-                                                    className="w-full bg-openpos-bg-subtle border-none rounded-xl px-3 py-2.5 text-[12px] outline-none"
-                                                    value={item.quantity}
-                                                    onChange={(e) => {
-                                                        const newItems = [...formData.items]
-                                                        newItems[index].quantity = parseInt(e.target.value) || 0
-                                                        setFormData(prev => ({ ...prev, items: newItems }))
-                                                    }}
-                                                />
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <span className="text-admin-value font-bold uppercase tracking-tight">{pur.supplier}</span>
+                                        </td>
+                                        <td className="px-6 py-4 text-center">
+                                            <div className="flex items-center justify-center gap-2 text-admin-dim font-bold">
+                                                <Calendar size={12} className="text-openpos-blue" />
+                                                <span className="uppercase">{pur.date}</span>
                                             </div>
-                                            <div className="col-span-3">
-                                                <input 
-                                                    type="number"
-                                                    placeholder="Price"
-                                                    className="w-full bg-openpos-bg-subtle border-none rounded-xl px-3 py-2.5 text-[12px] outline-none"
-                                                    value={item.price}
-                                                    onChange={(e) => {
-                                                        const newItems = [...formData.items]
-                                                        newItems[index].price = parseFloat(e.target.value) || 0
-                                                        setFormData(prev => ({ ...prev, items: newItems }))
-                                                    }}
-                                                />
-                                            </div>
-                                            <div className="col-span-1">
-                                                <button onClick={() => removeItem(index)} className="text-openpos-red p-2 hover:bg-openpos-red/10 rounded-lg transition-all">
-                                                    <X size={16} />
+                                        </td>
+                                        <td className="px-6 py-4 text-center">
+                                            <span className={cn(
+                                                "inline-flex items-center px-2.5 py-1 rounded-md text-[9px] font-bold uppercase tracking-widest border",
+                                                pur.status === 'Received' ? "bg-emerald-500/5 text-emerald-500 border-emerald-500/10" : 
+                                                pur.status === 'Pending' ? "bg-amber-500/5 text-amber-500 border-amber-500/10" : "bg-openpos-blue/5 text-openpos-blue border-openpos-blue/10"
+                                            )}>
+                                                {pur.status}
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4 text-right">
+                                            <span className="text-[13px] font-bold text-admin-value">KES {pur.total.toLocaleString()}</span>
+                                        </td>
+                                        <td className="px-6 py-4 text-right">
+                                            <div className="flex items-center justify-end gap-1.5">
+                                                <button 
+                                                    onClick={() => handleEdit(pur)}
+                                                    className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-openpos-blue hover:border-openpos-blue/30 hover:bg-openpos-blue/5 transition-all"
+                                                >
+                                                    <Edit2 size={12} />
+                                                </button>
+                                                <button 
+                                                    onClick={() => handleDelete(pur)}
+                                                    className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-red-400 hover:border-red-400/30 hover:bg-red-400/5 transition-all"
+                                                >
+                                                    <Trash2 size={12} />
+                                                </button>
+                                                <button className="p-2 bg-openpos-blue text-white rounded-lg shadow-lg shadow-openpos-blue/20 hover:scale-105 active:scale-95 transition-all">
+                                                    <ChevronRight size={14} />
                                                 </button>
                                             </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </Card>
+
+            {/* Procurement Order Modal */}
+            <Modal
+                isOpen={showAddModal}
+                onClose={() => { setShowAddModal(false); resetForm(); }}
+                title={editingPurchase ? "Modify Purchase Order" : "Initialize Procurement Order"}
+                description="Create or update inventory supply chain requests"
+                confirmText={editingPurchase ? "Update Transaction" : "Authorize Order"}
+                onConfirm={handleSave}
+                icon={ShoppingBag}
+                maxWidth="max-w-2xl"
+            >
+                <div className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div className="space-y-1.5">
+                            <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Vendor Identity</label>
+                            <input 
+                                value={formData.supplier}
+                                onChange={(e) => setFormData(prev => ({ ...prev, supplier: e.target.value }))}
+                                className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
+                                placeholder="e.g. Flour Suppliers Ltd"
+                            />
                         </div>
-                        <div className="p-6 border-t border-openpos-border flex items-center justify-between">
-                            <div className="flex flex-col">
-                                <span className="text-[10px] font-bold text-admin-dim uppercase tracking-widest">Estimated Total</span>
-                                <span className="text-xl font-bold text-admin-value">${formData.items.reduce((sum, item) => sum + (item.quantity * item.price), 0).toFixed(2)}</span>
+                        <div className="space-y-1.5">
+                            <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Temporal signature</label>
+                            <input 
+                                type="date"
+                                value={formData.date}
+                                onChange={(e) => setFormData(prev => ({ ...prev, date: e.target.value }))}
+                                className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="space-y-4">
+                        <div className="flex items-center justify-between border-b border-openpos-border pb-2">
+                            <div className="flex items-center gap-2">
+                                <Package size={14} className="text-openpos-blue" />
+                                <h3 className="text-[10px] font-bold text-admin-label uppercase tracking-widest">Inventory Line Items</h3>
                             </div>
-                            <div className="flex items-center gap-3">
-                                <button onClick={() => setShowAddModal(false)} className="px-6 py-2.5 rounded-xl font-bold text-[13px] text-admin-label hover:bg-openpos-bg-subtle transition-all">Cancel</button>
-                                <button onClick={handleSave} className="px-8 py-2.5 bg-openpos-blue text-white rounded-xl font-bold text-[13px] shadow-lg shadow-openpos-blue/20 transition-all">Create Order</button>
+                            <button onClick={addItem} className="text-openpos-blue font-bold text-[10px] flex items-center gap-1.5 bg-openpos-blue/5 px-3 py-1.5 rounded-lg border border-openpos-blue/10 hover:bg-openpos-blue hover:text-white transition-all uppercase tracking-widest">
+                                <Plus size={14} /> Add Vector
+                            </button>
+                        </div>
+                        <div className="space-y-3 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
+                            {formData.items.map((item, index) => (
+                                <div key={index} className="grid grid-cols-12 gap-3 items-center group">
+                                    <div className="col-span-6">
+                                        <input 
+                                            placeholder="SKU / Product Vector"
+                                            className="w-full bg-openpos-bg-subtle border-none rounded-xl px-4 py-2.5 text-[12px] font-bold text-admin-value outline-none ring-1 ring-openpos-border group-focus-within:ring-openpos-blue/30 transition-all"
+                                            value={item.product}
+                                            onChange={(e) => {
+                                                const newItems = [...formData.items]
+                                                newItems[index].product = e.target.value
+                                                setFormData(prev => ({ ...prev, items: newItems }))
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="col-span-2">
+                                        <input 
+                                            type="number"
+                                            placeholder="Qty"
+                                            className="w-full bg-openpos-bg-subtle border-none rounded-xl px-3 py-2.5 text-[12px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
+                                            value={item.quantity}
+                                            onChange={(e) => {
+                                                const newItems = [...formData.items]
+                                                newItems[index].quantity = parseInt(e.target.value) || 0
+                                                setFormData(prev => ({ ...prev, items: newItems }))
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="col-span-3">
+                                        <div className="relative">
+                                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-admin-dim">KES</span>
+                                            <input 
+                                                type="number"
+                                                placeholder="0.00"
+                                                className="w-full bg-openpos-bg-subtle border-none rounded-xl pl-10 pr-3 py-2.5 text-[12px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
+                                                value={item.price}
+                                                onChange={(e) => {
+                                                    const newItems = [...formData.items]
+                                                    newItems[index].price = parseFloat(e.target.value) || 0
+                                                    setFormData(prev => ({ ...prev, items: newItems }))
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col-span-1">
+                                        <button onClick={() => removeItem(index)} className="text-admin-dim p-2 hover:text-openpos-red hover:bg-openpos-red/5 rounded-lg transition-all">
+                                            <X size={16} />
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="p-5 bg-openpos-bg-subtle border border-openpos-border rounded-2xl flex items-center justify-between">
+                        <div className="flex flex-col">
+                            <span className="text-[10px] font-bold text-admin-dim uppercase tracking-widest">Aggregate Settlement Total</span>
+                            <span className="text-2xl font-bold text-openpos-blue mt-1">KES {formData.items.reduce((sum, item) => sum + (item.quantity * item.price), 0).toLocaleString()}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <div className="w-10 h-10 rounded-full bg-openpos-blue/10 flex items-center justify-center text-openpos-blue">
+                                <DollarSign size={20} />
                             </div>
                         </div>
                     </div>
                 </div>
-            )}
+            </Modal>
+
+            {/* Decommission Confirmation Modal */}
+            <Modal
+                isOpen={showDeleteModal}
+                onClose={() => setShowDeleteModal(false)}
+                title="Decommission Order Record"
+                description={`Are you sure you want to remove procurement reference "${deletingPurchase?.reference}"?`}
+                type="danger"
+                icon={Trash2}
+                confirmText="Delete"
+                confirmCountdown={5}
+                onConfirm={confirmDelete}
+            >
+                <div className="p-4 bg-openpos-red/5 rounded-2xl border border-openpos-red/10">
+                    <p className="text-[12px] text-openpos-red font-bold uppercase tracking-tight leading-relaxed opacity-80">
+                        This action will permanently purge this procurement record from the financial ledger. This operation cannot be reversed.
+                    </p>
+                </div>
+            </Modal>
         </div>
     )
 }
