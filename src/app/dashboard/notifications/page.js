@@ -255,7 +255,7 @@ export default function NotificationsPage() {
                         <div className="p-6 border-b border-openpos-border flex items-center justify-between bg-openpos-bg-subtle/50">
                             <div className="flex items-center gap-3">
                                 {selectedNotif.type === 'alert' ? <AlertCircle className="text-openpos-red" size={24} /> :
-                                 selectedNotif.type === 'success' ? <CheckCircle2 className="text-openpos-green" size={24} /> :
+                                 selectedNotif.type === 'success' ? <CheckCircle2 className="text-openpos-blue" size={24} /> :
                                  <Info className="text-openpos-blue" size={24} />}
                                 <h2 className="text-lg font-bold text-admin-value uppercase tracking-tighter">Notification Details</h2>
                             </div>
