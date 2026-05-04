@@ -87,6 +87,7 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
             ]
         },
 
+
         {
             id: 'relations',
             name: 'Relations',
