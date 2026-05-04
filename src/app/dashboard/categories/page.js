@@ -123,7 +123,7 @@ export default function CategoriesPage() {
                         </button>
                         <button 
                             onClick={() => exportCategories('Excel')}
-                            className="px-4 py-2.5 text-admin-dim hover:text-openpos-green hover:bg-openpos-green/5 transition-all flex items-center gap-2"
+                            className="px-4 py-2.5 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/5 transition-all flex items-center gap-2"
                         >
                             <Upload size={16} />
                             <span className="text-[10px] font-bold uppercase tracking-widest">Excel</span>
