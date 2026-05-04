@@ -154,6 +154,58 @@ export default function SalesListPage() {
                     </div>
                 </div>
             </div>
+
+            {/* CRUD Modal */}
+            <Modal
+                isOpen={showCrudModal}
+                onClose={() => setShowCrudModal(false)}
+                title={editingSale ? `Edit Record: ${editingSale.id}` : "Create New Sale Record"}
+                confirmText={editingSale ? "Update Record" : "Save Record"}
+                onConfirm={() => {
+                    toast.success(editingSale ? "Record Updated" : "Record Saved Successfully");
+                    setShowCrudModal(false);
+                }}
+            >
+                <div className="space-y-5">
+                    <div className="space-y-2">
+                        <label className="text-[11px] font-bold text-admin-value uppercase tracking-widest ml-1">Customer Name</label>
+                        <input 
+                            type="text"
+                            placeholder="Walking Customer"
+                            className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[13px] font-bold outline-none focus:ring-2 focus:ring-openpos-blue/10 focus:border-openpos-blue/30 transition-all"
+                            defaultValue={editingSale?.customer || ''}
+                        />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                            <label className="text-[11px] font-bold text-admin-value uppercase tracking-widest ml-1">Total Amount (KES)</label>
+                            <input 
+                                type="number"
+                                placeholder="0.00"
+                                className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[13px] font-bold outline-none focus:ring-2 focus:ring-openpos-blue/10 focus:border-openpos-blue/30 transition-all"
+                                defaultValue={editingSale?.total || ''}
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-[11px] font-bold text-admin-value uppercase tracking-widest ml-1">Payment Method</label>
+                            <select 
+                                className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[13px] font-bold outline-none focus:ring-2 focus:ring-openpos-blue/10 focus:border-openpos-blue/30 transition-all cursor-pointer"
+                                defaultValue={editingSale?.payment || 'Cash'}
+                            >
+                                <option>Cash</option>
+                                <option>M-Pesa</option>
+                                <option>Card</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="p-4 bg-blue-50 border border-blue-100 rounded-2xl">
+                        <p className="text-[10px] font-bold text-openpos-blue uppercase tracking-widest mb-1">Notice</p>
+                        <p className="text-[11px] text-admin-dim font-medium leading-relaxed">
+                            Manually added records will be logged as external transactions and reflected in your daily totals.
+                        </p>
+                    </div>
+                </div>
+            </Modal>
         </div>
     )
 }
