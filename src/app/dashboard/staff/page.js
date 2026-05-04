@@ -226,31 +226,38 @@ export default function StaffManagementPage() {
                 </div>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-card-bg p-4 rounded-xl border border-openpos-border">
+            {/* Directory Control */}
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-card-bg p-4 rounded-2xl border border-openpos-border shadow-sm">
                 <div className="relative w-full md:w-96 group">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-openpos-blue transition-colors" size={14} />
+                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors" size={16} />
                     <input
                         type="text"
                         autoComplete="off"
                         placeholder="Search staff members..."
-                        className="w-full pl-9 pr-4 py-2.5 bg-openpos-bg-subtle border border-openpos-border rounded-xl text-sm font-bold text-admin-value focus:outline-none focus:ring-2 focus:ring-openpos-blue/10 focus:border-openpos-blue transition-all"
+                        className="w-full pl-10 pr-4 py-2.5 bg-openpos-bg-subtle border border-openpos-border rounded-xl text-[11px] font-bold text-admin-value focus:outline-none focus:ring-2 focus:ring-openpos-blue/10 focus:border-openpos-blue transition-all"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
+                <div className="flex items-center gap-3 w-full md:w-auto">
+                    <div className="flex items-center gap-2 px-4 py-2 bg-openpos-blue/5 border border-openpos-blue/10 rounded-xl">
+                        <Users size={14} className="text-openpos-blue" />
+                        <span className="text-[10px] font-bold text-admin-value uppercase tracking-widest">{filteredStaff.length} Total Members</span>
+                    </div>
+                </div>
             </div>
 
             {/* Staff Table Container */}
-            <div className="border border-openpos-border rounded-2xl overflow-hidden bg-card-bg shadow-sm">
+            <Card noPadding className="shadow-sm">
                 <div className="overflow-x-auto custom-scrollbar">
                     <table className="w-full text-left whitespace-nowrap border-collapse text-[11px]">
                         <thead>
-                            <tr className="bg-openpos-bg-subtle border-b border-openpos-border font-bold text-admin-dim uppercase tracking-widest text-[9px]">
+                            <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border font-bold text-admin-dim uppercase tracking-widest text-[9px]">
                                 <th className="px-6 py-4">Team Member</th>
-                                <th className="px-6 py-4 text-center">Authorization</th>
-                                <th className="px-6 py-4 text-center">Status</th>
+                                <th className="px-6 py-4 text-center">Authorization Role</th>
+                                <th className="px-6 py-4 text-center">System Status</th>
                                 <th className="px-6 py-4 text-center">Contact Identity</th>
-                                <th className="px-6 py-4 text-right">Management</th>
+                                <th className="px-6 py-4 text-right">Management Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-openpos-border">
@@ -258,21 +265,24 @@ export default function StaffManagementPage() {
                                 <TableRowSkeleton cols={5} rows={5} />
                             ) : filteredStaff.length === 0 ? (
                                 <tr>
-                                    <td colSpan={5} className="py-20 text-center text-gray-400 font-medium text-[10px] uppercase tracking-widest">
+                                    <td colSpan={5} className="py-20 text-center text-gray-400 font-bold text-[10px] uppercase tracking-widest bg-openpos-bg-subtle/20">
                                         No staff members found in directory
                                     </td>
                                 </tr>
                             ) : (
                                 filteredStaff.map((user) => (
-                                    <tr key={user.id} className="hover:bg-openpos-bg-subtle transition-colors group cursor-default">
+                                    <tr key={user.id} className="hover:bg-openpos-bg-subtle/40 transition-colors group cursor-default">
                                         <td className="px-6 py-4">
-                                            <div className="flex items-center">
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-10 h-10 rounded-xl bg-openpos-blue/5 border border-openpos-blue/10 flex items-center justify-center text-openpos-blue group-hover:scale-105 transition-transform">
+                                                    <Fingerprint size={20} />
+                                                </div>
                                                 <div className="flex flex-col">
-                                                    <span className="font-bold text-admin-value leading-none uppercase text-[11px] group-hover:text-openpos-blue transition-colors">{user.name}</span>
-                                                    <span className="text-[8px] font-normal text-gray-400 mt-1.5 uppercase tracking-tight flex items-center gap-1.5 opacity-80">
-                                                        <AtSign size={8} /> {user.username}
+                                                    <span className="font-bold text-admin-value leading-none uppercase text-[12px] group-hover:text-openpos-blue transition-colors">{user.name}</span>
+                                                    <span className="text-[9px] font-bold text-admin-dim mt-1.5 uppercase tracking-tight flex items-center gap-1.5 opacity-80">
+                                                        <AtSign size={10} className="text-openpos-blue" /> {user.username}
                                                         <span className="mx-0.5 opacity-30">•</span>
-                                                        ID: {user.id.substring(0, 8)}
+                                                        UID: {user.id.substring(0, 8)}
                                                     </span>
                                                 </div>
                                             </div>
@@ -280,62 +290,62 @@ export default function StaffManagementPage() {
                                         <td className="px-6 py-4 text-center">
                                             <div className="flex flex-col items-center">
                                                 <span className={cn(
-                                                    "text-[9px] font-medium uppercase tracking-widest",
-                                                    user.type === 'admin' ? "text-red-400" : "text-gray-400"
+                                                    "text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-md",
+                                                    user.type === 'admin' ? "bg-red-400/10 text-red-400 border border-red-400/10" : "bg-gray-400/10 text-gray-400 border border-gray-400/10"
                                                 )}>
                                                     {user.type === 'admin' ? 'SYSTEM ADMIN' : 'STAFF USER'}
                                                 </span>
-                                                <span className="text-[7px] font-normal text-gray-300 mt-0.5 uppercase tracking-widest flex items-center gap-1 opacity-70">
-                                                    <Clock size={8} /> {new Date(user.createdAt).toLocaleDateString()}
+                                                <span className="text-[8px] font-bold text-admin-dim mt-1.5 uppercase tracking-widest flex items-center gap-1.5 opacity-70">
+                                                    <Clock size={10} /> Active Since {new Date(user.createdAt).toLocaleDateString()}
                                                 </span>
                                             </div>
                                         </td>
                                         <td className="px-6 py-4 text-center">
-                                            <div className="flex flex-col items-center gap-1.5">
-                                                <Badge variant={user.status === 'active' ? 'success' : 'error'} className="text-[8px] font-medium px-2 py-0.5 border-none uppercase tracking-widest rounded-md">
+                                            <div className="flex flex-col items-center">
+                                                <Badge variant={user.status === 'active' ? 'success' : 'error'} className="text-[8px] font-bold px-2 py-0.5 border-none uppercase tracking-widest rounded-md shadow-sm">
                                                     {user.status}
                                                 </Badge>
                                             </div>
                                         </td>
                                         <td className="px-6 py-4 text-center">
                                             <div className="flex flex-col items-center opacity-80">
-                                                <span className="text-[10px] font-normal text-gray-500 font-mono tracking-tighter flex items-center gap-1.5">
-                                                    <Phone size={9} className="text-gray-300" />
-                                                    {user.phone || 'N/A'}
+                                                <span className="text-[11px] font-bold text-admin-value font-mono tracking-tighter flex items-center gap-2">
+                                                    <Phone size={10} className="text-openpos-blue" />
+                                                    {user.phone || 'NO CONTACT'}
                                                 </span>
                                             </div>
-                                        </td>                                         <td className="px-6 py-4 text-right">
-                                            <div className="flex justify-end gap-2 group-hover:opacity-100 transition-opacity">
+                                        </td>
+                                        <td className="px-6 py-4 text-right">
+                                            <div className="flex justify-end gap-1.5">
                                                 <button
                                                     onClick={() => viewDetails(user)}
-                                                    className="p-1.5 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-admin-value hover:border-openpos-border transition-all"
-                                                    title="View Details"
+                                                    className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-admin-value hover:border-openpos-blue/30 hover:bg-openpos-blue/5 transition-all"
+                                                    title="Security Profile"
                                                 >
-                                                    <Fingerprint size={12} />
+                                                    <Shield size={12} />
                                                 </button>
                                 
-                                                {/* Only Superadmin can edit/delete other Admins. Admins can only manage Staff. */}
                                                 {!user.is_primary && (user.type !== 'admin' || isSuperAdmin || user.id === currentUser?.id) ? (
                                                     <>
                                                         <button
                                                             onClick={() => openEdit(user)}
-                                                            className="p-1.5 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-openpos-blue hover:border-openpos-blue/50 transition-all"
-                                                            title="Edit Permissions"
+                                                            className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-openpos-blue hover:border-openpos-blue/30 hover:bg-openpos-blue/5 transition-all"
+                                                            title="Edit Access"
                                                         >
                                                             <Edit2 size={12} />
                                                         </button>
                                                         {user.id !== currentUser?.id && (
                                                             <button
                                                                 onClick={() => { setSelectedStaff(user); setIsDeleteModalOpen(true); }}
-                                                                className="p-1.5 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-red-400 hover:border-red-100 transition-all"
-                                                                title="Revoke Access"
+                                                                className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-red-400 hover:border-red-400/30 hover:bg-red-400/5 transition-all"
+                                                                title="Revoke Identity"
                                                             >
                                                                 <Trash2 size={12} />
                                                             </button>
                                                         )}
                                                     </>
                                                 ) : (
-                                                    <div className="p-1.5 bg-openpos-bg-subtle border border-openpos-border rounded-lg text-gray-300 cursor-not-allowed opacity-50" title={user.is_primary ? "System Protected" : "Admin Account Restricted"}>
+                                                    <div className="p-2 bg-openpos-bg-subtle border border-openpos-border rounded-lg text-gray-300 cursor-not-allowed opacity-50" title={user.is_primary ? "System Protected" : "Security Restricted"}>
                                                         <Lock size={12} />
                                                     </div>
                                                 )}
@@ -347,7 +357,7 @@ export default function StaffManagementPage() {
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </Card>
                                 
             {/* Add/Edit Staff Modal */}
             <Modal
