@@ -130,11 +130,15 @@ export default function StaffManagementPage() {
  }
  }
 
- const handleDeleteUser = async () => {
- setStaff(prev => prev.filter(s => s.id !== selectedStaff.id))
- toast.success("Staff member deleted successfully")
- setIsDeleteModalOpen(false)
- }
+  const handleDeleteUser = async () => {
+    setIsSubmitting(true)
+    setTimeout(() => {
+        setStaff(prev => prev.filter(s => s.id !== selectedStaff.id))
+        toast.success("Staff member deleted successfully")
+        setIsDeleteModalOpen(false)
+        setIsSubmitting(false)
+    }, 1500)
+  }
 
  const resetForm = () => {
  setFormData({
@@ -605,9 +609,14 @@ export default function StaffManagementPage() {
  </button>
  <button
  onClick={handleDeleteUser}
- className="flex-1 py-3 bg-red-500 text-white rounded-xl text-[10px] font-medium uppercase tracking-widest transition-all shadow-lg shadow-red-200"
+ disabled={isSubmitting}
+ className="flex-1 py-3 bg-red-500 text-white rounded-xl text-[10px] font-medium uppercase tracking-widest transition-all shadow-lg shadow-red-200 flex items-center justify-center min-h-[44px]"
  >
- Confirm Revoke
+ {isSubmitting ? (
+ <Loader2 className="animate-spin"size={16} />
+ ) : (
+ "Confirm Revoke"
+ )}
  </button>
  </div>
  </div>
