@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F8FAFC;
+  --foreground: #0F172A;
+
+  /* Brand Design Tokens - OpenPOS Blue */
+  --openpos-blue: #2563EB;
+  --openpos-blue-light: #EFF6FF;
+  --openpos-blue-dark: #1E40AF;
+  
+  --openpos-green: #10B981;
+  --openpos-green-light: #ECFDF5;
+  --openpos-red: #EF4444;
+  --openpos-red-light: #FEF2F2;
+  
+  --openpos-border: #E2E8F0;
+  --openpos-bg-subtle: #F1F5F9;
+
+  /* Admin Matrix */
+  --admin-label: #64748B;
+  --admin-value: #0F172A;
+  --admin-dim: #94A3B8;
+
+  --card-bg: #FFFFFF;
+  --header-bg: rgba(255, 255, 255, 0.8);
+}
+
+.dark {
+  --background: #0F172A;
+  --foreground: #F8FAFC;
+
+  --openpos-blue: #3B82F6;
+  --openpos-blue-light: #1E293B;
+  --openpos-blue-dark: #60A5FA;
+
+  --openpos-green: #34D399;
+  --openpos-green-light: #064E3B;
+  --openpos-red: #F87171;
+  --openpos-red-light: #450A0A;
+
+  --openpos-border: #1E293B;
+  --openpos-bg-subtle: #1E293B;
+
+  --admin-label: #94A3B8;
+  --admin-value: #F8FAFC;
+  --admin-dim: #475569;
+
+  --card-bg: #1E293B;
+  --header-bg: rgba(15, 23, 42, 0.8);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-figtree: var(--font-figtree);
+
+  --color-openpos-blue: var(--openpos-blue);
+  --color-openpos-blue-light: var(--openpos-blue-light);
+  --color-openpos-blue-dark: var(--openpos-blue-dark);
+  
+  --color-openpos-green: var(--openpos-green);
+  --color-openpos-green-light: var(--openpos-green-light);
+  --color-openpos-red: var(--openpos-red);
+  --color-openpos-red-light: var(--openpos-red-light);
+  
+  --color-openpos-border: var(--openpos-border);
+  --color-openpos-bg-subtle: var(--openpos-bg-subtle);
+
+  --color-admin-label: var(--admin-label);
+  --color-admin-value: var(--admin-value);
+  --color-admin-dim: var(--admin-dim);
+
+  --color-card-bg: var(--card-bg);
+  --color-header-bg: var(--header-bg);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Remove default shadow behavior for clean 2D look */
+.shadow-sm,
+.shadow-md,
+.shadow-lg,
+.shadow-xl,
+.shadow-2xl {
+  box-shadow: none !important;
+}
+
+/* Excel-like Table Header */
+th {
+  font-weight: 600;
+  color: var(--admin-label);
+  background-color: var(--openpos-bg-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 6px 12px !important;
+  font-size: 10px !important;
+}
+
+td {
+  padding: 6px 12px !important;
+  font-size: 11px !important;
+}
+
+tr:hover td {
+  background-color: var(--openpos-bg-subtle);
+}
+
+/* Custom Scrollbar - High Visibility */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--admin-dim);
+  border: 2px solid var(--background);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--admin-label);
+}
+
+/* Firefox Support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #9CA3AF transparent;
+}
+
+/* Tightening up spacing */
+input,
+select,
+button {
+  font-size: 13px !important;
+}
+
+/* Data Row Styling */
+.data-row:hover {
+  background-color: var(--openpos-bg-subtle);
+}
+
+/* Shimmer Animation */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.shimmer-wrapper {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--openpos-bg-subtle);
+}
+
+.shimmer-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg,
+      rgba(150, 150, 150, 0) 0%,
+      rgba(150, 150, 150, 0.1) 50%,
+      rgba(150, 150, 150, 0) 100%);
+  animation: shimmer 1.5s infinite;
+}
+
+/* Spinner Animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin 3s linear infinite;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(209, 213, 219, 0.3);
+}

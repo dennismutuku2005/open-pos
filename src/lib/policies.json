@@ -1,0 +1,136 @@
+{
+  "dashboard": {
+    "view_dashboard": {
+      "label": "View Dashboard",
+      "description": "Access main dashboard overview and statistics"
+    },
+    "view_entries": {
+      "label": "View Entries",
+      "description": "Monitor live connections and activity logs"
+    },
+    "view_logs": {
+      "label": "System Debug Logs",
+      "description": "View detailed system level debug information"
+    },
+    "view_notifications": {
+      "label": "Notifications",
+      "description": "Access system notifications center"
+    }
+  },
+  "customers": {
+    "view_customers": {
+      "label": "View Customers",
+      "description": "Access customer lists and monthly unique stats"
+    },
+    "manage_customers": {
+      "label": "Manage Customer Details",
+      "description": "Edit, block or delete customer accounts"
+    },
+    "view_active_users": {
+      "label": "Live Connections",
+      "description": "Monitor currently connected devices"
+    },
+    "view_customer_history": {
+      "label": "Customer History",
+      "description": "View detailed connection and payment history per user"
+    },
+    "manage_stk": {
+      "label": "Payment Automation (STK)",
+      "description": "Control STK push alerts and blocking"
+    }
+  },
+  "prepaid": {
+    "manage_plans": {
+      "label": "Manage Plans",
+      "description": "Create and edit bandwidth packages"
+    },
+    "view_vouchers": {
+      "label": "Browse Vouchers",
+      "description": "Search and list existing prepaid codes"
+    },
+    "create_voucher": {
+      "label": "Generate Vouchers",
+      "description": "Create new bulk prepaid access codes"
+    },
+    "manage_prepaid_users": {
+      "label": "Prepaid Active Sessions",
+      "description": "Manage users on active prepaid cycles"
+    },
+    "manage_chap_recharge": {
+      "label": "Recharge",
+      "description": "Perform direct hotspot user activation and recharges"
+    }
+  },
+  "income": {
+    "view_income": {
+      "label": "Revenue Analytics",
+      "description": "Access core income charts and data"
+    },
+    "manage_expenses": {
+      "label": "Expense Tracking",
+      "description": "Record and monitor system overheads"
+    },
+    "view_reports": {
+      "label": "Financial Statements",
+      "description": "Access compiled financial reports"
+    },
+    "view_pdf_reports": {
+      "label": "Download PDF Reports",
+      "description": "Generate and download statement archives"
+    },
+    "view_mpesa": {
+      "label": "Payment Gateway Logs",
+      "description": "Monitor M-Pesa/Bank transaction history"
+    },
+    "view_bills": {
+      "label": "System Billing",
+      "description": "View platform subscription and invoices"
+    }
+  },
+  "sms": {
+    "view_sms": {
+      "label": "Access SMS Center",
+      "description": "View the SMS dashboard and message logs"
+    },
+    "manage_sms_config": {
+      "label": "Manage SMS Config",
+      "description": "Configure API keys and Partner IDs for TextSMS"
+    },
+    "send_bulk_sms": {
+      "label": "Broadcast SMS",
+      "description": "Send bulk notifications to selected customers"
+    }
+  },
+  "routers": {
+    "view_routers": {
+      "label": "View Station Nodes",
+      "description": "Monitor router connectivity and health"
+    },
+    "manage_routers": {
+      "label": "Configure Hardware",
+      "description": "Add, edit or remove router nodes"
+    },
+    "wa_alerts": {
+      "label": "WhatsApp Alerts",
+      "description": "Manage notification templates and schedules"
+    }
+  },
+  "system": {
+    "manage_users": {
+      "label": "Manage Staff Access",
+      "description": "Add/Remove staff and configure policies"
+    },
+    "manage_themes": {
+      "label": "Captive Portal Themes",
+      "description": "Customize hotspot login page aesthetics"
+    },
+    "system_config": {
+      "label": "Global System Config",
+      "description": "Modify core platform settings"
+    },
+    "change_payment": {
+      "label": "API & Gateway Keys",
+      "description": "Modify M-Pesa/KCB integration secrets"
+    }
+  }
+}
