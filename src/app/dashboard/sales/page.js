@@ -191,6 +191,38 @@ export default function SalesManagementPage() {
                     </table>
                 </div>
             </div>
+
+            {/* Sales Activity Logs (Silogs) */}
+            <div className="bg-card-bg border border-openpos-border rounded-3xl p-6 shadow-sm">
+                <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-sm font-bold text-admin-value uppercase tracking-widest flex items-center gap-2">
+                        <Activity size={18} className="text-openpos-blue" />
+                        Sales Activity Logs
+                    </h3>
+                </div>
+                <div className="space-y-4">
+                    {[
+                        { type: 'Sale', msg: 'New sale completed by Admin', time: '2 mins ago', amount: 'KES 2,450' },
+                        { type: 'Update', msg: 'Sale record #SAL-004 was updated', time: '15 mins ago', amount: null },
+                        { type: 'M-Pesa', msg: 'STK Push sent to 0712***678', time: '1 hour ago', amount: 'KES 1,500' },
+                        { type: 'Export', msg: 'Monthly sales report exported to PDF', time: '3 hours ago', amount: null },
+                    ].map((log, i) => (
+                        <div key={i} className="flex items-center justify-between p-3 border-b border-openpos-border last:border-0">
+                            <div className="flex items-center gap-4">
+                                <div className={cn(
+                                    "w-2 h-2 rounded-full",
+                                    log.type === 'Sale' ? "bg-openpos-blue" : "bg-openpos-blue/40"
+                                )} />
+                                <div>
+                                    <p className="text-[13px] font-bold text-admin-value">{log.msg}</p>
+                                    <p className="text-[10px] text-admin-dim font-bold uppercase tracking-widest">{log.type} • {log.time}</p>
+                                </div>
+                            </div>
+                            {log.amount && <span className="text-[12px] font-bold text-openpos-blue">{log.amount}</span>}
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }
