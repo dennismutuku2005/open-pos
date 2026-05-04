@@ -20,7 +20,7 @@ export function SkeletonCircle({ size = 40, className }) {
 
 export function SkeletonCard() {
   return (
-    <div className="bg-white border border-openpos-border rounded-2xl p-5 space-y-4">
+    <div className="bg-card-bg border border-openpos-border rounded-2xl p-5 space-y-4">
       <div className="flex items-center justify-between">
         <Skeleton className="h-10 w-10 rounded-xl" />
         <Skeleton className="h-4 w-4 rounded" />
