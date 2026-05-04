@@ -37,14 +37,7 @@ export default function ProfitLossPage() {
             {/* Breadcrumbs & Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                 <div className="flex flex-col gap-2">
-                    <Link 
-                        href="/dashboard/reports" 
-                        className="flex items-center gap-2 text-[10px] font-bold text-admin-dim hover:text-openpos-blue uppercase tracking-[2px] transition-colors w-fit"
-                    >
-                        <ArrowLeft size={12} /> Back to Hub
-                    </Link>
                     <h1 className="text-xl font-bold tracking-tight text-admin-value uppercase flex items-center gap-2">
-                        <TrendingUp size={20} className="text-openpos-blue" />
                         Profit & Loss Statement
                     </h1>
                     <p className="text-[13px] font-medium text-admin-label mt-0.5">Comprehensive fiscal analysis for {dateRange}.</p>
@@ -130,14 +123,6 @@ export default function ProfitLossPage() {
                                     </div>
                                 </div>
                             ))}
-                        </div>
-                    </Card>
-
-                    <Card title="Quick Insights" noPadding>
-                        <div className="p-4 bg-emerald-500/5 border border-emerald-500/10 rounded-2xl m-6">
-                            <p className="text-[11px] text-emerald-700 font-bold uppercase tracking-tight leading-relaxed">
-                                Revenue is up by 15% compared to last month. Net profit has increased by 18.4% due to optimized procurement costs.
-                            </p>
                         </div>
                     </Card>
                 </div>
