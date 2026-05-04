@@ -48,7 +48,7 @@ export default function InStockPage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[
                     { label: 'Total Items', value: '99+', icon: Package, color: 'text-openpos-blue', bg: 'bg-openpos-blue/10' },
-                    { label: 'Total Value', value: 'KES 1.2M', icon: CheckCircle2, color: 'text-openpos-green', bg: 'bg-openpos-green/10' },
+                    { label: 'Total Value', value: 'KES 1.2M', icon: CheckCircle2, color: 'text-openpos-blue', bg: 'bg-openpos-blue/10' },
                     { label: 'Inventory Health', value: 'Excellent', icon: Clock, color: 'text-purple-600', bg: 'bg-purple-100' },
                 ].map((stat, i) => (
                     <div key={i} className="bg-white border border-openpos-border rounded-2xl p-4 shadow-sm">
