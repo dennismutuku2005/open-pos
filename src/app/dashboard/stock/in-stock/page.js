@@ -12,11 +12,11 @@ import { Modal } from '@/components/Modal'
 
 // Mock Data
 const stockData = [
-    { id: 1, name: 'Logitech MX Master 3S', category: 'Accessories', stock: 12, price: 12500, value: 150000, status: 'Healthy', image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&q=80' },
-    { id: 2, name: 'USB-C Hub Multiport', category: 'Computing', stock: 24, price: 4500, value: 108000, status: 'Healthy', image: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&q=80' },
-    { id: 3, name: 'Portable SSD 1TB', category: 'Storage', stock: 18, price: 15500, value: 279000, status: 'Healthy', image: 'https://images.unsplash.com/photo-1597872200370-493dea23936a?w=400&q=80' },
-    { id: 4, name: 'Webcam 4K Ultra HD', category: 'Peripherals', stock: 15, price: 18000, value: 270000, status: 'Healthy', image: 'https://images.unsplash.com/photo-1610483178766-8092dcc6f36a?w=400&q=80' },
-    { id: 5, name: 'Bluetooth Earbuds', category: 'Audio', stock: 30, price: 6500, value: 195000, status: 'Healthy', image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&q=80' },
+    { id: 1, name: 'Logitech MX Master 3S', category: 'Accessories', stock: 12, price: 12500, value: 150000, status: 'In Stock', image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&q=80' },
+    { id: 2, name: 'USB-C Hub Multiport', category: 'Computing', stock: 24, price: 4500, value: 108000, status: 'In Stock', image: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&q=80' },
+    { id: 3, name: 'Portable SSD 1TB', category: 'Storage', stock: 18, price: 15500, value: 279000, status: 'In Stock', image: 'https://images.unsplash.com/photo-1597872200370-493dea23936a?w=400&q=80' },
+    { id: 4, name: 'Webcam 4K Ultra HD', category: 'Peripherals', stock: 15, price: 18000, value: 270000, status: 'In Stock', image: 'https://images.unsplash.com/photo-1610483178766-8092dcc6f36a?w=400&q=80' },
+    { id: 5, name: 'Bluetooth Earbuds', category: 'Audio', stock: 30, price: 6500, value: 195000, status: 'In Stock', image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&q=80' },
 ]
 
 export default function InStockPage() {
@@ -49,7 +49,7 @@ export default function InStockPage() {
                 {[
                     { label: 'Total Items', value: '99+', icon: Package, color: 'text-openpos-blue', bg: 'bg-openpos-blue/10' },
                     { label: 'Total Value', value: 'KES 1.2M', icon: CheckCircle2, color: 'text-openpos-green', bg: 'bg-openpos-green/10' },
-                    { label: 'Inventory Health', value: 'Good', icon: Clock, color: 'text-purple-600', bg: 'bg-purple-100' },
+                    { label: 'Inventory Health', value: 'Excellent', icon: Clock, color: 'text-purple-600', bg: 'bg-purple-100' },
                 ].map((stat, i) => (
                     <div key={i} className="bg-white border border-openpos-border rounded-2xl p-4 shadow-sm">
                         <div className="flex items-center gap-4">
