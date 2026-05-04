@@ -11,7 +11,9 @@ import {
 import Image from'next/image'
 import { cn } from'@/lib/utils'
 import { toast } from'sonner'
+import { Card } from '@/components/Card'
 import { Modal } from'@/components/Modal'
+import { Loader2 } from 'lucide-react'
 import { generateReport, generateExcelReport } from'@/lib/pdf'
 import { jsPDF } from'jspdf'
 
@@ -202,13 +204,13 @@ export default function ProductsPage() {
  <span className="text-[10px] font-bold uppercase tracking-widest">Excel</span>
  </button>
  </div>
- <button 
- onClick={() => { resetForm(); setShowFormModal(true); }}
- className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-3 rounded-xl font-bold text-[12px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
- >
- <Plus size={18} />
- Add Product
- </button>
+  <button 
+  onClick={() => { resetForm(); setShowFormModal(true); }}
+  className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-3 rounded-xl font-bold text-[12px] flex items-center justify-center gap-2 transition-all uppercase tracking-widest min-w-[160px]"
+  >
+  <Plus size={18} />
+  Add Product
+  </button>
  </div>
  </div>
 
