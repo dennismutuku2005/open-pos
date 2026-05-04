@@ -126,9 +126,9 @@ export default function DashboardLayout({ children }) {
                     )}
 
                     <div className={cn(
-                        "transition-all duration-500",
-                        !isZenMode && "pt-16",
-                        isZenMode ? "p-0 h-screen overflow-hidden" : (pathname === '/dashboard/sales' ? "p-0" : "px-6 py-8")
+                        "transition-all duration-500 min-h-[calc(100vh-64px)]",
+                        !isZenMode && "pt-20", // Increased padding to 80px (header 64px + 16px gap)
+                        isZenMode ? "p-0 h-screen overflow-hidden" : (pathname === '/dashboard/sales' ? "pt-16 p-0" : "px-6 pb-8")
                     )}>
                         <div className="max-w-[1600px] mx-auto">
                             <Suspense fallback={
