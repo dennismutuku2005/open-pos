@@ -73,7 +73,7 @@ export default function DashboardLayout({ children }) {
                 {/* Main Content Area */}
                 <main className={cn(
                     "transition-all duration-500 ease-in-out",
-                    pathname === '/dashboard/sales' ? "h-screen overflow-hidden" : "min-h-screen",
+                    pathname === '/dashboard/pos' ? "h-screen overflow-hidden" : "min-h-screen",
                     isZenMode ? "pl-16" : isSidebarOpen ? "md:pl-64" : "pl-16"
                 )}>
                     {/* Header */}
@@ -130,12 +130,12 @@ export default function DashboardLayout({ children }) {
                         "transition-all duration-500",
                         isZenMode 
                             ? "h-screen overflow-hidden" 
-                            : pathname === '/dashboard/sales' 
+                            : pathname === '/dashboard/pos' 
                                 ? "pt-16 h-screen overflow-hidden bg-[#F1F5F9]" 
                                 : "pt-20 px-6 pb-8 min-h-[calc(100vh-64px)]"
                     )}>
                         <div className={cn(
-                            pathname === '/dashboard/sales' ? "h-full" : "max-w-[1600px] mx-auto"
+                            pathname === '/dashboard/pos' ? "h-full" : "max-w-[1600px] mx-auto"
                         )}>
                             <Suspense fallback={
                                 <div className="flex items-center justify-center h-64">
