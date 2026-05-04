@@ -214,109 +214,130 @@ export default function ProductsPage() {
 
             {/* Filters */}
             <div className="bg-card-bg border border-openpos-border rounded-2xl p-4 flex flex-col md:flex-row items-center gap-4">
-                <div className="relative flex-1 w-full">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-admin-dim" size={16} />
+                <div className="relative flex-1 w-full group">
+                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors" size={16} />
                     <input 
                         type="text"
                         placeholder="Search products by name or barcode..."
-                        className="w-full bg-openpos-bg-subtle border-none rounded-xl pl-10 pr-4 py-2.5 text-[13px] font-medium focus:ring-1 focus:ring-openpos-blue/30 outline-none transition-all"
+                        className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-10 pr-4 py-2.5 text-[11px] font-bold text-admin-value focus:ring-2 focus:ring-openpos-blue/10 focus:border-openpos-blue outline-none transition-all"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
                 </div>
                 <div className="flex items-center gap-2 w-full md:w-auto">
-                    <select className="flex-1 md:w-48 bg-openpos-bg-subtle border-none rounded-xl px-4 py-2.5 text-[13px] font-bold outline-none">
+                    <select className="flex-1 md:w-48 bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-2.5 text-[11px] font-bold text-admin-value outline-none focus:border-openpos-blue transition-all uppercase tracking-widest cursor-pointer">
                         <option>All Categories</option>
                         {categories.map(c => <option key={c}>{c}</option>)}
                     </select>
                 </div>
             </div>
 
-            {/* Products Table */}
-            <div className="bg-card-bg border border-openpos-border rounded-2xl overflow-hidden shadow-sm">
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
+            {/* Products Table Container */}
+            <Card noPadding className="shadow-sm">
+                <div className="overflow-x-auto custom-scrollbar">
+                    <table className="w-full text-left border-collapse text-[11px]">
                         <thead>
                             <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border">
-                                <th className="py-3 px-6 text-[10px] uppercase tracking-widest font-bold text-admin-dim">Product</th>
-                                <th className="py-3 px-6 text-[10px] uppercase tracking-widest font-bold text-admin-dim">Category</th>
-                                <th className="py-3 px-6 text-[10px] uppercase tracking-widest font-bold text-admin-dim">Prices</th>
-                                <th className="py-3 px-6 text-[10px] uppercase tracking-widest font-bold text-admin-dim">Stock</th>
-                                <th className="py-3 px-6 text-[10px] uppercase tracking-widest font-bold text-admin-dim">Expiry</th>
-                                <th className="py-3 px-6 text-[10px] uppercase tracking-widest font-bold text-admin-dim text-right">Actions</th>
+                                <th className="py-4 px-6 text-[9px] uppercase tracking-widest font-bold text-admin-dim">Inventory Item</th>
+                                <th className="py-4 px-6 text-[9px] uppercase tracking-widest font-bold text-admin-dim text-center">Department</th>
+                                <th className="py-4 px-6 text-[9px] uppercase tracking-widest font-bold text-admin-dim">Price Matrix (KES)</th>
+                                <th className="py-4 px-6 text-[9px] uppercase tracking-widest font-bold text-admin-dim">Availability</th>
+                                <th className="py-4 px-6 text-[9px] uppercase tracking-widest font-bold text-admin-dim">Security / Expiry</th>
+                                <th className="py-4 px-6 text-[9px] uppercase tracking-widest font-bold text-admin-dim text-right">Management</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-openpos-border">
                             {products.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.barcode.includes(searchQuery)).map((product) => (
-                                <tr key={product.id} className="group hover:bg-openpos-bg-subtle transition-colors">
-                                    <td className="py-2.5 px-6">
+                                <tr key={product.id} className="group hover:bg-openpos-bg-subtle/40 transition-colors cursor-default">
+                                    <td className="py-3.5 px-6">
                                          <div className="flex items-center gap-4">
-                                             <div className="w-10 h-10 rounded-xl overflow-hidden bg-openpos-bg-subtle relative shrink-0 border border-openpos-border shadow-sm">
+                                             <div className="w-10 h-10 rounded-xl overflow-hidden bg-openpos-bg-subtle relative shrink-0 border border-openpos-border shadow-sm group-hover:scale-105 transition-transform">
                                                  {product.image ? (
                                                      <Image src={product.image} alt={product.name} fill className="object-cover" />
                                                  ) : (
-                                                     <div className="w-full h-full flex items-center justify-center text-admin-dim"><Tag size={18} /></div>
+                                                     <div className="w-full h-full flex items-center justify-center text-admin-dim"><Package size={18} /></div>
                                                  )}
                                              </div>
                                              <div>
-                                                 <p className="text-[13px] font-semibold text-admin-value">{product.name}</p>
-                                                 <div className="flex items-center gap-2 mt-0.5">
-                                                     <Barcode size={10} className="text-admin-dim" />
-                                                     <span className="text-[9px] font-medium text-admin-dim">{product.barcode}</span>
+                                                 <p className="text-[12px] font-bold text-admin-value uppercase tracking-tight group-hover:text-openpos-blue transition-colors">{product.name}</p>
+                                                 <div className="flex items-center gap-2 mt-1">
+                                                     <Barcode size={10} className="text-openpos-blue" />
+                                                     <span className="text-[9px] font-bold text-admin-dim tracking-tighter">{product.barcode}</span>
                                                  </div>
                                              </div>
                                          </div>
                                      </td>
-                                     <td className="py-2.5 px-6">
-                                         <span className="px-2 py-0.5 bg-openpos-blue/10 text-openpos-blue text-[9px] font-semibold rounded-md uppercase tracking-wider">
+                                     <td className="py-3.5 px-6 text-center">
+                                         <span className="px-2 py-1 bg-openpos-blue/5 text-openpos-blue text-[9px] font-bold rounded-md uppercase tracking-widest border border-openpos-blue/10">
                                              {product.category}
                                          </span>
                                      </td>
-                                     <td className="py-2.5 px-6">
-                                         <div className="flex flex-col gap-0.5">
-                                             <div className="flex items-center justify-between text-[10px] font-medium">
-                                                 <span className="text-admin-dim uppercase tracking-widest text-[8px]">Buy</span>
-                                                 <span className="text-admin-value">KES {product.buyPrice}</span>
+                                     <td className="py-3.5 px-6">
+                                         <div className="flex flex-col gap-1">
+                                             <div className="flex items-center gap-3">
+                                                 <span className="text-[8px] font-bold text-admin-dim uppercase tracking-widest w-8">Buy</span>
+                                                 <span className="text-[11px] font-bold text-admin-value">{product.buyPrice.toLocaleString()}</span>
                                              </div>
-                                             <div className="flex items-center justify-between text-[12px] font-semibold">
-                                                 <span className="text-admin-dim uppercase tracking-widest text-[8px]">Sell</span>
-                                                 <span className="text-openpos-blue">KES {product.sellPrice}</span>
+                                             <div className="flex items-center gap-3">
+                                                 <span className="text-[8px] font-bold text-openpos-blue uppercase tracking-widest w-8">Sell</span>
+                                                 <span className="text-[12px] font-bold text-openpos-blue">{product.sellPrice.toLocaleString()}</span>
                                              </div>
                                          </div>
                                      </td>
-                                     <td className="py-2.5 px-6">
-                                        <div className="flex flex-col gap-1.5">
+                                     <td className="py-3.5 px-6">
+                                        <div className="flex flex-col gap-2">
                                             <div className="flex items-center gap-2">
                                                 <span className={cn(
-                                                    "text-[15px] font-semibold",
+                                                    "text-[13px] font-bold",
                                                     product.stock < 10 ? "text-openpos-red" : "text-admin-value"
                                                 )}>{product.stock}</span>
-                                                <span className="text-[10px] font-medium text-admin-dim uppercase tracking-widest">In Stock</span>
+                                                <span className="text-[8px] font-bold text-admin-dim uppercase tracking-widest">Units Left</span>
                                             </div>
-                                            <div className="w-20 h-1 bg-openpos-bg-subtle rounded-full overflow-hidden">
+                                            <div className="w-24 h-1.5 bg-openpos-bg-subtle border border-openpos-border rounded-full overflow-hidden">
                                                 <div 
-                                                    className={cn("h-full transition-all", product.stock < 10 ? "bg-openpos-red" : "bg-openpos-blue")} 
+                                                    className={cn("h-full transition-all", product.stock < 10 ? "bg-openpos-red shadow-[0_0_8px_rgba(239,68,68,0.4)]" : "bg-openpos-blue shadow-[0_0_8px_rgba(37,99,235,0.4)]")} 
                                                     style={{ width: `${Math.min(100, (product.stock / 50) * 100)}%` }} 
                                                 />
                                             </div>
                                         </div>
                                     </td>
-                                     <td className="py-2.5 px-6">
-                                        <div className="flex flex-col">
-                                            <span className={cn(
-                                                "text-[12px] font-semibold",
-                                                product.hasExpiry ? "text-admin-value" : "text-admin-dim"
-                                            )}>
-                                                {product.hasExpiry ? product.expiry : 'No Expiry'}
-                                            </span>
-                                            {product.hasExpiry && <span className="text-[9px] text-admin-dim uppercase">Expires</span>}
+                                     <td className="py-3.5 px-6">
+                                        <div className="flex flex-col gap-1">
+                                            <div className="flex items-center gap-1.5">
+                                                <Calendar size={10} className={cn(product.hasExpiry ? "text-openpos-blue" : "text-admin-dim")} />
+                                                <span className={cn(
+                                                    "text-[10px] font-bold uppercase",
+                                                    product.hasExpiry ? "text-admin-value" : "text-admin-dim opacity-50"
+                                                )}>
+                                                    {product.hasExpiry ? product.expiry : 'Indefinite'}
+                                                </span>
+                                            </div>
+                                            {product.hasExpiry && <span className="text-[8px] text-admin-dim font-bold uppercase tracking-tighter opacity-70">Regulatory Expiry</span>}
                                         </div>
                                     </td>
-                                    <td className="py-2.5 px-6 text-right">
-                                        <div className="flex items-center justify-end gap-1">
-                                            <button onClick={() => printBarcode(product)} className="p-1.5 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/5 rounded-lg transition-all" title="Print Barcode"><Printer size={14} /></button>
-                                            <button onClick={() => handleEdit(product)} className="p-1.5 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/5 rounded-lg transition-all"><Edit2 size={14} /></button>
-                                            <button onClick={() => handleDelete(product)} className="p-1.5 text-admin-dim hover:text-openpos-red hover:bg-openpos-red/5 rounded-lg transition-all"><Trash2 size={14} /></button>
+                                    <td className="py-3.5 px-6 text-right">
+                                        <div className="flex items-center justify-end gap-1.5">
+                                            <button 
+                                                onClick={() => printBarcode(product)} 
+                                                className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-openpos-blue hover:border-openpos-blue/30 hover:bg-openpos-blue/5 transition-all" 
+                                                title="Print Security Label"
+                                            >
+                                                <Printer size={12} />
+                                            </button>
+                                            <button 
+                                                onClick={() => handleEdit(product)} 
+                                                className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-openpos-blue hover:border-openpos-blue/30 hover:bg-openpos-blue/5 transition-all"
+                                                title="Edit Profile"
+                                            >
+                                                <Edit2 size={12} />
+                                            </button>
+                                            <button 
+                                                onClick={() => handleDelete(product)} 
+                                                className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-openpos-red hover:border-openpos-red/30 hover:bg-openpos-red/5 transition-all"
+                                                title="Decommission"
+                                            >
+                                                <Trash2 size={12} />
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -324,7 +345,7 @@ export default function ProductsPage() {
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </Card>
 
             {/* Product Form Modal */}
             <Modal
