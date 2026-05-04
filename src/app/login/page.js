@@ -142,7 +142,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={isAuthenticating}
-                            className="w-full h-12 bg-[#0F172A] hover:bg-black text-white text-[13px] font-semibold rounded-xl transition-all duration-300 flex items-center justify-center tracking-wide"
+                            className="w-full bg-openpos-blue text-white rounded-xl py-4 font-bold text-[13px] uppercase tracking-[2px] shadow-lg shadow-openpos-blue/20 hover:scale-[1.01] active:scale-95 transition-all"
                         >
                             {isAuthenticating ? (
                                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
