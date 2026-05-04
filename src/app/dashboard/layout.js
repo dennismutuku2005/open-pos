@@ -4,7 +4,7 @@ import React, { useState, useEffect, Suspense } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import {
-    Menu, Bell, ChevronRight, X, LogOut, Search, Shield
+    Menu, Bell, ChevronRight, X, LogOut, Search, Shield, Clock
 } from 'lucide-react'
 import { Sidebar } from '@/components/Sidebar'
 import { Modal } from '@/components/Modal'
@@ -21,7 +21,15 @@ export default function DashboardLayout({ children }) {
     const [isZenMode, setIsZenMode] = useState(false)
     const [showLogoutModal, setShowLogoutModal] = useState(false)
     const [user, setUser] = useState(null)
+    const [currentTime, setCurrentTime] = useState(new Date())
+    const [mounted, setMounted] = useState(false)
     const pathname = usePathname()
+
+    useEffect(() => {
+        setMounted(true)
+        const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+        return () => clearInterval(timer);
+    }, []);
 
     useEffect(() => {
         const userData = authService.getUser()
@@ -46,7 +54,7 @@ export default function DashboardLayout({ children }) {
 
     const getPageName = () => {
         const segments = pathname.split('/').filter(Boolean);
-        if (segments.length <= 1) return 'Summary';
+        if (segments.length <= 1) return '';
         
         // Handle nested paths like /dashboard/sales/list -> "Sales List"
         return segments
@@ -75,67 +83,83 @@ export default function DashboardLayout({ children }) {
 
                 {/* Main Content Area */}
                 <main className={cn(
-                    "transition-all duration-500 ease-in-out",
-                    pathname === '/dashboard/pos' ? "h-screen overflow-hidden" : "min-h-screen",
+                    "transition-all duration-500 ease-in-out h-screen flex flex-col overflow-hidden",
                     isZenMode ? "pl-16" : isSidebarOpen ? "md:pl-64" : "pl-16"
                 )}>
                     {/* Header */}
                     {!isZenMode && (
-                        <header className={cn(
-                            "fixed top-0 right-0 z-[100] transition-all duration-500 flex items-center bg-openpos-bg/80 backdrop-blur-xl border-b border-openpos-border h-16",
-                            isSidebarOpen ? "md:left-64 left-0" : "left-16"
-                        )}>
-                            <div className="px-6 w-full flex items-center justify-between max-w-[1600px] mx-auto">
-                                <div className="flex items-center gap-4">
-                                    <button
-                                        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                                        className="p-2 text-admin-dim hover:bg-openpos-bg-subtle rounded-xl md:block hidden transition-all"
-                                    >
-                                        <Menu size={18} />
-                                    </button>
+                        <header className="h-14 border-b border-openpos-border bg-card-bg flex items-center justify-between px-6 shrink-0 z-40">
+                            <div className="flex items-center gap-3">
+                                <button 
+                                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                                    className="p-1.5 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/10 rounded-lg transition-all"
+                                >
+                                    <Menu size={18} />
+                                </button>
+                                <div>
                                     <div className="flex items-center gap-3">
-                                        <h2 className="text-[12px] font-bold text-admin-value uppercase tracking-[2px]">{getPageName()}</h2>
-                                        <span className="w-1 h-1 rounded-full bg-admin-dim/30" />
-                                        <div className="flex items-center gap-1.5">
-                                            <span className="text-[10px] font-bold text-admin-dim uppercase tracking-widest">{new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</span>
-                                            <span className="text-[14px]">🇰🇪</span>
+                                        <div className="w-5 h-5 rounded-full overflow-hidden border border-openpos-border shrink-0 shadow-sm">
+                                            <img 
+                                                src="https://flagcdn.com/w80/ke.png" 
+                                                alt="Kenya" 
+                                                className="w-full h-full object-cover"
+                                            />
                                         </div>
+                                        {getPageName() && (
+                                            <h2 className="text-[12px] font-bold text-admin-value tracking-tight leading-none uppercase">
+                                                {getPageName()}
+                                            </h2>
+                                        )}
                                     </div>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-6">
+                                {/* Global Search */}
+                                <div className="hidden lg:block w-[280px]">
+                                    <GlobalSearch />
                                 </div>
 
                                 <div className="flex items-center gap-4">
-                                    <GlobalSearch />
-                                    <ThemeToggle />
-                                    <Link 
-                                        href="/dashboard/settings/profile"
-                                        className="flex items-center gap-3 px-3 py-1.5 bg-openpos-bg-subtle/50 rounded-2xl border border-openpos-border/50 hover:bg-white hover:border-openpos-blue/30 transition-all group"
-                                    >
-                                        <div className="w-6 h-6 rounded-lg bg-openpos-blue/10 flex items-center justify-center text-openpos-blue font-bold text-[10px] group-hover:bg-openpos-blue group-hover:text-white transition-all">
-                                            {user?.name?.charAt(0) || 'A'}
+                                    {/* Utilities */}
+                                    <div className="flex items-center gap-2 pr-4 border-r border-openpos-border">
+                                        <ThemeToggle />
+                                        <div className="hidden sm:flex items-center gap-2 bg-openpos-bg-subtle px-2 py-1 rounded-lg border border-openpos-border shadow-sm">
+                                            <Clock size={10} className="text-openpos-blue" />
+                                            <span className="text-[9px] font-bold text-admin-value uppercase tracking-widest">
+                                                {currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                            </span>
                                         </div>
-                                        <div className="flex flex-col">
-                                            <span className="text-[10px] font-bold text-admin-value leading-none uppercase group-hover:text-openpos-blue transition-all">{user?.name || 'Administrator'}</span>
-                                            <span className="text-[8px] font-bold text-admin-dim uppercase tracking-tighter mt-0.5">{user?.role || 'Store Owner'}</span>
+                                    </div>
+
+                                    {/* Profile */}
+                                    <div className="flex items-center gap-2 pl-1">
+                                        <div className="text-right hidden md:block">
+                                            <p className="text-[10px] font-bold text-admin-value leading-none">
+                                                {mounted ? (authService.getUser()?.name || 'Admin User') : '...'}
+                                            </p>
+                                            <p className="text-[8px] font-bold text-openpos-blue uppercase tracking-widest mt-0.5">
+                                                {mounted ? (authService.getUser()?.type || 'Staff') : '...'}
+                                            </p>
                                         </div>
-                                    </Link>
-                                    <button 
-                                        onClick={() => setShowLogoutModal(true)}
-                                        className="ml-2 p-1.5 text-admin-dim hover:text-openpos-red hover:bg-openpos-red/5 rounded-lg transition-all"
-                                    >
-                                        <LogOut size={14} />
-                                    </button>
+                                        <div className="w-7 h-7 rounded-lg bg-openpos-blue flex items-center justify-center text-white font-bold shadow-lg shadow-openpos-blue/20 text-[10px]">
+                                            {mounted ? authService.getUser()?.name?.charAt(0) : 'A'}
+                                        </div>
+                                        <button 
+                                            onClick={() => setShowLogoutModal(true)}
+                                            className="p-1.5 text-admin-dim hover:text-openpos-red hover:bg-openpos-red/5 rounded-lg transition-all"
+                                        >
+                                            <LogOut size={12} />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </header>
                     )}
 
                     <div className={cn(
-                        "transition-all duration-500",
-                        isZenMode 
-                            ? "h-screen overflow-hidden" 
-                            : pathname === '/dashboard/pos' 
-                                ? "pt-16 h-screen overflow-hidden bg-[#F1F5F9]" 
-                                : "pt-20 px-6 pb-8 min-h-[calc(100vh-64px)]"
+                        "flex-1 overflow-y-auto overflow-x-hidden transition-all duration-500 bg-openpos-bg",
+                        isZenMode ? "p-0" : "px-6 py-4"
                     )}>
                         <div className={cn(
                             pathname === '/dashboard/pos' ? "h-full" : "max-w-[1600px] mx-auto"
