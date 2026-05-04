@@ -27,7 +27,7 @@
 }
 
 .dark {
-  --background: #0F172A;
+  --background: #020617; /* Deepest Midnight */
   --foreground: #F8FAFC;
 
   --openpos-blue: #3B82F6;
@@ -40,14 +40,14 @@
   --openpos-red-light: #450A0A;
 
   --openpos-border: #1E293B;
-  --openpos-bg-subtle: #1E293B;
+  --openpos-bg-subtle: #0F172A;
 
-  --admin-label: #CBD5E1;
+  --admin-label: #94A3B8;
   --admin-value: #F8FAFC;
   --admin-dim: #64748B;
 
-  --card-bg: #1E293B;
-  --header-bg: rgba(15, 23, 42, 0.8);
+  --card-bg: #0F172A; /* Sleek Dark Slate */
+  --header-bg: rgba(2, 6, 23, 0.8);
 }
 
 @theme inline {
