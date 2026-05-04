@@ -76,56 +76,59 @@ export default function DashboardLayout({ children }) {
                     isZenMode ? "pl-16" : isSidebarOpen ? "md:pl-64" : "pl-16"
                 )}>
                     {/* Header */}
-                    <header className={cn(
-                        "sticky top-0 z-[100] transition-all duration-500",
-                        isZenMode ? "hidden" : "bg-openpos-bg/80 backdrop-blur-xl border-b border-openpos-border"
-                    )}>
-                        <div className="px-6 h-16 flex items-center justify-between max-w-[1600px] mx-auto">
-                            <div className="flex items-center gap-4">
-                                <button
-                                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                                    className="p-2 text-admin-dim hover:bg-openpos-bg-subtle rounded-xl md:block hidden transition-all"
-                                >
-                                    <Menu size={18} />
-                                </button>
-                                <div className="flex items-center gap-3">
-                                    <h2 className="text-[12px] font-bold text-admin-value uppercase tracking-[2px]">{getPageName()}</h2>
-                                    <span className="w-1 h-1 rounded-full bg-admin-dim/30" />
-                                    <div className="flex items-center gap-1.5">
-                                        <span className="text-[10px] font-bold text-admin-dim uppercase tracking-widest">{new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</span>
-                                        <span className="text-[14px]">🇰🇪</span>
+                    {!isZenMode && (
+                        <header className={cn(
+                            "fixed top-0 right-0 z-[100] transition-all duration-500 flex items-center bg-openpos-bg/80 backdrop-blur-xl border-b border-openpos-border h-16",
+                            isSidebarOpen ? "md:left-64 left-0" : "left-16"
+                        )}>
+                            <div className="px-6 w-full flex items-center justify-between max-w-[1600px] mx-auto">
+                                <div className="flex items-center gap-4">
+                                    <button
+                                        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                                        className="p-2 text-admin-dim hover:bg-openpos-bg-subtle rounded-xl md:block hidden transition-all"
+                                    >
+                                        <Menu size={18} />
+                                    </button>
+                                    <div className="flex items-center gap-3">
+                                        <h2 className="text-[12px] font-bold text-admin-value uppercase tracking-[2px]">{getPageName()}</h2>
+                                        <span className="w-1 h-1 rounded-full bg-admin-dim/30" />
+                                        <div className="flex items-center gap-1.5">
+                                            <span className="text-[10px] font-bold text-admin-dim uppercase tracking-widest">{new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</span>
+                                            <span className="text-[14px]">🇰🇪</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className="flex items-center gap-4">
-                                <GlobalSearch />
-                                <ThemeToggle />
-                                <Link 
-                                    href="/dashboard/settings/profile"
-                                    className="flex items-center gap-3 px-3 py-1.5 bg-openpos-bg-subtle/50 rounded-2xl border border-openpos-border/50 hover:bg-white hover:border-openpos-blue/30 transition-all group"
-                                >
-                                    <div className="w-6 h-6 rounded-lg bg-openpos-blue/10 flex items-center justify-center text-openpos-blue font-bold text-[10px] group-hover:bg-openpos-blue group-hover:text-white transition-all">
-                                        {user?.name?.charAt(0) || 'A'}
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-[10px] font-bold text-admin-value leading-none uppercase group-hover:text-openpos-blue transition-all">{user?.name || 'Administrator'}</span>
-                                        <span className="text-[8px] font-bold text-admin-dim uppercase tracking-tighter mt-0.5">{user?.role || 'Store Owner'}</span>
-                                    </div>
-                                </Link>
-                                <button 
-                                    onClick={() => setShowLogoutModal(true)}
-                                    className="ml-2 p-1.5 text-admin-dim hover:text-openpos-red hover:bg-openpos-red/5 rounded-lg transition-all"
-                                >
-                                    <LogOut size={14} />
-                                </button>
+                                <div className="flex items-center gap-4">
+                                    <GlobalSearch />
+                                    <ThemeToggle />
+                                    <Link 
+                                        href="/dashboard/settings/profile"
+                                        className="flex items-center gap-3 px-3 py-1.5 bg-openpos-bg-subtle/50 rounded-2xl border border-openpos-border/50 hover:bg-white hover:border-openpos-blue/30 transition-all group"
+                                    >
+                                        <div className="w-6 h-6 rounded-lg bg-openpos-blue/10 flex items-center justify-center text-openpos-blue font-bold text-[10px] group-hover:bg-openpos-blue group-hover:text-white transition-all">
+                                            {user?.name?.charAt(0) || 'A'}
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] font-bold text-admin-value leading-none uppercase group-hover:text-openpos-blue transition-all">{user?.name || 'Administrator'}</span>
+                                            <span className="text-[8px] font-bold text-admin-dim uppercase tracking-tighter mt-0.5">{user?.role || 'Store Owner'}</span>
+                                        </div>
+                                    </Link>
+                                    <button 
+                                        onClick={() => setShowLogoutModal(true)}
+                                        className="ml-2 p-1.5 text-admin-dim hover:text-openpos-red hover:bg-openpos-red/5 rounded-lg transition-all"
+                                    >
+                                        <LogOut size={14} />
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </header>
+                        </header>
+                    )}
 
                     <div className={cn(
                         "transition-all duration-500",
-                        isZenMode ? "p-0 h-screen overflow-hidden" : "px-6 py-8"
+                        !isZenMode && "pt-16",
+                        isZenMode ? "p-0 h-screen overflow-hidden" : (pathname === '/dashboard/sales' ? "p-0" : "px-6 py-8")
                     )}>
                         <div className="max-w-[1600px] mx-auto">
                             <Suspense fallback={
