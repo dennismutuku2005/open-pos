@@ -1,12 +1,12 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { 
     BarChart3, Calendar, Download, Filter, 
     Search, FileText, ArrowUpRight, ArrowDownRight,
     TrendingUp, DollarSign, ShoppingBag, Receipt,
     ChevronDown, Printer, BadgeCent, History,
-    ArrowRightLeft, Wallet
+    ArrowRightLeft, Wallet, CheckCircle2
 } from 'lucide-react'
 import { 
     AreaChart, Area, XAxis, YAxis, CartesianGrid, 
@@ -52,8 +52,9 @@ const leastProducts = [
 ]
 
 export default function SalesReportPage() {
-    const [dateRange, setDateRange] = useState('Today')
+    const [dateRange, setDateRange] = useState(new Date().toISOString().split('T')[0])
     const [reportType, setReportType] = useState('Sales')
+    const dateInputRef = useRef(null)
 
     const downloadPDF = () => {
         const tableColumn = ["Order ID", "Date", "Customer", "Payment", "Profit", "Total Amount"]
@@ -75,10 +76,23 @@ export default function SalesReportPage() {
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold tracking-tight text-admin-value">Financial Reports</h1>
+                    <h1 className="text-2xl font-bold tracking-tight text-admin-value uppercase">Financial Reports</h1>
                     <p className="text-admin-label mt-1 font-medium">Detailed analysis of your sales, profit and loss.</p>
                 </div>
                 <div className="flex items-center gap-3 w-full sm:w-auto">
+                    <div className="relative flex-1 sm:flex-none">
+                        <input 
+                            type="date"
+                            ref={dateInputRef}
+                            value={dateRange}
+                            onChange={(e) => setDateRange(e.target.value)}
+                            className="absolute inset-0 opacity-0 cursor-pointer z-10"
+                        />
+                        <button className="w-full h-full bg-white border border-openpos-border text-admin-value px-5 py-3 rounded-xl font-bold text-[12px] flex items-center justify-center gap-2 hover:bg-gray-50 transition-all uppercase tracking-widest shadow-sm">
+                            <Calendar size={18} />
+                            {new Date(dateRange).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                        </button>
+                    </div>
                     <button 
                         onClick={downloadPDF}
                         className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-3 rounded-xl font-bold text-[12px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 hover:scale-[1.02] transition-all uppercase tracking-widest"
@@ -92,7 +106,7 @@ export default function SalesReportPage() {
             {/* Quick Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <ReportStatCard title="Gross Revenue" value="KES 374,050" change="+12%" icon={BadgeCent} color="blue" />
-                <ReportStatCard title="Net Profit" value="KES 148,200" change="+8%" icon={TrendingUp} color="green" />
+                <ReportStatCard title="Net Profit" value="KES 148,200" change="+8%" icon={TrendingUp} color="blue" />
                 <ReportStatCard title="Total Expenses" value="KES 42,100" change="-4%" icon={Wallet} color="red" />
             </div>
 
@@ -119,15 +133,16 @@ export default function SalesReportPage() {
                         <h3 className="text-sm font-bold text-admin-value uppercase tracking-widest">Revenue Performance</h3>
                         <p className="text-[11px] text-admin-dim font-bold mt-1 uppercase tracking-widest">Weekly Growth Analysis</p>
                     </div>
-                    <select 
-                        value={dateRange}
-                        onChange={(e) => setDateRange(e.target.value)}
-                        className="bg-openpos-bg-subtle border-none rounded-xl px-4 py-2.5 text-[12px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
-                    >
-                        <option>Today</option>
-                        <option>This Week</option>
-                        <option>This Month</option>
-                    </select>
+                    <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 rounded-full bg-openpos-blue" />
+                            <span className="text-[10px] font-bold text-admin-dim uppercase">Sales</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 rounded-full bg-openpos-blue/40" />
+                            <span className="text-[10px] font-bold text-admin-dim uppercase">Profit</span>
+                        </div>
+                    </div>
                 </div>
                 <div className="h-[350px] w-full">
                     <ResponsiveContainer width="100%" height="100%">
@@ -138,8 +153,8 @@ export default function SalesReportPage() {
                                     <stop offset="95%" stopColor="#2563EB" stopOpacity={0}/>
                                 </linearGradient>
                                 <linearGradient id="chartProfit" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="5%" stopColor="#10B981" stopOpacity={0.1}/>
-                                    <stop offset="95%" stopColor="#10B981" stopOpacity={0}/>
+                                    <stop offset="5%" stopColor="#2563EB" stopOpacity={0.05}/>
+                                    <stop offset="95%" stopColor="#2563EB" stopOpacity={0}/>
                                 </linearGradient>
                             </defs>
                             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--openpos-border)" />
@@ -147,7 +162,7 @@ export default function SalesReportPage() {
                             <YAxis axisLine={false} tickLine={false} tick={{fontSize: 10, fontWeight: 'bold', fill: 'var(--admin-dim)'}} />
                             <Tooltip contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }} />
                             <Area type="monotone" dataKey="sales" stroke="#2563EB" strokeWidth={4} fillOpacity={1} fill="url(#chartSales)" />
-                            <Area type="monotone" dataKey="profit" stroke="#10B981" strokeWidth={4} fillOpacity={1} fill="url(#chartProfit)" />
+                            <Area type="monotone" dataKey="profit" stroke="#2563EB" strokeWidth={4} strokeDasharray="5 5" fillOpacity={1} fill="url(#chartProfit)" />
                         </AreaChart>
                     </ResponsiveContainer>
                 </div>
@@ -160,7 +175,7 @@ export default function SalesReportPage() {
                     <div className="bg-card-bg border border-openpos-border rounded-3xl p-6 shadow-sm">
                         <div className="flex items-center justify-between mb-6">
                             <h3 className="text-sm font-bold text-admin-value uppercase tracking-widest flex items-center gap-2">
-                                <TrendingUp size={16} className="text-openpos-green" />
+                                <TrendingUp size={16} className="text-openpos-blue" />
                                 Top 5 Products
                             </h3>
                         </div>
@@ -168,7 +183,7 @@ export default function SalesReportPage() {
                             {topProducts.map((p, i) => (
                                 <div key={p.id} className="flex items-center justify-between p-3 rounded-xl hover:bg-openpos-bg-subtle transition-colors">
                                     <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 rounded-full bg-openpos-green/10 text-openpos-green font-bold flex items-center justify-center text-[12px]">{i + 1}</div>
+                                        <div className="w-8 h-8 rounded-full bg-openpos-blue/10 text-openpos-blue font-bold flex items-center justify-center text-[12px]">{i + 1}</div>
                                         <div>
                                             <p className="text-[13px] font-bold text-admin-value">{p.name}</p>
                                             <p className="text-[11px] text-admin-dim font-medium">{p.qty} sold</p>
@@ -238,7 +253,7 @@ export default function SalesReportPage() {
                                     <td className="p-5">
                                         <div className={cn(
                                             "inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider",
-                                            sale.payment === 'Cash' ? "bg-openpos-green/10 text-openpos-green" : 
+                                            sale.payment === 'Cash' ? "bg-openpos-blue/10 text-openpos-blue" : 
                                             sale.payment === 'M-Pesa' ? "bg-openpos-blue/10 text-openpos-blue" : "bg-purple-100 text-purple-600"
                                         )}>
                                             {sale.payment}
@@ -258,7 +273,6 @@ export default function SalesReportPage() {
 function ReportStatCard({ title, value, change, icon: Icon, color }) {
     const colorClasses = {
         blue: "bg-openpos-blue/5 text-openpos-blue",
-        green: "bg-openpos-green/5 text-openpos-green",
         red: "bg-openpos-red/5 text-openpos-red",
         purple: "bg-purple-50 text-purple-600",
         yellow: "bg-yellow-50 text-yellow-600",
@@ -277,7 +291,7 @@ function ReportStatCard({ title, value, change, icon: Icon, color }) {
                         <p className="text-lg font-bold text-admin-value">{value}</p>
                         <span className={cn(
                             "text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center gap-0.5 uppercase tracking-tighter",
-                            isPositive ? "text-openpos-green bg-openpos-green/5" : "text-openpos-red bg-openpos-red/5"
+                            isPositive ? "text-openpos-blue bg-openpos-blue/5" : "text-openpos-red bg-openpos-red/5"
                         )}>
                             {isPositive ? <ArrowUpRight size={10} /> : <ArrowDownRight size={10} />}
                             {change}
