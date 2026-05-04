@@ -111,7 +111,7 @@ export default function LoginPage() {
                                 onChange={handleChange}
                                 required
                                 disabled={isAuthenticating}
-                                className="w-full px-4 py-3.5 rounded-xl border border-openpos-border bg-openpos-bg-subtle focus:bg-white focus:border-openpos-blue focus:ring-4 focus:ring-openpos-blue/5 outline-none transition-all font-bold text-admin-value"
+                                className="w-full px-4 py-3 rounded-xl border border-openpos-border bg-white focus:border-slate-900 outline-none transition-all font-medium text-admin-value placeholder:text-admin-dim/50"
                                 placeholder="admin"
                             />
                         </div>
@@ -126,7 +126,7 @@ export default function LoginPage() {
                                     onChange={handleChange}
                                     required
                                     disabled={isAuthenticating}
-                                    className="w-full px-4 py-3.5 pr-12 rounded-xl border border-openpos-border bg-openpos-bg-subtle focus:bg-white focus:border-openpos-blue focus:ring-4 focus:ring-openpos-blue/5 outline-none transition-all font-bold text-admin-value"
+                                    className="w-full px-4 py-3 pr-12 rounded-xl border border-openpos-border bg-white focus:border-slate-900 outline-none transition-all font-medium text-admin-value placeholder:text-admin-dim/50"
                                     placeholder="••••••••"
                                 />
                                 <button
@@ -142,7 +142,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={isAuthenticating}
-                            className="w-full bg-slate-900 text-white py-3.5 rounded-xl font-bold text-[12px] uppercase tracking-[2px] hover:bg-slate-800 transition-all active:scale-[0.99] flex items-center justify-center h-[52px]"
+                            className="w-full h-12 bg-[#0F172A] hover:bg-black text-white text-[13px] font-semibold rounded-xl transition-all duration-300 flex items-center justify-center tracking-wide"
                         >
                             {isAuthenticating ? (
                                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
