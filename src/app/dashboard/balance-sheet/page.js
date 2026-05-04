@@ -98,7 +98,7 @@ export default function BalanceSheetPage() {
 
                         <div className="flex justify-between text-[16px] font-bold border-t-2 border-admin-value pt-3">
                             <span className="uppercase tracking-widest text-admin-value">Total Assets</span>
-                            <span className="text-openpos-green">KES 980,500</span>
+                            <span className="text-openpos-blue">KES 980,500</span>
                         </div>
                     </div>
 
