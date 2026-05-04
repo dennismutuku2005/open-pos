@@ -11,6 +11,8 @@ import { toast } from 'sonner'
 
 import { Modal } from '@/components/Modal'
 
+import { Card } from '@/components/Card'
+
 // Mock Data
 const initialSuppliers = [
     { id: 1, name: 'Premium Grains Co.', contact: 'Sarah Miller', phone: '+1 (555) 123-4567', email: 'orders@premiumgrains.com', category: 'Ingredients', rating: 4.8 },
@@ -22,20 +24,44 @@ export default function SuppliersPage() {
     const [suppliers, setSuppliers] = useState(initialSuppliers)
     const [showModal, setShowModal] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [editingSupplier, setEditingSupplier] = useState(null)
     const [deletingSupplier, setDeletingSupplier] = useState(null)
     const [formData, setFormData] = useState({ name: '', contact: '', phone: '', email: '', category: 'Ingredients' })
 
+    const handleAdd = () => {
+        setEditingSupplier(null)
+        setFormData({ name: '', contact: '', phone: '', email: '', category: 'Ingredients' })
+        setShowModal(true)
+    }
+
+    const handleEdit = (sup) => {
+        setEditingSupplier(sup)
+        setFormData({
+            name: sup.name,
+            contact: sup.contact,
+            phone: sup.phone,
+            email: sup.email,
+            category: sup.category
+        })
+        setShowModal(true)
+    }
+
     const handleSave = () => {
         if (!formData.name) return toast.error('Supplier name is required')
-        const newSup = {
-            id: Date.now(),
-            ...formData,
-            rating: 5.0
+        
+        if (editingSupplier) {
+            setSuppliers(prev => prev.map(s => s.id === editingSupplier.id ? { ...s, ...formData } : s))
+            toast.success('Supplier details updated')
+        } else {
+            const newSup = {
+                id: Date.now(),
+                ...formData,
+                rating: 5.0
+            }
+            setSuppliers(prev => [newSup, ...prev])
+            toast.success('Supplier onboarded successfully')
         }
-        setSuppliers(prev => [newSup, ...prev])
         setShowModal(false)
-        setFormData({ name: '', contact: '', phone: '', email: '', category: 'Ingredients' })
-        toast.success('Supplier onboarded successfully')
     }
 
     const handleDelete = (sup) => {
@@ -52,67 +78,83 @@ export default function SuppliersPage() {
     }
 
     return (
-        <div className="space-y-6 animate-in fade-in duration-500">
+        <div className="space-y-6 animate-in fade-in duration-500 pb-10">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold tracking-tight text-admin-value uppercase">Supply Partners</h1>
-                    <p className="text-admin-label mt-1">Manage your relationships with wholesalers and service providers.</p>
+                    <h1 className="text-xl font-bold tracking-tight text-admin-value uppercase">Supply Partners</h1>
+                    <p className="text-[13px] font-medium text-admin-label mt-1">Manage your relationships with wholesalers and service providers.</p>
                 </div>
                 <button 
-                    onClick={() => setShowModal(true)}
-                    className="w-full sm:w-auto bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 hover:scale-[1.02] transition-all"
+                    onClick={handleAdd}
+                    className="w-full sm:w-auto bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 hover:scale-[1.02] transition-all uppercase tracking-widest"
                 >
                     <Plus size={18} />
                     Onboard Supplier
                 </button>
             </div>
 
-            {/* Suppliers Table */}
-            <div className="bg-card-bg border border-openpos-border rounded-2xl overflow-hidden shadow-sm">
+            {/* Suppliers Card */}
+            <Card 
+                noPadding
+                title="Management Console"
+                subtitle="Active wholesale and logistics partners"
+                headerAction={
+                    <div className="relative">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-admin-dim" size={14} />
+                        <input 
+                            placeholder="Search partners..." 
+                            className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-9 pr-4 py-1.5 text-[11px] font-bold outline-none focus:ring-2 focus:ring-openpos-blue/10 w-64 transition-all"
+                        />
+                    </div>
+                }
+            >
                 <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                         <thead>
-                            <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border">
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Supplier Name</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Category</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Primary Contact</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Phone / Email</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest text-center">Rating</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest text-right">Actions</th>
+                            <tr className="bg-openpos-bg-subtle/30 border-b border-openpos-border">
+                                <th className="p-5 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Supplier Name</th>
+                                <th className="p-5 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Category</th>
+                                <th className="p-5 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Primary Contact</th>
+                                <th className="p-5 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Phone / Email</th>
+                                <th className="p-5 text-[10px] font-bold text-admin-dim uppercase tracking-widest text-center">Rating</th>
+                                <th className="p-5 text-[10px] font-bold text-admin-dim uppercase tracking-widest text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-openpos-border">
                             {suppliers.map((sup) => (
-                                <tr key={sup.id} className="group hover:bg-openpos-bg-subtle transition-colors">
-                                    <td className="px-6 py-2.5">
+                                <tr key={sup.id} className="group hover:bg-openpos-bg-subtle/40 transition-colors cursor-default">
+                                    <td className="p-5">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-8 h-8 rounded-lg bg-openpos-blue/5 flex items-center justify-center text-openpos-blue shrink-0">
+                                            <div className="w-9 h-9 rounded-lg bg-openpos-blue/5 flex items-center justify-center text-openpos-blue shrink-0 border border-openpos-blue/10">
                                                 <Truck size={16} />
                                             </div>
-                                            <span className="text-[13px] font-bold text-admin-value">{sup.name}</span>
+                                            <span className="text-[13px] font-bold text-admin-value uppercase tracking-tight">{sup.name}</span>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-2.5">
+                                    <td className="p-5">
                                         <span className="px-2 py-0.5 bg-openpos-blue/10 text-openpos-blue text-[9px] font-bold uppercase rounded-md tracking-widest">
                                             {sup.category}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-2.5 text-[12px] font-medium text-admin-value">
+                                    <td className="p-5 text-[12px] font-bold text-admin-value uppercase">
                                         {sup.contact}
                                     </td>
-                                    <td className="px-6 py-2.5">
+                                    <td className="p-5">
                                         <div className="flex flex-col">
                                             <span className="text-[12px] font-bold text-admin-value">{sup.phone}</span>
-                                            <span className="text-[10px] text-admin-dim">{sup.email}</span>
+                                            <span className="text-[10px] font-bold text-admin-dim uppercase tracking-tight">{sup.email}</span>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-2.5 text-center">
+                                    <td className="p-5 text-center">
                                         <span className="text-[11px] font-bold text-openpos-blue">{sup.rating} / 5.0</span>
                                     </td>
-                                    <td className="px-6 py-2.5 text-right">
+                                    <td className="p-5 text-right">
                                         <div className="flex items-center justify-end gap-1">
-                                            <button className="p-1.5 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/5 rounded-lg transition-all">
+                                            <button 
+                                                onClick={() => handleEdit(sup)}
+                                                className="p-1.5 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/5 rounded-lg transition-all"
+                                            >
                                                 <Edit2 size={14} />
                                             </button>
                                             <button 
@@ -128,40 +170,40 @@ export default function SuppliersPage() {
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </Card>
 
-            {/* Onboard Modal */}
+            {/* Save Modal */}
             <Modal
                 isOpen={showModal}
                 onClose={() => setShowModal(false)}
-                title="Onboard New Supplier"
-                description="Register a new wholesale partner"
-                confirmText="Create Supplier"
+                title={editingSupplier ? "Update Partner" : "Onboard New Supplier"}
+                description={editingSupplier ? "Update relationship details" : "Register a new wholesale partner"}
+                confirmText={editingSupplier ? "Save Changes" : "Create Supplier"}
                 onConfirm={handleSave}
                 icon={Truck}
                 maxWidth="max-w-lg"
             >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="md:col-span-2 space-y-1.5">
-                        <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Company Name *</label>
+                        <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Company Name *</label>
                         <input 
-                            className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
+                            className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none focus:ring-2 focus:ring-openpos-blue/10 transition-all"
                             value={formData.name}
                             onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                         />
                     </div>
                     <div className="space-y-1.5">
-                        <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Contact Person</label>
+                        <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Contact Person</label>
                         <input 
-                            className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
+                            className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none focus:ring-2 focus:ring-openpos-blue/10 transition-all"
                             value={formData.contact}
                             onChange={(e) => setFormData(prev => ({ ...prev, contact: e.target.value }))}
                         />
                     </div>
                     <div className="space-y-1.5">
-                        <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Category</label>
+                        <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Category</label>
                         <select 
-                            className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
+                            className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none cursor-pointer"
                             value={formData.category}
                             onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
                         >
@@ -173,18 +215,18 @@ export default function SuppliersPage() {
                         </select>
                     </div>
                     <div className="space-y-1.5">
-                        <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Phone Number</label>
+                        <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Phone Number</label>
                         <input 
-                            className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
+                            className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none focus:ring-2 focus:ring-openpos-blue/10 transition-all"
                             value={formData.phone}
                             onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                         />
                     </div>
                     <div className="space-y-1.5">
-                        <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Email Address</label>
+                        <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Email Address</label>
                         <input 
                             type="email"
-                            className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
+                            className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none focus:ring-2 focus:ring-openpos-blue/10 transition-all"
                             value={formData.email}
                             onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                         />
@@ -192,7 +234,7 @@ export default function SuppliersPage() {
                 </div>
             </Modal>
 
-            {/* Delete Confirmation Modal */}
+            {/* Delete Modal */}
             <Modal
                 isOpen={showDeleteModal}
                 onClose={() => setShowDeleteModal(false)}
@@ -200,12 +242,12 @@ export default function SuppliersPage() {
                 description={`Terminate relationship with "${deletingSupplier?.name}"?`}
                 type="danger"
                 icon={Trash2}
-                confirmText="Delete"
+                confirmText="Delete Supplier"
                 confirmCountdown={5}
                 onConfirm={confirmDelete}
             >
-                <div className="p-4 bg-red-50 rounded-2xl border border-red-100">
-                    <p className="text-[12px] text-red-600 font-medium leading-relaxed">
+                <div className="p-4 bg-openpos-red/5 border border-openpos-red/10 rounded-2xl">
+                    <p className="text-[11px] text-openpos-red font-bold uppercase tracking-tight leading-relaxed">
                         This will remove the supplier from your active partners list. Historical purchase records will remain intact.
                     </p>
                 </div>
