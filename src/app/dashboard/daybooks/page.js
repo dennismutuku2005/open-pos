@@ -1,10 +1,11 @@
 "use client"
 
-import React, { useState, useRef } from 'react'
-import { BookOpen, Plus, Calendar, ArrowRightLeft, DollarSign, ArrowUpRight, ArrowDownRight, Trash2 } from 'lucide-react'
+import React, { useState } from 'react'
+import { BookOpen, Plus, Calendar, ArrowRightLeft, DollarSign, ArrowUpRight, ArrowDownRight, Trash2, Search, Clock, Activity } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Modal } from '@/components/Modal'
 import { toast } from 'sonner'
+import { Card, StatCard } from '@/components/Card'
 
 const mockDaybook = [
     { id: 'DB-001', time: '09:00 AM', category: 'Opening Balance', amount: 50000, type: 'Credit', note: 'Till Opening' },
@@ -20,7 +21,6 @@ export default function DaybooksPage() {
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [deletingEntry, setDeletingEntry] = useState(null)
     const [formData, setFormData] = useState({ category: 'Sales', amount: '', type: 'Credit', note: '' })
-    const dateInputRef = useRef(null)
 
     const handleSave = () => {
         if (!formData.amount) return toast.error('Amount is required')
@@ -49,27 +49,31 @@ export default function DaybooksPage() {
         setDeletingEntry(null)
     }
 
+    const totalIn = entries.filter(e => e.type === 'Credit').reduce((acc, curr) => acc + curr.amount, 0)
+    const totalOut = entries.filter(e => e.type === 'Debit').reduce((acc, curr) => acc + curr.amount, 0)
+    const closing = 50000 + totalIn - totalOut
+
     return (
-        <div className="space-y-6 animate-in fade-in duration-500 font-figtree">
+        <div className="space-y-6 animate-in fade-in duration-500 font-figtree pb-10">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-xl font-bold tracking-tight text-admin-value uppercase">Daybooks</h1>
-                    <p className="text-admin-label mt-1 font-medium text-[13px]">Daily register for cash flows and personal withdrawals.</p>
+                    <h1 className="text-xl font-bold tracking-tight text-admin-value uppercase">Daybook Ledger</h1>
+                    <p className="text-[13px] font-medium text-admin-label mt-1">Daily register for real-time cash flow monitoring and petty cash tracking.</p>
                 </div>
                 <div className="flex gap-3 w-full sm:w-auto">
-                    <div className="relative">
-                        <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-openpos-blue" size={16} />
+                    <div className="relative group">
+                        <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-openpos-blue transition-colors" size={16} />
                         <input 
                             type="date"
                             value={selectedDate}
                             onChange={(e) => setSelectedDate(e.target.value)}
-                            className="bg-white border border-openpos-border text-admin-value pl-11 pr-5 py-2.5 rounded-xl font-bold text-[12px] hover:border-openpos-blue/30 transition-all uppercase tracking-widest shadow-sm outline-none focus:ring-2 focus:ring-openpos-blue/10"
+                            className="bg-card-bg border border-openpos-border text-admin-value pl-11 pr-5 py-2.5 rounded-xl font-bold text-[11px] hover:border-openpos-blue/30 transition-all uppercase tracking-widest shadow-sm outline-none focus:ring-2 focus:ring-openpos-blue/10"
                         />
                     </div>
                     <button 
                         onClick={() => setShowModal(true)}
-                        className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[12px] flex items-center justify-center gap-2 shadow-lg hover:scale-[1.02] transition-all uppercase tracking-widest"
+                        className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest"
                     >
                         <Plus size={18} />
                         New Entry
@@ -79,109 +83,82 @@ export default function DaybooksPage() {
 
             {/* Daily Summary */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="bg-white border border-openpos-border rounded-xl p-4 shadow-sm hover:border-openpos-blue/20 transition-all">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg flex items-center justify-center text-admin-dim bg-openpos-bg-subtle shrink-0">
-                            <BookOpen size={18} />
-                        </div>
-                        <div>
-                            <p className="text-[10px] font-bold text-admin-dim uppercase tracking-wider">Opening</p>
-                            <p className="text-lg font-bold text-admin-value">KES 50,000</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="bg-white border border-openpos-border rounded-xl p-4 shadow-sm hover:border-openpos-blue/20 transition-all">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg flex items-center justify-center text-openpos-blue bg-openpos-blue/5 shrink-0">
-                            <ArrowUpRight size={18} />
-                        </div>
-                        <div>
-                            <p className="text-[10px] font-bold text-admin-dim uppercase tracking-wider">Total In</p>
-                            <p className="text-lg font-bold text-admin-value">KES {entries.filter(e => e.type === 'Credit').reduce((acc, curr) => acc + curr.amount, 0).toLocaleString()}</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="bg-white border border-openpos-border rounded-xl p-4 shadow-sm hover:border-openpos-blue/20 transition-all">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg flex items-center justify-center text-openpos-red bg-openpos-red/5 shrink-0">
-                            <ArrowDownRight size={18} />
-                        </div>
-                        <div>
-                            <p className="text-[10px] font-bold text-admin-dim uppercase tracking-wider">Total Out</p>
-                            <p className="text-lg font-bold text-admin-value">KES {entries.filter(e => e.type === 'Debit').reduce((acc, curr) => acc + curr.amount, 0).toLocaleString()}</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="bg-white border border-openpos-border rounded-xl p-4 shadow-sm hover:border-openpos-blue/20 transition-all">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg flex items-center justify-center text-openpos-blue bg-openpos-blue/5 shrink-0">
-                            <DollarSign size={18} />
-                        </div>
-                        <div>
-                            <p className="text-[10px] font-bold text-admin-dim uppercase tracking-wider">Closing</p>
-                            <p className="text-lg font-bold text-admin-value">KES {(50000 + entries.filter(e => e.type === 'Credit').reduce((acc, curr) => acc + curr.amount, 0) - entries.filter(e => e.type === 'Debit').reduce((acc, curr) => acc + curr.amount, 0)).toLocaleString()}</p>
-                        </div>
-                    </div>
-                </div>
+                <StatCard title="Opening balance" value="KES 50,000" change="Till status: Verified" isPositive={true} icon={BookOpen} color="blue" subtitle="AUDIT BASE" />
+                <StatCard title="Aggregate Inflow" value={`KES ${totalIn.toLocaleString()}`} change="Real-time revenue" isPositive={true} icon={ArrowUpRight} color="blue" subtitle="CASH IN" />
+                <StatCard title="Aggregate Outflow" value={`KES ${totalOut.toLocaleString()}`} change="Operational costs" isPositive={false} icon={ArrowDownRight} color="blue" subtitle="CASH OUT" />
+                <StatCard title="Projected Closing" value={`KES ${closing.toLocaleString()}`} change="Est. daily settlement" isPositive={true} icon={DollarSign} color="blue" subtitle="NET LIQUIDITY" />
             </div>
 
             {/* Entries Table */}
-            <div className="bg-card-bg border border-openpos-border rounded-3xl overflow-hidden shadow-sm">
-                <div className="p-4 border-b border-openpos-border flex items-center justify-between bg-openpos-bg-subtle/30">
-                    <h3 className="text-[11px] font-bold text-admin-value uppercase tracking-[2px]">Daily Register Entries</h3>
-                    <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-bold text-admin-dim uppercase tracking-widest">Live Updates</span>
-                        <div className="w-2 h-2 rounded-full bg-openpos-blue animate-pulse" />
+            <Card 
+                noPadding
+                title="Daily Transaction Register"
+                subtitle="Temporal audit of cash flows and register adjustments"
+                headerAction={
+                    <div className="flex items-center gap-3">
+                        <div className="relative group">
+                            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors" size={14} />
+                            <input 
+                                placeholder="Search registry..." 
+                                className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-10 pr-4 py-1.5 text-[11px] font-bold text-admin-value outline-none focus:ring-2 focus:ring-openpos-blue/10 focus:border-openpos-blue w-64 transition-all"
+                            />
+                        </div>
+                        <div className="flex items-center gap-2 px-3 py-1 bg-openpos-blue/5 border border-openpos-blue/10 rounded-lg text-openpos-blue">
+                            <Activity size={12} className="animate-pulse" />
+                            <span className="text-[9px] font-bold uppercase tracking-widest">Live Sync</span>
+                        </div>
                     </div>
-                </div>
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
+                }
+            >
+                <div className="overflow-x-auto custom-scrollbar">
+                    <table className="w-full text-left whitespace-nowrap border-collapse text-[11px]">
                         <thead>
-                            <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border">
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Entry Detail</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Category</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest text-center">Type</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest text-right">Amount</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest text-right">Actions</th>
+                            <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border text-[9px] font-bold text-admin-dim uppercase tracking-widest">
+                                <th className="px-6 py-4">Temporal Signature</th>
+                                <th className="px-6 py-4">Transaction Identity</th>
+                                <th className="px-6 py-4">Financial Category</th>
+                                <th className="px-6 py-4 text-center">Flow Type</th>
+                                <th className="px-6 py-4 text-right">Settlement Amount</th>
+                                <th className="px-6 py-4 text-right">Ledger</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-openpos-border">
                             {entries.map((entry) => (
-                                <tr key={entry.id} className="group hover:bg-openpos-bg-subtle transition-colors">
-                                    <td className="px-6 py-2.5">
+                                <tr key={entry.id} className="group hover:bg-openpos-bg-subtle/40 transition-colors cursor-default">
+                                    <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
-                                            <div className={cn(
-                                                "w-1.5 h-10 rounded-full",
-                                                entry.type === 'Credit' ? "bg-openpos-blue" : "bg-openpos-red"
-                                            )} />
-                                            <div>
-                                                <p className="text-[13px] font-bold text-admin-value leading-none">{entry.id}</p>
-                                                <p className="text-[10px] text-admin-dim mt-1 font-medium">{entry.time} • {entry.note}</p>
+                                            <div className="w-8 h-8 rounded-lg bg-openpos-bg-subtle border border-openpos-border flex items-center justify-center text-admin-dim group-hover:scale-105 transition-transform">
+                                                <Clock size={14} />
                                             </div>
+                                            <span className="font-bold text-admin-value uppercase tracking-tighter">{entry.time}</span>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-2.5">
-                                        <span className="text-[11px] font-bold text-admin-label uppercase tracking-widest bg-openpos-bg-subtle px-2 py-0.5 rounded">{entry.category}</span>
-                                    </td>
-                                    <td className="px-6 py-2.5">
-                                        <div className="flex justify-center">
-                                            <span className={cn(
-                                                "px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest",
-                                                entry.type === 'Credit' ? "bg-openpos-blue/10 text-openpos-blue" : "bg-openpos-red/10 text-openpos-red"
-                                            )}>
-                                                {entry.type}
-                                            </span>
+                                    <td className="px-6 py-4">
+                                        <div className="flex flex-col">
+                                            <span className="font-bold text-admin-value uppercase tracking-tight group-hover:text-openpos-blue transition-colors">{entry.id}</span>
+                                            <span className="text-[9px] text-admin-dim font-bold uppercase tracking-widest mt-0.5">{entry.note}</span>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-2.5 text-right font-bold text-[14px] text-admin-value">
+                                    <td className="px-6 py-4">
+                                        <span className="text-admin-value font-bold uppercase tracking-tight">{entry.category}</span>
+                                    </td>
+                                    <td className="px-6 py-4 text-center">
+                                        <span className={cn(
+                                            "inline-flex items-center px-2.5 py-1 rounded-md text-[9px] font-bold uppercase tracking-widest border",
+                                            entry.type === 'Credit' ? "bg-openpos-blue/5 text-openpos-blue border-openpos-blue/10" : "bg-openpos-red/5 text-openpos-red border-openpos-red/10"
+                                        )}>
+                                            {entry.type === 'Credit' ? 'Cash In' : 'Cash Out'}
+                                        </span>
+                                    </td>
+                                    <td className="px-6 py-4 text-right font-bold text-[13px] text-admin-value">
                                         KES {entry.amount.toLocaleString()}
                                     </td>
-                                    <td className="px-6 py-2.5 text-right">
+                                    <td className="px-6 py-4 text-right">
                                         <button 
                                             onClick={() => handleDelete(entry)}
-                                            className="p-2 text-admin-dim hover:text-openpos-red hover:bg-openpos-red/5 rounded-xl transition-all"
+                                            className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-openpos-red hover:border-openpos-red/30 hover:bg-openpos-red/5 transition-all"
                                         >
-                                            <Trash2 size={16} />
+                                            <Trash2 size={12} />
                                         </button>
                                     </td>
                                 </tr>
@@ -189,75 +166,77 @@ export default function DaybooksPage() {
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </Card>
 
             {/* Entry Modal */}
             <Modal
                 isOpen={showModal}
                 onClose={() => setShowModal(false)}
-                title="New Daybook Entry"
-                description="Record a cash transaction in the daily register"
-                confirmText="Create Entry"
+                title="Register Transaction"
+                description="Initialize a new cash flow entry in the daily register"
+                confirmText="Authorize Entry"
                 onConfirm={handleSave}
                 icon={Plus}
                 maxWidth="max-w-md"
             >
-                <div className="space-y-4">
+                <div className="space-y-6">
                     <div className="space-y-1.5">
-                        <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Transaction Type</label>
+                        <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Flow Direction</label>
                         <div className="flex bg-openpos-bg-subtle rounded-2xl p-1 ring-1 ring-openpos-border">
                             <button 
                                 onClick={() => setFormData(prev => ({ ...prev, type: 'Credit' }))}
                                 className={cn(
-                                    "flex-1 py-2.5 rounded-xl text-[10px] font-bold uppercase transition-all", 
+                                    "flex-1 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all", 
                                     formData.type === 'Credit' ? "bg-openpos-blue text-white shadow-lg" : "text-admin-dim hover:bg-white"
                                 )}
-                            >Cash In (Credit)</button>
+                            >Cash Inflow</button>
                             <button 
                                 onClick={() => setFormData(prev => ({ ...prev, type: 'Debit' }))}
                                 className={cn(
-                                    "flex-1 py-2.5 rounded-xl text-[10px] font-bold uppercase transition-all", 
+                                    "flex-1 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all", 
                                     formData.type === 'Debit' ? "bg-openpos-red text-white shadow-lg" : "text-admin-dim hover:bg-white"
                                 )}
-                            >Cash Out (Debit)</button>
+                            >Cash Outflow</button>
                         </div>
                     </div>
 
-                    <div className="space-y-1.5">
-                        <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Category</label>
-                        <select 
-                            className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
-                            value={formData.category}
-                            onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
-                        >
-                            <option>Sales</option>
-                            <option>Personal Withdrawal</option>
-                            <option>Supplier Payment</option>
-                            <option>Opening Balance</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
+                    <div className="grid grid-cols-1 gap-5">
+                        <div className="space-y-1.5">
+                            <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Financial Category</label>
+                            <select 
+                                className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
+                                value={formData.category}
+                                onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
+                            >
+                                <option>Sales</option>
+                                <option>Personal Withdrawal</option>
+                                <option>Supplier Payment</option>
+                                <option>Opening Balance</option>
+                                <option>Operational Expense</option>
+                            </select>
+                        </div>
 
-                    <div className="space-y-1.5">
-                        <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Amount (KES) *</label>
-                        <input 
-                            type="number"
-                            placeholder="0.00"
-                            className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
-                            value={formData.amount}
-                            onChange={(e) => setFormData(prev => ({ ...prev, amount: e.target.value }))}
-                        />
-                    </div>
+                        <div className="space-y-1.5">
+                            <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Settlement Amount (KES)</label>
+                            <input 
+                                type="number"
+                                placeholder="0.00"
+                                className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
+                                value={formData.amount}
+                                onChange={(e) => setFormData(prev => ({ ...prev, amount: e.target.value }))}
+                            />
+                        </div>
 
-                    <div className="space-y-1.5">
-                        <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Notes / Narration</label>
-                        <textarea 
-                            rows="2"
-                            placeholder="Transaction details..."
-                            className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30 resize-none"
-                            value={formData.note}
-                            onChange={(e) => setFormData(prev => ({ ...prev, note: e.target.value }))}
-                        />
+                        <div className="space-y-1.5">
+                            <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Audit Narration</label>
+                            <textarea 
+                                rows="2"
+                                placeholder="Describe the transaction for the audit trail..."
+                                className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30 resize-none"
+                                value={formData.note}
+                                onChange={(e) => setFormData(prev => ({ ...prev, note: e.target.value }))}
+                            />
+                        </div>
                     </div>
                 </div>
             </Modal>
@@ -266,17 +245,17 @@ export default function DaybooksPage() {
             <Modal
                 isOpen={showDeleteModal}
                 onClose={() => setShowDeleteModal(false)}
-                title="Delete Entry"
-                description={`Remove transaction ${deletingEntry?.id}?`}
+                title="Decommission Entry"
+                description={`Are you sure you want to remove register entry "${deletingEntry?.id}"?`}
                 type="danger"
                 icon={Trash2}
                 confirmText="Delete"
                 confirmCountdown={5}
                 onConfirm={confirmDelete}
             >
-                <div className="p-4 bg-red-50 rounded-2xl border border-red-100">
-                    <p className="text-[12px] text-red-600 font-medium leading-relaxed">
-                        This action will remove the entry from today's register. This may affect your closing balance calculations.
+                <div className="p-4 bg-openpos-red/5 rounded-2xl border border-openpos-red/10">
+                    <p className="text-[12px] text-openpos-red font-bold uppercase tracking-tight leading-relaxed opacity-80">
+                        This action will permanently purge this entry from today's financial register. This may cause discrepancies in the end-of-day closing balance.
                     </p>
                 </div>
             </Modal>
