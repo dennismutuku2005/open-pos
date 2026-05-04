@@ -28,10 +28,17 @@ const AVAILABLE_POLICIES = Object.values(policiesData).flatMap(category =>
 
 import { useRouter } from 'next/navigation'
 
+const mockStaff = [
+    { id: 'STF-001', name: 'Dennis Mutuku', username: 'dennis_root', type: 'admin', status: 'active', phone: '+254 700 123 456', createdAt: '2024-01-10', is_primary: true },
+    { id: 'STF-002', name: 'Jane Kamau', username: 'jane_sales', type: 'user', status: 'active', phone: '+254 711 222 333', createdAt: '2024-02-15', policies: ['view_sales', 'create_sales', 'view_inventory'] },
+    { id: 'STF-003', name: 'John Omari', username: 'john_stock', type: 'user', status: 'active', phone: '+254 722 333 444', createdAt: '2024-03-05', policies: ['manage_inventory', 'view_purchases'] },
+    { id: 'STF-004', name: 'Sarah Wambui', username: 'sarah_audit', type: 'user', status: 'suspended', phone: '+254 733 444 555', createdAt: '2024-03-20', policies: ['view_reports', 'view_audit_logs'] },
+]
+
 export default function StaffManagementPage() {
     const router = useRouter()
-    const [staff, setStaff] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
+    const [staff, setStaff] = useState(mockStaff)
+    const [isLoading, setIsLoading] = useState(false)
     const [isRefreshing, setIsRefreshing] = useState(false)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [searchTerm, setSearchTerm] = useState('')
@@ -64,18 +71,11 @@ export default function StaffManagementPage() {
 
     const fetchStaff = async () => {
         setIsRefreshing(true)
-        try {
-            const res = await dashboardService.getStaff()
-            if (res?.status === 'success') {
-                setStaff(res.data || [])
-            }
-        } catch (e) {
-            console.error("Failed to fetch staff:", e)
-            toast.error("Failed to load staff list")
-        } finally {
-            setIsLoading(false)
+        // Simulated fetch for dummy info
+        setTimeout(() => {
+            setStaff(mockStaff)
             setIsRefreshing(false)
-        }
+        }, 1000)
     }
 
     useEffect(() => {
@@ -101,24 +101,23 @@ export default function StaffManagementPage() {
             const dataToSave = { ...formData }
             if (otpCode) dataToSave.otp_code = otpCode
 
-            const res = editingStaff
-                ? await dashboardService.updateStaff(editingStaff.id, dataToSave)
-                : await dashboardService.createStaff(dataToSave)
-
-            if (res?.status === 'success') {
-                toast.success(editingStaff ? "Staff member updated" : "Staff member created")
-                setShowModal(false)
-                setShowOTPModal(false)
-                setEditingStaff(null)
-                resetForm()
-                fetchStaff()
-            } else if (res?.status === 'otp_required') {
-                setShowOTPModal(true)
-                toast.info(res.message || "Verification required")
+            if (editingStaff) {
+                setStaff(prev => prev.map(s => s.id === editingStaff.id ? { ...formData, id: s.id, createdAt: s.createdAt, is_primary: s.is_primary } : s))
+                toast.success("Staff member updated")
             } else {
-                toast.error(res?.message || "Failed to process request")
-                setShowOTPModal(false)
+                const newStaff = {
+                    ...formData,
+                    id: `STF-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`,
+                    createdAt: new Date().toISOString().split('T')[0],
+                    is_primary: false
+                }
+                setStaff(prev => [newStaff, ...prev])
+                toast.success("Staff member created")
             }
+            setShowModal(false)
+            setShowOTPModal(false)
+            setEditingStaff(null)
+            resetForm()
         } catch (e) {
             console.error(e)
             toast.error(e.message || "An error occurred")
@@ -131,18 +130,9 @@ export default function StaffManagementPage() {
     }
 
     const handleDeleteUser = async () => {
-        try {
-            const res = await dashboardService.deleteStaff(selectedStaff.id)
-            if (res?.status === 'success') {
-                toast.success("Staff member deleted successfully")
-                setIsDeleteModalOpen(false)
-                fetchStaff()
-            } else {
-                toast.error(res?.message || "Failed to delete staff")
-            }
-        } catch (e) {
-            toast.error("An error occurred")
-        }
+        setStaff(prev => prev.filter(s => s.id !== selectedStaff.id))
+        toast.success("Staff member deleted successfully")
+        setIsDeleteModalOpen(false)
     }
 
     const resetForm = () => {
