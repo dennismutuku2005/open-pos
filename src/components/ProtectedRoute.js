@@ -9,37 +9,50 @@ export default function ProtectedRoute({ children }) {
     // To avoid hydration mismatch, we must ensure the server and initial client render match.
     // The user wants to see the dashboard immediately, so we default to isAuthorized=true.
     // If subsequent verification fails, we redirect to login.
-    const [isAuthorized, setIsAuthorized] = useState(true);
-    const [isChecking, setIsChecking] = useState(false);
+    const [isAuthorized, setIsAuthorized] = useState(false);
+    const [isChecking, setIsChecking] = useState(true);
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (!mounted) return;
+
         const checkAuth = async () => {
-            // Check locally first
-            const token = authService.getToken();
-            const isLocalValid = !!(token && !authService.isTokenExpired(token));
+            try {
+                // Check locally first
+                const token = authService.getToken();
+                const isLocalValid = !!(token && !authService.isTokenExpired(token));
 
-            if (!isLocalValid) {
+                if (!isLocalValid) {
+                    setIsAuthorized(false);
+                    setIsChecking(false);
+                    router.push('/login');
+                    return;
+                }
+
+                // Verify with server in background
+                const isValid = await authService.verifyToken();
+
+                if (!isValid) {
+                    setIsAuthorized(false);
+                    router.push('/login');
+                } else {
+                    setIsAuthorized(true);
+                }
+            } catch (error) {
+                console.error("Auth check failed:", error);
                 setIsAuthorized(false);
                 router.push('/login');
-                return;
+            } finally {
+                setIsChecking(false);
             }
-
-            // Verify with server in background
-            const isValid = await authService.verifyToken();
-
-            if (!isValid) {
-                // If server says no, redirect to login
-                setIsAuthorized(false);
-                router.push('/login');
-            } else {
-                setIsAuthorized(true);
-            }
-
-            setIsChecking(false);
         };
 
         checkAuth();
-    }, [router]);
+    }, [router, mounted]);
 
     if (isChecking) {
         return (
