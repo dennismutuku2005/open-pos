@@ -196,7 +196,7 @@ export default function ProductsPage() {
                         </button>
                         <button 
                             onClick={() => exportProducts('Excel')}
-                            className="px-4 py-2.5 text-admin-dim hover:text-openpos-green hover:bg-openpos-green/5 transition-all flex items-center gap-2"
+                            className="px-4 py-2.5 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/5 transition-all flex items-center gap-2"
                         >
                             <Upload size={16} />
                             <span className="text-[10px] font-bold uppercase tracking-widest">Excel</span>
@@ -295,7 +295,7 @@ export default function ProductsPage() {
                                             </div>
                                             <div className="w-20 h-1 bg-openpos-bg-subtle rounded-full overflow-hidden">
                                                 <div 
-                                                    className={cn("h-full transition-all", product.stock < 10 ? "bg-openpos-red" : "bg-openpos-green")} 
+                                                    className={cn("h-full transition-all", product.stock < 10 ? "bg-openpos-red" : "bg-openpos-blue")} 
                                                     style={{ width: `${Math.min(100, (product.stock / 50) * 100)}%` }} 
                                                 />
                                             </div>
