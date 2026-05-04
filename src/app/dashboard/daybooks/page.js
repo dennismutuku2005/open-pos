@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { BookOpen, Plus, Calendar, ArrowRightLeft, DollarSign, ArrowUpRight, ArrowDownRight, Trash2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Modal } from '@/components/Modal'
@@ -15,10 +15,12 @@ const mockDaybook = [
 
 export default function DaybooksPage() {
     const [entries, setEntries] = useState(mockDaybook)
+    const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0])
     const [showModal, setShowModal] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [deletingEntry, setDeletingEntry] = useState(null)
     const [formData, setFormData] = useState({ category: 'Sales', amount: '', type: 'Credit', note: '' })
+    const dateInputRef = useRef(null)
 
     const handleSave = () => {
         if (!formData.amount) return toast.error('Amount is required')
@@ -52,14 +54,23 @@ export default function DaybooksPage() {
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-xl font-bold tracking-tight text-admin-value">Daybooks</h1>
+                    <h1 className="text-xl font-bold tracking-tight text-admin-value uppercase">Daybooks</h1>
                     <p className="text-admin-label mt-1 font-medium text-[13px]">Daily register for cash flows and personal withdrawals.</p>
                 </div>
                 <div className="flex gap-3 w-full sm:w-auto">
-                    <button className="flex-1 sm:flex-none bg-white border border-openpos-border text-admin-value px-5 py-2.5 rounded-xl font-bold text-[12px] flex items-center justify-center gap-2 hover:bg-gray-50 transition-all uppercase tracking-widest shadow-sm">
-                        <Calendar size={16} />
-                        Select Date
-                    </button>
+                    <div className="relative flex-1 sm:flex-none">
+                        <input 
+                            type="date"
+                            ref={dateInputRef}
+                            value={selectedDate}
+                            onChange={(e) => setSelectedDate(e.target.value)}
+                            className="absolute inset-0 opacity-0 cursor-pointer z-10"
+                        />
+                        <button className="w-full h-full bg-white border border-openpos-border text-admin-value px-5 py-2.5 rounded-xl font-bold text-[12px] flex items-center justify-center gap-2 hover:bg-gray-50 transition-all uppercase tracking-widest shadow-sm">
+                            <Calendar size={16} />
+                            {new Date(selectedDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                        </button>
+                    </div>
                     <button 
                         onClick={() => setShowModal(true)}
                         className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[12px] flex items-center justify-center gap-2 shadow-lg hover:scale-[1.02] transition-all uppercase tracking-widest"
@@ -85,7 +96,7 @@ export default function DaybooksPage() {
                 </div>
                 <div className="bg-white border border-openpos-border rounded-xl p-4 shadow-sm hover:border-openpos-blue/20 transition-all">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg flex items-center justify-center text-openpos-green bg-openpos-green/5 shrink-0">
+                        <div className="w-10 h-10 rounded-lg flex items-center justify-center text-openpos-blue bg-openpos-blue/5 shrink-0">
                             <ArrowUpRight size={18} />
                         </div>
                         <div>
@@ -124,7 +135,7 @@ export default function DaybooksPage() {
                     <h3 className="text-[11px] font-bold text-admin-value uppercase tracking-[2px]">Daily Register Entries</h3>
                     <div className="flex items-center gap-2">
                         <span className="text-[10px] font-bold text-admin-dim uppercase tracking-widest">Live Updates</span>
-                        <div className="w-2 h-2 rounded-full bg-openpos-green animate-pulse" />
+                        <div className="w-2 h-2 rounded-full bg-openpos-blue animate-pulse" />
                     </div>
                 </div>
                 <div className="overflow-x-auto">
@@ -145,7 +156,7 @@ export default function DaybooksPage() {
                                         <div className="flex items-center gap-3">
                                             <div className={cn(
                                                 "w-1.5 h-10 rounded-full",
-                                                entry.type === 'Credit' ? "bg-openpos-green" : "bg-openpos-red"
+                                                entry.type === 'Credit' ? "bg-openpos-blue" : "bg-openpos-red"
                                             )} />
                                             <div>
                                                 <p className="text-[13px] font-bold text-admin-value leading-none">{entry.id}</p>
@@ -160,7 +171,7 @@ export default function DaybooksPage() {
                                         <div className="flex justify-center">
                                             <span className={cn(
                                                 "px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest",
-                                                entry.type === 'Credit' ? "bg-openpos-green/10 text-openpos-green" : "bg-openpos-red/10 text-openpos-red"
+                                                entry.type === 'Credit' ? "bg-openpos-blue/10 text-openpos-blue" : "bg-openpos-red/10 text-openpos-red"
                                             )}>
                                                 {entry.type}
                                             </span>
@@ -203,7 +214,7 @@ export default function DaybooksPage() {
                                 onClick={() => setFormData(prev => ({ ...prev, type: 'Credit' }))}
                                 className={cn(
                                     "flex-1 py-2.5 rounded-xl text-[10px] font-bold uppercase transition-all", 
-                                    formData.type === 'Credit' ? "bg-openpos-green text-white shadow-lg" : "text-admin-dim hover:bg-white"
+                                    formData.type === 'Credit' ? "bg-openpos-blue text-white shadow-lg" : "text-admin-dim hover:bg-white"
                                 )}
                             >Cash In (Credit)</button>
                             <button 
