@@ -85,8 +85,8 @@ export default function ProfilePage() {
                             <div className="flex items-center gap-2">
                                 <p className="text-[10px] font-bold text-admin-dim uppercase tracking-[1.5px]">{user.type} • OPEN POS RETAIL</p>
                                 <span className="w-1 h-1 rounded-full bg-admin-dim/20" />
-                                <span className="text-[9px] font-bold text-openpos-green uppercase tracking-widest flex items-center gap-1">
-                                    <div className="w-1 h-1 rounded-full bg-openpos-green animate-pulse" />
+                                <span className="text-[9px] font-bold text-openpos-blue uppercase tracking-widest flex items-center gap-1">
+                                    <div className="w-1 h-1 rounded-full bg-openpos-blue animate-pulse" />
                                     Active
                                 </span>
                             </div>
@@ -227,7 +227,7 @@ export default function ProfilePage() {
                             </div>
                             <div className="flex items-center gap-3">
                                 {item.active && (
-                                    <span className="text-[8px] font-bold text-white bg-openpos-green px-2 py-0.5 rounded-md uppercase tracking-widest">
+                                    <span className="text-[8px] font-bold text-white bg-openpos-blue px-2 py-0.5 rounded-md uppercase tracking-widest">
                                         Active
                                     </span>
                                 )}
