@@ -80,18 +80,14 @@ export default function SalesReportPage() {
                     <p className="text-admin-label mt-1 font-medium">Detailed analysis of your sales, profit and loss.</p>
                 </div>
                 <div className="flex items-center gap-3 w-full sm:w-auto">
-                    <div className="relative flex-1 sm:flex-none">
+                    <div className="relative">
+                        <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-openpos-blue" size={18} />
                         <input 
                             type="date"
-                            ref={dateInputRef}
                             value={dateRange}
                             onChange={(e) => setDateRange(e.target.value)}
-                            className="absolute inset-0 opacity-0 cursor-pointer z-10"
+                            className="bg-white border border-openpos-border text-admin-value pl-11 pr-5 py-3 rounded-xl font-bold text-[12px] hover:border-openpos-blue/30 transition-all uppercase tracking-widest shadow-sm outline-none focus:ring-2 focus:ring-openpos-blue/10"
                         />
-                        <button className="w-full h-full bg-white border border-openpos-border text-admin-value px-5 py-3 rounded-xl font-bold text-[12px] flex items-center justify-center gap-2 hover:bg-gray-50 transition-all uppercase tracking-widest shadow-sm">
-                            <Calendar size={18} />
-                            {new Date(dateRange).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
-                        </button>
                     </div>
                     <button 
                         onClick={downloadPDF}
