@@ -45,10 +45,13 @@ export default function DashboardLayout({ children }) {
     }, [pathname, isMobile])
 
     const getPageName = () => {
-        const path = pathname.split('/').pop() || 'Summary';
-        return path
-            .replace(/[-_]/g, ' ')
-            .split(' ')
+        const segments = pathname.split('/').filter(Boolean);
+        if (segments.length <= 1) return 'Summary';
+        
+        // Handle nested paths like /dashboard/sales/list -> "Sales List"
+        return segments
+            .slice(1) // Remove 'dashboard'
+            .map(word => word.replace(/[-_]/g, ' '))
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ');
     }
