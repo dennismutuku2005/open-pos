@@ -4,8 +4,6 @@ import React, { useState, useEffect } from 'react'
 import { Calendar as CalendarIcon, ChevronDown, Router, Check, Clock, ArrowLeft } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { CalendarUI } from './Calendar'
-import { dashboardService } from '@/services/dashboard'
-
 export function GlobalFilters({ onFilterChange, defaultDateRange = 'Today', showDateFilter = true, showRouterFilter = true }) {
     const [selectedRouter, setSelectedRouter] = useState('All Routers')
     const [selectedDateRange, setSelectedDateRange] = useState(defaultDateRange)
@@ -20,16 +18,9 @@ export function GlobalFilters({ onFilterChange, defaultDateRange = 'Today', show
 
     useEffect(() => {
         const loadRouters = async () => {
-            try {
-                const list = await dashboardService.getRouters();
-                if (list && Array.isArray(list)) {
-                    // Ensure 'All Routers' is always at the top if not already present
-                    const formattedList = list.includes('All Routers') ? list : ['All Routers', ...list];
-                    setRouters(formattedList);
-                }
-            } catch (error) {
-                console.error("Failed to load routers:", error);
-            }
+            // Simulated fetch for dummy info
+            const mockRouters = ['All Routers', 'Nairobi Hub', 'Mombasa Branch', 'Kisumu Terminal', 'Nakuru Node'];
+            setRouters(mockRouters);
         };
         loadRouters();
     }, [])
