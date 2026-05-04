@@ -251,11 +251,11 @@ export default function ProductsPage() {
                                 <tr key={product.id} className="group hover:bg-openpos-bg-subtle transition-colors">
                                     <td className="py-2.5 px-6">
                                          <div className="flex items-center gap-4">
-                                             <div className="w-10 h-10 rounded-xl overflow-hidden bg-openpos-bg-subtle relative shrink-0 border border-openpos-border">
+                                             <div className="w-10 h-10 rounded-xl overflow-hidden bg-openpos-bg-subtle relative shrink-0 border border-openpos-border shadow-sm">
                                                  {product.image ? (
                                                      <Image src={product.image} alt={product.name} fill className="object-cover" />
                                                  ) : (
-                                                     <div className="w-full h-full flex items-center justify-center text-admin-dim"><ImageIcon size={18} /></div>
+                                                     <div className="w-full h-full flex items-center justify-center text-admin-dim"><Tag size={18} /></div>
                                                  )}
                                              </div>
                                              <div>
