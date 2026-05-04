@@ -94,7 +94,7 @@ export default function SuppliersPage() {
                                         </div>
                                     </td>
                                     <td className="px-6 py-2.5">
-                                        <span className="px-2 py-0.5 bg-openpos-green/10 text-openpos-green text-[9px] font-bold uppercase rounded-md tracking-widest">
+                                        <span className="px-2 py-0.5 bg-openpos-blue/10 text-openpos-blue text-[9px] font-bold uppercase rounded-md tracking-widest">
                                             {sup.category}
                                         </span>
                                     </td>
