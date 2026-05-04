@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 export const Badge = ({ children, variant = 'default', className }) => {
     const variants = {
         default: 'bg-openpos-bg-subtle text-admin-label border-openpos-border',
-        success: 'bg-openpos-green/10 text-openpos-green border-openpos-green/20',
+        success: 'bg-openpos-blue/10 text-openpos-blue border-openpos-blue/20',
         warning: 'bg-orange-500/10 text-orange-500 border-orange-500/20',
         error: 'bg-red-500/10 text-red-500 border-red-500/20',
         info: 'bg-openpos-purple/10 text-openpos-purple border-openpos-purple/20',
