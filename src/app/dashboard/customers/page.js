@@ -77,7 +77,7 @@ export default function CustomersPage() {
                         </button>
                         <button 
                             onClick={() => exportCustomers('Excel')}
-                            className="px-4 py-2.5 text-admin-dim hover:text-openpos-green hover:bg-openpos-green/5 transition-all flex items-center gap-2"
+                            className="px-4 py-2.5 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/5 transition-all flex items-center gap-2"
                         >
                             <Upload size={16} />
                             <span className="text-[10px] font-bold uppercase tracking-widest">Excel</span>
@@ -97,7 +97,7 @@ export default function CustomersPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
                     { label: 'Total Customers', value: '1,284', icon: Users, color: 'text-openpos-blue', bg: 'bg-openpos-blue/10' },
-                    { label: 'Repeat Customers', value: '72%', icon: ShoppingBag, color: 'text-openpos-green', bg: 'bg-openpos-green/10' },
+                    { label: 'Repeat Customers', value: '72%', icon: ShoppingBag, color: 'text-openpos-blue', bg: 'bg-openpos-blue/10' },
                     { label: 'Loyalty Points Issued', value: '45.2k', icon: Trophy, color: 'text-yellow-600', bg: 'bg-yellow-100' },
                     { label: 'Avg Customer Value', value: 'KES 184.50', icon: ArrowUpRight, color: 'text-purple-600', bg: 'bg-purple-100' },
                 ].map((stat, i) => (
@@ -179,7 +179,7 @@ export default function CustomersPage() {
                                         <span className={cn(
                                             "px-2 py-0.5 rounded-lg text-[9px] font-bold uppercase tracking-widest",
                                             customer.status === 'VIP' ? "bg-openpos-blue text-white shadow-lg shadow-openpos-blue/20" : 
-                                            customer.status === 'Regular' ? "bg-openpos-green-light text-openpos-green" : "bg-admin-dim/10 text-admin-dim"
+                                            customer.status === 'Regular' ? "bg-openpos-blue/10 text-openpos-blue" : "bg-admin-dim/10 text-admin-dim"
                                         )}>
                                             {customer.status}
                                         </span>
