@@ -348,10 +348,10 @@ export default function POSPage() {
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-xl border border-openpos-border shadow-sm">
-                            <div className="w-1.5 h-1.5 rounded-full bg-openpos-green" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-openpos-blue" />
                             <span className="text-[11px] font-bold text-admin-value">Open Order</span>
                         </div>
-                        <button className="w-8 h-8 bg-white rounded-lg border border-openpos-border flex items-center justify-center text-openpos-green">
+                        <button className="w-8 h-8 bg-white rounded-lg border border-openpos-border flex items-center justify-center text-openpos-blue">
                             <Power size={15} />
                         </button>
                     </div>
@@ -505,7 +505,7 @@ export default function POSPage() {
                             </p>
                             <div className="pt-4 border-t border-openpos-border flex items-center justify-between">
                                 <div className="flex items-center gap-2">
-                                    <div className={cn("w-2 h-2 rounded-full", infoModalProduct.stock > 10 ? "bg-openpos-green" : "bg-openpos-red")} />
+                                    <div className={cn("w-2 h-2 rounded-full", infoModalProduct.stock > 10 ? "bg-openpos-blue" : "bg-openpos-red")} />
                                     <span className="text-[12px] font-bold text-admin-value uppercase tracking-widest">{infoModalProduct.stock} in stock</span>
                                 </div>
                                 <button 
