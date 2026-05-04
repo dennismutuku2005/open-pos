@@ -6,7 +6,7 @@ import {
  Shield, Lock, Bell, Camera,
  Save, X, ChevronRight, CheckCircle2,
  Activity, Key, Smartphone, LogOut,
- BadgeCheck, Globe2
+ BadgeCheck, Globe2, Loader2
 } from'lucide-react'
 import { motion, AnimatePresence } from'framer-motion'
 import { cn } from'@/lib/utils'
@@ -113,7 +113,7 @@ export default function ProfilePage() {
  disabled={isLoading}
  className="bg-openpos-blue text-white px-5 py-2 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all shadow-md shadow-openpos-blue/20 flex items-center gap-1.5"
  >
- {isLoading ? <div className="w-2.5 h-2.5 border-2 border-white/30 border-t-white rounded-full animate-spin"/> : <Save size={12} />}
+ {isLoading ? <Loader2 size={12} className="animate-spin" /> : <Save size={12} />}
  Update
  </button>
  </div>
