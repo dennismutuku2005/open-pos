@@ -143,7 +143,7 @@ export default function StockAdjustmentPage() {
                                     <td className="py-2.5 px-6">
                                         <div className={cn(
                                             "flex items-center gap-1.5 font-bold text-[10px] uppercase tracking-widest",
-                                            adj.type === 'Increase' ? "text-openpos-green" : "text-openpos-red"
+                                            adj.type === 'Increase' ? "text-openpos-blue" : "text-openpos-red"
                                         )}>
                                             {adj.type === 'Increase' ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
                                             {adj.type}
