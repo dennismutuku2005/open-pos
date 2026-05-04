@@ -327,7 +327,7 @@ export default function POSPage() {
     return (
         <div className={cn(
             "flex bg-[#F1F5F9] font-figtree overflow-hidden",
-            isFullScreen ? "fixed inset-0 z-[1000] p-3 gap-3 h-screen" : "h-[calc(100vh-64px)] gap-4"
+            isFullScreen ? "fixed inset-0 z-[1000] p-3 gap-3 h-screen" : "h-full gap-4"
         )}>
             {/* Left Terminal */}
             <div className="flex-1 flex flex-col gap-3 min-w-0 overflow-hidden">
@@ -370,7 +370,7 @@ export default function POSPage() {
                 </div>
 
                 {/* Scrollable Product Grid — only this scrolls */}
-                <div className="flex-1 overflow-y-auto custom-scrollbar pr-1 pb-2">
+                <div className="flex-1 overflow-y-auto custom-scrollbar pr-1">
                     <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3">
                         {products
                             .filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -410,7 +410,7 @@ export default function POSPage() {
                     </div>
                 </div>
             </div>            {/* Right Column (Cart / Checkout Flow) */}
-            <div className="w-[360px] h-full bg-white rounded-[24px] border border-openpos-border shadow-lg flex flex-col overflow-hidden shrink-0">
+            <div className="w-[360px] h-full bg-white border-l border-openpos-border shadow-lg flex flex-col overflow-hidden shrink-0">
                 
                 {/* Header */}
                 <div className="p-5 pb-4 border-b border-openpos-border bg-white shrink-0">
