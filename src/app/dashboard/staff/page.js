@@ -8,6 +8,7 @@ import {
     AtSign, Phone, Clock, UserX, UserRoundCheck
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { Card } from '@/components/Card'
 import { Skeleton, TableRowSkeleton } from '@/components/Skeleton'
 import { Badge } from '@/components/Badge'
 import { Modal } from '@/components/Modal'
