@@ -81,7 +81,7 @@ export default function PurchasesPage() {
                         <div className="flex items-center gap-4">
                             <div className={cn(
                                 "w-12 h-12 rounded-xl flex items-center justify-center shrink-0",
-                                pur.status === 'Received' ? "bg-openpos-green-light text-openpos-green" : 
+                                pur.status === 'Received' ? "bg-openpos-blue/10 text-openpos-blue" : 
                                 pur.status === 'Pending' ? "bg-yellow-100 text-yellow-600" : "bg-openpos-blue-light text-openpos-blue"
                             )}>
                                 <ShoppingBag size={24} />
@@ -91,7 +91,7 @@ export default function PurchasesPage() {
                                     <h3 className="text-[14px] font-bold text-admin-value">{pur.reference}</h3>
                                     <span className={cn(
                                         "text-[9px] font-bold uppercase px-2 py-0.5 rounded-lg",
-                                        pur.status === 'Received' ? "bg-openpos-green-light text-openpos-green" : 
+                                        pur.status === 'Received' ? "bg-openpos-blue/10 text-openpos-blue" : 
                                         pur.status === 'Pending' ? "bg-yellow-100 text-yellow-600" : "bg-openpos-blue-light text-openpos-blue"
                                     )}>
                                         {pur.status}
