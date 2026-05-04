@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Activity, Clock, Search, RefreshCw, ChevronDown, Filter } from 'lucide-react'
-import { Badge } from '@/components/Badge'
+import { Card } from '@/components/Card'
 import { Skeleton, TableRowSkeleton } from '@/components/Skeleton'
 import { cn } from '@/lib/utils'
 import { logsService } from '@/services/logs'
@@ -255,7 +255,7 @@ export default function SystemLogsPage() {
                         </p>
                     </div>
                 )}
-            </div>
+            </Card>
         </div>
     )
 }
