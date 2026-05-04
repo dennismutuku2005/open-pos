@@ -19,6 +19,7 @@ import authService from'@/lib/auth'
 export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, isZenMode, setIsZenMode }) {
  const [openMenus, setOpenMenus] = useState([])
  const [showLogoutModal, setShowLogoutModal] = useState(false)
+ const [isLoggingOut, setIsLoggingOut] = useState(false)
  const [mounted, setMounted] = useState(false)
  const searchParams = useSearchParams()
 
@@ -297,20 +298,22 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
  </div>
  </aside>
 
- {/* Standardized Logout Modal */}
- <Modal
- isOpen={showLogoutModal}
- onClose={() => setShowLogoutModal(false)}
- title="Confirm Logout"
- description="Are you sure you want to sign out?"
- type="danger"
- icon={LogOut}
- confirmText="Sign Out"
- onConfirm={() => {
- authService.logout();
- window.location.href ='/login';
- }}
- />
+  {/* Standardized Logout Modal */}
+  <Modal
+  isOpen={showLogoutModal}
+  onClose={() => !isLoggingOut && setShowLogoutModal(false)}
+  title="Confirm Logout"
+  description="Are you sure you want to sign out?"
+  type="danger"
+  icon={LogOut}
+  confirmText="Sign Out"
+  isLoading={isLoggingOut}
+  onConfirm={async () => {
+  setIsLoggingOut(true);
+  await authService.logout();
+  window.location.href ='/login';
+  }}
+  />
  </>
  )
 }
