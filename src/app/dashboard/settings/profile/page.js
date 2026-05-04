@@ -53,9 +53,9 @@ export default function ProfilePage() {
     return (
         <div className="max-w-4xl mx-auto pb-10 space-y-5 animate-in fade-in slide-in-from-bottom-2 duration-500 font-figtree">
             {/* Main Identity Card */}
-            <div className="bg-white border border-openpos-border rounded-2xl overflow-hidden shadow-sm">
+            <div className="bg-card-bg border border-openpos-border rounded-2xl overflow-hidden shadow-sm">
                 <div className="h-24 bg-gradient-to-r from-openpos-blue/5 via-openpos-blue/[0.02] to-transparent relative">
-                    <div className="absolute top-3 right-5 flex items-center gap-1.5 px-2.5 py-1 bg-white/90 backdrop-blur-md rounded-full border border-openpos-border/50">
+                    <div className="absolute top-3 right-5 flex items-center gap-1.5 px-2.5 py-1 bg-card-bg/90 backdrop-blur-md rounded-full border border-openpos-border/50">
                         <span className="text-[12px]">🇰🇪</span>
                         <span className="text-[9px] font-bold text-admin-value uppercase tracking-widest">Kenya Office</span>
                     </div>
@@ -64,12 +64,12 @@ export default function ProfilePage() {
                 <div className="px-8 pb-8 relative">
                     <div className="flex flex-col sm:flex-row items-end gap-5 -mt-10 mb-6">
                         <div className="relative group">
-                            <div className="w-24 h-24 rounded-2xl bg-white border-[4px] border-white shadow-lg flex items-center justify-center overflow-hidden">
+                            <div className="w-24 h-24 rounded-2xl bg-card-bg border-[4px] border-card-bg shadow-lg flex items-center justify-center overflow-hidden">
                                 <div className="w-full h-full bg-openpos-blue/5 flex items-center justify-center text-openpos-blue text-2xl font-bold">
                                     {user.name.charAt(0)}
                                 </div>
                             </div>
-                            <button className="absolute bottom-0 right-0 p-1.5 bg-openpos-blue text-white rounded-xl shadow-md hover:scale-105 transition-all border-2 border-white">
+                            <button className="absolute bottom-0 right-0 p-1.5 bg-openpos-blue text-white rounded-xl shadow-md hover:scale-105 transition-all border-2 border-card-bg">
                                 <Camera size={14} />
                             </button>
                         </div>
@@ -130,7 +130,7 @@ export default function ProfilePage() {
                                     <label className="text-[8px] font-bold text-admin-dim uppercase tracking-widest ml-1 mb-1 block">Official Name</label>
                                     <div className={cn(
                                         "flex items-center gap-3 px-4 py-2.5 rounded-xl border transition-all",
-                                        isEditing ? "bg-white border-openpos-blue/30 shadow-sm shadow-openpos-blue/5" : "bg-openpos-bg-subtle border-transparent"
+                                        isEditing ? "bg-card-bg border-openpos-blue/30 shadow-sm shadow-openpos-blue/5" : "bg-openpos-bg-subtle border-transparent"
                                     )}>
                                         <User size={14} className="text-admin-dim" />
                                         <input 
@@ -146,7 +146,7 @@ export default function ProfilePage() {
                                     <label className="text-[8px] font-bold text-admin-dim uppercase tracking-widest ml-1 mb-1 block">System Email</label>
                                     <div className={cn(
                                         "flex items-center gap-3 px-4 py-2.5 rounded-xl border transition-all",
-                                        isEditing ? "bg-white border-openpos-blue/30 shadow-sm shadow-openpos-blue/5" : "bg-openpos-bg-subtle border-transparent"
+                                        isEditing ? "bg-card-bg border-openpos-blue/30 shadow-sm shadow-openpos-blue/5" : "bg-openpos-bg-subtle border-transparent"
                                     )}>
                                         <Mail size={14} className="text-admin-dim" />
                                         <input 
@@ -168,7 +168,7 @@ export default function ProfilePage() {
                                     <label className="text-[8px] font-bold text-admin-dim uppercase tracking-widest ml-1 mb-1 block">Phone Number</label>
                                     <div className={cn(
                                         "flex items-center gap-3 px-4 py-2.5 rounded-xl border transition-all",
-                                        isEditing ? "bg-white border-openpos-blue/30 shadow-sm shadow-openpos-blue/5" : "bg-openpos-bg-subtle border-transparent"
+                                        isEditing ? "bg-card-bg border-openpos-blue/30 shadow-sm shadow-openpos-blue/5" : "bg-openpos-bg-subtle border-transparent"
                                     )}>
                                         <Phone size={14} className="text-admin-dim" />
                                         <input 
@@ -184,7 +184,7 @@ export default function ProfilePage() {
                                     <label className="text-[8px] font-bold text-admin-dim uppercase tracking-widest ml-1 mb-1 block">Duty Station</label>
                                     <div className={cn(
                                         "flex items-center gap-3 px-4 py-2.5 rounded-xl border transition-all",
-                                        isEditing ? "bg-white border-openpos-blue/30 shadow-sm shadow-openpos-blue/5" : "bg-openpos-bg-subtle border-transparent"
+                                        isEditing ? "bg-card-bg border-openpos-blue/30 shadow-sm shadow-openpos-blue/5" : "bg-openpos-bg-subtle border-transparent"
                                     )}>
                                         <MapPin size={14} className="text-admin-dim" />
                                         <input 
@@ -202,7 +202,7 @@ export default function ProfilePage() {
             </div>
 
             {/* Security Section */}
-            <div className="bg-white border border-openpos-border rounded-2xl overflow-hidden shadow-sm">
+            <div className="bg-card-bg border border-openpos-border rounded-2xl overflow-hidden shadow-sm">
                 <div className="px-8 py-4 border-b border-openpos-border bg-openpos-bg-subtle/30 flex items-center justify-between">
                     <h3 className="text-[9px] font-bold text-admin-value uppercase tracking-[2.5px]">System Security</h3>
                     <div className="flex items-center gap-1.5 text-[9px] font-bold text-openpos-blue bg-openpos-blue/10 px-2.5 py-1 rounded-lg uppercase tracking-widest">
