@@ -1,8 +1,8 @@
 "use client"
 
 import React, { useState } from 'react'
-import { 
-    Package, Search, Filter, ArrowUpRight, 
+import {
+    Package, Search, Filter, ArrowUpRight,
     MoreVertical, Download, Printer, CheckCircle2,
     Clock, AlertTriangle
 } from 'lucide-react'
@@ -22,7 +22,7 @@ const stockData = [
 export default function InStockPage() {
     const [searchTerm, setSearchTerm] = useState('')
 
-    const filteredStock = stockData.filter(s => 
+    const filteredStock = stockData.filter(s =>
         s.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
 
@@ -70,8 +70,8 @@ export default function InStockPage() {
                 <div className="p-5 border-b border-openpos-border flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="relative w-full md:w-96">
                         <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim" size={16} />
-                        <input 
-                            placeholder="Search in stock..." 
+                        <input
+                            placeholder="Search in stock..."
                             className="w-full bg-openpos-bg-subtle border-none rounded-xl pl-11 pr-4 py-2.5 text-[13px] font-medium outline-none ring-1 ring-transparent focus:ring-openpos-blue/20 transition-all"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
@@ -122,10 +122,7 @@ export default function InStockPage() {
                                         <span className="text-[14px] font-bold text-openpos-blue">KES {item.value.toLocaleString()}</span>
                                     </td>
                                     <td className="px-6 py-4">
-                                        <div className="flex items-center gap-1.5">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-openpos-green" />
-                                            <span className="text-[11px] font-bold text-openpos-green uppercase">{item.status}</span>
-                                        </div>
+                                        <span className="text-[11px] font-bold text-openpos-blue uppercase tracking-wider">{item.status}</span>
                                     </td>
                                     <td className="px-6 py-4 text-right">
                                         <button className="p-2 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/10 rounded-lg transition-all">
