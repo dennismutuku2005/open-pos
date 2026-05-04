@@ -119,47 +119,47 @@ export default function SystemLogsPage() {
                 </div>
             </div>
 
-            {/* Filter Bar */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-card-bg p-4 rounded-xl border border-openpos-border">
+            {/* Activity Monitoring Control */}
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-card-bg p-4 rounded-2xl border border-openpos-border shadow-sm">
                 <div className="relative w-full md:w-96 group">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-openpos-blue transition-colors" size={14} />
+                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors" size={16} />
                     <input
                         type="text"
                         autoComplete="off"
                         placeholder="Search by user, action, or description..."
-                        className="w-full pl-9 pr-4 py-2.5 bg-openpos-bg-subtle border border-openpos-border rounded-xl text-sm font-bold text-admin-value focus:outline-none focus:ring-2 focus:ring-openpos-blue/10 focus:border-openpos-blue transition-all"
+                        className="w-full pl-10 pr-4 py-2.5 bg-openpos-bg-subtle border border-openpos-border rounded-xl text-[11px] font-bold text-admin-value focus:outline-none focus:ring-2 focus:ring-openpos-blue/10 focus:border-openpos-blue transition-all"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
                 <div className="flex items-center gap-3 w-full md:w-auto">
-                    <div className="flex items-center gap-2 px-3 py-2 bg-openpos-bg-subtle border border-openpos-border rounded-xl">
-                        <Filter size={12} className="text-admin-dim" />
+                    <div className="flex items-center gap-2 px-4 py-2 bg-openpos-bg-subtle border border-openpos-border rounded-xl">
+                        <Filter size={14} className="text-openpos-blue" />
                         <select
-                            className="bg-transparent text-[11px] font-bold text-admin-dim focus:outline-none cursor-pointer uppercase tracking-widest text-admin-value"
+                            className="bg-transparent text-[11px] font-bold text-admin-value focus:outline-none cursor-pointer uppercase tracking-widest outline-none border-none p-0"
                             value={statusFilter}
                             onChange={(e) => setStatusFilter(e.target.value)}
                         >
-                            <option value="all">ALL ACTIVITY</option>
-                            <option value="success">SUCCESS ONLY</option>
-                            <option value="failed">FAILED ONLY</option>
+                            <option value="all">ALL SYSTEM ACTIVITY</option>
+                            <option value="success">SUCCESSFUL VECTORS</option>
+                            <option value="failed">FAILED VECTORS</option>
                         </select>
                     </div>
                 </div>
             </div>
 
-            {/* Logs Table */}
-            <div className="bg-card-bg border border-openpos-border rounded-xl shadow-sm overflow-hidden">
+            {/* Audit Trail Ledger */}
+            <Card noPadding className="shadow-sm">
                 <div className="overflow-x-auto custom-scrollbar">
-                    <table className="w-full text-left border-collapse text-[11px]">
-                        <thead className="bg-openpos-bg-subtle border-b border-openpos-border font-bold text-admin-dim uppercase tracking-widest text-[9px]">
-                            <tr>
-                                <th className="py-5 px-6">User Identity</th>
-                                <th className="py-5 px-6">Action Type</th>
-                                <th className="py-5 px-6">Activity Audit Description</th>
-                                <th className="py-5 px-6">Source IP</th>
-                                <th className="py-5 px-6">Timestamp</th>
-                                <th className="py-5 px-6 text-center">Status</th>
+                    <table className="w-full text-left whitespace-nowrap border-collapse text-[11px]">
+                        <thead>
+                            <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border text-[9px] font-bold text-admin-dim uppercase tracking-widest">
+                                <th className="px-6 py-4">Security Principal</th>
+                                <th className="px-6 py-4 text-center">Operation Vector</th>
+                                <th className="px-6 py-4">Activity Audit Narrative</th>
+                                <th className="px-6 py-4 text-center">Network Identity</th>
+                                <th className="px-6 py-4 text-right">Temporal Signature</th>
+                                <th className="px-6 py-4 text-center">Vector Status</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-openpos-border">
@@ -167,14 +167,14 @@ export default function SystemLogsPage() {
                                 <TableRowSkeleton cols={6} rows={15} />
                             ) : logs.length === 0 ? (
                                 <tr>
-                                    <td colSpan={6} className="py-32 text-center">
+                                    <td colSpan={6} className="py-32 text-center bg-openpos-bg-subtle/20">
                                         <div className="flex flex-col items-center justify-center gap-3">
-                                            <div className="w-16 h-16 bg-openpos-bg-subtle rounded-full flex items-center justify-center text-admin-dim/40 opacity-50">
+                                            <div className="w-16 h-16 bg-openpos-bg-subtle rounded-full flex items-center justify-center text-admin-dim/40 opacity-50 border border-openpos-border">
                                                 <Activity size={32} />
                                             </div>
                                             <div className="space-y-1">
-                                                <p className="text-[12px] font-bold text-admin-value uppercase tracking-widest">No Logs Found</p>
-                                                <p className="text-[10px] text-admin-dim uppercase">Try refining your search or filters</p>
+                                                <p className="text-[12px] font-bold text-admin-value uppercase tracking-widest">No audit data indexed</p>
+                                                <p className="text-[10px] text-admin-dim uppercase font-bold opacity-60">Adjust security filters or search vectors</p>
                                             </div>
                                         </div>
                                     </td>
@@ -186,48 +186,48 @@ export default function SystemLogsPage() {
                                         <tr 
                                             key={log.id} 
                                             ref={isLast ? lastElementRef : null}
-                                            className="hover:bg-openpos-bg-subtle/50 transition-colors group"
+                                            className="hover:bg-openpos-bg-subtle/40 transition-colors group cursor-default"
                                         >
-                                            <td className="py-4 px-6">
+                                            <td className="px-6 py-4">
                                                 <div className="flex flex-col">
                                                     <span className="text-[11px] font-bold text-admin-value uppercase group-hover:text-openpos-blue transition-colors">
                                                         {log.user}
                                                     </span>
-                                                    <span className="text-[8px] text-gray-400 font-medium uppercase tracking-tighter opacity-60">
-                                                        CID: {log.id.split('-').pop().substring(0, 8)}
+                                                    <span className="text-[8px] text-admin-dim font-bold uppercase tracking-tighter opacity-60 mt-1">
+                                                        TRX: {log.id.split('-').pop().substring(0, 8)}
                                                     </span>
                                                 </div>
                                             </td>
-                                            <td className="py-4 px-6">
-                                                <Badge variant="outline" className="text-[8px] font-bold uppercase py-0.5 px-2 bg-openpos-bg-subtle border-openpos-border text-admin-dim group-hover:bg-openpos-blue/5 group-hover:text-openpos-blue transition-all">
+                                            <td className="px-6 py-4 text-center">
+                                                <span className="text-[8px] font-bold uppercase py-1 px-2.5 bg-openpos-bg-subtle border border-openpos-border text-admin-dim rounded-md group-hover:bg-openpos-blue/5 group-hover:text-openpos-blue group-hover:border-openpos-blue/20 transition-all">
                                                     {log.action}
-                                                </Badge>
+                                                </span>
                                             </td>
-                                            <td className="py-4 px-6">
-                                                <p className="text-[10px] text-admin-dim max-w-sm font-medium leading-relaxed">
+                                            <td className="px-6 py-4">
+                                                <p className="text-[10px] text-admin-dim max-w-sm font-bold uppercase tracking-tight leading-relaxed opacity-80">
                                                     {log.description}
                                                 </p>
                                             </td>
-                                            <td className="py-4 px-6">
-                                                <span className="text-[10px] font-mono font-medium text-gray-400 opacity-60">
+                                            <td className="px-6 py-4 text-center">
+                                                <span className="text-[9px] font-mono font-bold text-admin-dim opacity-70 bg-openpos-bg-subtle px-2 py-0.5 rounded border border-openpos-border">
                                                     {log.ip || 'INTERNAL'}
                                                 </span>
                                             </td>
-                                            <td className="py-4 px-6">
-                                                <div className="flex flex-col">
-                                                    <span className="text-[10px] font-bold text-admin-value uppercase">{log.time}</span>
-                                                    <span className="text-[8px] text-gray-400 font-medium uppercase tracking-tighter opacity-60">{log.date.split(' ')[0]}</span>
+                                            <td className="px-6 py-4 text-right">
+                                                <div className="flex flex-col items-end">
+                                                    <span className="text-[10px] font-bold text-admin-value uppercase tracking-tighter">{log.time}</span>
+                                                    <span className="text-[8px] text-admin-dim font-bold uppercase tracking-tighter opacity-60 mt-0.5">{log.date.split(' ')[0]}</span>
                                                 </div>
                                             </td>
-                                            <td className="py-4 px-6">
+                                            <td className="px-6 py-4">
                                                 <div className="flex items-center justify-center gap-2">
                                                     <div className={cn(
-                                                        "w-1.5 h-1.5 rounded-full",
-                                                        log.status === 'failed' ? "bg-red-400" : "bg-emerald-400"
+                                                        "w-1.5 h-1.5 rounded-full shadow-sm",
+                                                        log.status === 'failed' ? "bg-openpos-red" : "bg-emerald-500"
                                                     )} />
                                                     <span className={cn(
                                                         "text-[9px] font-bold uppercase tracking-widest",
-                                                        log.status === 'failed' ? "text-red-400" : "text-emerald-500"
+                                                        log.status === 'failed' ? "text-openpos-red" : "text-emerald-500"
                                                     )}>{log.status}</span>
                                                 </div>
                                             </td>
