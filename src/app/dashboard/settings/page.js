@@ -1,103 +1,175 @@
 "use client"
 
-import React, { useState } from 'react'
+import React from 'react'
 import { 
-    User, CreditCard, ShoppingBag, 
-    Users, ShieldCheck, Settings as SettingsIcon,
-    ChevronRight, LogOut, Bell, Smartphone,
-    DollarSign, Receipt, Globe, Shield,
-    Store, Briefcase, Lock, Wallet
+    User, Wallet, Store, Users, 
+    Globe, Smartphone, ShieldCheck, 
+    Bell, ArrowRight, Settings as SettingsIcon,
+    Shield, Lock, CreditCard, Layout
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
-const settingsGroups = [
+const settingsModules = [
     {
-        title: 'Account & Profile',
-        items: [
-            { id: 'profile', name: 'Your Profile', desc: 'Personal information and security', icon: User, href: '/dashboard/settings/profile' },
-            { id: 'notifications', name: 'Notification Settings', desc: 'Configure how you receive alerts', icon: Bell, href: '/dashboard/notifications' },
-        ]
+        id: 'profile',
+        name: 'Profile Identity',
+        desc: 'Personal administrative signatures and security protocols',
+        href: '/dashboard/settings/profile',
+        icon: User,
+        tag: 'Identity',
+        color: 'blue'
     },
     {
-        title: 'POS & Sales',
-        items: [
-            { id: 'payments', name: 'Payment Methods', desc: 'Manage cash, MPESA, and cards', icon: Wallet, href: '/dashboard/settings/payments' },
-            { id: 'sales-config', name: 'Sales Configuration', desc: 'Taxes, discounts, and receipts', icon: Store, href: '/dashboard/config' },
-            { id: 'expenses', name: 'Expense Categories', desc: 'Organize your spending', icon: Receipt, href: '/dashboard/expenses' },
-        ]
+        id: 'payments',
+        name: 'Payment Channels',
+        desc: 'Configure M-Pesa, Cash, and Card settlement vectors',
+        href: '/dashboard/settings/payments',
+        icon: Wallet,
+        tag: 'Financial',
+        color: 'blue'
     },
     {
-        title: 'Organization',
-        items: [
-            { id: 'staff', name: 'Staff Management', desc: 'Roles, permissions and shifts', icon: Users, href: '/dashboard/staff' },
-            { id: 'policies', name: 'Policies & Security', desc: 'System access and audit logs', icon: ShieldCheck, href: '/dashboard/staff' },
-        ]
+        id: 'pos-config',
+        name: 'Terminal Config',
+        desc: 'Taxes, receipt templates, and hardware peripherals',
+        href: '/dashboard/settings/terminal',
+        icon: Store,
+        tag: 'Operational',
+        color: 'blue'
     },
     {
-        title: 'System',
-        items: [
-            { id: 'general', name: 'General Settings', desc: 'Language, timezone and currency', icon: Globe, href: '/dashboard/config' },
-            { id: 'api', name: 'API & Integrations', desc: 'Connect with external services', icon: Smartphone, href: '/dashboard/config' },
-        ]
+        id: 'security',
+        name: 'Security Shield',
+        desc: 'Encryption keys, 2FA, and access control policies',
+        href: '/dashboard/settings/security',
+        icon: ShieldCheck,
+        tag: 'Protection',
+        color: 'blue'
+    },
+    {
+        id: 'staff-roles',
+        name: 'Staff Hierarchy',
+        desc: 'Manage organizational roles and biometric access',
+        href: '/dashboard/staff',
+        icon: Users,
+        tag: 'Human Capital',
+        color: 'blue'
+    },
+    {
+        id: 'notifications',
+        name: 'Alert Protocols',
+        desc: 'Configure system-wide push and email signals',
+        href: '/dashboard/notifications',
+        icon: Bell,
+        tag: 'Signals',
+        color: 'blue'
+    },
+    {
+        id: 'regional',
+        name: 'Regional Matrix',
+        desc: 'Currency localization, timezones, and language layers',
+        href: '/dashboard/settings/general',
+        icon: Globe,
+        tag: 'Localization',
+        color: 'blue'
+    },
+    {
+        id: 'integrations',
+        name: 'System Bridge',
+        desc: 'API keys, webhooks, and third-party sync states',
+        href: '/dashboard/settings/api',
+        icon: Smartphone,
+        tag: 'Connection',
+        color: 'blue'
     }
 ]
 
 export default function SettingsPage() {
     return (
-        <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500 pb-20">
+        <div className="space-y-8 animate-in fade-in duration-500 font-figtree pb-20">
             {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div>
-                    <h1 className="text-xl font-bold tracking-tight text-admin-value">System Settings</h1>
-                    <p className="text-admin-label mt-1 text-[14px]">Configure and manage your POS system preferences.</p>
-                </div>
+            <div>
+                <h1 className="text-xl font-bold tracking-tight text-admin-value uppercase flex items-center gap-2">
+                    <SettingsIcon size={20} className="text-openpos-blue" />
+                    System Configuration Matrix
+                </h1>
+                <p className="text-[13px] font-medium text-admin-label mt-1">Fine-tune your POS infrastructure and organizational parameters.</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {settingsGroups.map((group, groupIdx) => (
-                    <div key={groupIdx} className="space-y-4">
-                        <h3 className="text-[11px] font-bold text-admin-dim uppercase tracking-[3px] ml-1">{group.title}</h3>
-                        <div className="space-y-3">
-                            {group.items.map((item) => (
-                                <Link 
-                                    key={item.id} 
-                                    href={item.href}
-                                    className="group flex items-center justify-between p-4 bg-card-bg border border-openpos-border rounded-3xl hover:border-openpos-blue/30 hover:shadow-xl hover:shadow-openpos-blue/5 transition-all"
-                                >
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-2xl bg-openpos-bg-subtle flex items-center justify-center text-admin-dim group-hover:bg-openpos-blue/10 group-hover:text-openpos-blue transition-all">
-                                            <item.icon size={24} strokeWidth={1.5} />
-                                        </div>
-                                        <div>
-                                            <p className="text-[14px] font-bold text-admin-value group-hover:text-openpos-blue transition-colors">{item.name}</p>
-                                            <p className="text-[11px] text-admin-label font-medium mt-0.5">{item.desc}</p>
-                                        </div>
-                                    </div>
-                                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-admin-dim group-hover:translate-x-1 group-hover:text-openpos-blue transition-all">
-                                        <ChevronRight size={18} />
-                                    </div>
-                                </Link>
-                            ))}
+            {/* POS-Style Grid Layout */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {settingsModules.map((module) => (
+                    <Link 
+                        key={module.id} 
+                        href={module.href}
+                        className="group relative bg-card-bg border border-openpos-border rounded-[24px] p-2 hover:border-openpos-blue/30 hover:shadow-xl hover:shadow-openpos-blue/5 transition-all duration-300 flex flex-col"
+                    >
+                        {/* Module Visual Area */}
+                        <div className="aspect-square rounded-[18px] bg-openpos-bg-subtle flex items-center justify-center relative overflow-hidden transition-transform duration-500">
+                            <div className="absolute inset-0 bg-gradient-to-br from-openpos-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <module.icon size={48} className="text-openpos-blue opacity-80 group-hover:scale-110 transition-transform duration-500" />
+                            
+                            {/* Floating Metadata Tag */}
+                            <div className="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-card-bg border border-openpos-border shadow-sm">
+                                <span className="text-[9px] font-bold text-openpos-blue uppercase tracking-[2px]">{module.tag}</span>
+                            </div>
+
+                            {/* Execution Indicator */}
+                            <div className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-openpos-blue text-white flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg shadow-openpos-blue/20">
+                                <ArrowRight size={16} />
+                            </div>
                         </div>
-                    </div>
+
+                        {/* Description Layer */}
+                        <div className="p-4 space-y-1">
+                            <h3 className="text-[14px] font-bold text-admin-value group-hover:text-openpos-blue transition-colors uppercase tracking-tight">
+                                {module.name}
+                            </h3>
+                            <p className="text-[11px] text-admin-dim font-medium leading-relaxed line-clamp-2">
+                                {module.desc}
+                            </p>
+                        </div>
+                    </Link>
                 ))}
             </div>
 
-            {/* Support/Info Card */}
-            <div className="bg-openpos-blue rounded-3xl p-8 relative overflow-hidden shadow-2xl shadow-openpos-blue/20">
-                <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
-                    <div className="space-y-2">
-                        <h2 className="text-2xl font-bold text-white">Need help with configuration?</h2>
-                        <p className="text-white/70 text-[14px] max-w-lg">Our support team is available 24/7 to help you set up your POS system for maximum efficiency.</p>
+            {/* Operational Status (Replaces big blue card) */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-4">
+                <div className="lg:col-span-2 p-8 bg-openpos-bg-subtle border border-openpos-border rounded-[32px] flex flex-col md:flex-row items-center gap-8 group">
+                    <div className="flex-1 space-y-4 text-center md:text-left">
+                        <div className="flex items-center justify-center md:justify-start gap-2">
+                            <div className="w-8 h-8 rounded-lg bg-openpos-blue text-white flex items-center justify-center shadow-lg shadow-openpos-blue/20">
+                                <Shield size={16} />
+                            </div>
+                            <span className="text-[10px] font-bold text-openpos-blue uppercase tracking-widest">Security Status</span>
+                        </div>
+                        <h2 className="text-2xl font-bold text-admin-value leading-tight">Your system is protected by <span className="text-openpos-blue">AES-256</span> encryption protocols.</h2>
+                        <p className="text-[13px] text-admin-dim font-medium leading-relaxed">
+                            All settings modified in this matrix are instantly synchronized across your terminal network and cryptographically signed for audit transparency.
+                        </p>
+                        <div className="flex flex-wrap gap-3 pt-2 justify-center md:justify-start">
+                            <div className="px-3 py-1 bg-card-bg border border-openpos-border rounded-lg text-[10px] font-bold text-admin-dim uppercase tracking-widest">TLS 1.3 Active</div>
+                            <div className="px-3 py-1 bg-card-bg border border-openpos-border rounded-lg text-[10px] font-bold text-admin-dim uppercase tracking-widest">Cloud Sync: OK</div>
+                        </div>
                     </div>
-                    <button className="bg-white text-openpos-blue px-8 py-3 rounded-2xl font-bold text-[13px] uppercase tracking-widest shadow-xl hover:scale-105 transition-all">
-                        Contact Support
+                    <div className="w-48 h-48 bg-card-bg border border-openpos-border rounded-[40px] shadow-2xl flex items-center justify-center p-6 -rotate-2 group-hover:rotate-0 transition-transform duration-500">
+                        <Lock size={80} className="text-openpos-blue opacity-10" />
+                    </div>
+                </div>
+
+                <div className="bg-card-bg border border-openpos-border rounded-[32px] p-8 flex flex-col justify-center items-center text-center space-y-6">
+                    <div className="w-16 h-16 rounded-2xl bg-openpos-blue/5 flex items-center justify-center text-openpos-blue">
+                        <Layout size={32} />
+                    </div>
+                    <div>
+                        <h4 className="text-[15px] font-bold text-admin-value uppercase tracking-tight">Need assistance?</h4>
+                        <p className="text-[12px] text-admin-dim font-medium mt-2 leading-relaxed">Our technical engineers are on standby for system deployment queries.</p>
+                    </div>
+                    <button className="w-full py-3.5 bg-openpos-blue text-white rounded-2xl font-bold text-[11px] uppercase tracking-[2px] shadow-lg shadow-openpos-blue/20 hover:scale-[1.02] active:scale-95 transition-all">
+                        Technical Support
                     </button>
                 </div>
-                {/* Background Decoration */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
-                <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-2xl translate-y-1/2 -translate-x-1/4" />
             </div>
         </div>
     )
