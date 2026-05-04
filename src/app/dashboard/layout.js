@@ -72,7 +72,8 @@ export default function DashboardLayout({ children }) {
 
                 {/* Main Content Area */}
                 <main className={cn(
-                    "transition-all duration-500 ease-in-out min-h-screen",
+                    "transition-all duration-500 ease-in-out",
+                    pathname === '/dashboard/sales' ? "h-screen overflow-hidden" : "min-h-screen",
                     isZenMode ? "pl-16" : isSidebarOpen ? "md:pl-64" : "pl-16"
                 )}>
                     {/* Header */}
@@ -126,11 +127,16 @@ export default function DashboardLayout({ children }) {
                     )}
 
                     <div className={cn(
-                        "transition-all duration-500 min-h-[calc(100vh-64px)]",
-                        !isZenMode && "pt-20", // Increased padding to 80px (header 64px + 16px gap)
-                        isZenMode ? "p-0 h-screen overflow-hidden" : (pathname === '/dashboard/sales' ? "pt-16 p-0" : "px-6 pb-8")
+                        "transition-all duration-500",
+                        isZenMode 
+                            ? "h-screen overflow-hidden" 
+                            : pathname === '/dashboard/sales' 
+                                ? "pt-16 h-screen overflow-hidden bg-[#F1F5F9]" 
+                                : "pt-20 px-6 pb-8 min-h-[calc(100vh-64px)]"
                     )}>
-                        <div className="max-w-[1600px] mx-auto">
+                        <div className={cn(
+                            pathname === '/dashboard/sales' ? "h-full" : "max-w-[1600px] mx-auto"
+                        )}>
                             <Suspense fallback={
                                 <div className="flex items-center justify-center h-64">
                                     <div className="w-8 h-8 border-4 border-openpos-blue/20 border-t-openpos-blue rounded-full animate-spin" />
