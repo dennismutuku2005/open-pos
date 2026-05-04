@@ -69,7 +69,7 @@ export default function DashboardPage() {
             {/* Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 <StatCard title="Total Sales Today" value="KES 124,050" change="+12.5%" isPositive={true} icon={DollarSign} color="blue" />
-                <StatCard title="Products In" value="1,420" change="+3.2%" isPositive={true} icon={Package} color="green" />
+                <StatCard title="Products In" value="1,420" change="+3.2%" isPositive={true} icon={Package} color="blue" />
                 <StatCard title="Products Expired" value="12" change="+2 since yesterday" isPositive={false} icon={AlertTriangle} color="red" />
                 <StatCard title="Staffs Active" value="8/10" change="All shifts covered" isPositive={true} icon={Users} color="purple" />
             </div>
@@ -256,7 +256,7 @@ export default function DashboardPage() {
                             <div key={act.id} className="flex gap-4">
                                 <div className={cn(
                                     "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border",
-                                    act.type === 'Sale' ? "bg-openpos-green/10 text-openpos-green border-openpos-green/20" : "bg-openpos-blue/10 text-openpos-blue border-openpos-blue/20"
+                                    act.type === 'Sale' ? "bg-openpos-blue/10 text-openpos-blue border-openpos-blue/20" : "bg-openpos-blue/10 text-openpos-blue border-openpos-blue/20"
                                 )}>
                                     {act.type === 'Sale' ? <ShoppingBasket size={18} /> : <ArrowRightLeft size={18} />}
                                 </div>
@@ -282,7 +282,7 @@ export default function DashboardPage() {
 function StatCard({ title, value, change, isPositive, icon: Icon, color }) {
     const colorClasses = {
         blue: "text-openpos-blue bg-openpos-blue/10",
-        green: "text-openpos-green bg-openpos-green/10",
+        blue: "text-openpos-blue bg-openpos-blue/10",
         red: "text-openpos-red bg-openpos-red/10",
         purple: "text-openpos-purple bg-openpos-purple/10",
     }
@@ -300,7 +300,7 @@ function StatCard({ title, value, change, isPositive, icon: Icon, color }) {
                         <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 mt-1">
                             <span className={cn(
                                 "text-[9px] font-bold px-1.5 py-0.5 rounded-md uppercase tracking-tight whitespace-nowrap",
-                                isPositive ? "bg-openpos-green/10 text-openpos-green" : "bg-openpos-red/10 text-openpos-red"
+                                isPositive ? "bg-openpos-blue/10 text-openpos-blue" : "bg-openpos-red/10 text-openpos-red"
                             )}>
                                 {change}
                             </span>
