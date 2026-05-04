@@ -68,110 +68,125 @@ export default function StockAdjustmentPage() {
                 </button>
             </div>
 
-            {/* Quick Stats */}
+            {/* Inventory Statistics */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-card-bg border border-openpos-border rounded-xl p-4 shadow-sm hover:border-openpos-blue/20 transition-all">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg flex items-center justify-center text-openpos-red bg-openpos-red/5 shrink-0">
-                            <ArrowDownRight size={18} />
-                        </div>
-                        <div>
-                            <p className="text-[10px] font-bold text-admin-dim uppercase tracking-wider">Total Shrinkage</p>
-                            <p className="text-lg font-bold text-admin-value">KES 1,245</p>
-                        </div>
-                    </div>
-                    <div className="mt-3">
-                        <span className="text-[9px] font-bold text-admin-dim bg-openpos-bg-subtle px-2 py-0.5 rounded uppercase">Latest 30 Days</span>
-                    </div>
-                </div>
-
-                <div className="bg-card-bg border border-openpos-border rounded-xl p-4 shadow-sm hover:border-openpos-blue/20 transition-all">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg flex items-center justify-center text-openpos-blue bg-openpos-blue/5 shrink-0">
-                            <History size={18} />
-                        </div>
-                        <div>
-                            <p className="text-[10px] font-bold text-admin-dim uppercase tracking-wider">Audit Accuracy</p>
-                            <p className="text-lg font-bold text-admin-value">98.2%</p>
-                        </div>
-                    </div>
-                    <div className="mt-3">
-                        <span className="text-[9px] font-bold text-admin-dim bg-openpos-bg-subtle px-2 py-0.5 rounded uppercase">Matched Counts</span>
-                    </div>
-                </div>
-
-                <div className="bg-card-bg border border-openpos-border rounded-xl p-4 shadow-sm hover:border-openpos-blue/20 transition-all">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg flex items-center justify-center text-orange-600 bg-orange-50 shrink-0">
-                            <ShieldAlert size={18} />
-                        </div>
-                        <div>
-                            <p className="text-[10px] font-bold text-admin-dim uppercase tracking-wider">Recent Issues</p>
-                            <p className="text-lg font-bold text-admin-value">5 Audits</p>
-                        </div>
-                    </div>
-                    <div className="mt-3">
-                        <span className="text-[9px] font-bold text-admin-dim bg-openpos-bg-subtle px-2 py-0.5 rounded uppercase">Pending Review</span>
-                    </div>
-                </div>
+                <StatCard 
+                    title="Financial Shrinkage" 
+                    value="KES 1,245" 
+                    change="-12% vs last month" 
+                    isPositive={true} 
+                    icon={ArrowDownRight} 
+                    color="red" 
+                    subtitle="LATEST 30 DAYS"
+                />
+                <StatCard 
+                    title="Audit Integrity" 
+                    value="98.2%" 
+                    change="+0.5%" 
+                    isPositive={true} 
+                    icon={History} 
+                    color="blue" 
+                    subtitle="MATCHED COUNTS"
+                />
+                <StatCard 
+                    title="System Anomalies" 
+                    value="5 Audits" 
+                    change="Requires Attention" 
+                    isPositive={false} 
+                    icon={ShieldAlert} 
+                    color="red" 
+                    subtitle="PENDING REVIEW"
+                />
             </div>
 
-            {/* Adjustment History */}
-            <div className="bg-card-bg border border-openpos-border rounded-3xl overflow-hidden shadow-sm">
-                <div className="p-4 border-b border-openpos-border flex items-center justify-between">
-                    <h3 className="text-sm font-bold text-admin-value uppercase tracking-[2px]">Correction History</h3>
-                    <div className="relative w-64">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-admin-dim" size={14} />
-                        <input placeholder="Search adjustments..." className="w-full bg-openpos-bg-subtle border-none rounded-xl pl-9 pr-4 py-2.5 text-[11px] font-bold outline-none" />
+            {/* Adjustment History Registry */}
+            <Card 
+                noPadding
+                title="Correction History"
+                subtitle="Manual inventory adjustment audit trail"
+                headerAction={
+                    <div className="flex items-center gap-3">
+                        <div className="relative group">
+                            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors" size={14} />
+                            <input 
+                                placeholder="Search adjustments..." 
+                                className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-10 pr-4 py-2 text-[11px] font-bold text-admin-value outline-none focus:ring-2 focus:ring-openpos-blue/10 focus:border-openpos-blue w-64 transition-all"
+                            />
+                        </div>
                     </div>
-                </div>
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left">
+                }
+            >
+                <div className="overflow-x-auto custom-scrollbar">
+                    <table className="w-full text-left whitespace-nowrap border-collapse text-[11px]">
                         <thead>
-                            <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border">
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Product</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Type</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Qty</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Reason</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest text-right">Staff / Date</th>
+                            <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border text-[9px] font-bold text-admin-dim uppercase tracking-widest">
+                                <th className="px-6 py-4">Inventory Item</th>
+                                <th className="px-6 py-4 text-center">Vector Type</th>
+                                <th className="px-6 py-4 text-center">Density Shift</th>
+                                <th className="px-6 py-4">Internal Justification</th>
+                                <th className="px-6 py-4 text-right">Auditor / Timestamp</th>
+                                <th className="px-6 py-4 text-right">Management</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-openpos-border">
-                            {adjustments.map((adj) => (
-                                <tr key={adj.id} className="group hover:bg-openpos-bg-subtle/30 transition-colors text-[13px]">
-                                    <td className="py-2.5 px-6 font-bold text-admin-value uppercase tracking-tight">{adj.product}</td>
-                                    <td className="py-2.5 px-6">
-                                        <div className={cn(
-                                            "flex items-center gap-1.5 font-bold text-[10px] uppercase tracking-widest",
-                                            adj.type === 'Increase' ? "text-openpos-blue" : "text-openpos-red"
-                                        )}>
-                                            {adj.type === 'Increase' ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
-                                            {adj.type}
-                                        </div>
-                                    </td>
-                                    <td className="py-2.5 px-6 font-bold text-admin-value">{adj.qty} units</td>
-                                    <td className="py-2.5 px-6">
-                                        <p className="text-[11px] text-admin-label font-medium line-clamp-1 max-w-[200px]">{adj.reason}</p>
-                                    </td>
-                                    <td className="py-2.5 px-6 text-right">
-                                        <div className="flex items-center justify-end gap-1">
-                                            <button className="p-1.5 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/5 rounded-lg transition-all">
-                                                <Edit2 size={14} />
-                                            </button>
-                                            <button 
-                                                onClick={() => handleDelete(adj)}
-                                                className="p-1.5 text-admin-dim hover:text-openpos-red hover:bg-openpos-red/5 rounded-lg transition-all"
-                                            >
-                                                <Trash2 size={14} />
-                                            </button>
-                                        </div>
+                            {adjustments.length === 0 ? (
+                                <tr>
+                                    <td colSpan={6} className="py-20 text-center text-gray-400 font-bold text-[10px] uppercase tracking-widest bg-openpos-bg-subtle/20">
+                                        No adjustment records found in registry
                                     </td>
                                 </tr>
-                            ))}
+                            ) : (
+                                adjustments.map((adj) => (
+                                    <tr key={adj.id} className="group hover:bg-openpos-bg-subtle/40 transition-colors cursor-default">
+                                        <td className="px-6 py-4">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-8 h-8 rounded-lg bg-openpos-bg-subtle border border-openpos-border flex items-center justify-center text-openpos-blue group-hover:scale-105 transition-transform">
+                                                    <Package size={16} />
+                                                </div>
+                                                <span className="font-bold text-admin-value uppercase tracking-tight group-hover:text-openpos-blue transition-colors">{adj.product}</span>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 text-center">
+                                            <div className={cn(
+                                                "inline-flex items-center gap-1.5 font-bold text-[9px] uppercase tracking-widest px-2 py-0.5 rounded-md border",
+                                                adj.type === 'Increase' ? "bg-openpos-blue/5 text-openpos-blue border-openpos-blue/10" : "bg-openpos-red/5 text-openpos-red border-openpos-red/10"
+                                            )}>
+                                                {adj.type === 'Increase' ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
+                                                {adj.type}
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 text-center font-bold text-admin-value">
+                                            {adj.type === 'Increase' ? '+' : '-'}{adj.qty} <span className="text-[9px] text-admin-dim">UNITS</span>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <p className="text-[10px] text-admin-dim font-bold uppercase tracking-tight line-clamp-1 max-w-[200px] opacity-80">{adj.reason}</p>
+                                        </td>
+                                        <td className="px-6 py-4 text-right">
+                                            <div className="flex flex-col items-end">
+                                                <span className="text-[11px] font-bold text-admin-value">{adj.staff}</span>
+                                                <span className="text-[8px] font-bold text-admin-dim uppercase tracking-tighter mt-1">{adj.date}</span>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 text-right">
+                                            <div className="flex items-center justify-end gap-1.5">
+                                                <button className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-openpos-blue hover:border-openpos-blue/30 hover:bg-openpos-blue/5 transition-all">
+                                                    <Edit2 size={12} />
+                                                </button>
+                                                <button 
+                                                    onClick={() => handleDelete(adj)}
+                                                    className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-red-400 hover:border-red-400/30 hover:bg-red-400/5 transition-all"
+                                                >
+                                                    <Trash2 size={12} />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </Card>
 
             {/* Standardized Modal */}
             <Modal
