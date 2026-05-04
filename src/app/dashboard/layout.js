@@ -127,7 +127,7 @@ export default function DashboardLayout({ children }) {
                                         <div className="hidden sm:flex items-center gap-2 bg-openpos-bg-subtle px-2 py-1 rounded-lg border border-openpos-border shadow-sm">
                                             <Clock size={10} className="text-openpos-blue" />
                                             <span className="text-[9px] font-bold text-admin-value uppercase tracking-widest">
-                                                {currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                                {mounted ? currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--'}
                                             </span>
                                         </div>
                                     </div>
