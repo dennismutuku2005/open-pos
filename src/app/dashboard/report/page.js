@@ -86,7 +86,7 @@ export default function SalesReportPage() {
                             type="date"
                             value={dateRange}
                             onChange={(e) => setDateRange(e.target.value)}
-                            className="bg-white border border-openpos-border text-admin-value pl-11 pr-5 py-3 rounded-xl font-bold text-[12px] hover:border-openpos-blue/30 transition-all uppercase tracking-widest shadow-sm outline-none focus:ring-2 focus:ring-openpos-blue/10"
+                            className="bg-card-bg border border-openpos-border text-admin-value pl-11 pr-5 py-3 rounded-xl font-bold text-[12px] hover:border-openpos-blue/30 transition-all uppercase tracking-widest shadow-sm outline-none focus:ring-2 focus:ring-openpos-blue/10"
                         />
                     </div>
                     <button 
@@ -114,7 +114,7 @@ export default function SalesReportPage() {
                         onClick={() => setReportType(type)}
                         className={cn(
                             "px-6 py-2.5 rounded-lg font-bold text-[12px] uppercase tracking-widest transition-all",
-                            reportType === type ? "bg-white text-openpos-blue shadow-sm" : "text-admin-dim hover:text-admin-value"
+                            reportType === type ? "bg-card-bg text-openpos-blue shadow-sm" : "text-admin-dim hover:text-admin-value"
                         )}
                     >
                         {type}
@@ -226,7 +226,7 @@ export default function SalesReportPage() {
                     </h3>
                     <div className="relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-admin-dim" size={14} />
-                        <input placeholder="Search orders..." className="bg-white border border-openpos-border rounded-xl pl-9 pr-4 py-2 text-[12px] font-medium outline-none focus:ring-1 focus:ring-openpos-blue/30 w-64 transition-all" />
+                        <input placeholder="Search orders..." className="bg-card-bg border border-openpos-border rounded-xl pl-9 pr-4 py-2 text-[12px] font-medium outline-none focus:ring-1 focus:ring-openpos-blue/30 w-64 transition-all" />
                     </div>
                 </div>
                 <div className="overflow-x-auto">
@@ -250,7 +250,7 @@ export default function SalesReportPage() {
                                         <div className={cn(
                                             "inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider",
                                             sale.payment === 'Cash' ? "bg-openpos-blue/10 text-openpos-blue" : 
-                                            sale.payment === 'M-Pesa' ? "bg-openpos-blue/10 text-openpos-blue" : "bg-purple-100 text-purple-600"
+                                            sale.payment === 'M-Pesa' ? "bg-openpos-blue/10 text-openpos-blue" : "bg-openpos-blue/10 text-openpos-blue"
                                         )}>
                                             {sale.payment}
                                         </div>
@@ -276,7 +276,7 @@ function ReportStatCard({ title, value, change, icon: Icon, color }) {
     const isPositive = !change.startsWith('-')
 
     return (
-        <div className="bg-white border border-openpos-border rounded-xl p-4 shadow-sm hover:border-openpos-blue/20 transition-all">
+        <div className="bg-card-bg border border-openpos-border rounded-xl p-4 shadow-sm hover:border-openpos-blue/20 transition-all">
             <div className="flex items-center gap-3">
                 <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center shrink-0", colorClasses[color] || colorClasses.blue)}>
                     <Icon size={18} />
