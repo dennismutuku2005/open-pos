@@ -147,24 +147,24 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
         <>
             <aside className={sidebarClass}>
                 {/* Logo Section */}
-                <div className="h-16 flex items-center justify-center border-b border-openpos-border">
+                <div className="h-20 flex items-center justify-center border-b border-openpos-border">
                     <Link href={createHref("/dashboard")} className="flex items-center justify-center gap-2">
                         {showText ? (
                             <Image
                                 src="/logoc.png"
                                 alt="Open POS"
-                                width={12}
-                                height={12}
-                                className="h-7 w-auto object-contain"
+                                width={160}
+                                height={40}
+                                className="h-10 w-auto object-contain"
                                 priority
                             />
                         ) : (
                             <Image
                                 src="/logoc.png"
                                 alt="Open POS"
-                                width={32}
-                                height={32}
-                                className="h-6 w-auto object-contain"
+                                width={40}
+                                height={40}
+                                className="h-8 w-auto object-contain"
                                 priority
                             />
                         )}
@@ -268,33 +268,7 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
                     "mt-auto border-t border-openpos-border py-2 space-y-1",
                     showText ? "px-3" : "px-2"
                 )}>
-                    {/* Zen Mode Toggle */}
-                    <button
-                        onClick={() => setIsZenMode(!isZenMode)}
-                        className={cn(
-                            "w-full flex items-center transition-all rounded-xl py-2.5",
-                            showText ? "px-3 gap-3" : "px-0 justify-center",
-                            isZenMode 
-                                ? "bg-openpos-blue/10 text-openpos-blue font-bold" 
-                                : "text-admin-dim hover:bg-openpos-bg-subtle hover:text-foreground"
-                        )}
-                    >
-                        {isZenMode ? <Activity size={18} /> : <Activity size={18} className="opacity-50" />}
-                        {showText && (
-                            <div className="flex-1 flex items-center justify-between">
-                                <span>Zen Mode</span>
-                                <div className={cn(
-                                    "w-8 h-4 rounded-full relative transition-colors duration-200",
-                                    isZenMode ? "bg-openpos-blue" : "bg-admin-dim/20"
-                                )}>
-                                    <div className={cn(
-                                        "absolute top-1 left-1 w-2 h-2 rounded-full bg-white transition-transform duration-200",
-                                        isZenMode ? "translate-x-4" : "translate-x-0"
-                                    )} />
-                                </div>
-                            </div>
-                        )}
-                    </button>
+
 
                     <button
                         onClick={() => setShowLogoutModal(true)}
