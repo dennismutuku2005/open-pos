@@ -4,8 +4,8 @@ import React, { useState } from'react'
 import {
  Package, Search, Filter, AlertCircle,
  MoreVertical, ShoppingCart, RefreshCcw,
- XCircle, AlertTriangle
-} from'lucide-react'
+ XCircle, AlertTriangle, Loader2
+} from 'lucide-react'
 import Image from'next/image'
 import { cn } from'@/lib/utils'
 
@@ -18,6 +18,15 @@ const outOfStockData = [
 
 export default function OutOfStockPage() {
  const [searchTerm, setSearchTerm] = useState('')
+ const [loadingRows, setLoadingRows] = useState({})
+
+ const handleRestock = (id) => {
+   setLoadingRows(prev => ({ ...prev, [id]: true }))
+   setTimeout(() => {
+     setLoadingRows(prev => ({ ...prev, [id]: false }))
+     // In a real app, we would update the stock here
+   }, 1500)
+ }
 
  const filteredStock = outOfStockData.filter(s =>
  s.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -111,8 +120,18 @@ export default function OutOfStockPage() {
  </div>
  </td>
  <td className="px-6 py-4 text-right">
- <button className="bg-openpos-bg-subtle text-admin-dim px-3 py-1.5 rounded-lg font-bold text-[11px] uppercase transition-all flex items-center gap-2 ml-auto">
+ <button 
+ onClick={() => handleRestock(item.id)}
+ disabled={loadingRows[item.id]}
+ className="bg-openpos-bg-subtle text-admin-dim px-3 py-1.5 rounded-lg font-bold text-[11px] uppercase transition-all flex items-center gap-2 ml-auto min-w-[90px] justify-center"
+ >
+ {loadingRows[item.id] ? (
+ <Loader2 size={14} className="animate-spin" />
+ ) : (
+ <>
  <RefreshCcw size={14} /> Restock
+ </>
+ )}
  </button>
  </td>
  </tr>
