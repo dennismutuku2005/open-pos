@@ -170,7 +170,7 @@ export default function CategoriesPage() {
                                     <td className="px-6 py-2.5">
                                         <span className={cn(
                                             "px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-widest",
-                                            cat.type === 'Service' ? "bg-openpos-green/10 text-openpos-green" : "bg-openpos-blue/10 text-openpos-blue"
+                                            cat.type === 'Service' ? "bg-openpos-blue/20 text-openpos-blue" : "bg-openpos-blue/10 text-openpos-blue"
                                         )}>
                                             {cat.type}
                                         </span>
