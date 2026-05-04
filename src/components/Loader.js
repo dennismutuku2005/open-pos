@@ -1,4 +1,4 @@
-import React from'react'
+import { Loader2 } from 'lucide-react'
 import { cn } from'@/lib/utils'
 
 // Liquid Loader Component
@@ -17,9 +17,9 @@ export function LiquidLoader({ className }) {
 // Spinner Component (Simple)
 export function Spinner({ size = 16, className }) {
  return (
- <div
- className={cn("animate-spin rounded-full border-2 border-current border-t-transparent", className)}
- style={{ width: size, height: size }}
+ <Loader2 
+ className={cn("animate-spin", className)} 
+ size={size}
  />
  )
 }
