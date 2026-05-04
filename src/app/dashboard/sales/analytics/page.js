@@ -48,7 +48,7 @@ export default function SalesAnalyticsPage() {
                     <h1 className="text-2xl font-bold tracking-tight text-admin-value uppercase">Sales Analytics</h1>
                     <p className="text-admin-label mt-1 font-medium">Deep dive into your revenue patterns and product performance.</p>
                 </div>
-                <div className="bg-white border border-openpos-border rounded-xl px-4 py-2 flex items-center gap-2 shadow-sm">
+                <div className="bg-card-bg border border-openpos-border rounded-xl px-4 py-2 flex items-center gap-2 shadow-sm">
                     <Calendar size={14} className="text-openpos-blue" />
                     <span className="text-[11px] font-bold text-admin-value uppercase tracking-widest">Year to Date</span>
                 </div>
@@ -169,20 +169,20 @@ export default function SalesAnalyticsPage() {
                         {topPerformingProducts.map((product, i) => (
                             <div key={i} className="flex items-center justify-between p-4 rounded-2xl bg-openpos-bg-subtle/30 border border-openpos-border/50">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-white border border-openpos-border flex items-center justify-center text-[14px] font-bold text-openpos-blue">
+                                    <div className="w-10 h-10 rounded-xl bg-card-bg border border-openpos-border flex items-center justify-center text-[14px] font-bold text-openpos-blue">
                                         {i + 1}
                                     </div>
                                     <div>
                                         <p className="text-[13px] font-bold text-admin-value">{product.name}</p>
                                         <p className="text-[10px] text-admin-dim font-bold uppercase">{product.sales} sales this month</p>
                                     </div>
-                                </div>
-                                <div className={cn(
-                                    "flex items-center gap-1 text-[11px] font-bold px-2 py-1 rounded-lg",
-                                    product.growth.startsWith('+') ? "text-openpos-blue bg-openpos-blue/10" : "text-openpos-red bg-openpos-red/10"
-                                )}>
-                                    {product.growth.startsWith('+') ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
-                                    {product.growth}
+                                    <span className={cn(
+                                        "text-[9px] px-1.5 py-0.5 rounded-md font-bold uppercase",
+                                        product.growth.startsWith('+') ? "bg-openpos-blue/10 text-openpos-blue" : "bg-openpos-red/10 text-openpos-red"
+                                    )}>
+                                        {product.growth.startsWith('+') ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
+                                        {product.growth}
+                                    </span>
                                 </div>
                             </div>
                         ))}
@@ -195,7 +195,7 @@ export default function SalesAnalyticsPage() {
 
 function AnalyticsCard({ title, value, change, isPositive, icon: Icon }) {
     return (
-        <div className="bg-white border border-openpos-border rounded-2xl p-4 shadow-sm">
+        <div className="bg-card-bg border border-openpos-border rounded-2xl p-4 shadow-sm">
             <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-openpos-blue/5 text-openpos-blue flex items-center justify-center shrink-0">
                     <Icon size={20} />

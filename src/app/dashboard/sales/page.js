@@ -59,10 +59,9 @@ export default function SalesManagementPage() {
                     <div className="relative">
                         <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-openpos-blue" size={18} />
                         <input 
-                            type="date"
-                            value={selectedDate}
-                            onChange={(e) => setSelectedDate(e.target.value)}
-                            className="bg-white border border-openpos-border text-admin-value pl-11 pr-5 py-3 rounded-xl font-bold text-[12px] hover:border-openpos-blue/30 transition-all uppercase tracking-widest shadow-sm outline-none focus:ring-2 focus:ring-openpos-blue/10"
+                            type="date" 
+                            className="bg-card-bg border border-openpos-border text-admin-value pl-11 pr-5 py-3 rounded-xl font-bold text-[12px] hover:border-openpos-blue/30 transition-all uppercase tracking-widest shadow-sm outline-none focus:ring-2 focus:ring-openpos-blue/10"
+                            defaultValue={new Date().toISOString().split('T')[0]}
                         />
                     </div>
                 </div>
@@ -139,52 +138,54 @@ export default function SalesManagementPage() {
                 </div>
             </div>
 
-            {/* Sales List */}
+            {/* Recent Transactions Table */}
             <div className="bg-card-bg border border-openpos-border rounded-3xl overflow-hidden shadow-sm">
                 <div className="p-6 border-b border-openpos-border flex items-center justify-between bg-openpos-bg-subtle/20">
                     <h3 className="text-sm font-bold text-admin-value uppercase tracking-widest flex items-center gap-2">
                         <History size={18} className="text-openpos-blue" />
-                        Transactions List
+                        Recent Transactions
                     </h3>
-                    <div className="flex items-center gap-3">
-                        <div className="relative">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-admin-dim" size={14} />
-                            <input placeholder="Search orders..." className="bg-white border border-openpos-border rounded-xl pl-9 pr-4 py-2 text-[12px] font-medium outline-none focus:ring-1 focus:ring-openpos-blue/30 w-64 transition-all" />
-                        </div>
+                    <div className="relative">
+                        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim" size={16} />
+                        <input placeholder="Search orders..." className="bg-card-bg border border-openpos-border rounded-xl pl-9 pr-4 py-2 text-[12px] font-medium outline-none focus:ring-1 focus:ring-openpos-blue/30 w-64 transition-all" />
                     </div>
                 </div>
+                
                 <div className="overflow-x-auto">
-                    <table className="w-full text-left">
+                    <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-openpos-bg-subtle/30">
-                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest">Sale ID</th>
-                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest">Time</th>
-                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest">Items</th>
-                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest">Payment</th>
-                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest text-right">Total</th>
-                                <th className="p-5"></th>
+                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest border-b border-openpos-border">Transaction ID</th>
+                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest border-b border-openpos-border">Date & Time</th>
+                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest border-b border-openpos-border">Customer</th>
+                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest border-b border-openpos-border">Items</th>
+                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest border-b border-openpos-border">Method</th>
+                                <th className="p-5 text-[10px] uppercase font-bold text-admin-dim tracking-widest border-b border-openpos-border text-right">Amount</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-openpos-border">
                             {recentTransactions.map((sale) => (
-                                <tr key={sale.id} className="group hover:bg-openpos-bg-subtle/50 transition-colors">
+                                <tr key={sale.id} className="hover:bg-openpos-bg-subtle/40 transition-colors">
                                     <td className="p-5 text-[13px] font-bold text-admin-value">{sale.id}</td>
-                                    <td className="p-5 text-[12px] font-medium text-admin-dim flex items-center gap-2">
-                                        <Clock size={12} />
-                                        {sale.date}
-                                    </td>
-                                    <td className="p-5 text-[13px] font-bold text-admin-value">{sale.items} items</td>
                                     <td className="p-5">
-                                        <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-openpos-blue/10 text-openpos-blue">
+                                        <div className="flex flex-col">
+                                            <span className="text-[13px] font-bold text-admin-value">{sale.date.split(',')[0]}</span>
+                                            <span className="text-[10px] text-admin-dim font-medium uppercase">{sale.date.split(',')[1]}</span>
+                                        </div>
+                                    </td>
+                                    <td className="p-5 text-[13px] font-bold text-admin-value">{sale.customer}</td>
+                                    <td className="p-5 text-[13px] font-bold text-admin-value">
+                                        <span className="px-2 py-0.5 bg-openpos-bg-subtle rounded-md text-[11px]">{sale.items} Items</span>
+                                    </td>
+                                    <td className="p-5">
+                                        <div className={cn(
+                                            "inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider",
+                                            sale.payment === 'Cash' ? "bg-blue-50 dark:bg-blue-900/30 text-openpos-blue" : "bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400"
+                                        )}>
                                             {sale.payment}
-                                        </span>
+                                        </div>
                                     </td>
                                     <td className="p-5 text-right font-bold text-admin-value">KES {sale.total.toLocaleString()}</td>
-                                    <td className="p-5 text-right">
-                                        <button className="p-2 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/10 rounded-lg transition-all">
-                                            <Printer size={16} />
-                                        </button>
-                                    </td>
                                 </tr>
                             ))}
                         </tbody>

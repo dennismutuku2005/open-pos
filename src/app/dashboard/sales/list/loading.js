@@ -16,7 +16,7 @@ export default function Loading() {
       </div>
 
       {/* Table Skeleton */}
-      <div className="bg-white border border-openpos-border rounded-3xl overflow-hidden shadow-sm">
+      <div className="bg-card-bg border border-openpos-border rounded-3xl overflow-hidden shadow-sm">
         <div className="p-6 border-b border-openpos-border flex justify-between bg-openpos-bg-subtle/10">
           <Skeleton className="h-8 w-40 rounded-xl" />
           <Skeleton className="h-10 w-72 rounded-xl" />
