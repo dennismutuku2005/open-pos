@@ -48,7 +48,7 @@ export default function LedgersPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-white border border-openpos-border rounded-2xl p-5 shadow-sm">
                     <div className="flex items-center gap-3 mb-2">
-                        <div className="w-8 h-8 rounded-lg bg-openpos-green/10 flex items-center justify-center text-openpos-green">
+                        <div className="w-8 h-8 rounded-lg bg-openpos-blue/10 flex items-center justify-center text-openpos-blue">
                             <ArrowUpRight size={16} />
                         </div>
                         <h3 className="text-[12px] font-bold text-admin-dim uppercase tracking-widest">Total Receivables</h3>
@@ -121,7 +121,7 @@ export default function LedgersPage() {
                                     <td className="p-4">
                                         <span className={cn(
                                             "px-2 py-1 text-[10px] font-bold rounded-md uppercase tracking-wider",
-                                            trx.type === 'Credit' ? "bg-openpos-green/10 text-openpos-green" : "bg-openpos-red/10 text-openpos-red"
+                                            trx.type === 'Credit' ? "bg-openpos-blue/10 text-openpos-blue" : "bg-openpos-red/10 text-openpos-red"
                                         )}>
                                             {trx.type}
                                         </span>
