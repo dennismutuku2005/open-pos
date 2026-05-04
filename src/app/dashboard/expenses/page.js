@@ -94,7 +94,7 @@ export default function ExpensesPage() {
                         </button>
                         <button 
                             onClick={() => exportExpenses('Excel')}
-                            className="px-4 py-2.5 text-admin-dim hover:text-openpos-green hover:bg-openpos-green/5 transition-all flex items-center gap-2"
+                            className="px-4 py-2.5 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/5 transition-all flex items-center gap-2"
                         >
                             <Upload size={16} />
                             <span className="text-[10px] font-bold uppercase tracking-widest">Excel</span>
@@ -208,7 +208,7 @@ export default function ExpensesPage() {
                                      <td className="py-2.5 px-6 text-center">
                                          <span className={cn(
                                              "px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-widest",
-                                             exp.status === 'Cleared' ? "bg-openpos-green/10 text-openpos-green" : "bg-yellow-100/50 text-yellow-700"
+                                             exp.status === 'Cleared' ? "bg-openpos-blue/10 text-openpos-blue" : "bg-yellow-100/50 text-yellow-700"
                                          )}>
                                              {exp.status}
                                          </span>
