@@ -166,7 +166,7 @@ export default function POSPage() {
                                 <h4 className="text-[12px] font-bold text-admin-value truncate">{item.name}</h4>
                                 <p className="text-[12px] font-bold text-admin-dim">KES {item.price}</p>
                             </div>
-                            <div className="flex items-center gap-2 bg-[#F8FAFC] px-2 py-1 rounded-lg border border-openpos-border h-fit self-center">
+                            <div className="flex items-center gap-2 bg-openpos-bg-subtle px-2 py-1 rounded-lg border border-openpos-border h-fit self-center">
                                 <button onClick={() => updateQuantity(item.id, -1)} className="text-admin-dim"><Minus size={14} /></button>
                                 <span className="text-[12px] font-bold text-admin-value">{item.quantity}</span>
                                 <button onClick={() => updateQuantity(item.id, 1)} className="text-admin-dim"><Plus size={14} /></button>
@@ -191,7 +191,7 @@ export default function POSPage() {
                         onClick={() => setPaymentMethod('mpesa')}
                         className={cn(
                             "w-full flex items-center justify-between p-4 rounded-2xl border-2 transition-all",
-                            paymentMethod === 'mpesa' ? "border-openpos-blue bg-openpos-blue/5" : "border-openpos-border bg-white hover:border-openpos-blue/30"
+                            paymentMethod === 'mpesa' ? "border-openpos-blue bg-openpos-blue/5" : "border-openpos-border bg-card-bg hover:border-openpos-blue/30"
                         )}
                     >
                         <div className="flex items-center gap-3">
@@ -210,7 +210,7 @@ export default function POSPage() {
                         onClick={() => setPaymentMethod('cash')}
                         className={cn(
                             "w-full flex items-center justify-between p-4 rounded-2xl border-2 transition-all",
-                            paymentMethod === 'cash' ? "border-openpos-blue bg-openpos-blue/5" : "border-openpos-border bg-white hover:border-openpos-blue/30"
+                            paymentMethod === 'cash' ? "border-openpos-blue bg-openpos-blue/5" : "border-openpos-border bg-card-bg hover:border-openpos-blue/30"
                         )}
                     >
                         <div className="flex items-center gap-3">
@@ -239,7 +239,7 @@ export default function POSPage() {
                     </div>
                     
                     <div className="bg-openpos-bg-subtle/50 border border-openpos-border p-4 rounded-2xl flex items-center gap-4">
-                        <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center border border-openpos-border">
+                        <div className="w-12 h-12 bg-card-bg rounded-xl shadow-sm flex items-center justify-center border border-openpos-border">
                             <Smartphone className="text-openpos-blue" size={24} />
                         </div>
                         <div>
@@ -254,7 +254,7 @@ export default function POSPage() {
                             <input 
                                 type="text"
                                 placeholder="e.g. 0712345678"
-                                className="w-full bg-white border border-openpos-border rounded-xl pl-11 pr-4 py-3 text-[14px] font-bold outline-none shadow-sm focus:ring-2 focus:ring-openpos-blue/20 focus:border-openpos-blue transition-all"
+                                className="w-full bg-card-bg border border-openpos-border rounded-xl pl-11 pr-4 py-3 text-[14px] font-bold outline-none shadow-sm focus:ring-2 focus:ring-openpos-blue/20 focus:border-openpos-blue transition-all"
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                                 autoFocus
@@ -335,7 +335,7 @@ export default function POSPage() {
 
     return (
         <div className={cn(
-            "flex bg-[#F1F5F9] font-figtree overflow-hidden",
+            "flex bg-background font-figtree overflow-hidden",
             isFullScreen ? "fixed inset-0 z-[1000] p-3 gap-3 h-screen" : "h-full gap-4"
         )}>
             {/* Left Terminal */}
@@ -344,10 +344,10 @@ export default function POSPage() {
                 {/* Fixed Header */}
                 <div className="flex items-center justify-between shrink-0 h-10">
                     <div className="flex items-center gap-2">
-                        <button onClick={() => setIsFullScreen(!isFullScreen)} className="w-8 h-8 bg-white rounded-lg border border-openpos-border flex items-center justify-center text-openpos-blue shadow-sm">
+                        <button onClick={() => setIsFullScreen(!isFullScreen)} className="w-8 h-8 bg-card-bg rounded-lg border border-openpos-border flex items-center justify-center text-openpos-blue shadow-sm">
                             <Menu size={15} />
                         </button>
-                        <div className="bg-white rounded-xl px-3 py-1.5 border border-openpos-border shadow-sm flex items-center gap-2">
+                        <div className="bg-card-bg rounded-xl px-3 py-1.5 border border-openpos-border shadow-sm flex items-center gap-2">
                             <Calendar size={13} className="text-openpos-blue" />
                             <span className="text-[11px] font-bold text-admin-value">29 May 2024</span>
                             <span className="text-openpos-border mx-0.5">|</span>
@@ -356,7 +356,7 @@ export default function POSPage() {
                         </div>
                     </div>
                     <div className="flex items-center gap-2">
-                        <button className="w-8 h-8 bg-white rounded-lg border border-openpos-border flex items-center justify-center text-openpos-blue">
+                        <button className="w-8 h-8 bg-card-bg rounded-lg border border-openpos-border flex items-center justify-center text-openpos-blue">
                             <Power size={15} />
                         </button>
                     </div>
@@ -367,7 +367,7 @@ export default function POSPage() {
                     <input 
                         type="text"
                         placeholder="Search items..."
-                        className="w-full bg-white border border-openpos-border rounded-xl pl-4 pr-10 py-2.5 text-[12px] font-medium outline-none shadow-sm"
+                        className="w-full bg-card-bg border border-openpos-border rounded-xl pl-4 pr-10 py-2.5 text-[12px] font-medium outline-none shadow-sm"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
@@ -384,7 +384,7 @@ export default function POSPage() {
                                 "px-4 py-1.5 rounded-lg font-bold text-[10px] uppercase tracking-widest whitespace-nowrap transition-all border",
                                 selectedCategory === cat 
                                     ? "bg-openpos-blue text-white border-openpos-blue shadow-sm" 
-                                    : "bg-white text-admin-dim border-openpos-border hover:bg-openpos-bg-subtle"
+                                    : "bg-card-bg text-admin-dim border-openpos-border hover:bg-openpos-bg-subtle"
                             )}
                         >
                             {cat}
@@ -398,7 +398,7 @@ export default function POSPage() {
                         {filteredProducts.map((product) => (
                             <div 
                                 key={product.id}
-                                className="bg-white border border-openpos-border rounded-2xl p-3 flex flex-col gap-3 shadow-sm cursor-pointer"
+                                className="bg-card-bg border border-openpos-border rounded-2xl p-3 flex flex-col gap-3 shadow-sm cursor-pointer"
                                 onClick={() => setCart(prev => {
                                     const exists = prev.find(i => i.id === product.id)
                                     if (exists) return prev.map(i => i.id === product.id ? { ...i, quantity: i.quantity + 1 } : i)
@@ -408,7 +408,7 @@ export default function POSPage() {
                                 <div className="aspect-[4/3] relative rounded-xl overflow-hidden bg-openpos-bg-subtle">
                                     <Image src={product.image} alt={product.name} fill className="object-cover" />
                                     <button 
-                                        className="absolute top-2 right-2 w-7 h-7 bg-white/80 backdrop-blur rounded-lg flex items-center justify-center text-admin-dim hover:text-openpos-blue hover:bg-white shadow-sm transition-all"
+                                        className="absolute top-2 right-2 w-7 h-7 bg-card-bg/80 backdrop-blur rounded-lg flex items-center justify-center text-admin-dim hover:text-openpos-blue hover:bg-card-bg shadow-sm transition-all"
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             setInfoModalProduct(product);
@@ -431,10 +431,10 @@ export default function POSPage() {
                     </div>
                 </div>
             </div>            {/* Right Column (Cart / Checkout Flow) */}
-            <div className="w-[360px] h-full bg-white border-l border-openpos-border shadow-lg flex flex-col overflow-hidden shrink-0">
+            <div className="w-[360px] h-full bg-card-bg border-l border-openpos-border shadow-lg flex flex-col overflow-hidden shrink-0">
                 
                 {/* Header */}
-                <div className="p-5 pb-4 border-b border-openpos-border bg-white shrink-0">
+                <div className="p-5 pb-4 border-b border-openpos-border bg-card-bg shrink-0">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                             <div className="w-8 h-8 bg-openpos-blue/10 rounded-lg flex items-center justify-center">
@@ -462,7 +462,7 @@ export default function POSPage() {
                 </div>
 
                 {/* Footer */}
-                <div className="p-6 bg-white border-t border-dashed border-openpos-border space-y-4 shrink-0">
+                <div className="p-6 bg-card-bg border-t border-dashed border-openpos-border space-y-4 shrink-0">
                     {checkoutStep !== 'processing' && checkoutStep !== 'success' && (
                         <div className="flex justify-between items-center mb-2">
                             <span className="text-[14px] font-bold text-admin-value uppercase">Total</span>

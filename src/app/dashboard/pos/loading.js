@@ -19,7 +19,7 @@ export default function Loading() {
         </div>
         <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3">
             {Array.from({ length: 8 }).map((_, i) => (
-                <div key={i} className="bg-white border border-openpos-border rounded-2xl p-3 space-y-3">
+                <div key={i} className="bg-card-bg border border-openpos-border rounded-2xl p-3 space-y-3">
                     <Skeleton className="aspect-[4/3] w-full rounded-xl" />
                     <Skeleton className="h-4 w-3/4 rounded" />
                     <div className="flex justify-between">
@@ -32,7 +32,7 @@ export default function Loading() {
       </div>
 
       {/* Right Column */}
-      <div className="w-[360px] bg-white border-l border-openpos-border flex flex-col p-6 space-y-6">
+      <div className="w-[360px] bg-card-bg border-l border-openpos-border flex flex-col p-6 space-y-6">
         <div className="flex items-center gap-3">
             <Skeleton className="h-10 w-10 rounded-xl" />
             <div className="space-y-1">
