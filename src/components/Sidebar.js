@@ -105,7 +105,6 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
             children: [
                 { name: 'Customers', href: '/dashboard/customers' },
                 { name: 'Suppliers', href: '/dashboard/suppliers' },
-                { name: 'Ledgers', href: '/dashboard/ledgers', badge: 'New' },
             ]
         },
 
@@ -114,10 +113,13 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
         {
             id: 'finance',
             name: 'Finance',
+            href: '/dashboard/finance',
             icon: Wallet,
             children: [
-                { name: 'Daybooks', href: '/dashboard/daybooks' },
-                { name: 'Balance Sheet', href: '/dashboard/balance-sheet' },
+                { name: 'Finance Overview', href: '/dashboard/finance' },
+                { name: 'Daybook', href: '/dashboard/finance/daybook' },
+                { name: 'Balance Sheet', href: '/dashboard/finance/balance-sheet' },
+                { name: 'General Ledger', href: '/dashboard/finance/ledger' },
             ]
         },
         
