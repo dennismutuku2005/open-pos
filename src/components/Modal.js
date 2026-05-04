@@ -158,14 +158,9 @@ export function Modal({
  config.btn
  )}
  >
- {isLoading ? (
- <Loader2 className="animate-spin" size={16} />
- ) : (
- <>
- {confirmText}
+ {isLoading && <Loader2 className="animate-spin" size={14} />}
+ <span>{confirmText}</span>
  {timer > 0 && <span>({timer}s)</span>}
- </>
- )}
  </button>
  </>
  )}
