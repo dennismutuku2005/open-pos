@@ -157,11 +157,11 @@ export default function CategoriesPage() {
                                 <tr key={cat.id} className="group hover:bg-openpos-bg-subtle transition-colors">
                                     <td className="px-6 py-2.5">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-lg overflow-hidden bg-white border border-openpos-border shrink-0 relative">
+                                            <div className="w-10 h-10 rounded-lg overflow-hidden bg-openpos-bg-subtle shrink-0 relative border border-openpos-border shadow-sm">
                                                 {cat.image ? (
                                                     <Image src={cat.image} alt={cat.name} fill className="object-cover" />
                                                 ) : (
-                                                    <div className="w-full h-full flex items-center justify-center text-admin-dim"><ImageIcon size={16} /></div>
+                                                    <div className="w-full h-full flex items-center justify-center text-admin-dim"><Tag size={16} /></div>
                                                 )}
                                             </div>
                                             <span className="text-[13px] font-bold text-admin-value">{cat.name}</span>
