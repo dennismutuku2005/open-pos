@@ -32,6 +32,8 @@ const products = [
 ]
 
 export default function POSPage() {
+    const [searchQuery, setSearchQuery] = useState('')
+    const [cart, setCart] = useState([])
     const [selectedCategory, setSelectedCategory] = useState('All')
     const [showClearCartModal, setShowClearCartModal] = useState(false)
     const [isFullScreen, setIsFullScreen] = useState(false)
