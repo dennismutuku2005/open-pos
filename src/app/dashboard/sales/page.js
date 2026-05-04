@@ -5,7 +5,7 @@ import {
     Calendar, Search, ShoppingBag, ShoppingCart, 
     TrendingUp, Package, History, ArrowUpRight,
     ArrowDownRight, MoreVertical, Edit2, Trash2,
-    ChevronRight, Activity, DollarSign
+    ChevronRight, Activity, DollarSign, Printer
 } from 'lucide-react'
 import { 
     AreaChart, Area, XAxis, YAxis, CartesianGrid, 

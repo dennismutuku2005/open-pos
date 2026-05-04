@@ -231,9 +231,6 @@ export default function PurchasesPage() {
                                                 >
                                                     <Trash2 size={12} />
                                                 </button>
-                                                <button className="p-2 bg-openpos-blue text-white rounded-lg shadow-lg shadow-openpos-blue/20 hover:scale-105 active:scale-95 transition-all">
-                                                    <ChevronRight size={14} />
-                                                </button>
                                             </div>
                                         </td>
                                     </tr>

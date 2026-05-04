@@ -120,9 +120,7 @@ export default function LedgersPage() {
                                         <span className="text-[13px] font-bold text-openpos-blue">KES {trx.balance.toLocaleString()}</span>
                                     </td>
                                     <td className="px-6 py-4 text-right">
-                                        <button className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-openpos-blue hover:border-openpos-blue/30 transition-all">
-                                            <ChevronRight size={14} />
-                                        </button>
+                                        <div className="w-10" /> {/* Spacer for alignment */}
                                     </td>
                                 </tr>
                             ))}
