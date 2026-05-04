@@ -144,11 +144,8 @@ export default function LoginPage() {
  disabled={isAuthenticating}
  className="w-full bg-openpos-blue text-white rounded-xl py-4 font-bold text-[13px] uppercase tracking-[2px] shadow-lg shadow-openpos-blue/20 transition-all flex items-center justify-center min-h-[52px]"
  >
- {isAuthenticating ? (
- <Loader2 className="animate-spin" size={20} />
- ) : (
- 'Sign In'
- )}
+ {isAuthenticating && <Loader2 className="animate-spin" size={20} />}
+ <span className={cn(isAuthenticating && "ml-2")}>Sign In</span>
  </button>
  </form>
  </div>
