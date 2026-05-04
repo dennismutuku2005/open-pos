@@ -12,6 +12,8 @@ import { toast } from 'sonner'
 import { Modal } from '@/components/Modal'
 import { generateReport, generateExcelReport } from '@/lib/pdf'
 
+import { Card } from '@/components/Card'
+
 // Mock Data
 const initialCategories = [
     { id: 1, name: 'Breads', type: 'Product', count: 45, image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80', desc: 'Freshly baked artisan breads.' },
@@ -60,7 +62,7 @@ export default function CategoriesPage() {
             setCategories(prev => prev.map(c => c.id === editingCategory.id ? { ...formData, id: c.id, count: c.count } : c))
             toast.success('Category updated')
         } else {
-            setCategories(prev => [...prev, { ...formData, id: Date.now(), count: 0 }])
+            setCategories(prev => [{ ...formData, id: Date.now(), count: 0 }, ...prev])
             toast.success('Category created')
         }
         setShowAddModal(false)
@@ -105,15 +107,15 @@ export default function CategoriesPage() {
     }
 
     return (
-        <div className="space-y-6 animate-in fade-in duration-500">
+        <div className="space-y-6 animate-in fade-in duration-500 pb-10">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-xl font-bold tracking-tight text-admin-value">Categories</h1>
-                    <p className="text-admin-label mt-1">Organize your products and services into groups.</p>
+                    <h1 className="text-xl font-bold tracking-tight text-admin-value uppercase">Categories</h1>
+                    <p className="text-[13px] font-medium text-admin-label mt-1">Organize your products and services into groups.</p>
                 </div>
                 <div className="flex items-center gap-3 w-full sm:w-auto">
-                    <div className="flex items-center bg-white border border-openpos-border rounded-xl overflow-hidden shadow-sm">
+                    <div className="flex items-center bg-card-bg border border-openpos-border rounded-xl overflow-hidden shadow-sm">
                         <button 
                             onClick={() => exportCategories('PDF')}
                             className="px-4 py-2.5 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/5 transition-all flex items-center gap-2 border-r border-openpos-border"
@@ -139,61 +141,81 @@ export default function CategoriesPage() {
                 </div>
             </div>
 
-            {/* Categories Table */}
-            <div className="bg-card-bg border border-openpos-border rounded-2xl overflow-hidden shadow-sm">
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
+            {/* Organizational Ledger */}
+            <Card 
+                noPadding
+                title="Management Console"
+                subtitle="Active grouping of services and products inventory"
+                headerAction={
+                    <div className="flex items-center gap-3">
+                        <div className="relative group">
+                            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors" size={14} />
+                            <input 
+                                placeholder="Search categories..." 
+                                className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-10 pr-4 py-2 text-[11px] font-bold text-admin-value outline-none focus:ring-2 focus:ring-openpos-blue/10 focus:border-openpos-blue w-64 transition-all"
+                            />
+                        </div>
+                    </div>
+                }
+            >
+                <div className="overflow-x-auto custom-scrollbar">
+                    <table className="w-full text-left whitespace-nowrap border-collapse text-[11px]">
                         <thead>
-                            <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border">
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Category</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Type</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest text-center">Items</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest">Description</th>
-                                <th className="px-6 py-3 text-[10px] font-bold text-admin-dim uppercase tracking-widest text-right">Actions</th>
+                            <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border text-[9px] font-bold text-admin-dim uppercase tracking-widest">
+                                <th className="px-6 py-4">Categorization Identity</th>
+                                <th className="px-6 py-4 text-center">Classification</th>
+                                <th className="px-6 py-4 text-center">Inventory Density</th>
+                                <th className="px-6 py-4">Internal Specification</th>
+                                <th className="px-6 py-4 text-right">Management</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-openpos-border">
                             {categories.map((cat) => (
-                                <tr key={cat.id} className="group hover:bg-openpos-bg-subtle transition-colors">
-                                    <td className="px-6 py-2.5">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-lg overflow-hidden bg-openpos-bg-subtle shrink-0 relative border border-openpos-border shadow-sm">
+                                <tr key={cat.id} className="group hover:bg-openpos-bg-subtle/40 transition-colors cursor-default">
+                                    <td className="px-6 py-4">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-10 h-10 rounded-xl overflow-hidden bg-openpos-bg-subtle shrink-0 relative border border-openpos-border shadow-sm group-hover:scale-105 transition-transform">
                                                 {cat.image ? (
                                                     <Image src={cat.image} alt={cat.name} fill className="object-cover" />
                                                 ) : (
                                                     <div className="w-full h-full flex items-center justify-center text-admin-dim"><Tag size={16} /></div>
                                                 )}
                                             </div>
-                                            <span className="text-[13px] font-bold text-admin-value">{cat.name}</span>
+                                            <span className="text-[12px] font-bold text-admin-value group-hover:text-openpos-blue transition-colors uppercase tracking-tight">{cat.name}</span>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-2.5">
+                                    <td className="px-6 py-4 text-center">
                                         <span className={cn(
-                                            "px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-widest",
-                                            cat.type === 'Service' ? "bg-openpos-blue/20 text-openpos-blue" : "bg-openpos-blue/10 text-openpos-blue"
+                                            "px-2.5 py-1 rounded-md text-[9px] font-bold uppercase tracking-widest border",
+                                            cat.type === 'Service' ? "bg-openpos-blue/5 text-openpos-blue border-openpos-blue/20" : "bg-openpos-blue/10 text-openpos-blue border-openpos-blue/10"
                                         )}>
                                             {cat.type}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-2.5 text-center">
-                                        <span className="text-[12px] font-bold text-admin-value bg-openpos-bg-subtle px-2 py-0.5 rounded-md border border-openpos-border">{cat.count}</span>
+                                    <td className="px-6 py-4 text-center">
+                                        <div className="flex flex-col items-center">
+                                            <span className="text-[11px] font-bold text-admin-value bg-openpos-bg-subtle px-2.5 py-1 rounded-lg border border-openpos-border shadow-sm">{cat.count.toLocaleString()}</span>
+                                            <span className="text-[8px] font-bold text-admin-dim uppercase tracking-widest mt-1 opacity-70">Linked Items</span>
+                                        </div>
                                     </td>
-                                    <td className="px-6 py-2.5">
-                                        <p className="text-[11px] text-admin-dim font-medium line-clamp-1 max-w-[300px]">{cat.desc || 'No description'}</p>
+                                    <td className="px-6 py-4">
+                                        <p className="text-[10px] text-admin-dim font-bold uppercase tracking-tight line-clamp-1 max-w-[300px] opacity-80">{cat.desc || 'No system specification defined'}</p>
                                     </td>
-                                    <td className="px-6 py-2.5 text-right">
-                                        <div className="flex items-center justify-end gap-1">
+                                    <td className="px-6 py-4 text-right">
+                                        <div className="flex items-center justify-end gap-1.5">
                                             <button 
                                                 onClick={() => handleEdit(cat)}
-                                                className="p-1.5 text-admin-dim hover:text-openpos-blue hover:bg-openpos-blue/5 rounded-lg transition-all"
+                                                className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-openpos-blue hover:border-openpos-blue/30 hover:bg-openpos-blue/5 transition-all"
+                                                title="Modify Group"
                                             >
-                                                <Edit2 size={14} />
+                                                <Edit2 size={12} />
                                             </button>
                                             <button 
                                                 onClick={() => handleDelete(cat)}
-                                                className="p-1.5 text-admin-dim hover:text-openpos-red hover:bg-openpos-red/5 rounded-lg transition-all"
+                                                className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim hover:text-red-400 hover:border-red-400/30 hover:bg-red-400/5 transition-all"
+                                                title="Purge Category"
                                             >
-                                                <Trash2 size={14} />
+                                                <Trash2 size={12} />
                                             </button>
                                         </div>
                                     </td>
@@ -202,35 +224,35 @@ export default function CategoriesPage() {
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </Card>
 
-            {/* Standardized Modal */}
+            {/* Save Modal */}
             <Modal
                 isOpen={showAddModal}
                 onClose={() => setShowAddModal(false)}
-                title={editingCategory ? 'Edit Category' : 'New Category'}
+                title={editingCategory ? 'Update Category' : 'New Category'}
                 description="Organize your items and services"
-                confirmText={editingCategory ? 'Update' : 'Create'}
+                confirmText={editingCategory ? 'Save Changes' : 'Create'}
                 onConfirm={handleSave}
                 icon={Layers}
                 maxWidth="max-w-lg"
             >
                 <div className="space-y-5">
                     <div className="space-y-1.5">
-                        <label className="text-[11px] font-bold text-admin-label uppercase tracking-widest ml-1">Category Name *</label>
+                        <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Category Name *</label>
                         <input 
                             name="name"
                             value={formData.name}
                             onChange={handleInputChange}
-                            className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30"
+                            className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none focus:ring-2 focus:ring-openpos-blue/10 transition-all"
                             placeholder="e.g. Pastries"
                         />
                     </div>
 
                     <div className="space-y-1.5">
-                        <label className="text-[11px] font-bold text-admin-label uppercase tracking-widest ml-1">Category Image</label>
-                        <div className="flex items-center gap-4 p-4 bg-openpos-bg-subtle rounded-2xl ring-1 ring-openpos-border">
-                            <div className="w-16 h-16 rounded-xl bg-white border border-openpos-border overflow-hidden flex items-center justify-center shrink-0 relative group">
+                        <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Identity Image</label>
+                        <div className="flex items-center gap-4 p-4 bg-openpos-bg-subtle rounded-2xl border border-openpos-border">
+                            <div className="w-16 h-16 rounded-xl bg-card-bg border border-openpos-border overflow-hidden flex items-center justify-center shrink-0 relative group">
                                 {formData.image ? (
                                     <>
                                         <Image src={formData.image} alt="Preview" fill className="object-cover" />
@@ -246,11 +268,11 @@ export default function CategoriesPage() {
                                 )}
                             </div>
                             <div className="flex-1">
-                                <label className="flex flex-col items-center justify-center w-full h-12 border-2 border-dashed border-openpos-border rounded-xl cursor-pointer hover:bg-white transition-all group">
+                                <label className="flex flex-col items-center justify-center w-full h-12 border-2 border-dashed border-openpos-border rounded-xl cursor-pointer hover:bg-card-bg transition-all group">
                                     <div className="flex items-center gap-2">
                                         <Upload size={14} className="text-admin-dim group-hover:text-openpos-blue transition-colors" />
-                                        <span className="text-[11px] font-bold text-admin-dim group-hover:text-admin-value transition-colors uppercase tracking-widest">
-                                            {formData.image ? 'Change' : 'Upload from PC'}
+                                        <span className="text-[10px] font-bold text-admin-dim group-hover:text-admin-value transition-colors uppercase tracking-widest">
+                                            {formData.image ? 'Change' : 'Upload File'}
                                         </span>
                                     </div>
                                     <input type="file" className="hidden" accept="image/*" onChange={handleImageUpload} />
@@ -260,17 +282,17 @@ export default function CategoriesPage() {
                     </div>
 
                     <div className="space-y-1.5">
-                        <label className="text-[11px] font-bold text-admin-label uppercase tracking-widest ml-1">Category Type</label>
+                        <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Category Classification</label>
                         <div className="grid grid-cols-2 gap-3">
                             {['Product', 'Service'].map(type => (
                                 <button 
                                     key={type}
                                     onClick={() => setFormData(prev => ({ ...prev, type }))}
                                     className={cn(
-                                        "py-3 rounded-2xl text-[12px] font-bold border transition-all",
+                                        "py-3 rounded-xl text-[11px] font-bold border transition-all uppercase tracking-widest",
                                         formData.type === type 
                                             ? "bg-openpos-blue/10 border-openpos-blue text-openpos-blue shadow-sm" 
-                                            : "bg-openpos-bg-subtle border-transparent text-admin-dim hover:bg-white"
+                                            : "bg-openpos-bg-subtle border-transparent text-admin-dim hover:bg-card-bg"
                                     )}
                                 >
                                     {type}
@@ -280,34 +302,34 @@ export default function CategoriesPage() {
                     </div>
 
                     <div className="space-y-1.5">
-                        <label className="text-[11px] font-bold text-admin-label uppercase tracking-widest ml-1">Description</label>
+                        <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Internal Description</label>
                         <textarea 
                             name="desc"
                             rows="3"
                             value={formData.desc}
                             onChange={handleInputChange}
-                            className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border focus:ring-openpos-blue/30 resize-none"
+                            className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none focus:ring-2 focus:ring-openpos-blue/10 transition-all resize-none"
                             placeholder="Brief category details..."
                         />
                     </div>
                 </div>
             </Modal>
 
-            {/* Delete Confirmation Modal */}
+            {/* Delete Modal */}
             <Modal
                 isOpen={showDeleteModal}
                 onClose={() => setShowDeleteModal(false)}
-                title="Delete Category"
-                description={`Are you sure you want to delete "${deletingCategory?.name}"?`}
+                title="Remove Category"
+                description={`Delete "${deletingCategory?.name}"?`}
                 type="danger"
                 icon={Trash2}
-                confirmText="Delete"
+                confirmText="Delete Category"
                 confirmCountdown={5}
                 onConfirm={confirmDelete}
             >
-                <div className="p-4 bg-red-50 rounded-2xl border border-red-100">
-                    <p className="text-[12px] text-red-600 font-medium leading-relaxed">
-                        This will permanently remove the category from your list. Products currently assigned to this category will remain, but they will no longer have a category assigned.
+                <div className="p-4 bg-openpos-red/5 border border-openpos-red/10 rounded-2xl">
+                    <p className="text-[11px] text-openpos-red font-bold uppercase tracking-tight leading-relaxed">
+                        This will permanently remove the category. Products currently assigned to this category will become unclassified.
                     </p>
                 </div>
             </Modal>
