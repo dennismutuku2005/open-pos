@@ -11,8 +11,8 @@ import { cn } from '@/lib/utils'
 
 // Mock Data
 const expiredData = [
-    { id: 9, name: 'Thermal Receipt Paper (Roll)', category: 'Consumables', expiredOn: '2026-03-15', stock: 5, value: 1200 },
-    { id: 10, name: 'Cleaning Solvent 500ml', category: 'Maintenance', expiredOn: '2026-04-20', stock: 2, value: 3500 },
+    { id: 9, name: 'Thermal Receipt Paper (Roll)', category: 'Consumables', expiredOn: '2026-03-15', stock: 5, value: 1200, image: 'https://images.unsplash.com/photo-1594122230689-45899d9e6f69?w=400&q=80' },
+    { id: 10, name: 'Cleaning Solvent 500ml', category: 'Maintenance', expiredOn: '2026-04-20', stock: 2, value: 3500, image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400&q=80' },
 ]
 
 export default function ExpiredPage() {
