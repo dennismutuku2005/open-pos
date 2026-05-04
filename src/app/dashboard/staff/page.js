@@ -472,7 +472,7 @@ export default function StaffManagementPage() {
                                                 "w-4 h-4 rounded-md border flex items-center justify-center transition-all mt-0.5",
                                                 isSelected
                                                     ? "bg-openpos-blue border-openpos-blue"
-                                                    : "bg-white border-openpos-border group-hover:border-openpos-blue/40"
+                                                    : "bg-card-bg border-openpos-border group-hover:border-openpos-blue/40"
                                             )}>
                                                 {isSelected && <BadgeCheck size={10} className="text-white" />}
                                             </div>
@@ -493,7 +493,7 @@ export default function StaffManagementPage() {
                             </div>
                         </div>
                     ) : (
-                        <div className="p-4 bg-red-50/50 border border-red-100 rounded-xl flex items-center gap-3">
+                        <div className="p-4 bg-openpos-red/5 border border-openpos-red/10 rounded-xl flex items-center gap-3">
                             <ShieldAlert className="text-red-400 shrink-0" size={16} />
                             <p className="text-[10px] text-red-700/70 font-bold uppercase tracking-tight leading-relaxed">
                                 Administrator accounts have full system access by default. Multi-user policies are not required for this role.
