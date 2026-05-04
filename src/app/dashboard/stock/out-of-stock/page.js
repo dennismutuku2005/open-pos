@@ -1,8 +1,8 @@
 "use client"
 
 import React, { useState } from 'react'
-import { 
-    Package, Search, Filter, AlertCircle, 
+import {
+    Package, Search, Filter, AlertCircle,
     MoreVertical, ShoppingCart, RefreshCcw,
     XCircle, AlertTriangle
 } from 'lucide-react'
@@ -11,15 +11,15 @@ import { cn } from '@/lib/utils'
 
 // Mock Data
 const outOfStockData = [
-    { id: 6, name: 'Wireless Headphones Pro', category: 'Audio', lastStock: 0, reorderPoint: 5, status: 'Out of Stock', image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&q=80' },
-    { id: 7, name: '4K HDMI Cable 2m', category: 'Accessories', lastStock: 0, reorderPoint: 10, status: 'Critical', image: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&q=80' },
-    { id: 8, name: 'Laptop Stand Aluminum', category: 'Furniture', lastStock: 2, reorderPoint: 5, status: 'Low Stock', image: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=400&q=80' },
+    { id: 6, name: 'Wireless Headphones Pro', category: 'Audio', lastStock: 0, reorderPoint: 5, status: 'Out of Stock' },
+    { id: 7, name: '4K HDMI Cable 2m', category: 'Accessories', lastStock: 0, reorderPoint: 10, status: 'Critical' },
+    { id: 8, name: 'Laptop Stand Aluminum', category: 'Furniture', lastStock: 2, reorderPoint: 5, status: 'Low Stock' },
 ]
 
 export default function OutOfStockPage() {
     const [searchTerm, setSearchTerm] = useState('')
 
-    const filteredStock = outOfStockData.filter(s => 
+    const filteredStock = outOfStockData.filter(s =>
         s.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
 
@@ -54,8 +54,8 @@ export default function OutOfStockPage() {
                 <div className="p-5 border-b border-openpos-border flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="relative w-full md:w-96">
                         <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim" size={16} />
-                        <input 
-                            placeholder="Search alerts..." 
+                        <input
+                            placeholder="Search alerts..."
                             className="w-full bg-openpos-bg-subtle border-none rounded-xl pl-11 pr-4 py-2.5 text-[13px] font-medium outline-none ring-1 ring-transparent focus:ring-openpos-red/20 transition-all"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
