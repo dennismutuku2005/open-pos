@@ -35,7 +35,7 @@ export function Card({
  )}
  </div>
  )}
- <div className={cn(!noPadding &&"p-6")}>
+ <div className={cn(!noPadding &&"p-4 md:p-6")}>
  {children}
  </div>
  </div>
@@ -54,8 +54,8 @@ export function StatCard({
  const colorClasses = {
  blue:"text-openpos-blue bg-openpos-blue/10 border-openpos-blue/10",
  red:"text-openpos-red bg-openpos-red/10 border-openpos-red/10",
- purple:"text-purple-600 bg-purple-50 border-purple-100",
- green:"text-emerald-600 bg-emerald-50 border-emerald-100",
+ purple:"text-purple-500 bg-purple-500/10 border-purple-500/10",
+ green:"text-emerald-500 bg-emerald-500/10 border-emerald-500/10",
  }
 
  return (
@@ -71,9 +71,9 @@ export function StatCard({
  {Icon && <Icon size={18} />}
  </div>
  <div className="flex-1 min-w-0">
- <p className="text-[10px] font-bold text-admin-dim uppercase tracking-wider">{title}</p>
+ <p className="text-[8.5px] sm:text-[10px] font-bold text-admin-dim uppercase tracking-wider truncate" title={title}>{title}</p>
  <div className="flex flex-col mt-0.5">
- <p className="text-lg font-bold text-admin-value leading-none truncate tracking-tight">{value}</p>
+ <p className="text-base sm:text-lg font-bold text-admin-value leading-none truncate tracking-tight" title={value}>{value}</p>
  {change && (
  <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 mt-1">
  <span className={cn(

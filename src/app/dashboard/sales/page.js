@@ -73,7 +73,7 @@ export default function SalesManagementPage() {
  </div>
 
  {/* Top Stats */}
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+ <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
  <StatCard title="Today's Sales"value="KES 124,050"change="+12% vs yesterday"isPositive={true} icon={DollarSign} color="blue"/>
  <StatCard title="Average Ticket"value="KES 855"change="+2% margin"isPositive={true} icon={ShoppingCart} color="blue"/>
  <StatCard title="Volume Sold"value="342 Units"change="Across 145 orders"isPositive={true} icon={Package} color="blue"/>

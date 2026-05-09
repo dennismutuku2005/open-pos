@@ -84,7 +84,7 @@ export default function DashboardLayout({ children }) {
  {/* Main Content Area */}
  <main className={cn(
 "transition-all duration-500 ease-in-out h-screen flex flex-col overflow-hidden",
- isZenMode ?"pl-16": isSidebarOpen ?"md:pl-64":"pl-16"
+ isZenMode ?"pl-0 md:pl-16": isSidebarOpen ?"pl-0 md:pl-64":"pl-0 md:pl-16"
  )}>
  {/* Header */}
  {!isZenMode && (
@@ -159,7 +159,7 @@ export default function DashboardLayout({ children }) {
 
  <div className={cn(
 "flex-1 overflow-y-auto overflow-x-hidden transition-all duration-500 bg-openpos-bg",
- isZenMode ?"p-0":"px-6 py-3"
+ isZenMode ?"p-0":"px-3 md:px-6 py-3"
  )}>
  <div className={cn(
  pathname ==='/dashboard/pos'?"h-full":"max-w-[1600px] mx-auto"

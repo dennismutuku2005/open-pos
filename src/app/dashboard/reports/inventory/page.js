@@ -72,7 +72,7 @@ export default function InventoryReportPage() {
  </div>
 
  {/* Performance Stats */}
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+ <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
  <StatCard title="Active SKUs"value="156 Items"change="+4 New"isPositive={true} icon={Package} color="blue"/>
  <StatCard title="Stock Value"value="KES 1.2M"change="+KES 45K"isPositive={true} icon={Layers} color="blue"/>
  <StatCard title="Top Movers"value="Bakery"change="65% Share"isPositive={true} icon={TrendingUp} color="blue"/>

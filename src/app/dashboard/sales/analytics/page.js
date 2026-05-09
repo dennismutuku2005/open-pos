@@ -55,7 +55,7 @@ export default function SalesAnalyticsPage() {
  </div>
 
  {/* Analytics Stats */}
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+ <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
  <AnalyticsCard title="Gross Margin"value="38.5%"change="+2.4%"isPositive={true} icon={TrendingUp} />
  <AnalyticsCard title="Avg Transaction"value="KES 8,420"change="+12%"isPositive={true} icon={DollarSign} />
  <AnalyticsCard title="Customer LTV"value="KES 45,000"change="-0.5%"isPositive={false} icon={Activity} />

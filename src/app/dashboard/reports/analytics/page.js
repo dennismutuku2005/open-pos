@@ -76,7 +76,7 @@ export default function AnalyticsReportPage() {
  </div>
 
  {/* Performance Stats */}
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+ <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
  <StatCard title="Conversion Rate"value="18.5%"change="+2.4%"isPositive={true} icon={Target} color="blue"/>
  <StatCard title="Peak Traffic"value="06:00 PM"change="920 Trans"isPositive={true} icon={Zap} color="blue"/>
  <StatCard title="Avg. Basket"value="KES 1,240"change="+KES 150"isPositive={true} icon={ShoppingBag} color="blue"/>

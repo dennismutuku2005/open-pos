@@ -101,7 +101,7 @@ export default function SalesReportPage() {
  </div>
 
  {/* Quick Stats Grid */}
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+ <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
  <StatCard title="Gross Revenue"value="KES 374,050"change="+12%"isPositive={true} icon={BadgeCent} color="blue"/>
  <StatCard title="Net Profit"value="KES 148,200"change="+8%"isPositive={true} icon={TrendingUp} color="blue"/>
  <StatCard title="Total Expenses"value="KES 42,100"change="-4%"isPositive={false} icon={Wallet} color="red"/>

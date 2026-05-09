@@ -359,7 +359,7 @@ export default function StaffManagementPage() {
  footer={null}
  >
  <form onSubmit={handleSubmit} className="space-y-4 pt-2">
- <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+ <div className="grid grid-cols-2 sm:grid-cols-2 gap-4">
  <div className="space-y-1">
  <label className="text-[9px] font-bold text-admin-dim uppercase ml-1">Full Name</label>
  <input
@@ -385,7 +385,7 @@ export default function StaffManagementPage() {
  </div>
  </div>
  
- <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+ <div className="grid grid-cols-2 sm:grid-cols-2 gap-4">
  <div className="space-y-1">
  <label className="text-[9px] font-bold text-admin-dim uppercase ml-1">Phone</label>
  <input
@@ -422,7 +422,7 @@ export default function StaffManagementPage() {
  </div>
  </div>
  
- <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+ <div className="grid grid-cols-2 sm:grid-cols-2 gap-4">
  <div className="space-y-1">
  <label className="text-[9px] font-medium text-gray-400 uppercase ml-1">Role</label>
  <select
@@ -454,7 +454,7 @@ export default function StaffManagementPage() {
  <Lock size={12} className="text-openpos-blue"/>
  System Policies & Permissions
  </label>
- <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+ <div className="grid grid-cols-2 sm:grid-cols-2 gap-2">
  {AVAILABLE_POLICIES.map(policy => {
  const isSelected = formData.policies?.includes(policy.id)
  return (

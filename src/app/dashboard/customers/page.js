@@ -146,7 +146,7 @@ export default function CustomersPage() {
  </div>
 
  {/* Stats */}
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+ <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
  <StatCard title="Total Customers"value="1,284"change="+12"isPositive={true} icon={Users} color="blue"/>
  <StatCard title="Repeat Customers"value="72%"change="+5%"isPositive={true} icon={ShoppingBag} color="blue"/>
  <StatCard title="Loyalty Issued"value="45.2k"change="+1.2k"isPositive={true} icon={Trophy} color="blue"/>

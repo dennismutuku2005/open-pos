@@ -68,7 +68,7 @@ export default function DashboardPage() {
  </div>
 
  {/* Stats Grid */}
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+ <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
  <StatCard title="Total Sales Today"value="KES 124,050"change="+12.5%"isPositive={true} icon={DollarSign} color="blue"/>
  <StatCard title="Products In"value="1,420"change="+3.2%"isPositive={true} icon={Package} color="blue"/>
  <StatCard title="Products Expired"value="12"change="+2 since yesterday"isPositive={false} icon={AlertTriangle} color="red"/>

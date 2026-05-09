@@ -68,7 +68,7 @@ export default function ProfitLossPage() {
  </div>
 
  {/* Fiscal Matrix */}
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+ <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
  <StatCard title="Gross Revenue"value="KES 670,000"change="+12.5%"isPositive={true} icon={DollarSign} color="blue"/>
  <StatCard title="Operating Costs"value="KES 400,000"change="+5.2%"isPositive={false} icon={Wallet} color="red"/>
  <StatCard title="Net Profit"value="KES 270,000"change="+18.4%"isPositive={true} icon={TrendingUp} color="blue"/>

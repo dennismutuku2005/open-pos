@@ -140,7 +140,7 @@ export default function ExpensesPage() {
  </div>
 
  {/* Metrics */}
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+ <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
  <StatCard title="Monthly Total"value="KES 2,450"change="+12%"isPositive={false} icon={TrendingDown} color="blue"/>
  <StatCard title="Pending Approval"value="KES 120"change="1 Record"isPositive={true} icon={Clock} color="blue"/>
  <StatCard title="Budget Usage"value="65%"change="Within Limit"isPositive={true} icon={BarChart3} color="blue"/>
