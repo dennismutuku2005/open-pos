@@ -7,7 +7,7 @@ import {
  ArrowLeft, MoreHorizontal, Package,
  Filter, X, CheckCircle2, Phone, Printer,
  Smartphone, Banknote, Receipt, Download,
- Menu, Power, Edit3, Ticket, QrCode, Calendar,
+ Menu, Power, Edit3, Ticket, QrCode, Calendar, Maximize, Minimize,
  Loader2, Info, Tag
 } from'lucide-react'
 import { Modal } from'@/components/Modal'
@@ -345,7 +345,7 @@ export default function POSPage() {
  <div className="flex items-center justify-between shrink-0 h-10">
  <div className="flex items-center gap-2">
  <button onClick={() => setIsFullScreen(!isFullScreen)} className="w-8 h-8 bg-card-bg rounded-lg border border-openpos-border flex items-center justify-center text-openpos-blue shadow-sm">
- <Menu size={15} />
+ {isFullScreen ? <Minimize size={15} /> : <Maximize size={15} />}
  </button>
  <div className="bg-card-bg rounded-lg px-3 py-1.5 border border-openpos-border shadow-sm flex items-center gap-2">
  <Calendar size={13} className="text-openpos-blue"/>
