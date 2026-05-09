@@ -114,7 +114,7 @@ export function Modal({
  <div className="flex items-start justify-between mb-4">
  <div className="flex flex-col gap-1">
  {CustomIcon && (
- <div className={cn("w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 mb-4 border transition-colors", config.bg, config.color, config.border)}>
+ <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center shrink-0 mb-4 border transition-colors", config.bg, config.color, config.border)}>
  <Icon size={20} />
  </div>
  )}
@@ -123,7 +123,7 @@ export function Modal({
  </div>
  <button
  onClick={onClose}
- className="p-2 rounded-xl text-admin-dim transition-all"
+ className="p-2 rounded-lg text-admin-dim transition-all"
  >
  <X size={18} />
  </button>
@@ -145,7 +145,7 @@ export function Modal({
  <button
  onClick={onClose}
  disabled={isLoading}
- className="flex-1 px-4 py-3 bg-card-bg border border-openpos-border text-admin-dim rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all disabled:opacity-50"
+ className="flex-1 px-4 py-3 bg-card-bg border border-openpos-border text-admin-dim rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all disabled:opacity-50"
  >
  {cancelText}
  </button>
@@ -154,7 +154,7 @@ export function Modal({
  onClick={onConfirm}
  disabled={isLoading || timer > 0}
  className={cn(
-"flex-1 px-4 py-3 text-white rounded-xl text-[10px] font-medium uppercase tracking-widest transition-all shadow-lg disabled:opacity-50 flex items-center justify-center gap-2",
+"flex-1 px-4 py-3 text-white rounded-lg text-[10px] font-medium uppercase tracking-widest transition-all shadow-lg disabled:opacity-50 flex items-center justify-center gap-2",
  config.btn
  )}
  >

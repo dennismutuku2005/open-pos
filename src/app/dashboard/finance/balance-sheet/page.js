@@ -23,13 +23,13 @@ export default function BalanceSheetPage() {
  <p className="text-[13px] font-medium text-admin-label mt-1">Strategic snapshot of organizational financial position and equity distribution.</p>
  </div>
  <div className="flex gap-3 w-full sm:w-auto">
- <button className="flex-1 sm:flex-none bg-card-bg border border-openpos-border text-admin-value px-4 py-2.5 rounded-xl font-bold text-[11px] flex items-center justify-center gap-2 transition-all uppercase tracking-widest shadow-sm">
+ <button className="flex-1 sm:flex-none bg-card-bg border border-openpos-border text-admin-value px-4 py-2.5 rounded-lg font-bold text-[11px] flex items-center justify-center gap-2 transition-all uppercase tracking-widest shadow-sm">
  <Calendar size={16} />
  As of Today
  </button>
  <button 
  onClick={downloadSheet}
- className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
+ className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-lg font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
  >
  <Download size={18} />
  Export Ledger
@@ -134,7 +134,7 @@ export default function BalanceSheetPage() {
  </div>
  </div>
 
- <div className="flex justify-between items-center text-[15px] font-bold border-t-2 border-admin-value pt-4 bg-openpos-bg-subtle/30 px-4 py-3 rounded-xl">
+ <div className="flex justify-between items-center text-[15px] font-bold border-t-2 border-admin-value pt-4 bg-openpos-bg-subtle/30 px-4 py-3 rounded-lg">
  <span className="uppercase tracking-[2px] text-admin-value">Aggregate Assets</span>
  <span className="text-openpos-blue tabular-nums">KES 980,500.00</span>
  </div>
@@ -195,7 +195,7 @@ export default function BalanceSheetPage() {
  </div>
  </div>
 
- <div className="flex justify-between items-center text-[15px] font-bold border-t-2 border-admin-value pt-4 bg-openpos-bg-subtle/30 px-4 py-3 rounded-xl">
+ <div className="flex justify-between items-center text-[15px] font-bold border-t-2 border-admin-value pt-4 bg-openpos-bg-subtle/30 px-4 py-3 rounded-lg">
  <span className="uppercase tracking-[2px] text-admin-value">Aggregate Liab. & Equity</span>
  <span className="text-openpos-blue tabular-nums">KES 980,500.00</span>
  </div>

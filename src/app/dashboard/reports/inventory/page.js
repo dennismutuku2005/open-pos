@@ -49,7 +49,7 @@ export default function InventoryReportPage() {
  <div className="flex items-center gap-3">
  <button 
  onClick={handleRefresh}
- className="p-2.5 bg-card-bg border border-openpos-border rounded-xl text-admin-dim transition-all"
+ className="p-2.5 bg-card-bg border border-openpos-border rounded-lg text-admin-dim transition-all"
  >
  <RefreshCw size={16} className={cn(loading &&"animate-spin")} />
  </button>
@@ -59,7 +59,7 @@ export default function InventoryReportPage() {
  setTimeout(() => setLoading(false), 2000);
  }}
  disabled={loading}
- className="bg-openpos-blue text-white px-6 py-2.5 rounded-xl font-bold text-[11px] flex items-center gap-2 transition-all uppercase tracking-widest min-w-[160px] justify-center"
+ className="bg-openpos-blue text-white px-6 py-2.5 rounded-lg font-bold text-[11px] flex items-center gap-2 transition-all uppercase tracking-widest min-w-[160px] justify-center"
  >
  {loading ? (
  <Loader2 size={16} className="animate-spin" />
@@ -92,9 +92,9 @@ export default function InventoryReportPage() {
  >
  <div className="space-y-2 mt-4">
  {topProducts.map((p, i) => (
- <div key={p.id} className="flex items-center justify-between p-4 rounded-2xl bg-openpos-bg-subtle/30 border border-openpos-border transition-all group cursor-default">
+ <div key={p.id} className="flex items-center justify-between p-4 rounded-lg bg-openpos-bg-subtle/30 border border-openpos-border transition-all group cursor-default">
  <div className="flex items-center gap-4">
- <div className="w-10 h-10 rounded-xl bg-openpos-blue/5 text-openpos-blue border border-openpos-blue/10 font-bold flex items-center justify-center text-[12px] transition-transform">
+ <div className="w-10 h-10 rounded-lg bg-openpos-blue/5 text-openpos-blue border border-openpos-blue/10 font-bold flex items-center justify-center text-[12px] transition-transform">
  #{i + 1}
  </div>
  <div>
@@ -128,9 +128,9 @@ export default function InventoryReportPage() {
  >
  <div className="space-y-2 mt-4">
  {leastProducts.map((p, i) => (
- <div key={p.id} className="flex items-center justify-between p-4 rounded-2xl bg-openpos-bg-subtle/30 border border-openpos-border transition-all group cursor-default">
+ <div key={p.id} className="flex items-center justify-between p-4 rounded-lg bg-openpos-bg-subtle/30 border border-openpos-border transition-all group cursor-default">
  <div className="flex items-center gap-4">
- <div className="w-10 h-10 rounded-xl bg-red-500/5 text-red-400 border border-red-500/10 font-bold flex items-center justify-center text-[12px] transition-transform">
+ <div className="w-10 h-10 rounded-lg bg-red-500/5 text-red-400 border border-red-500/10 font-bold flex items-center justify-center text-[12px] transition-transform">
  #{i + 1}
  </div>
  <div>
@@ -165,10 +165,10 @@ export default function InventoryReportPage() {
  <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors"size={14} />
  <input 
  placeholder="Search inventory..."
- className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-10 pr-4 py-1.5 text-[11px] font-bold text-admin-value outline-none w-64 transition-all"
+ className="bg-openpos-bg-subtle border border-openpos-border rounded-lg pl-10 pr-4 py-1.5 text-[11px] font-bold text-admin-value outline-none w-64 transition-all"
  />
  </div>
- <button className="p-2 bg-card-bg border border-openpos-border rounded-xl text-admin-dim transition-all">
+ <button className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim transition-all">
  <Filter size={14} />
  </button>
  </div>

@@ -32,7 +32,7 @@ export function GlobalFilters({ onFilterChange, defaultDateRange ='Today', showD
  <div className="relative w-full sm:w-auto">
  <button
  onClick={() => { setIsRouterOpen(!isRouterOpen); setIsDateOpen(false); }}
- className="flex items-center justify-between gap-3 px-4 py-2.5 bg-card-bg border border-openpos-border rounded-xl transition-all w-full sm:w-48 text-left group"
+ className="flex items-center justify-between gap-3 px-4 py-2.5 bg-card-bg border border-openpos-border rounded-lg transition-all w-full sm:w-48 text-left group"
  >
  <div className="flex items-center gap-2 overflow-hidden">
  <Router size={16} className="text-admin-dim transition-colors shrink-0"/>
@@ -44,7 +44,7 @@ export function GlobalFilters({ onFilterChange, defaultDateRange ='Today', showD
  {isRouterOpen && (
  <>
  <div className="fixed inset-0 z-40"onClick={() => setIsRouterOpen(false)} />
- <div className="absolute top-full left-0 mt-2 w-full sm:w-56 bg-card-bg border border-openpos-border rounded-xl shadow-2xl z-50 py-2 animate-in fade-in zoom-in duration-200 max-h-[300px] overflow-y-auto transition-colors duration-300">
+ <div className="absolute top-full left-0 mt-2 w-full sm:w-56 bg-card-bg border border-openpos-border rounded-lg shadow-2xl z-50 py-2 animate-in fade-in zoom-in duration-200 max-h-[300px] overflow-y-auto transition-colors duration-300">
  {routers.map((router) => (
  <button
  key={router}
@@ -74,7 +74,7 @@ export function GlobalFilters({ onFilterChange, defaultDateRange ='Today', showD
  setIsRouterOpen(false);
  setDateView('presets');
  }}
- className="flex items-center justify-between gap-3 px-4 py-2.5 bg-card-bg border border-openpos-border rounded-xl transition-all w-full sm:w-52 text-left group"
+ className="flex items-center justify-between gap-3 px-4 py-2.5 bg-card-bg border border-openpos-border rounded-lg transition-all w-full sm:w-52 text-left group"
  >
  <div className="flex items-center gap-2 overflow-hidden">
  <CalendarIcon size={16} className="text-admin-dim transition-colors shrink-0"/>
@@ -86,7 +86,7 @@ export function GlobalFilters({ onFilterChange, defaultDateRange ='Today', showD
  {isDateOpen && (
  <>
  <div className="fixed inset-0 z-40"onClick={() => setIsDateOpen(false)} />
- <div className="absolute top-full right-0 mt-2 w-full sm:w-72 bg-card-bg border border-openpos-border rounded-xl shadow-2xl z-50 overflow-hidden animate-in fade-in zoom-in duration-200 transition-colors duration-300">
+ <div className="absolute top-full right-0 mt-2 w-full sm:w-72 bg-card-bg border border-openpos-border rounded-lg shadow-2xl z-50 overflow-hidden animate-in fade-in zoom-in duration-200 transition-colors duration-300">
  {dateView ==='presets'? (
  <div className="py-2">
  <div className="px-4 py-2 border-b border-openpos-border mb-1">

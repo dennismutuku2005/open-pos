@@ -41,14 +41,14 @@ export default function OutOfStockPage() {
  <p className="text-admin-label mt-1">Products that require immediate replenishment.</p>
  </div>
  <div className="flex items-center gap-3">
- <button className="bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[12px] uppercase flex items-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all">
+ <button className="bg-openpos-blue text-white px-5 py-2.5 rounded-lg font-bold text-[12px] uppercase flex items-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all">
  <ShoppingCart size={16} /> Create Purchase Order
  </button>
  </div>
  </div>
 
  {/* Warning Banner */}
- <div className="bg-openpos-red/5 border border-openpos-red/10 rounded-2xl p-4 flex items-center gap-4">
+ <div className="bg-openpos-red/5 border border-openpos-red/10 rounded-lg p-4 flex items-center gap-4">
  <div className="w-10 h-10 rounded-full bg-openpos-red/10 flex items-center justify-center text-openpos-red shrink-0">
  <AlertTriangle size={20} />
  </div>
@@ -65,7 +65,7 @@ export default function OutOfStockPage() {
  <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim"size={16} />
  <input
  placeholder="Search alerts..."
- className="w-full bg-openpos-bg-subtle border-none rounded-xl pl-11 pr-4 py-2.5 text-[13px] font-medium outline-none ring-1 ring-transparent transition-all"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg pl-11 pr-4 py-2.5 text-[13px] font-medium outline-none ring-1 ring-transparent transition-all"
  value={searchTerm}
  onChange={(e) => setSearchTerm(e.target.value)}
  />
@@ -76,17 +76,17 @@ export default function OutOfStockPage() {
  <table className="w-full text-left">
  <thead>
  <tr className="bg-openpos-bg-subtle/30 text-[10px] font-bold text-admin-dim uppercase tracking-widest">
- <th className="px-6 py-4">Product</th>
- <th className="px-6 py-4">Current Stock</th>
- <th className="px-6 py-4">Reorder Point</th>
- <th className="px-6 py-4">Priority</th>
- <th className="px-6 py-4 text-right">Action</th>
+ <th className="px-6 py-3">Product</th>
+ <th className="px-6 py-3">Current Stock</th>
+ <th className="px-6 py-3">Reorder Point</th>
+ <th className="px-6 py-3">Priority</th>
+ <th className="px-6 py-3 text-right">Action</th>
  </tr>
  </thead>
  <tbody className="divide-y divide-openpos-border">
  {filteredStock.map((item) => (
  <tr key={item.id} className="group transition-colors">
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <div className="flex items-center gap-3">
  <div className="w-10 h-10 rounded-lg overflow-hidden bg-openpos-bg-subtle shrink-0 relative border border-openpos-border shadow-sm">
  {item.image ? (
@@ -101,13 +101,13 @@ export default function OutOfStockPage() {
  </div>
  </div>
  </td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <span className="text-[14px] font-bold text-openpos-red">{item.lastStock} Units</span>
  </td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <span className="text-[14px] font-medium text-admin-label">Min: {item.reorderPoint} Units</span>
  </td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <div className="flex items-center gap-1.5">
  <div className={cn(
 "w-1.5 h-1.5 rounded-full",
@@ -119,7 +119,7 @@ export default function OutOfStockPage() {
  )}>{item.status}</span>
  </div>
  </td>
- <td className="px-6 py-4 text-right">
+ <td className="px-6 py-3 text-right">
  <button 
  onClick={() => handleRestock(item.id)}
  disabled={loadingRows[item.id]}

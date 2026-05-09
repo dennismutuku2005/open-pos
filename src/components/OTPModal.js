@@ -151,7 +151,7 @@ export function OTPModal({ isOpen, onClose, onVerify, phoneNumber, isLoading, ac
  onChange={(e) => handleChange(index, e.target.value)}
  onKeyDown={(e) => handleKeyDown(index, e)}
  onPaste={handlePaste}
- className="w-10 h-12 sm:w-12 sm:h-14 text-center text-lg font-bold bg-card-bg border border-openpos-border text-openpos-purple rounded-xl outline-none transition-all uppercase tracking-tighter"
+ className="w-10 h-12 sm:w-12 sm:h-14 text-center text-lg font-bold bg-card-bg border border-openpos-border text-openpos-purple rounded-lg outline-none transition-all uppercase tracking-tighter"
  />
  ))}
  </div>

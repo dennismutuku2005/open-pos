@@ -111,7 +111,7 @@ export default function PurchasesPage() {
  </div>
  <button 
  onClick={() => { resetForm(); setShowAddModal(true); }}
- className="w-full sm:w-auto bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
+ className="w-full sm:w-auto bg-openpos-blue text-white px-5 py-2.5 rounded-lg font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
  >
  <Plus size={18} />
  New Order
@@ -160,7 +160,7 @@ export default function PurchasesPage() {
  <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors"size={14} />
  <input 
  placeholder="Search orders..."
- className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-10 pr-4 py-2 text-[11px] font-bold text-admin-value outline-none w-64 transition-all"
+ className="bg-openpos-bg-subtle border border-openpos-border rounded-lg pl-10 pr-4 py-2 text-[11px] font-bold text-admin-value outline-none w-64 transition-all"
  />
  </div>
  </div>
@@ -170,12 +170,12 @@ export default function PurchasesPage() {
  <table className="w-full text-left whitespace-nowrap border-collapse text-[11px]">
  <thead>
  <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border text-[9px] font-bold text-admin-dim uppercase tracking-widest">
- <th className="px-6 py-4">Transaction ID</th>
- <th className="px-6 py-4">Vendor Entity</th>
- <th className="px-6 py-4 text-center">Temporal Signature</th>
- <th className="px-6 py-4 text-center">Procurement Status</th>
- <th className="px-6 py-4 text-right">Settlement Total</th>
- <th className="px-6 py-4 text-right">Management</th>
+ <th className="px-6 py-3">Transaction ID</th>
+ <th className="px-6 py-3">Vendor Entity</th>
+ <th className="px-6 py-3 text-center">Temporal Signature</th>
+ <th className="px-6 py-3 text-center">Procurement Status</th>
+ <th className="px-6 py-3 text-right">Settlement Total</th>
+ <th className="px-6 py-3 text-right">Management</th>
  </tr>
  </thead>
  <tbody className="divide-y divide-openpos-border">
@@ -188,24 +188,22 @@ export default function PurchasesPage() {
  ) : (
  purchases.map((pur) => (
  <tr key={pur.id} className="group transition-colors cursor-default">
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <div className="flex items-center gap-3">
- <div className="w-8 h-8 rounded-lg bg-openpos-bg-subtle border border-openpos-border flex items-center justify-center text-openpos-blue transition-transform">
- <ShoppingBag size={16} />
- </div>
+ 
  <span className="font-bold text-admin-value uppercase tracking-tight transition-colors">{pur.reference}</span>
  </div>
  </td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <span className="text-admin-value font-bold uppercase tracking-tight">{pur.supplier}</span>
  </td>
- <td className="px-6 py-4 text-center">
+ <td className="px-6 py-3 text-center">
  <div className="flex items-center justify-center gap-2 text-admin-dim font-bold">
  <Calendar size={12} className="text-openpos-blue"/>
  <span className="uppercase">{pur.date}</span>
  </div>
  </td>
- <td className="px-6 py-4 text-center">
+ <td className="px-6 py-3 text-center">
  <span className={cn(
 "inline-flex items-center px-2.5 py-1 rounded-md text-[9px] font-bold uppercase tracking-widest border",
  pur.status ==='Received'?"bg-emerald-500/5 text-emerald-500 border-emerald-500/10": 
@@ -214,10 +212,10 @@ export default function PurchasesPage() {
  {pur.status}
  </span>
  </td>
- <td className="px-6 py-4 text-right">
+ <td className="px-6 py-3 text-right">
  <span className="text-[13px] font-bold text-admin-value">KES {pur.total.toLocaleString()}</span>
  </td>
- <td className="px-6 py-4 text-right">
+ <td className="px-6 py-3 text-right">
  <div className="flex items-center justify-end gap-1.5">
  <button 
  onClick={() => handleEdit(pur)}
@@ -259,7 +257,7 @@ export default function PurchasesPage() {
  <input 
  value={formData.supplier}
  onChange={(e) => setFormData(prev => ({ ...prev, supplier: e.target.value }))}
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
  placeholder="e.g. Flour Suppliers Ltd"
  />
  </div>
@@ -269,7 +267,7 @@ export default function PurchasesPage() {
  type="date"
  value={formData.date}
  onChange={(e) => setFormData(prev => ({ ...prev, date: e.target.value }))}
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
  />
  </div>
  </div>
@@ -290,7 +288,7 @@ export default function PurchasesPage() {
  <div className="col-span-6">
  <input 
  placeholder="SKU / Product Vector"
- className="w-full bg-openpos-bg-subtle border-none rounded-xl px-4 py-2.5 text-[12px] font-bold text-admin-value outline-none ring-1 ring-openpos-border group-focus-within:ring-openpos-blue/30 transition-all"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-2.5 text-[12px] font-bold text-admin-value outline-none ring-1 ring-openpos-border group-focus-within:ring-openpos-blue/30 transition-all"
  value={item.product}
  onChange={(e) => {
  const newItems = [...formData.items]
@@ -303,7 +301,7 @@ export default function PurchasesPage() {
  <input 
  type="number"
  placeholder="Qty"
- className="w-full bg-openpos-bg-subtle border-none rounded-xl px-3 py-2.5 text-[12px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-3 py-2.5 text-[12px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
  value={item.quantity}
  onChange={(e) => {
  const newItems = [...formData.items]
@@ -318,7 +316,7 @@ export default function PurchasesPage() {
  <input 
  type="number"
  placeholder="0.00"
- className="w-full bg-openpos-bg-subtle border-none rounded-xl pl-10 pr-3 py-2.5 text-[12px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg pl-10 pr-3 py-2.5 text-[12px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
  value={item.price}
  onChange={(e) => {
  const newItems = [...formData.items]
@@ -338,7 +336,7 @@ export default function PurchasesPage() {
  </div>
  </div>
 
- <div className="p-5 bg-openpos-bg-subtle border border-openpos-border rounded-2xl flex items-center justify-between">
+ <div className="p-5 bg-openpos-bg-subtle border border-openpos-border rounded-lg flex items-center justify-between">
  <div className="flex flex-col">
  <span className="text-[10px] font-bold text-admin-dim uppercase tracking-widest">Aggregate Settlement Total</span>
  <span className="text-2xl font-bold text-openpos-blue mt-1">KES {formData.items.reduce((sum, item) => sum + (item.quantity * item.price), 0).toLocaleString()}</span>
@@ -364,7 +362,7 @@ export default function PurchasesPage() {
  confirmCountdown={5}
  onConfirm={confirmDelete}
  >
- <div className="p-4 bg-openpos-red/5 rounded-2xl border border-openpos-red/10">
+ <div className="p-4 bg-openpos-red/5 rounded-lg border border-openpos-red/10">
  <p className="text-[12px] text-openpos-red font-bold uppercase tracking-tight leading-relaxed opacity-80">
  This action will permanently purge this procurement record from the financial ledger. This operation cannot be reversed.
  </p>

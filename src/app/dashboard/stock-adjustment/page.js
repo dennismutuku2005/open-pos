@@ -61,7 +61,7 @@ export default function StockAdjustmentPage() {
  </div>
  <button 
  onClick={() => setShowModal(true)}
- className="w-full sm:w-auto bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all"
+ className="w-full sm:w-auto bg-openpos-blue text-white px-5 py-2.5 rounded-lg font-bold text-[13px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all"
  >
  <Plus size={18} />
  New Adjustment
@@ -110,7 +110,7 @@ export default function StockAdjustmentPage() {
  <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors"size={14} />
  <input 
  placeholder="Search adjustments..."
- className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-10 pr-4 py-2 text-[11px] font-bold text-admin-value outline-none w-64 transition-all"
+ className="bg-openpos-bg-subtle border border-openpos-border rounded-lg pl-10 pr-4 py-2 text-[11px] font-bold text-admin-value outline-none w-64 transition-all"
  />
  </div>
  </div>
@@ -120,12 +120,12 @@ export default function StockAdjustmentPage() {
  <table className="w-full text-left whitespace-nowrap border-collapse text-[11px]">
  <thead>
  <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border text-[9px] font-bold text-admin-dim uppercase tracking-widest">
- <th className="px-6 py-4">Inventory Item</th>
- <th className="px-6 py-4 text-center">Vector Type</th>
- <th className="px-6 py-4 text-center">Density Shift</th>
- <th className="px-6 py-4">Internal Justification</th>
- <th className="px-6 py-4 text-right">Auditor / Timestamp</th>
- <th className="px-6 py-4 text-right">Management</th>
+ <th className="px-6 py-3">Inventory Item</th>
+ <th className="px-6 py-3 text-center">Vector Type</th>
+ <th className="px-6 py-3 text-center">Density Shift</th>
+ <th className="px-6 py-3">Internal Justification</th>
+ <th className="px-6 py-3 text-right">Auditor / Timestamp</th>
+ <th className="px-6 py-3 text-right">Management</th>
  </tr>
  </thead>
  <tbody className="divide-y divide-openpos-border">
@@ -138,15 +138,13 @@ export default function StockAdjustmentPage() {
  ) : (
  adjustments.map((adj) => (
  <tr key={adj.id} className="group transition-colors cursor-default">
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <div className="flex items-center gap-3">
- <div className="w-8 h-8 rounded-lg bg-openpos-bg-subtle border border-openpos-border flex items-center justify-center text-openpos-blue transition-transform">
- <Package size={16} />
- </div>
+ 
  <span className="font-bold text-admin-value uppercase tracking-tight transition-colors">{adj.product}</span>
  </div>
  </td>
- <td className="px-6 py-4 text-center">
+ <td className="px-6 py-3 text-center">
  <div className={cn(
 "inline-flex items-center gap-1.5 font-bold text-[9px] uppercase tracking-widest px-2 py-0.5 rounded-md border",
  adj.type ==='Increase'?"bg-openpos-blue/5 text-openpos-blue border-openpos-blue/10":"bg-openpos-red/5 text-openpos-red border-openpos-red/10"
@@ -155,19 +153,19 @@ export default function StockAdjustmentPage() {
  {adj.type}
  </div>
  </td>
- <td className="px-6 py-4 text-center font-bold text-admin-value">
+ <td className="px-6 py-3 text-center font-bold text-admin-value">
  {adj.type ==='Increase'?'+':'-'}{adj.qty} <span className="text-[9px] text-admin-dim">UNITS</span>
  </td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <p className="text-[10px] text-admin-dim font-bold uppercase tracking-tight line-clamp-1 max-w-[200px] opacity-80">{adj.reason}</p>
  </td>
- <td className="px-6 py-4 text-right">
+ <td className="px-6 py-3 text-right">
  <div className="flex flex-col items-end">
  <span className="text-[11px] font-bold text-admin-value">{adj.staff}</span>
  <span className="text-[8px] font-bold text-admin-dim uppercase tracking-tighter mt-1">{adj.date}</span>
  </div>
  </td>
- <td className="px-6 py-4 text-right">
+ <td className="px-6 py-3 text-right">
  <div className="flex items-center justify-end gap-1.5">
  <button className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim transition-all">
  <Edit2 size={12} />
@@ -203,7 +201,7 @@ export default function StockAdjustmentPage() {
  <div className="space-y-1.5">
  <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Select Product</label>
  <select 
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
  value={formData.product}
  onChange={(e) => setFormData(prev => ({ ...prev, product: e.target.value }))}
  >
@@ -217,18 +215,18 @@ export default function StockAdjustmentPage() {
  <div className="grid grid-cols-2 gap-4">
  <div className="space-y-1.5">
  <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Adjustment Type</label>
- <div className="flex bg-openpos-bg-subtle rounded-2xl p-1 ring-1 ring-openpos-border">
+ <div className="flex bg-openpos-bg-subtle rounded-lg p-1 ring-1 ring-openpos-border">
  <button 
  onClick={() => setFormData(prev => ({ ...prev, type:'Increase'}))}
  className={cn(
-"flex-1 py-2 rounded-xl text-[11px] font-bold uppercase transition-all", 
+"flex-1 py-2 rounded-lg text-[11px] font-bold uppercase transition-all", 
  formData.type ==='Increase'?"bg-openpos-blue text-white shadow-lg shadow-openpos-blue/20":"text-admin-dim"
  )}
  >Increase</button>
  <button 
  onClick={() => setFormData(prev => ({ ...prev, type:'Decrease'}))}
  className={cn(
-"flex-1 py-2 rounded-xl text-[11px] font-bold uppercase transition-all", 
+"flex-1 py-2 rounded-lg text-[11px] font-bold uppercase transition-all", 
  formData.type ==='Decrease'?"bg-openpos-red text-white shadow-lg shadow-openpos-red/20":"text-admin-dim"
  )}
  >Decrease</button>
@@ -238,7 +236,7 @@ export default function StockAdjustmentPage() {
  <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Quantity</label>
  <input 
  type="number"
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
  placeholder="0"
  value={formData.qty}
  onChange={(e) => setFormData(prev => ({ ...prev, qty: parseInt(e.target.value) || 0 }))}
@@ -249,7 +247,7 @@ export default function StockAdjustmentPage() {
  <div className="space-y-1.5">
  <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Reason / Detail</label>
  <textarea 
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border resize-none"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border resize-none"
  rows="3"
  placeholder="Explain the reason for adjustment..."
  value={formData.reason}
@@ -271,7 +269,7 @@ export default function StockAdjustmentPage() {
  confirmCountdown={5}
  onConfirm={confirmDelete}
  >
- <div className="p-4 bg-openpos-red/5 rounded-2xl border border-openpos-red/10">
+ <div className="p-4 bg-openpos-red/5 rounded-lg border border-openpos-red/10">
  <p className="text-[12px] text-openpos-red font-medium leading-relaxed">
  This will permanently remove this record from your adjustment history. Please note that this action will NOT reverse any changes previously made to the stock levels.
  </p>

@@ -140,7 +140,7 @@ export function GlobalSearch() {
  onFocus={() => {
  if (results.length > 0) setIsOpen(true)
  }}
- className="pl-9 pr-12 py-2 w-full bg-openpos-bg-subtle border-openpos-border border rounded-xl text-[11px] outline-none transition-all placeholder:text-admin-dim font-bold text-admin-value lg:w-[400px] shadow-sm"
+ className="pl-9 pr-12 py-2 w-full bg-openpos-bg-subtle border-openpos-border border rounded-lg text-[11px] outline-none transition-all placeholder:text-admin-dim font-bold text-admin-value lg:w-[400px] shadow-sm"
  />
  <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 opacity-20 pointer-events-none hidden lg:flex">
  <Command size={10} />
@@ -150,7 +150,7 @@ export function GlobalSearch() {
 
  {/* Floating Results List */}
  {isOpen && (
- <div className="absolute top-full mt-2 left-0 right-0 bg-card-bg border border-openpos-border rounded-2xl shadow-2xl overflow-hidden z-[60] animate-in fade-in slide-in-from-top-2 duration-200">
+ <div className="absolute top-full mt-2 left-0 right-0 bg-card-bg border border-openpos-border rounded-lg shadow-2xl overflow-hidden z-[60] animate-in fade-in slide-in-from-top-2 duration-200">
  <div className="p-2 space-y-1">
  {results.map((item, idx) => (
  <button
@@ -158,7 +158,7 @@ export function GlobalSearch() {
  onClick={() => handleSelect(item)}
  onMouseEnter={() => setActiveIndex(idx)}
  className={cn(
-"w-full flex items-center justify-between p-2 rounded-xl transition-all text-left group/item",
+"w-full flex items-center justify-between p-2 rounded-lg transition-all text-left group/item",
  idx === activeIndex ?"bg-openpos-blue/5 text-openpos-blue":"text-admin-label"
  )}
  >

@@ -159,14 +159,14 @@ export default function SettingsPage() {
  </div>
 
  <div className="bg-card-bg border border-openpos-border rounded-[32px] p-8 flex flex-col justify-center items-center text-center space-y-6">
- <div className="w-16 h-16 rounded-2xl bg-openpos-blue/5 flex items-center justify-center text-openpos-blue">
+ <div className="w-16 h-16 rounded-lg bg-openpos-blue/5 flex items-center justify-center text-openpos-blue">
  <Layout size={32} />
  </div>
  <div>
  <h4 className="text-[15px] font-bold text-admin-value uppercase tracking-tight">Need assistance?</h4>
  <p className="text-[12px] text-admin-dim font-medium mt-2 leading-relaxed">Our technical engineers are on standby for system deployment queries.</p>
  </div>
- <button className="w-full py-3.5 bg-openpos-blue text-white rounded-2xl font-bold text-[11px] uppercase tracking-[2px] shadow-lg shadow-openpos-blue/20 transition-all">
+ <button className="w-full py-3.5 bg-openpos-blue text-white rounded-lg font-bold text-[11px] uppercase tracking-[2px] shadow-lg shadow-openpos-blue/20 transition-all">
  Technical Support
  </button>
  </div>

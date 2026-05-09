@@ -99,7 +99,7 @@ export default function FinanceIndexPage() {
  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
  <Card title="Financial Integrity"subtitle="Audit trails & Data security"noPadding>
  <div className="p-6 space-y-4">
- <div className="flex items-start gap-4 p-4 bg-openpos-bg-subtle rounded-2xl border border-openpos-border">
+ <div className="flex items-start gap-4 p-4 bg-openpos-bg-subtle rounded-lg border border-openpos-border">
  <Landmark className="text-openpos-blue mt-1"size={20} />
  <div>
  <h4 className="text-[13px] font-bold text-admin-value uppercase">Consolidated Ledger</h4>

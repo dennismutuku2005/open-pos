@@ -48,12 +48,12 @@ export default function SalesListPage() {
  setEditingSale(null);
  setShowCrudModal(true);
  }}
- className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[12px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
+ className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-lg font-bold text-[12px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
  >
  <ShoppingBag size={16} />
  New Sale Record
  </button>
- <button className="flex-1 sm:flex-none bg-card-bg border border-openpos-border text-admin-value px-5 py-2.5 rounded-xl font-bold text-[12px] flex items-center justify-center gap-2 transition-all uppercase tracking-widest shadow-sm">
+ <button className="flex-1 sm:flex-none bg-card-bg border border-openpos-border text-admin-value px-5 py-2.5 rounded-lg font-bold text-[12px] flex items-center justify-center gap-2 transition-all uppercase tracking-widest shadow-sm">
  <Download size={16} />
  Export
  </button>
@@ -103,7 +103,7 @@ export default function SalesListPage() {
  subtitle="Live stream of all system transactions"
  headerAction={
  <div className="flex items-center gap-3">
- <div className="hidden md:flex bg-openpos-bg-subtle border border-openpos-border rounded-xl px-3 py-1.5 items-center gap-2">
+ <div className="hidden md:flex bg-openpos-bg-subtle border border-openpos-border rounded-lg px-3 py-1.5 items-center gap-2">
  <Calendar size={12} className="text-openpos-blue"/>
  <span className="text-[10px] font-bold text-admin-value uppercase">Last 30 Days</span>
  </div>
@@ -111,7 +111,7 @@ export default function SalesListPage() {
  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-admin-dim"size={14} />
  <input 
  placeholder="Search records..."
- className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-9 pr-4 py-1.5 text-[11px] font-bold outline-none w-64 transition-all"
+ className="bg-openpos-bg-subtle border border-openpos-border rounded-lg pl-9 pr-4 py-1.5 text-[11px] font-bold outline-none w-64 transition-all"
  value={searchQuery}
  onChange={(e) => setSearchQuery(e.target.value)}
  />
@@ -145,9 +145,7 @@ export default function SalesListPage() {
  </td>
  <td className="p-5 text-[12px] font-bold text-admin-value">
  <div className="flex items-center gap-2">
- <div className="w-6 h-6 rounded-full bg-openpos-blue/10 flex items-center justify-center text-[9px] font-bold text-openpos-blue">
- {sale.customer.charAt(0)}
- </div>
+ 
  {sale.customer}
  </div>
  </td>
@@ -186,8 +184,8 @@ export default function SalesListPage() {
  <div className="p-5 border-t border-openpos-border flex items-center justify-between bg-openpos-bg-subtle/10">
  <p className="text-[10px] text-admin-dim font-bold uppercase tracking-widest">Showing 7 of 1,240 records</p>
  <div className="flex gap-2">
- <button className="px-4 py-2 border border-openpos-border rounded-xl text-[10px] font-bold text-admin-dim transition-all uppercase tracking-widest">Previous</button>
- <button className="px-4 py-2 bg-openpos-blue text-white rounded-xl text-[10px] font-bold shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest">Next Page</button>
+ <button className="px-4 py-2 border border-openpos-border rounded-lg text-[10px] font-bold text-admin-dim transition-all uppercase tracking-widest">Previous</button>
+ <button className="px-4 py-2 bg-openpos-blue text-white rounded-lg text-[10px] font-bold shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest">Next Page</button>
  </div>
  </div>
  </Card>
@@ -209,7 +207,7 @@ export default function SalesListPage() {
  <input 
  type="text"
  placeholder="Walking Customer"
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none transition-all"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none transition-all"
  defaultValue={editingSale?.customer ||''}
  />
  </div>
@@ -219,14 +217,14 @@ export default function SalesListPage() {
  <input 
  type="number"
  placeholder="0.00"
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none transition-all"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none transition-all"
  defaultValue={editingSale?.total ||''}
  />
  </div>
  <div className="space-y-2">
  <label className="text-[10px] font-bold text-admin-value uppercase tracking-widest ml-1">Settlement Method</label>
  <select 
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none transition-all cursor-pointer"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none transition-all cursor-pointer"
  defaultValue={editingSale?.payment ||'Cash'}
  >
  <option>Cash</option>
@@ -235,7 +233,7 @@ export default function SalesListPage() {
  </select>
  </div>
  </div>
- <div className="p-4 bg-openpos-blue/5 border border-openpos-blue/10 rounded-2xl">
+ <div className="p-4 bg-openpos-blue/5 border border-openpos-blue/10 rounded-lg">
  <p className="text-[9px] font-bold text-openpos-blue uppercase tracking-widest mb-1 flex items-center gap-2">
  <ShoppingBag size={10} />
  Administrative Notice

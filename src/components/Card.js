@@ -14,14 +14,14 @@ export function Card({
  return (
  <div 
  className={cn(
-"bg-card-bg border border-openpos-border rounded-2xl shadow-sm overflow-hidden",
+"bg-card-bg border border-openpos-border rounded-lg shadow-sm overflow-hidden",
  className
  )} 
  {...props}
  >
  {(title || subtitle || headerAction) && (
  <div className={cn(
-"px-6 py-4 border-b border-openpos-border flex items-center justify-between",
+"px-6 py-3 border-b border-openpos-border flex items-center justify-between",
  headerClassName
  )}>
  <div>
@@ -60,12 +60,12 @@ export function StatCard({
 
  return (
  <div className={cn(
-"bg-card-bg border border-openpos-border rounded-2xl p-4 shadow-sm transition-all group overflow-hidden relative",
+"bg-card-bg border border-openpos-border rounded-lg p-4 shadow-sm transition-all group overflow-hidden relative",
  className
  )}>
  <div className="flex items-center gap-3">
  <div className={cn(
-"w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-all", 
+"w-10 h-10 rounded-lg flex items-center justify-center shrink-0 border transition-all", 
  colorClasses[color] || colorClasses.blue
  )}>
  {Icon && <Icon size={18} />}

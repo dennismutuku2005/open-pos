@@ -204,7 +204,7 @@ export default function StaffManagementPage() {
  <button
  onClick={fetchStaff}
  disabled={isRefreshing}
- className="flex items-center gap-2 px-6 py-2.5 bg-openpos-blue/5 text-openpos-blue border border-openpos-blue/10 rounded-xl transition-all text-xs font-medium uppercase tracking-widest w-full sm:w-auto justify-center disabled:opacity-50"
+ className="flex items-center gap-2 px-6 py-2.5 bg-openpos-blue/5 text-openpos-blue border border-openpos-blue/10 rounded-lg transition-all text-xs font-medium uppercase tracking-widest w-full sm:w-auto justify-center disabled:opacity-50"
  >
  <RefreshCw size={14} className={cn(isRefreshing &&"animate-spin")} />
  </button>
@@ -214,7 +214,7 @@ export default function StaffManagementPage() {
  resetForm();
  setShowModal(true);
  }}
- className="flex items-center gap-2 px-6 py-2.5 bg-openpos-blue text-white rounded-xl transition-all text-xs font-medium uppercase tracking-widest shadow-lg shadow-openpos-blue/20 w-full sm:w-auto justify-center"
+ className="flex items-center gap-2 px-6 py-2.5 bg-openpos-blue text-white rounded-lg transition-all text-xs font-medium uppercase tracking-widest shadow-lg shadow-openpos-blue/20 w-full sm:w-auto justify-center"
  >
  <Plus size={14} /> Add Staff User
  </button>
@@ -222,20 +222,20 @@ export default function StaffManagementPage() {
  </div>
 
  {/* Directory Control */}
- <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-card-bg p-4 rounded-2xl border border-openpos-border shadow-sm">
+ <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-card-bg p-4 rounded-lg border border-openpos-border shadow-sm">
  <div className="relative w-full md:w-96 group">
  <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors"size={16} />
  <input
  type="text"
  autoComplete="off"
  placeholder="Search staff members..."
- className="w-full pl-10 pr-4 py-2.5 bg-openpos-bg-subtle border border-openpos-border rounded-xl text-[11px] font-bold text-admin-value transition-all"
+ className="w-full pl-10 pr-4 py-2.5 bg-openpos-bg-subtle border border-openpos-border rounded-lg text-[11px] font-bold text-admin-value transition-all"
  value={searchTerm}
  onChange={(e) => setSearchTerm(e.target.value)}
  />
  </div>
  <div className="flex items-center gap-3 w-full md:w-auto">
- <div className="flex items-center gap-2 px-4 py-2 bg-openpos-blue/5 border border-openpos-blue/10 rounded-xl">
+ <div className="flex items-center gap-2 px-4 py-2 bg-openpos-blue/5 border border-openpos-blue/10 rounded-lg">
  <Users size={14} className="text-openpos-blue"/>
  <span className="text-[10px] font-bold text-admin-value uppercase tracking-widest">{filteredStaff.length} Total Members</span>
  </div>
@@ -248,11 +248,11 @@ export default function StaffManagementPage() {
  <table className="w-full text-left whitespace-nowrap border-collapse text-[11px]">
  <thead>
  <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border font-bold text-admin-dim uppercase tracking-widest text-[9px]">
- <th className="px-6 py-4">Team Member</th>
- <th className="px-6 py-4 text-center">Authorization Role</th>
- <th className="px-6 py-4 text-center">System Status</th>
- <th className="px-6 py-4 text-center">Contact Identity</th>
- <th className="px-6 py-4 text-right">Management Actions</th>
+ <th className="px-6 py-3">Team Member</th>
+ <th className="px-6 py-3 text-center">Authorization Role</th>
+ <th className="px-6 py-3 text-center">System Status</th>
+ <th className="px-6 py-3 text-center">Contact Identity</th>
+ <th className="px-6 py-3 text-right">Management Actions</th>
  </tr>
  </thead>
  <tbody className="divide-y divide-openpos-border">
@@ -267,7 +267,7 @@ export default function StaffManagementPage() {
  ) : (
  filteredStaff.map((user) => (
  <tr key={user.id} className="transition-colors group cursor-default">
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <div className="flex flex-col">
  <span className="font-bold text-admin-value leading-none uppercase text-[12px] transition-colors">{user.name}</span>
  <span className="text-[9px] font-bold text-admin-dim mt-1.5 uppercase tracking-tight flex items-center gap-1.5 opacity-80">
@@ -277,7 +277,7 @@ export default function StaffManagementPage() {
  </span>
  </div>
  </td>
- <td className="px-6 py-4 text-center">
+ <td className="px-6 py-3 text-center">
  <div className="flex flex-col items-center">
  <span className={cn(
 "text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-md",
@@ -290,14 +290,14 @@ export default function StaffManagementPage() {
  </span>
  </div>
  </td>
- <td className="px-6 py-4 text-center">
+ <td className="px-6 py-3 text-center">
  <div className="flex flex-col items-center">
  <Badge variant={user.status ==='active'?'success':'error'} className="text-[8px] font-bold px-2 py-0.5 border-none uppercase tracking-widest rounded-md shadow-sm">
  {user.status}
  </Badge>
  </div>
  </td>
- <td className="px-6 py-4 text-center">
+ <td className="px-6 py-3 text-center">
  <div className="flex flex-col items-center opacity-80">
  <span className="text-[11px] font-bold text-admin-value font-mono tracking-tighter flex items-center gap-2">
  <Phone size={10} className="text-openpos-blue"/>
@@ -305,7 +305,7 @@ export default function StaffManagementPage() {
  </span>
  </div>
  </td>
- <td className="px-6 py-4 text-right">
+ <td className="px-6 py-3 text-right">
  <div className="flex justify-end gap-1.5">
  <button
  onClick={() => viewDetails(user)}
@@ -367,7 +367,7 @@ export default function StaffManagementPage() {
  autoComplete="off"
  value={formData.name}
  onChange={e => setFormData({ ...formData, name: e.target.value })}
- className="w-full px-4 py-2 bg-openpos-bg-subtle border border-openpos-border rounded-xl text-[11px] font-bold text-admin-value outline-none transition-all"
+ className="w-full px-4 py-2 bg-openpos-bg-subtle border border-openpos-border rounded-lg text-[11px] font-bold text-admin-value outline-none transition-all"
  placeholder="Full Name"
  />
  </div>
@@ -379,7 +379,7 @@ export default function StaffManagementPage() {
  autoComplete="off"
  value={formData.username}
  onChange={e => setFormData({ ...formData, username: e.target.value })}
- className="w-full px-4 py-2 bg-openpos-bg-subtle border border-openpos-border rounded-xl text-[11px] font-bold text-admin-value outline-none transition-all disabled:opacity-50"
+ className="w-full px-4 py-2 bg-openpos-bg-subtle border border-openpos-border rounded-lg text-[11px] font-bold text-admin-value outline-none transition-all disabled:opacity-50"
  placeholder="Username"
  />
  </div>
@@ -392,7 +392,7 @@ export default function StaffManagementPage() {
  autoComplete="off"
  value={formData.phone}
  onChange={e => setFormData({ ...formData, phone: e.target.value })}
- className="w-full px-4 py-2 bg-openpos-bg-subtle border border-openpos-border rounded-xl text-[11px] font-bold text-admin-value outline-none transition-all"
+ className="w-full px-4 py-2 bg-openpos-bg-subtle border border-openpos-border rounded-lg text-[11px] font-bold text-admin-value outline-none transition-all"
  placeholder="+254..."
  />
  </div>
@@ -408,7 +408,7 @@ export default function StaffManagementPage() {
  autoComplete="new-password"
  value={formData.password}
  onChange={e => setFormData({ ...formData, password: e.target.value })}
- className="w-full pl-9 pr-12 py-2 bg-openpos-bg-subtle border border-openpos-border rounded-xl text-[11px] font-bold text-admin-value outline-none transition-all"
+ className="w-full pl-9 pr-12 py-2 bg-openpos-bg-subtle border border-openpos-border rounded-lg text-[11px] font-bold text-admin-value outline-none transition-all"
  placeholder="••••••••"
  />
  <button
@@ -428,7 +428,7 @@ export default function StaffManagementPage() {
  <select
  value={formData.type}
  onChange={e => setFormData({ ...formData, type: e.target.value })}
- className="w-full px-4 py-2 bg-openpos-bg-subtle border border-openpos-border rounded-xl text-[11px] font-bold text-admin-value outline-none transition-all"
+ className="w-full px-4 py-2 bg-openpos-bg-subtle border border-openpos-border rounded-lg text-[11px] font-bold text-admin-value outline-none transition-all"
  >
  <option value="user">STAFF</option>
  <option value="admin">ADMIN</option>
@@ -439,7 +439,7 @@ export default function StaffManagementPage() {
  <select
  value={formData.status}
  onChange={e => setFormData({ ...formData, status: e.target.value })}
- className="w-full px-4 py-2 bg-openpos-bg-subtle border border-openpos-border rounded-xl text-[11px] font-bold text-admin-value outline-none transition-all"
+ className="w-full px-4 py-2 bg-openpos-bg-subtle border border-openpos-border rounded-lg text-[11px] font-bold text-admin-value outline-none transition-all"
  >
  <option value="active">ACTIVE</option>
  <option value="suspended">SUSPENDED</option>
@@ -462,7 +462,7 @@ export default function StaffManagementPage() {
  key={policy.id}
  onClick={() => togglePolicy(policy.id)}
  className={cn(
-"flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-all group",
+"flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-all group",
  isSelected
  ?"bg-openpos-blue/5 border-openpos-blue/30 ring-1 ring-openpos-blue/10"
  :"bg-openpos-bg-subtle border-openpos-border"
@@ -493,7 +493,7 @@ export default function StaffManagementPage() {
  </div>
  </div>
  ) : (
- <div className="p-4 bg-openpos-red/5 border border-openpos-red/10 rounded-xl flex items-center gap-3">
+ <div className="p-4 bg-openpos-red/5 border border-openpos-red/10 rounded-lg flex items-center gap-3">
  <ShieldAlert className="text-red-400 shrink-0"size={16} />
  <p className="text-[10px] text-red-700/70 font-bold uppercase tracking-tight leading-relaxed">
  Administrator accounts have full system access by default. Multi-user policies are not required for this role.
@@ -504,7 +504,7 @@ export default function StaffManagementPage() {
  <button
  type="submit"
  disabled={isSubmitting}
- className="w-full h-11 bg-openpos-blue text-white rounded-xl font-medium text-[11px] uppercase tracking-widest transition-all disabled:opacity-50 mt-4 flex items-center justify-center relative overflow-hidden"
+ className="w-full h-11 bg-openpos-blue text-white rounded-lg font-medium text-[11px] uppercase tracking-widest transition-all disabled:opacity-50 mt-4 flex items-center justify-center relative overflow-hidden"
  >
  {isSubmitting ? (
  <Loader2 className="animate-spin"size={16} />
@@ -543,11 +543,11 @@ export default function StaffManagementPage() {
  </div>
  
  <div className="grid grid-cols-1 gap-1.5 text-left">
- <div className="bg-openpos-bg-subtle p-3 rounded-xl border border-openpos-border">
+ <div className="bg-openpos-bg-subtle p-3 rounded-lg border border-openpos-border">
  <p className="text-[8px] font-bold text-admin-dim uppercase tracking-widest">Username</p>
  <p className="text-[11px] font-bold text-admin-value mt-0.5">{selectedStaff.username}</p>
  </div>
- <div className="bg-openpos-bg-subtle p-3 rounded-xl border border-openpos-border">
+ <div className="bg-openpos-bg-subtle p-3 rounded-lg border border-openpos-border">
  <p className="text-[8px] font-bold text-openpos-blue uppercase tracking-widest">Created</p>
  <p className="text-[11px] font-bold text-admin-value mt-0.5">{new Date(selectedStaff.createdAt).toLocaleString()}</p>
  </div>
@@ -574,7 +574,7 @@ export default function StaffManagementPage() {
  
  <button
  onClick={() => setShowDetailModal(false)}
- className="w-full py-2.5 border border-openpos-border rounded-xl text-[10px] font-bold uppercase tracking-widest text-admin-dim transition-colors"
+ className="w-full py-2.5 border border-openpos-border rounded-lg text-[10px] font-bold uppercase tracking-widest text-admin-dim transition-colors"
  >
  Close
  </button>
@@ -593,7 +593,7 @@ export default function StaffManagementPage() {
  footer={null}
  >
  <div className="space-y-4 pt-2">
- <div className="flex-1 bg-card-bg border border-openpos-border rounded-xl p-3 flex items-center gap-3">
+ <div className="flex-1 bg-card-bg border border-openpos-border rounded-lg p-3 flex items-center gap-3">
  <UserX className="text-red-400 shrink-0"size={16} />
  <p className="text-[10px] text-red-700/70 font-medium leading-relaxed uppercase tracking-tight">
  Warning: This action will immediately terminate all active sessions and permanently revoke system access for this member.
@@ -603,14 +603,14 @@ export default function StaffManagementPage() {
  <div className="flex gap-3">
  <button
  onClick={() => setIsDeleteModalOpen(false)}
- className="flex-1 py-3 border border-openpos-border rounded-xl text-[10px] font-bold uppercase tracking-widest text-admin-dim transition-colors"
+ className="flex-1 py-3 border border-openpos-border rounded-lg text-[10px] font-bold uppercase tracking-widest text-admin-dim transition-colors"
  >
  Cancel
  </button>
  <button
  onClick={handleDeleteUser}
  disabled={isSubmitting}
- className="flex-1 py-3 bg-red-500 text-white rounded-xl text-[10px] font-medium uppercase tracking-widest transition-all shadow-lg shadow-red-200 flex items-center justify-center min-h-[44px]"
+ className="flex-1 py-3 bg-red-500 text-white rounded-lg text-[10px] font-medium uppercase tracking-widest transition-all shadow-lg shadow-red-200 flex items-center justify-center min-h-[44px]"
  >
  {isSubmitting ? (
  <Loader2 className="animate-spin"size={16} />

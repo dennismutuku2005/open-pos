@@ -92,7 +92,7 @@ export default function PaymentTypesPage() {
  </div>
  <button 
  onClick={handleAdd}
- className="bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[12px] flex items-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
+ className="bg-openpos-blue text-white px-5 py-2.5 rounded-lg font-bold text-[12px] flex items-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
  >
  <Plus size={16} />
  Add Method
@@ -110,7 +110,7 @@ export default function PaymentTypesPage() {
  <input 
  type="text"
  placeholder="Search methods..."
- className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-9 pr-4 py-1.5 text-[11px] font-bold outline-none w-64 transition-all"
+ className="bg-openpos-bg-subtle border border-openpos-border rounded-lg pl-9 pr-4 py-1.5 text-[11px] font-bold outline-none w-64 transition-all"
  value={searchQuery}
  onChange={(e) => setSearchQuery(e.target.value)}
  />
@@ -134,9 +134,7 @@ export default function PaymentTypesPage() {
  <tr key={method.id} className="group transition-colors cursor-default">
  <td className="p-5">
  <div className="flex items-center gap-3">
- <div className="w-9 h-9 rounded-lg bg-openpos-blue/10 flex items-center justify-center text-openpos-blue border border-openpos-blue/10">
- <Icon size={18} />
- </div>
+ 
  <span className="font-bold text-[13px] text-admin-value">{method.name}</span>
  </div>
  </td>
@@ -190,7 +188,7 @@ export default function PaymentTypesPage() {
  <input 
  type="text"
  placeholder="e.g. PayPal, M-Pesa Business"
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none transition-all"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none transition-all"
  value={formData.name}
  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
  />
@@ -200,7 +198,7 @@ export default function PaymentTypesPage() {
  <div className="space-y-1.5">
  <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Channel Type</label>
  <select 
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none cursor-pointer"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none cursor-pointer"
  value={formData.type}
  onChange={(e) => setFormData({ ...formData, type: e.target.value })}
  >
@@ -213,7 +211,7 @@ export default function PaymentTypesPage() {
  <div className="space-y-1.5">
  <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Initial Status</label>
  <select 
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none cursor-pointer"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none cursor-pointer"
  value={formData.status}
  onChange={(e) => setFormData({ ...formData, status: e.target.value })}
  >
@@ -223,7 +221,7 @@ export default function PaymentTypesPage() {
  </div>
  </div>
 
- <div className="p-4 bg-openpos-blue/5 border border-openpos-blue/10 rounded-2xl flex items-start gap-3 mt-4">
+ <div className="p-4 bg-openpos-blue/5 border border-openpos-blue/10 rounded-lg flex items-start gap-3 mt-4">
  <div className="w-8 h-8 rounded-full bg-openpos-blue/10 flex items-center justify-center text-openpos-blue shrink-0">
  <CheckCircle2 size={14} />
  </div>
@@ -247,7 +245,7 @@ export default function PaymentTypesPage() {
  confirmText="Delete Method"
  onConfirm={handleDelete}
  >
- <div className="p-4 bg-red-500/5 border border-red-500/10 rounded-2xl flex items-start gap-3">
+ <div className="p-4 bg-red-500/5 border border-red-500/10 rounded-lg flex items-start gap-3">
  <div className="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 shrink-0">
  <XCircle size={14} />
  </div>

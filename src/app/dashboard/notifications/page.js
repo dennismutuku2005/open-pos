@@ -126,14 +126,14 @@ export default function NotificationsPage() {
  <button
  onClick={handleRefresh}
  disabled={refreshing}
- className="flex items-center gap-2 px-6 py-2.5 bg-openpos-blue/5 text-openpos-blue border border-openpos-blue/10 rounded-xl transition-all text-xs font-medium uppercase tracking-widest w-full sm:w-auto justify-center disabled:opacity-50"
+ className="flex items-center gap-2 px-6 py-2.5 bg-openpos-blue/5 text-openpos-blue border border-openpos-blue/10 rounded-lg transition-all text-xs font-medium uppercase tracking-widest w-full sm:w-auto justify-center disabled:opacity-50"
  title="Refresh"
  >
  <RefreshCw size={14} className={refreshing ?"animate-spin":""} />
  </button>
  <button
  onClick={() => handleMarkAsRead()}
- className="px-4 py-2 bg-openpos-bg-subtle border border-openpos-border text-admin-dim rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all"
+ className="px-4 py-2 bg-openpos-bg-subtle border border-openpos-border text-admin-dim rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all"
  >
  Mark All as Read
  </button>
@@ -142,24 +142,24 @@ export default function NotificationsPage() {
 
  {/* Error Message */}
  {error && (
- <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center gap-3 text-red-600 text-xs">
+ <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-3 text-red-600 text-xs">
  <AlertCircle size={16} />
  {error}
  </div>
  )}
 
  {/* Notifications Table */}
- <div className="bg-card-bg border border-openpos-border rounded-2xl overflow-hidden shadow-sm">
+ <div className="bg-card-bg border border-openpos-border rounded-lg overflow-hidden shadow-sm">
  <div className="overflow-x-auto">
  <table className="w-full text-left text-[11px]">
  <thead className="bg-openpos-bg-subtle border-b border-openpos-border text-admin-dim font-bold uppercase tracking-wider text-[10px]">
  <tr>
- <th className="px-6 py-4 w-12">Status</th>
- <th className="px-6 py-4 w-32">Type</th>
- <th className="px-6 py-4 w-64">Title</th>
- <th className="px-6 py-4">Message Snippet</th>
- <th className="px-6 py-4 w-32">Time</th>
- <th className="px-6 py-4 text-right w-24">Actions</th>
+ <th className="px-6 py-3 w-12">Status</th>
+ <th className="px-6 py-3 w-32">Type</th>
+ <th className="px-6 py-3 w-64">Title</th>
+ <th className="px-6 py-3">Message Snippet</th>
+ <th className="px-6 py-3 w-32">Time</th>
+ <th className="px-6 py-3 text-right w-24">Actions</th>
  </tr>
  </thead>
  <tbody className="divide-y divide-openpos-border">
@@ -182,14 +182,14 @@ export default function NotificationsPage() {
  onClick={() => openModal(notif)}
  className={`transition-colors cursor-pointer group ${notif.is_read == 0 ?'bg-openpos-blue/[0.02]':''}`}
  >
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  {notif.is_read == 0 ? (
  <div className="w-2.5 h-2.5 rounded-full bg-openpos-blue shadow-[0_0_8px_rgba(37,99,235,0.5)]"title="Unread"/>
  ) : (
  <CheckCircle size={14} className="text-admin-dim opacity-40"/>
  )}
  </td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <Badge 
  variant={
  notif.type ==='alert'?'error':
@@ -200,19 +200,19 @@ export default function NotificationsPage() {
  {notif.type ||'system'}
  </Badge>
  </td>
- <td className="px-6 py-4 font-bold text-admin-value">
+ <td className="px-6 py-3 font-bold text-admin-value">
  {notif.title}
  </td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <span className="text-admin-dim font-medium line-clamp-1 transition-colors">{notif.message}</span>
  </td>
- <td className="px-6 py-4 text-admin-dim">
+ <td className="px-6 py-3 text-admin-dim">
  <div className="flex items-center gap-1.5 whitespace-nowrap font-bold">
  <Clock size={12} />
  {format(new Date(notif.created_at),'MMM d, HH:mm')}
  </div>
  </td>
- <td className="px-6 py-4 text-right">
+ <td className="px-6 py-3 text-right">
  <div className="flex items-center justify-end gap-2">
  <button
  className="p-2 text-admin-dim rounded-lg transition-all"
@@ -259,12 +259,12 @@ export default function NotificationsPage() {
  <Info className="text-openpos-blue"size={24} />}
  <h1 className="text-xl font-bold text-admin-value uppercase tracking-tight">Notification Details</h1>
  </div>
- <button onClick={() => setSelectedNotif(null)} className="p-2 rounded-xl text-admin-dim transition-colors"><X size={20} /></button>
+ <button onClick={() => setSelectedNotif(null)} className="p-2 rounded-lg text-admin-dim transition-colors"><X size={20} /></button>
  </div>
  <div className="p-6 space-y-5">
  <div>
  <h3 className="text-xl font-bold text-admin-value tracking-tight mb-2">{selectedNotif.title}</h3>
- <p className="text-[13px] font-medium text-admin-label leading-relaxed bg-openpos-bg-subtle p-4 rounded-xl border border-openpos-border">
+ <p className="text-[13px] font-medium text-admin-label leading-relaxed bg-openpos-bg-subtle p-4 rounded-lg border border-openpos-border">
  {selectedNotif.message}
  </p>
  </div>

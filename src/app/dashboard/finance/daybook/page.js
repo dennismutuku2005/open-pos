@@ -68,12 +68,12 @@ export default function DaybooksPage() {
  type="date"
  value={selectedDate}
  onChange={(e) => setSelectedDate(e.target.value)}
- className="bg-card-bg border border-openpos-border text-admin-value pl-11 pr-5 py-2.5 rounded-xl font-bold text-[11px] transition-all uppercase tracking-widest shadow-sm outline-none"
+ className="bg-card-bg border border-openpos-border text-admin-value pl-11 pr-5 py-2.5 rounded-lg font-bold text-[11px] transition-all uppercase tracking-widest shadow-sm outline-none"
  />
  </div>
  <button 
  onClick={() => setShowModal(true)}
- className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
+ className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-lg font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
  >
  <Plus size={18} />
  New Entry
@@ -100,7 +100,7 @@ export default function DaybooksPage() {
  <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors"size={14} />
  <input 
  placeholder="Search registry..."
- className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-10 pr-4 py-1.5 text-[11px] font-bold text-admin-value outline-none w-64 transition-all"
+ className="bg-openpos-bg-subtle border border-openpos-border rounded-lg pl-10 pr-4 py-1.5 text-[11px] font-bold text-admin-value outline-none w-64 transition-all"
  />
  </div>
  <div className="flex items-center gap-2 px-3 py-1 bg-openpos-blue/5 border border-openpos-blue/10 rounded-lg text-openpos-blue">
@@ -114,35 +114,33 @@ export default function DaybooksPage() {
  <table className="w-full text-left whitespace-nowrap border-collapse text-[11px]">
  <thead>
  <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border text-[9px] font-bold text-admin-dim uppercase tracking-widest">
- <th className="px-6 py-4">Temporal Signature</th>
- <th className="px-6 py-4">Transaction Identity</th>
- <th className="px-6 py-4">Financial Category</th>
- <th className="px-6 py-4 text-center">Flow Type</th>
- <th className="px-6 py-4 text-right">Settlement Amount</th>
- <th className="px-6 py-4 text-right">Ledger</th>
+ <th className="px-6 py-3">Temporal Signature</th>
+ <th className="px-6 py-3">Transaction Identity</th>
+ <th className="px-6 py-3">Financial Category</th>
+ <th className="px-6 py-3 text-center">Flow Type</th>
+ <th className="px-6 py-3 text-right">Settlement Amount</th>
+ <th className="px-6 py-3 text-right">Ledger</th>
  </tr>
  </thead>
  <tbody className="divide-y divide-openpos-border">
  {entries.map((entry) => (
  <tr key={entry.id} className="group transition-colors cursor-default">
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <div className="flex items-center gap-3">
- <div className="w-8 h-8 rounded-lg bg-openpos-bg-subtle border border-openpos-border flex items-center justify-center text-admin-dim transition-transform">
- <Clock size={14} />
- </div>
+ 
  <span className="font-bold text-admin-value uppercase tracking-tighter">{entry.time}</span>
  </div>
  </td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <div className="flex flex-col">
  <span className="font-bold text-admin-value uppercase tracking-tight transition-colors">{entry.id}</span>
  <span className="text-[9px] text-admin-dim font-bold uppercase tracking-widest mt-0.5">{entry.note}</span>
  </div>
  </td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <span className="text-admin-value font-bold uppercase tracking-tight">{entry.category}</span>
  </td>
- <td className="px-6 py-4 text-center">
+ <td className="px-6 py-3 text-center">
  <span className={cn(
 "inline-flex items-center px-2.5 py-1 rounded-md text-[9px] font-bold uppercase tracking-widest border",
  entry.type ==='Credit'?"bg-openpos-blue/5 text-openpos-blue border-openpos-blue/10":"bg-openpos-red/5 text-openpos-red border-openpos-red/10"
@@ -150,10 +148,10 @@ export default function DaybooksPage() {
  {entry.type ==='Credit'?'Cash In':'Cash Out'}
  </span>
  </td>
- <td className="px-6 py-4 text-right font-bold text-[13px] text-admin-value">
+ <td className="px-6 py-3 text-right font-bold text-[13px] text-admin-value">
  KES {entry.amount.toLocaleString()}
  </td>
- <td className="px-6 py-4 text-right">
+ <td className="px-6 py-3 text-right">
  <button 
  onClick={() => handleDelete(entry)}
  className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim transition-all"
@@ -182,18 +180,18 @@ export default function DaybooksPage() {
  <div className="space-y-6">
  <div className="space-y-1.5">
  <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Flow Direction</label>
- <div className="flex bg-openpos-bg-subtle rounded-2xl p-1 ring-1 ring-openpos-border">
+ <div className="flex bg-openpos-bg-subtle rounded-lg p-1 ring-1 ring-openpos-border">
  <button 
  onClick={() => setFormData(prev => ({ ...prev, type:'Credit'}))}
  className={cn(
-"flex-1 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all", 
+"flex-1 py-3 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all", 
  formData.type ==='Credit'?"bg-openpos-blue text-white shadow-lg":"text-admin-dim"
  )}
  >Cash Inflow</button>
  <button 
  onClick={() => setFormData(prev => ({ ...prev, type:'Debit'}))}
  className={cn(
-"flex-1 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all", 
+"flex-1 py-3 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all", 
  formData.type ==='Debit'?"bg-openpos-red text-white shadow-lg":"text-admin-dim"
  )}
  >Cash Outflow</button>
@@ -204,7 +202,7 @@ export default function DaybooksPage() {
  <div className="space-y-1.5">
  <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Financial Category</label>
  <select 
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
  value={formData.category}
  onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
  >
@@ -221,7 +219,7 @@ export default function DaybooksPage() {
  <input 
  type="number"
  placeholder="0.00"
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
  value={formData.amount}
  onChange={(e) => setFormData(prev => ({ ...prev, amount: e.target.value }))}
  />
@@ -232,7 +230,7 @@ export default function DaybooksPage() {
  <textarea 
  rows="2"
  placeholder="Describe the transaction for the audit trail..."
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border resize-none"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border resize-none"
  value={formData.note}
  onChange={(e) => setFormData(prev => ({ ...prev, note: e.target.value }))}
  />
@@ -253,7 +251,7 @@ export default function DaybooksPage() {
  confirmCountdown={5}
  onConfirm={confirmDelete}
  >
- <div className="p-4 bg-openpos-red/5 rounded-2xl border border-openpos-red/10">
+ <div className="p-4 bg-openpos-red/5 rounded-lg border border-openpos-red/10">
  <p className="text-[12px] text-openpos-red font-bold uppercase tracking-tight leading-relaxed opacity-80">
  This action will permanently purge this entry from today's financial register. This may cause discrepancies in the end-of-day closing balance.
  </p>

@@ -1,12 +1,13 @@
 "use client"
 
-import React, { useState, useEffect } from'react'
-import Image from'next/image'
-import { useRouter } from'next/navigation'
-import { motion } from'framer-motion'
-import { Eye, EyeOff, AlertCircle, Loader2 } from'lucide-react'
-import authService from'@/lib/auth'
-import { APP_VERSION } from'@/lib/version'
+import React, { useState, useEffect } from 'react'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
+import { Eye, EyeOff, AlertCircle, Loader2 } from 'lucide-react'
+import authService from '@/lib/auth'
+import { APP_VERSION } from '@/lib/version'
+import { cn } from '@/lib/utils'
 
 export default function LoginPage() {
  const router = useRouter()
@@ -95,7 +96,7 @@ export default function LoginPage() {
  <motion.div 
  initial={{ opacity: 0, y: -10 }}
  animate={{ opacity: 1, y: 0 }}
- className="bg-openpos-red-light border border-openpos-red/20 text-openpos-red px-4 py-3 rounded-xl flex items-center gap-3 text-[12px] font-bold"
+ className="bg-openpos-red-light border border-openpos-red/20 text-openpos-red px-4 py-2.5 rounded-lg flex items-center gap-3 text-[12px] font-bold"
  >
  <AlertCircle size={16} />
  {error}
@@ -111,7 +112,7 @@ export default function LoginPage() {
  onChange={handleChange}
  required
  disabled={isAuthenticating}
- className="w-full px-4 py-3 rounded-xl border border-openpos-border bg-white outline-none transition-all font-medium text-admin-value placeholder:text-admin-dim/50"
+ className="w-full px-4 py-2.5 rounded-lg border border-openpos-border bg-white outline-none transition-all font-medium text-admin-value placeholder:text-admin-dim/50"
  placeholder="admin"
  />
  </div>
@@ -126,7 +127,7 @@ export default function LoginPage() {
  onChange={handleChange}
  required
  disabled={isAuthenticating}
- className="w-full px-4 py-3 pr-12 rounded-xl border border-openpos-border bg-white outline-none transition-all font-medium text-admin-value placeholder:text-admin-dim/50"
+ className="w-full px-4 py-2.5 pr-12 rounded-lg border border-openpos-border bg-white outline-none transition-all font-medium text-admin-value placeholder:text-admin-dim/50"
  placeholder="••••••••"
  />
  <button
@@ -142,7 +143,7 @@ export default function LoginPage() {
  <button
  type="submit"
  disabled={isAuthenticating}
- className="w-full bg-openpos-blue text-white rounded-xl py-4 font-bold text-[13px] uppercase tracking-[2px] shadow-lg shadow-openpos-blue/20 transition-all flex items-center justify-center min-h-[52px]"
+ className="w-full bg-openpos-blue text-white rounded-lg py-3 font-bold text-[13px] uppercase tracking-[2px] shadow-lg shadow-openpos-blue/20 transition-all flex items-center justify-center min-h-[44px]"
  >
  {isAuthenticating && <Loader2 className="animate-spin" size={20} />}
  <span className={cn(isAuthenticating && "ml-2")}>Sign In</span>

@@ -96,7 +96,7 @@ export default function SuppliersPage() {
  </div>
  <button 
  onClick={handleAdd}
- className="w-full sm:w-auto bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
+ className="w-full sm:w-auto bg-openpos-blue text-white px-5 py-2.5 rounded-lg font-bold text-[13px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
  >
  <Plus size={18} />
  Onboard Supplier
@@ -113,7 +113,7 @@ export default function SuppliersPage() {
  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-admin-dim"size={14} />
  <input 
  placeholder="Search partners..."
- className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-9 pr-4 py-1.5 text-[11px] font-bold outline-none w-64 transition-all"
+ className="bg-openpos-bg-subtle border border-openpos-border rounded-lg pl-9 pr-4 py-1.5 text-[11px] font-bold outline-none w-64 transition-all"
  />
  </div>
  }
@@ -135,9 +135,7 @@ export default function SuppliersPage() {
  <tr key={sup.id} className="group transition-colors cursor-default">
  <td className="p-5">
  <div className="flex items-center gap-3">
- <div className="w-9 h-9 rounded-lg bg-openpos-blue/5 flex items-center justify-center text-openpos-blue shrink-0 border border-openpos-blue/10">
- <Truck size={16} />
- </div>
+ 
  <span className="text-[13px] font-bold text-admin-value uppercase tracking-tight">{sup.name}</span>
  </div>
  </td>
@@ -197,7 +195,7 @@ export default function SuppliersPage() {
  <div className="md:col-span-2 space-y-1.5">
  <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Company Name *</label>
  <input 
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none transition-all"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none transition-all"
  value={formData.name}
  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
  />
@@ -205,7 +203,7 @@ export default function SuppliersPage() {
  <div className="space-y-1.5">
  <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Contact Person</label>
  <input 
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none transition-all"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none transition-all"
  value={formData.contact}
  onChange={(e) => setFormData(prev => ({ ...prev, contact: e.target.value }))}
  />
@@ -213,7 +211,7 @@ export default function SuppliersPage() {
  <div className="space-y-1.5">
  <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Category</label>
  <select 
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none cursor-pointer"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none cursor-pointer"
  value={formData.category}
  onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
  >
@@ -227,7 +225,7 @@ export default function SuppliersPage() {
  <div className="space-y-1.5">
  <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Phone Number</label>
  <input 
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none transition-all"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none transition-all"
  value={formData.phone}
  onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
  />
@@ -236,7 +234,7 @@ export default function SuppliersPage() {
  <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Email Address</label>
  <input 
  type="email"
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none transition-all"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none transition-all"
  value={formData.email}
  onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
  />
@@ -257,7 +255,7 @@ export default function SuppliersPage() {
  onConfirm={confirmDelete}
  isLoading={isLoading}
  >
- <div className="p-4 bg-openpos-red/5 border border-openpos-red/10 rounded-2xl">
+ <div className="p-4 bg-openpos-red/5 border border-openpos-red/10 rounded-lg">
  <p className="text-[11px] text-openpos-red font-bold uppercase tracking-tight leading-relaxed">
  This will remove the supplier from your active partners list. Historical purchase records will remain intact.
  </p>

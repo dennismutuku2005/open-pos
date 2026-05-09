@@ -23,11 +23,11 @@ export default function LedgersPage() {
  <h1 className="text-xl font-bold tracking-tight text-admin-value uppercase">General Ledger</h1>
  <p className="text-[13px] font-medium text-admin-label mt-1">Audit trail for customer and supplier financial account settlements.</p>
  </div>
- <div className="flex bg-openpos-bg-subtle p-1 rounded-2xl ring-1 ring-openpos-border shadow-sm">
+ <div className="flex bg-openpos-bg-subtle p-1 rounded-lg ring-1 ring-openpos-border shadow-sm">
  <button 
  onClick={() => setActiveTab('customers')}
  className={cn(
-"px-6 py-2 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all",
+"px-6 py-2 rounded-lg font-bold text-[10px] uppercase tracking-widest transition-all",
  activeTab ==='customers'?"bg-card-bg text-openpos-blue shadow-lg border border-openpos-border":"text-admin-dim"
  )}
  >
@@ -36,7 +36,7 @@ export default function LedgersPage() {
  <button 
  onClick={() => setActiveTab('suppliers')}
  className={cn(
-"px-6 py-2 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all",
+"px-6 py-2 rounded-lg font-bold text-[10px] uppercase tracking-widest transition-all",
  activeTab ==='suppliers'?"bg-card-bg text-openpos-blue shadow-lg border border-openpos-border":"text-admin-dim"
  )}
  >
@@ -63,7 +63,7 @@ export default function LedgersPage() {
  <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors"size={14} />
  <input 
  placeholder="Search entities or TRX ID..."
- className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-10 pr-4 py-1.5 text-[11px] font-bold text-admin-value outline-none w-64 transition-all"
+ className="bg-openpos-bg-subtle border border-openpos-border rounded-lg pl-10 pr-4 py-1.5 text-[11px] font-bold text-admin-value outline-none w-64 transition-all"
  />
  </div>
  <button className="flex items-center gap-2 px-3 py-1.5 bg-openpos-bg-subtle border border-openpos-border rounded-lg text-admin-dim transition-all">
@@ -77,35 +77,35 @@ export default function LedgersPage() {
  <table className="w-full text-left whitespace-nowrap border-collapse text-[11px]">
  <thead>
  <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border text-[9px] font-bold text-admin-dim uppercase tracking-widest">
- <th className="px-6 py-4">Temporal Signature</th>
- <th className="px-6 py-4">Transaction Identity</th>
- <th className="px-6 py-4">Entity Identity</th>
- <th className="px-6 py-4">Narration</th>
- <th className="px-6 py-4 text-center">Settlement Type</th>
- <th className="px-6 py-4 text-right">Settlement Total</th>
- <th className="px-6 py-4 text-right">Cumulative Balance</th>
- <th className="px-6 py-4 text-right">Ledger</th>
+ <th className="px-6 py-3">Temporal Signature</th>
+ <th className="px-6 py-3">Transaction Identity</th>
+ <th className="px-6 py-3">Entity Identity</th>
+ <th className="px-6 py-3">Narration</th>
+ <th className="px-6 py-3 text-center">Settlement Type</th>
+ <th className="px-6 py-3 text-right">Settlement Total</th>
+ <th className="px-6 py-3 text-right">Cumulative Balance</th>
+ <th className="px-6 py-3 text-right">Ledger</th>
  </tr>
  </thead>
  <tbody className="divide-y divide-openpos-border">
  {mockLedger.map(trx => (
  <tr key={trx.id} className="group transition-colors cursor-default">
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <div className="flex items-center gap-2 text-admin-dim font-bold">
  <Calendar size={12} className="text-openpos-blue"/>
  <span className="uppercase">{trx.date}</span>
  </div>
  </td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <span className="font-bold text-admin-value uppercase tracking-tight transition-colors">{trx.id}</span>
  </td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <span className="text-admin-value font-bold uppercase tracking-tight">{trx.entity}</span>
  </td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <span className="text-admin-dim font-bold uppercase tracking-tighter opacity-80">{trx.description}</span>
  </td>
- <td className="px-6 py-4 text-center">
+ <td className="px-6 py-3 text-center">
  <span className={cn(
 "inline-flex items-center px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-widest border",
  trx.type ==='Credit'?"bg-openpos-blue/5 text-openpos-blue border-openpos-blue/10":"bg-openpos-red/5 text-openpos-red border-openpos-red/10"
@@ -113,13 +113,13 @@ export default function LedgersPage() {
  {trx.type}
  </span>
  </td>
- <td className="px-6 py-4 text-right">
+ <td className="px-6 py-3 text-right">
  <span className="text-[13px] font-bold text-admin-value">KES {trx.amount.toLocaleString()}</span>
  </td>
- <td className="px-6 py-4 text-right">
+ <td className="px-6 py-3 text-right">
  <span className="text-[13px] font-bold text-openpos-blue">KES {trx.balance.toLocaleString()}</span>
  </td>
- <td className="px-6 py-4 text-right">
+ <td className="px-6 py-3 text-right">
  <div className="w-10"/> {/* Spacer for alignment */}
  </td>
  </tr>

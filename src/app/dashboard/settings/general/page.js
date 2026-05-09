@@ -32,7 +32,7 @@ export default function GeneralSettingsPage() {
  <div className="flex items-center gap-4">
  <Link 
  href="/dashboard/settings"
- className="w-10 h-10 rounded-xl bg-card-bg border border-openpos-border flex items-center justify-center text-admin-dim transition-all shadow-sm"
+ className="w-10 h-10 rounded-lg bg-card-bg border border-openpos-border flex items-center justify-center text-admin-dim transition-all shadow-sm"
  >
  <ChevronLeft size={20} />
  </Link>
@@ -47,7 +47,7 @@ export default function GeneralSettingsPage() {
  <button 
  onClick={handleSave}
  disabled={loading}
- className="w-full sm:w-auto bg-openpos-blue text-white px-8 py-2.5 rounded-xl font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest disabled:opacity-50"
+ className="w-full sm:w-auto bg-openpos-blue text-white px-8 py-2.5 rounded-lg font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest disabled:opacity-50"
  >
  {loading ? <RefreshCw size={16} className="animate-spin"/> : <Save size={16} />}
  Sync Parameters
@@ -67,7 +67,7 @@ export default function GeneralSettingsPage() {
  <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Entity Name</label>
  <input 
  type="text"
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
  value={config.storeName}
  onChange={(e) => setConfig(prev => ({ ...prev, storeName: e.target.value }))}
  />
@@ -77,7 +77,7 @@ export default function GeneralSettingsPage() {
  <div className="relative">
  <Languages className="absolute left-4 top-1/2 -translate-y-1/2 text-openpos-blue"size={16} />
  <select 
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl pl-12 pr-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border appearance-none"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg pl-12 pr-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border appearance-none"
  value={config.language}
  onChange={(e) => setConfig(prev => ({ ...prev, language: e.target.value }))}
  >
@@ -95,7 +95,7 @@ export default function GeneralSettingsPage() {
  <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-openpos-blue"size={16} />
  <input 
  type="text"
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl pl-12 pr-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg pl-12 pr-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
  value={config.address}
  onChange={(e) => setConfig(prev => ({ ...prev, address: e.target.value }))}
  />
@@ -115,7 +115,7 @@ export default function GeneralSettingsPage() {
  <div className="relative">
  <Clock className="absolute left-4 top-1/2 -translate-y-1/2 text-openpos-blue"size={16} />
  <select 
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl pl-12 pr-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border appearance-none"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg pl-12 pr-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border appearance-none"
  value={config.timezone}
  onChange={(e) => setConfig(prev => ({ ...prev, timezone: e.target.value }))}
  >
@@ -130,7 +130,7 @@ export default function GeneralSettingsPage() {
  <div className="relative">
  <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 text-openpos-blue"size={16} />
  <select 
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl pl-12 pr-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border appearance-none"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg pl-12 pr-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border appearance-none"
  value={config.currency}
  onChange={(e) => setConfig(prev => ({ ...prev, currency: e.target.value }))}
  >

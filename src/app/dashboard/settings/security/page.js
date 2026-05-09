@@ -25,7 +25,7 @@ export default function SecuritySettingsPage() {
  <div className="flex items-center gap-4">
  <Link 
  href="/dashboard/settings"
- className="w-10 h-10 rounded-xl bg-card-bg border border-openpos-border flex items-center justify-center text-admin-dim transition-all shadow-sm"
+ className="w-10 h-10 rounded-lg bg-card-bg border border-openpos-border flex items-center justify-center text-admin-dim transition-all shadow-sm"
  >
  <ChevronLeft size={20} />
  </Link>
@@ -40,7 +40,7 @@ export default function SecuritySettingsPage() {
  <button 
  onClick={handleUpdate}
  disabled={loading}
- className="w-full sm:w-auto bg-openpos-blue text-white px-8 py-2.5 rounded-xl font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest disabled:opacity-50"
+ className="w-full sm:w-auto bg-openpos-blue text-white px-8 py-2.5 rounded-lg font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest disabled:opacity-50"
  >
  {loading ? <RefreshCw size={16} className="animate-spin"/> : <Lock size={16} />}
  Harden Security
@@ -60,7 +60,7 @@ export default function SecuritySettingsPage() {
  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-openpos-blue"size={16} />
  <input 
  type={showPassword ?"text":"password"} 
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl pl-12 pr-12 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg pl-12 pr-12 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
  defaultValue="secret_key_placeholder"
  />
  <button 
@@ -73,7 +73,7 @@ export default function SecuritySettingsPage() {
  </div>
 
  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
- <div className="p-4 bg-openpos-bg-subtle border border-openpos-border rounded-2xl space-y-3">
+ <div className="p-4 bg-openpos-bg-subtle border border-openpos-border rounded-lg space-y-3">
  <div className="flex items-center justify-between">
  <span className="text-[11px] font-bold text-admin-value uppercase tracking-tight">Two-Factor Auth</span>
  <div className="w-8 h-4 bg-openpos-blue rounded-full relative">
@@ -82,7 +82,7 @@ export default function SecuritySettingsPage() {
  </div>
  <p className="text-[10px] text-admin-dim font-medium leading-relaxed">Require a biometric or SMS token for administrative logins.</p>
  </div>
- <div className="p-4 bg-openpos-bg-subtle border border-openpos-border rounded-2xl space-y-3">
+ <div className="p-4 bg-openpos-bg-subtle border border-openpos-border rounded-lg space-y-3">
  <div className="flex items-center justify-between">
  <span className="text-[11px] font-bold text-admin-value uppercase tracking-tight">Session Timeout</span>
  <span className="text-[10px] font-bold text-openpos-blue">4 Hours</span>
@@ -98,7 +98,7 @@ export default function SecuritySettingsPage() {
  subtitle="Database encryption and hardware lockouts"
  >
  <div className="space-y-4 mt-4">
- <div className="flex items-center justify-between p-4 bg-red-500/5 border border-red-500/10 rounded-2xl">
+ <div className="flex items-center justify-between p-4 bg-red-500/5 border border-red-500/10 rounded-lg">
  <div className="flex items-center gap-3">
  <AlertTriangle className="text-red-500"size={20} />
  <div>

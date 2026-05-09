@@ -5,10 +5,10 @@ export default function Loading() {
  <div className="space-y-6 animate-in fade-in duration-500 p-6">
  <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
  <div className="space-y-2">
- <Skeleton className="h-8 w-48 rounded-xl"/>
+ <Skeleton className="h-8 w-48 rounded-lg"/>
  <Skeleton className="h-4 w-96 rounded-lg"/>
  </div>
- <Skeleton className="h-10 w-40 rounded-xl"/>
+ <Skeleton className="h-10 w-40 rounded-lg"/>
  </div>
 
  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

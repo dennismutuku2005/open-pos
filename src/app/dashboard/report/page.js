@@ -87,12 +87,12 @@ export default function SalesReportPage() {
  type="date"
  value={dateRange}
  onChange={(e) => setDateRange(e.target.value)}
- className="bg-card-bg border border-openpos-border text-admin-value pl-11 pr-5 py-2.5 rounded-xl font-bold text-[11px] transition-all uppercase tracking-widest shadow-sm outline-none"
+ className="bg-card-bg border border-openpos-border text-admin-value pl-11 pr-5 py-2.5 rounded-lg font-bold text-[11px] transition-all uppercase tracking-widest shadow-sm outline-none"
  />
  </div>
  <button 
  onClick={downloadPDF}
- className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
+ className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-lg font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
  >
  <Download size={16} />
  Download PDF
@@ -172,7 +172,7 @@ export default function SalesReportPage() {
  >
  <div className="space-y-2 mt-2">
  {topProducts.map((p, i) => (
- <div key={p.id} className="flex items-center justify-between p-3 rounded-xl transition-colors group cursor-default">
+ <div key={p.id} className="flex items-center justify-between p-3 rounded-lg transition-colors group cursor-default">
  <div className="flex items-center gap-3">
  <div className="w-8 h-8 rounded-lg bg-openpos-blue/5 text-openpos-blue border border-openpos-blue/10 font-bold flex items-center justify-center text-[11px] transition-transform">{i + 1}</div>
  <div>
@@ -194,7 +194,7 @@ export default function SalesReportPage() {
  >
  <div className="space-y-2 mt-2">
  {leastProducts.map((p, i) => (
- <div key={p.id} className="flex items-center justify-between p-3 rounded-xl transition-colors group cursor-default">
+ <div key={p.id} className="flex items-center justify-between p-3 rounded-lg transition-colors group cursor-default">
  <div className="flex items-center gap-3">
  <div className="w-8 h-8 rounded-lg bg-openpos-red/5 text-openpos-red border border-openpos-red/10 font-bold flex items-center justify-center text-[11px] transition-transform">{i + 1}</div>
  <div>
@@ -218,7 +218,7 @@ export default function SalesReportPage() {
  headerAction={
  <div className="relative">
  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-admin-dim"size={14} />
- <input placeholder="Search orders..."className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-9 pr-4 py-1.5 text-[11px] font-bold outline-none w-64 transition-all"/>
+ <input placeholder="Search orders..."className="bg-openpos-bg-subtle border border-openpos-border rounded-lg pl-9 pr-4 py-1.5 text-[11px] font-bold outline-none w-64 transition-all"/>
  </div>
  }
  >
@@ -265,7 +265,7 @@ function ReportStatCard({ title, value, change, icon: Icon, color }) {
  const isPositive = !change.startsWith('-')
 
  return (
- <div className="bg-card-bg border border-openpos-border rounded-xl p-4 shadow-sm transition-all">
+ <div className="bg-card-bg border border-openpos-border rounded-lg p-4 shadow-sm transition-all">
  <div className="flex items-center gap-3">
  <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center shrink-0", colorClasses[color] || colorClasses.blue)}>
  <Icon size={18} />

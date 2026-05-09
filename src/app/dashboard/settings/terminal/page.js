@@ -31,7 +31,7 @@ export default function TerminalSettingsPage() {
  <div className="flex items-center gap-4">
  <Link 
  href="/dashboard/settings"
- className="w-10 h-10 rounded-xl bg-card-bg border border-openpos-border flex items-center justify-center text-admin-dim transition-all shadow-sm"
+ className="w-10 h-10 rounded-lg bg-card-bg border border-openpos-border flex items-center justify-center text-admin-dim transition-all shadow-sm"
  >
  <ChevronLeft size={20} />
  </Link>
@@ -46,7 +46,7 @@ export default function TerminalSettingsPage() {
  <button 
  onClick={handleSave}
  disabled={loading}
- className="w-full sm:w-auto bg-openpos-blue text-white px-8 py-2.5 rounded-xl font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest disabled:opacity-50"
+ className="w-full sm:w-auto bg-openpos-blue text-white px-8 py-2.5 rounded-lg font-bold text-[11px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest disabled:opacity-50"
  >
  {loading ? <RefreshCw size={16} className="animate-spin"/> : <Settings size={16} />}
  Sync Terminal
@@ -65,7 +65,7 @@ export default function TerminalSettingsPage() {
  <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">VAT / Sales Tax (%)</label>
  <input 
  type="number"
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
  value={config.taxRate}
  onChange={(e) => setConfig(prev => ({ ...prev, taxRate: e.target.value }))}
  />
@@ -74,7 +74,7 @@ export default function TerminalSettingsPage() {
  <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Max Operator Discount (%)</label>
  <input 
  type="number"
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold text-admin-value outline-none ring-1 ring-openpos-border"
  value={config.discountLimit}
  onChange={(e) => setConfig(prev => ({ ...prev, discountLimit: e.target.value }))}
  />
@@ -88,7 +88,7 @@ export default function TerminalSettingsPage() {
  subtitle="Managing connected thermal printers and displays"
  >
  <div className="space-y-4 mt-4">
- <div className="flex items-center justify-between p-4 bg-openpos-bg-subtle border border-openpos-border rounded-2xl group transition-all">
+ <div className="flex items-center justify-between p-4 bg-openpos-bg-subtle border border-openpos-border rounded-lg group transition-all">
  <div className="flex items-center gap-3">
  <Printer className="text-openpos-blue"size={20} />
  <div>
@@ -101,7 +101,7 @@ export default function TerminalSettingsPage() {
  </div>
  </div>
 
- <div className="flex items-center justify-between p-4 bg-openpos-bg-subtle border border-openpos-border rounded-2xl group transition-all">
+ <div className="flex items-center justify-between p-4 bg-openpos-bg-subtle border border-openpos-border rounded-lg group transition-all">
  <div className="flex items-center gap-3">
  <Tablet className="text-openpos-blue"size={20} />
  <div>
@@ -120,7 +120,7 @@ export default function TerminalSettingsPage() {
  <div className="space-y-6">
  <div className="p-8 bg-openpos-blue/5 border border-openpos-blue/10 rounded-[32px] space-y-4">
  <p className="text-[10px] font-bold text-openpos-blue uppercase tracking-widest">Printer Preview</p>
- <div className="bg-white p-4 rounded-xl shadow-inner rotate-1 space-y-2">
+ <div className="bg-white p-4 rounded-lg shadow-inner rotate-1 space-y-2">
  <div className="h-2 w-1/2 bg-gray-200 rounded mx-auto"/>
  <div className="h-1 w-full bg-gray-100 rounded"/>
  <div className="h-1 w-3/4 bg-gray-100 rounded mx-auto"/>

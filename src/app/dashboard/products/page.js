@@ -197,7 +197,7 @@ export default function ProductsPage() {
  <p className="text-admin-label mt-1 font-medium text-[13px]">Manage your inventory, prices, and stock levels.</p>
  </div>
  <div className="flex items-center gap-3 w-full sm:w-auto">
- <div className="flex items-center bg-card-bg border border-openpos-border rounded-xl overflow-hidden shadow-sm">
+ <div className="flex items-center bg-card-bg border border-openpos-border rounded-lg overflow-hidden shadow-sm">
  <button 
  onClick={() => exportProducts('PDF')}
  className="px-4 py-2.5 text-admin-dim transition-all flex items-center gap-2 border-r border-openpos-border"
@@ -215,7 +215,7 @@ export default function ProductsPage() {
  </div>
   <button 
   onClick={() => { resetForm(); setShowFormModal(true); }}
-  className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-3 rounded-xl font-bold text-[12px] flex items-center justify-center gap-2 transition-all uppercase tracking-widest min-w-[160px]"
+  className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-3 rounded-lg font-bold text-[12px] flex items-center justify-center gap-2 transition-all uppercase tracking-widest min-w-[160px]"
   >
   <Plus size={18} />
   Add Product
@@ -224,19 +224,19 @@ export default function ProductsPage() {
  </div>
 
  {/* Filters */}
- <div className="bg-card-bg border border-openpos-border rounded-2xl p-4 flex flex-col md:flex-row items-center gap-4">
+ <div className="bg-card-bg border border-openpos-border rounded-lg p-4 flex flex-col md:flex-row items-center gap-4">
  <div className="relative flex-1 w-full group">
  <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors"size={16} />
  <input 
  type="text"
  placeholder="Search products by name or barcode..."
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-10 pr-4 py-2.5 text-[11px] font-bold text-admin-value outline-none transition-all"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg pl-10 pr-4 py-2.5 text-[11px] font-bold text-admin-value outline-none transition-all"
  value={searchQuery}
  onChange={(e) => setSearchQuery(e.target.value)}
  />
  </div>
  <div className="flex items-center gap-2 w-full md:w-auto">
- <select className="flex-1 md:w-48 bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-2.5 text-[11px] font-bold text-admin-value outline-none transition-all uppercase tracking-widest cursor-pointer">
+ <select className="flex-1 md:w-48 bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-2.5 text-[11px] font-bold text-admin-value outline-none transition-all uppercase tracking-widest cursor-pointer">
  <option>All Categories</option>
  {categories.map(c => <option key={c}>{c}</option>)}
  </select>
@@ -262,7 +262,7 @@ export default function ProductsPage() {
  <tr key={product.id} className="group transition-colors cursor-default">
  <td className="py-3.5 px-6">
  <div className="flex items-center gap-4">
- <div className="w-10 h-10 rounded-xl overflow-hidden bg-openpos-bg-subtle relative shrink-0 border border-openpos-border shadow-sm transition-transform">
+ <div className="w-10 h-10 rounded-lg overflow-hidden bg-openpos-bg-subtle relative shrink-0 border border-openpos-border shadow-sm transition-transform">
  {product.image ? (
  <Image src={product.image} alt={product.name} fill className="object-cover"/>
  ) : (
@@ -380,7 +380,7 @@ export default function ProductsPage() {
  name="name"
  value={formData.name}
  onChange={handleInputChange}
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl pl-12 pr-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg pl-12 pr-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
  placeholder="e.g. Sourdough Loaf"
  />
  </div>
@@ -392,7 +392,7 @@ export default function ProductsPage() {
  name="category"
  value={formData.category}
  onChange={handleInputChange}
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
  >
  <option value="">Select Category</option>
  {categories.map(c => <option key={c} value={c}>{c}</option>)}
@@ -401,8 +401,8 @@ export default function ProductsPage() {
 
  <div className="md:col-span-2 space-y-1.5">
  <label className="text-[10px] font-bold text-admin-label uppercase tracking-widest ml-1">Product Image</label>
- <div className="flex items-center gap-4 p-4 bg-openpos-bg-subtle rounded-2xl ring-1 ring-openpos-border">
- <div className="w-16 h-16 rounded-xl bg-card-bg border border-openpos-border overflow-hidden flex items-center justify-center shrink-0 relative group">
+ <div className="flex items-center gap-4 p-4 bg-openpos-bg-subtle rounded-lg ring-1 ring-openpos-border">
+ <div className="w-16 h-16 rounded-lg bg-card-bg border border-openpos-border overflow-hidden flex items-center justify-center shrink-0 relative group">
  {formData.image ? (
  <>
  <Image src={formData.image} alt="Preview"fill className="object-cover"/>
@@ -418,7 +418,7 @@ export default function ProductsPage() {
  )}
  </div>
  <div className="flex-1">
- <label className="flex flex-col items-center justify-center w-full h-12 border-2 border-dashed border-openpos-border rounded-xl cursor-pointer transition-all group">
+ <label className="flex flex-col items-center justify-center w-full h-12 border-2 border-dashed border-openpos-border rounded-lg cursor-pointer transition-all group">
  <div className="flex items-center gap-2">
  <Upload size={14} className="text-admin-dim transition-colors"/>
  <span className="text-[11px] font-bold text-admin-dim transition-colors uppercase tracking-widest">
@@ -444,7 +444,7 @@ export default function ProductsPage() {
  type="number"
  value={formData.buyPrice}
  onChange={handleInputChange}
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
  placeholder="0.00"
  />
  </div>
@@ -456,7 +456,7 @@ export default function ProductsPage() {
  type="number"
  value={formData.sellPrice}
  onChange={handleInputChange}
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
  placeholder="0.00"
  />
  </div>
@@ -468,7 +468,7 @@ export default function ProductsPage() {
  type="number"
  value={formData.stock}
  onChange={handleInputChange}
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
  placeholder="0"
  />
  </div>
@@ -482,12 +482,12 @@ export default function ProductsPage() {
  max="100"
  value={formData.discount}
  onChange={handleInputChange}
- className="w-full bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
+ className="w-full bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
  placeholder="e.g. 10"
  />
  </div>
 
- <div className="md:col-span-2 space-y-4 bg-openpos-bg-subtle/50 p-4 rounded-2xl border border-openpos-border/50">
+ <div className="md:col-span-2 space-y-4 bg-openpos-bg-subtle/50 p-4 rounded-lg border border-openpos-border/50">
  <div className="flex items-center justify-between">
  <div className="flex items-center gap-3">
  <div className="w-8 h-8 rounded-lg bg-card-bg border border-openpos-border flex items-center justify-center text-admin-dim">
@@ -518,7 +518,7 @@ export default function ProductsPage() {
  type="date"
  value={formData.expiry}
  onChange={handleInputChange}
- className="w-full bg-card-bg border-none rounded-xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border mt-1.5 transition-all"
+ className="w-full bg-card-bg border-none rounded-lg px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border mt-1.5 transition-all"
  required={formData.hasExpiry}
  />
  </div>
@@ -532,12 +532,12 @@ export default function ProductsPage() {
  name="barcode"
  value={formData.barcode}
  onChange={handleInputChange}
- className="flex-1 bg-openpos-bg-subtle border-none rounded-2xl px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
+ className="flex-1 bg-openpos-bg-subtle border-none rounded-lg px-4 py-3 text-[13px] font-bold outline-none ring-1 ring-openpos-border"
  placeholder="Barcode"
  />
  <button 
  onClick={generateBarcode}
- className="bg-openpos-blue/10 text-openpos-blue font-bold text-[10px] px-6 rounded-2xl uppercase tracking-widest transition-all"
+ className="bg-openpos-blue/10 text-openpos-blue font-bold text-[10px] px-6 rounded-lg uppercase tracking-widest transition-all"
  >
  Auto
  </button>
@@ -559,7 +559,7 @@ export default function ProductsPage() {
  onConfirm={confirmDelete}
  isLoading={isSubmitting}
  >
- <div className="p-4 bg-openpos-red/5 rounded-2xl border border-openpos-red/10">
+ <div className="p-4 bg-openpos-red/5 rounded-lg border border-openpos-red/10">
  <p className="text-[12px] text-openpos-red font-medium leading-relaxed">
  This will permanently remove the product from your inventory. All historical sales data will remain, but you won't be able to sell this item anymore.
  </p>

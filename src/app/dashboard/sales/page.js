@@ -65,7 +65,7 @@ export default function SalesManagementPage() {
  <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-openpos-blue transition-colors"size={16} />
  <input 
  type="date"
- className="bg-card-bg border border-openpos-border text-admin-value pl-11 pr-5 py-2.5 rounded-xl font-bold text-[11px] transition-all uppercase tracking-widest shadow-sm outline-none"
+ className="bg-card-bg border border-openpos-border text-admin-value pl-11 pr-5 py-2.5 rounded-lg font-bold text-[11px] transition-all uppercase tracking-widest shadow-sm outline-none"
  defaultValue={new Date().toISOString().split('T')[0]}
  />
  </div>
@@ -144,7 +144,7 @@ export default function SalesManagementPage() {
  </div>
  ))}
  </div>
- <div className="mt-8 p-4 bg-openpos-bg-subtle border border-openpos-border rounded-2xl">
+ <div className="mt-8 p-4 bg-openpos-bg-subtle border border-openpos-border rounded-lg">
  <p className="text-[9px] font-bold text-openpos-blue uppercase tracking-widest mb-1">AI INSIGHT</p>
  <p className="text-[11px] text-admin-dim font-bold uppercase tracking-tight leading-relaxed">
  Beef Crowich is your primary liquidity driver today, contributing nearly 45% of gross revenue.
@@ -163,7 +163,7 @@ export default function SalesManagementPage() {
  <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors"size={14} />
  <input 
  placeholder="Search transactions..."
- className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-10 pr-4 py-1.5 text-[11px] font-bold text-admin-value outline-none w-64 transition-all"
+ className="bg-openpos-bg-subtle border border-openpos-border rounded-lg pl-10 pr-4 py-1.5 text-[11px] font-bold text-admin-value outline-none w-64 transition-all"
  />
  </div>
  }
@@ -172,32 +172,32 @@ export default function SalesManagementPage() {
  <table className="w-full text-left whitespace-nowrap border-collapse text-[11px]">
  <thead>
  <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border text-[9px] font-bold text-admin-dim uppercase tracking-widest">
- <th className="px-6 py-4">Transaction ID</th>
- <th className="px-6 py-4">Date & Temporal Signature</th>
- <th className="px-6 py-4">Customer identity</th>
- <th className="px-6 py-4 text-center">Volume</th>
- <th className="px-6 py-4 text-center">Settlement Method</th>
- <th className="px-6 py-4 text-right">Net total</th>
- <th className="px-6 py-4 text-right">Ledger</th>
+ <th className="px-6 py-3">Transaction ID</th>
+ <th className="px-6 py-3">Date & Temporal Signature</th>
+ <th className="px-6 py-3">Customer identity</th>
+ <th className="px-6 py-3 text-center">Volume</th>
+ <th className="px-6 py-3 text-center">Settlement Method</th>
+ <th className="px-6 py-3 text-right">Net total</th>
+ <th className="px-6 py-3 text-right">Ledger</th>
  </tr>
  </thead>
  <tbody className="divide-y divide-openpos-border">
  {sales.map((sale) => (
  <tr key={sale.id} className="group transition-colors cursor-default">
- <td className="px-6 py-4 font-bold text-admin-value uppercase tracking-tight transition-colors">{sale.id}</td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3 font-bold text-admin-value uppercase tracking-tight transition-colors">{sale.id}</td>
+ <td className="px-6 py-3">
  <div className="flex flex-col">
  <span className="font-bold text-admin-value uppercase">{sale.date.split('')[0]}</span>
  <span className="text-[9px] text-admin-dim font-bold uppercase tracking-tighter mt-0.5">{sale.date.split('')[1]}</span>
  </div>
  </td>
- <td className="px-6 py-4 text-admin-value font-bold uppercase tracking-tight">{sale.customer}</td>
- <td className="px-6 py-4 text-center">
+ <td className="px-6 py-3 text-admin-value font-bold uppercase tracking-tight">{sale.customer}</td>
+ <td className="px-6 py-3 text-center">
  <span className="px-2 py-1 bg-openpos-bg-subtle border border-openpos-border rounded-md font-bold text-[10px] uppercase tracking-widest">
  {sale.items} Items
  </span>
  </td>
- <td className="px-6 py-4 text-center">
+ <td className="px-6 py-3 text-center">
  <span className={cn(
 "inline-flex items-center px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-widest border",
  sale.payment ==='Cash'?"bg-openpos-blue/5 text-openpos-blue border-openpos-blue/10":"bg-purple-500/5 text-purple-500 border-purple-500/10"
@@ -205,8 +205,8 @@ export default function SalesManagementPage() {
  {sale.payment}
  </span>
  </td>
- <td className="px-6 py-4 text-right font-bold text-admin-value">KES {sale.total.toLocaleString()}</td>
- <td className="px-6 py-4 text-right">
+ <td className="px-6 py-3 text-right font-bold text-admin-value">KES {sale.total.toLocaleString()}</td>
+ <td className="px-6 py-3 text-right">
  <div className="flex items-center justify-end gap-1.5">
  <button className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim transition-all">
  <Printer size={12} />
@@ -238,7 +238,7 @@ export default function SalesManagementPage() {
  confirmCountdown={5}
  onConfirm={confirmDelete}
  >
- <div className="p-4 bg-openpos-red/5 rounded-2xl border border-openpos-red/10">
+ <div className="p-4 bg-openpos-red/5 rounded-lg border border-openpos-red/10">
  <p className="text-[12px] text-openpos-red font-bold uppercase tracking-tight leading-relaxed opacity-80">
  This action will permanently purge this transaction record from the financial ledger. This operation cannot be reversed.
  </p>

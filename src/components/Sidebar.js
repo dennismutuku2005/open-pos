@@ -202,7 +202,7 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
  <button
  onClick={() => toggleMenu(item.id)}
  className={cn(
-"w-full flex items-center rounded-xl transition-all group relative text-[13px] cursor-pointer py-2.5",
+"w-full flex items-center rounded-lg transition-all group relative text-[13px] cursor-pointer py-2.5",
  showText ?"px-3 gap-3":"px-0 justify-center",
  isActive && !isExpanded ?"bg-openpos-blue/10 text-openpos-blue font-semibold":"text-admin-label"
  )}
@@ -250,7 +250,7 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
  <Link
  href={createHref(item.href)}
  className={cn(
-"flex items-center rounded-xl transition-all group relative text-[13px] py-2.5",
+"flex items-center rounded-lg transition-all group relative text-[13px] py-2.5",
  showText ?"px-3 gap-3":"px-0 justify-center",
  isActive
  ?"bg-openpos-blue text-white shadow-sm font-semibold"
@@ -288,7 +288,7 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
  <button
  onClick={() => setShowLogoutModal(true)}
  className={cn(
-"w-full flex items-center text-admin-dim transition-all rounded-xl text-[13px] font-semibold group cursor-pointer py-2.5",
+"w-full flex items-center text-admin-dim transition-all rounded-lg text-[13px] font-semibold group cursor-pointer py-2.5",
  showText ?"px-3 gap-3":"px-0 justify-center"
  )}
  >

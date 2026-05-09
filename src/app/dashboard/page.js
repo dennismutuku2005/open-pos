@@ -62,7 +62,7 @@ export default function DashboardPage() {
  <h1 className="text-xl font-bold tracking-tight text-admin-value">Open POS Dashboard</h1>
  <p className="text-admin-label mt-1 text-[13px]">Welcome back, here's what's happening with your store today.</p>
  </div>
- <div className="bg-card-bg border border-openpos-border rounded-xl px-4 py-2 flex items-center justify-center">
+ <div className="bg-card-bg border border-openpos-border rounded-lg px-4 py-2 flex items-center justify-center">
  <span className="font-semibold text-[12px] text-admin-value">{new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric'})}</span>
  </div>
  </div>
@@ -83,7 +83,7 @@ export default function DashboardPage() {
  title="Sales Overview"
  subtitle="Performance of the day"
  headerAction={
- <select className="bg-openpos-bg-subtle border-none rounded-xl text-[11px] font-bold px-4 py-2 outline-none transition-all cursor-pointer">
+ <select className="bg-openpos-bg-subtle border-none rounded-lg text-[11px] font-bold px-4 py-2 outline-none transition-all cursor-pointer">
  <option>Today</option>
  <option>Yesterday</option>
  <option>Last 7 Days</option>
@@ -110,7 +110,7 @@ export default function DashboardPage() {
  </Card>
 
  {/* Activity Carousel */}
- <div className="bg-openpos-blue/[0.03] border border-openpos-blue/10 rounded-2xl p-6 relative overflow-hidden flex items-center h-32">
+ <div className="bg-openpos-blue/[0.03] border border-openpos-blue/10 rounded-lg p-6 relative overflow-hidden flex items-center h-32">
  <div className="absolute top-0 left-0 w-1 h-full bg-openpos-blue"/>
  <div className="flex-1">
  <p className="text-[10px] font-bold text-openpos-blue uppercase tracking-widest mb-3">Live Open POS activity</p>
@@ -124,7 +124,7 @@ export default function DashboardPage() {
  transition={{ duration: 0.4 }}
  className="absolute inset-0 flex items-center gap-4"
  >
- <div className="w-12 h-12 rounded-xl bg-card-bg border border-openpos-border flex items-center justify-center shrink-0">
+ <div className="w-12 h-12 rounded-lg bg-card-bg border border-openpos-border flex items-center justify-center shrink-0">
  <div className="w-6 h-6 bg-openpos-bg-subtle rounded-md"/>
  </div>
  <div>
@@ -186,7 +186,7 @@ export default function DashboardPage() {
  { name:'Billie', role:'Cashier', time:'08:45 AM'},
  { name:'Richard', role:'Server', time:'08:15 AM'},
  ].map((staff, i) => (
- <div key={i} className="flex items-center justify-between p-3 rounded-xl border border-openpos-border transition-all cursor-default">
+ <div key={i} className="flex items-center justify-between p-3 rounded-lg border border-openpos-border transition-all cursor-default">
  <div className="flex items-center gap-3">
  <div className="w-9 h-9 rounded-lg bg-openpos-blue/10 flex items-center justify-center text-openpos-blue font-bold text-xs">
  {staff.name.charAt(0)}
@@ -244,7 +244,7 @@ export default function DashboardPage() {
  {recentHistory.map((act) => (
  <div key={act.id} className="flex gap-4 group">
  <div className={cn(
-"w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-all",
+"w-10 h-10 rounded-lg flex items-center justify-center shrink-0 border transition-all",
  act.type ==='Sale'?"bg-openpos-blue/10 text-openpos-blue border-openpos-blue/20":"bg-openpos-blue/10 text-openpos-blue border-openpos-blue/20"
  )}>
  {act.type ==='Sale'? <ShoppingBasket size={18} /> : <ArrowRightLeft size={18} />}

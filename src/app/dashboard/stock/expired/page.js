@@ -54,7 +54,7 @@ export default function ExpiredPage() {
  <div className="flex items-center gap-3">
  <button 
  onClick={writeOffAll}
- className="bg-openpos-bg-subtle text-admin-dim px-5 py-2.5 rounded-xl font-bold text-[12px] uppercase flex items-center gap-2 transition-all"
+ className="bg-openpos-bg-subtle text-admin-dim px-5 py-2.5 rounded-lg font-bold text-[12px] uppercase flex items-center gap-2 transition-all"
  >
  <Trash2 size={16} /> Write-off All
  </button>
@@ -67,17 +67,17 @@ export default function ExpiredPage() {
  <table className="w-full text-left">
  <thead>
  <tr className="bg-openpos-bg-subtle/30 text-[10px] font-bold text-admin-dim uppercase tracking-widest">
- <th className="px-6 py-4">Product Name</th>
- <th className="px-6 py-4">Expired On</th>
- <th className="px-6 py-4">Quantity Left</th>
- <th className="px-6 py-4">Loss Value</th>
- <th className="px-6 py-4 text-right">Action</th>
+ <th className="px-6 py-3">Product Name</th>
+ <th className="px-6 py-3">Expired On</th>
+ <th className="px-6 py-3">Quantity Left</th>
+ <th className="px-6 py-3">Loss Value</th>
+ <th className="px-6 py-3 text-right">Action</th>
  </tr>
  </thead>
  <tbody className="divide-y divide-openpos-border">
  {filteredStock.length > 0 ? filteredStock.map((item) => (
  <tr key={item.id} className="group transition-colors">
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <div className="flex items-center gap-3">
  <div className="w-10 h-10 rounded-lg overflow-hidden bg-openpos-bg-subtle shrink-0 relative border border-openpos-border shadow-sm">
  {item.image ? (
@@ -92,19 +92,19 @@ export default function ExpiredPage() {
  </div>
  </div>
  </td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <div className="flex items-center gap-2 text-openpos-red">
  <Calendar size={14} />
  <span className="text-[14px] font-bold">{new Date(item.expiredOn).toLocaleDateString()}</span>
  </div>
  </td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <span className="text-[14px] font-bold text-admin-value">{item.stock} Units</span>
  </td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <span className="text-[14px] font-bold text-openpos-red">KES {item.value.toLocaleString()}</span>
  </td>
- <td className="px-6 py-4 text-right">
+ <td className="px-6 py-3 text-right">
  <button onClick={() => handleDelete(item)} className="p-2 text-admin-dim rounded-lg transition-all">
  <Trash2 size={16} />
  </button>
@@ -136,7 +136,7 @@ export default function ExpiredPage() {
  confirmText="Write-off"
  onConfirm={confirmWriteOff}
  >
- <div className="p-4 bg-openpos-red/5 rounded-2xl border border-openpos-red/10">
+ <div className="p-4 bg-openpos-red/5 rounded-lg border border-openpos-red/10">
  <p className="text-[12px] text-openpos-red font-medium">This action will record a financial loss of KES {selectedItem?.value.toLocaleString()} and remove the items from your inventory inventory permanently.</p>
  </div>
  </Modal>

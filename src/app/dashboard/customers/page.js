@@ -119,7 +119,7 @@ export default function CustomersPage() {
  <p className="text-[13px] font-medium text-admin-label mt-1">Manage your relationship and loyalty with your clients.</p>
  </div>
  <div className="flex items-center gap-3 w-full sm:w-auto">
- <div className="flex items-center bg-card-bg border border-openpos-border rounded-xl overflow-hidden shadow-sm">
+ <div className="flex items-center bg-card-bg border border-openpos-border rounded-lg overflow-hidden shadow-sm">
  <button 
  onClick={() => exportCustomers('PDF')}
  className="px-4 py-2.5 text-admin-dim transition-all flex items-center gap-2 border-r border-openpos-border"
@@ -137,7 +137,7 @@ export default function CustomersPage() {
  </div>
  <button 
  onClick={handleAdd}
- className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all"
+ className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-lg font-bold text-[13px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all"
  >
  <UserPlus size={18} />
  Register Customer
@@ -164,12 +164,12 @@ export default function CustomersPage() {
  <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors"size={14} />
  <input 
  placeholder="Search customers..."
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-10 pr-4 py-2 text-[11px] font-bold text-admin-value outline-none transition-all"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg pl-10 pr-4 py-2 text-[11px] font-bold text-admin-value outline-none transition-all"
  value={searchTerm}
  onChange={(e) => setSearchTerm(e.target.value)}
  />
  </div>
- <button className="px-4 py-2 bg-openpos-bg-subtle border border-openpos-border text-admin-dim rounded-xl font-bold text-[10px] flex items-center gap-2 uppercase tracking-widest transition-all">
+ <button className="px-4 py-2 bg-openpos-bg-subtle border border-openpos-border text-admin-dim rounded-lg font-bold text-[10px] flex items-center gap-2 uppercase tracking-widest transition-all">
  <Filter size={12} /> Filter
  </button>
  </div>
@@ -179,11 +179,11 @@ export default function CustomersPage() {
  <table className="w-full text-left whitespace-nowrap border-collapse text-[11px]">
  <thead>
  <tr className="bg-openpos-bg-subtle/50 text-[9px] font-bold text-admin-dim uppercase tracking-widest border-b border-openpos-border">
- <th className="px-6 py-4">Customer Identity</th>
- <th className="px-6 py-4 text-center">Loyalty Assets</th>
- <th className="px-6 py-4 text-center">Lifetime Value (KES)</th>
- <th className="px-6 py-4 text-center">Portfolio Status</th>
- <th className="px-6 py-4 text-right">Management</th>
+ <th className="px-6 py-3">Customer Identity</th>
+ <th className="px-6 py-3 text-center">Loyalty Assets</th>
+ <th className="px-6 py-3 text-center">Lifetime Value (KES)</th>
+ <th className="px-6 py-3 text-center">Portfolio Status</th>
+ <th className="px-6 py-3 text-right">Management</th>
  </tr>
  </thead>
  <tbody className="divide-y divide-openpos-border">
@@ -196,11 +196,9 @@ export default function CustomersPage() {
  ) : (
  filteredCustomers.map((customer) => (
  <tr key={customer.id} className="group transition-colors cursor-default">
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <div className="flex items-center gap-4">
- <div className="w-10 h-10 rounded-xl bg-openpos-blue/5 border border-openpos-blue/10 flex items-center justify-center text-openpos-blue font-bold text-[14px] transition-transform">
- {customer.name.charAt(0)}
- </div>
+ 
  <div>
  <h3 className="text-[12px] font-bold text-admin-value transition-colors uppercase tracking-tight">{customer.name}</h3>
  <div className="flex items-center gap-3 mt-1 text-admin-dim">
@@ -210,7 +208,7 @@ export default function CustomersPage() {
  </div>
  </div>
  </td>
- <td className="px-6 py-4 text-center">
+ <td className="px-6 py-3 text-center">
  <div className="flex flex-col items-center">
  <div className="flex items-center gap-2 px-2.5 py-1 bg-openpos-blue/5 border border-openpos-blue/10 rounded-lg">
  <Trophy size={12} className="text-openpos-blue"/>
@@ -219,13 +217,13 @@ export default function CustomersPage() {
  <span className="text-[8px] font-bold text-admin-dim uppercase tracking-tighter mt-1">Reward Balance</span>
  </div>
  </td>
- <td className="px-6 py-4 text-center">
+ <td className="px-6 py-3 text-center">
  <div className="flex flex-col items-center">
  <span className="text-[12px] font-bold text-admin-value">{customer.totalSpent.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
  <span className="text-[8px] font-bold text-admin-dim uppercase tracking-widest mt-1 opacity-70">{customer.visits} Total Sessions</span>
  </div>
  </td>
- <td className="px-6 py-4 text-center">
+ <td className="px-6 py-3 text-center">
  <div className="flex flex-col items-center">
  <span className={cn(
 "px-2.5 py-1 rounded-md text-[9px] font-bold uppercase tracking-widest border",
@@ -236,7 +234,7 @@ export default function CustomersPage() {
  </span>
  </div>
  </td>
- <td className="px-6 py-4 text-right">
+ <td className="px-6 py-3 text-right">
  <div className="flex items-center justify-end gap-1.5">
  <button 
  onClick={() => handleEdit(customer)}
@@ -277,7 +275,7 @@ export default function CustomersPage() {
  <input 
  type="text"
  placeholder="John Doe"
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none transition-all"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none transition-all"
  value={formData.name}
  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
  />
@@ -288,7 +286,7 @@ export default function CustomersPage() {
  <input 
  type="text"
  placeholder="+254..."
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none transition-all"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none transition-all"
  value={formData.phone}
  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
  />
@@ -296,7 +294,7 @@ export default function CustomersPage() {
  <div className="space-y-1.5">
  <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Customer Tier</label>
  <select 
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none cursor-pointer"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none cursor-pointer"
  value={formData.status}
  onChange={(e) => setFormData({ ...formData, status: e.target.value })}
  >
@@ -311,7 +309,7 @@ export default function CustomersPage() {
  <input 
  type="email"
  placeholder="client@example.com"
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none transition-all"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none transition-all"
  value={formData.email}
  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
  />
@@ -331,7 +329,7 @@ export default function CustomersPage() {
  confirmCountdown={5}
  onConfirm={confirmDelete}
  >
- <div className="p-4 bg-openpos-red/5 border border-openpos-red/10 rounded-2xl">
+ <div className="p-4 bg-openpos-red/5 border border-openpos-red/10 rounded-lg">
  <p className="text-[11px] text-openpos-red font-bold uppercase tracking-tight leading-relaxed">
  This will permanently remove the customer record and their loyalty points history. This action cannot be reversed.
  </p>

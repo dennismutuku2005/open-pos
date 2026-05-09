@@ -159,7 +159,7 @@ export default function DashboardLayout({ children }) {
 
  <div className={cn(
 "flex-1 overflow-y-auto overflow-x-hidden transition-all duration-500 bg-openpos-bg",
- isZenMode ?"p-0":"px-6 py-4"
+ isZenMode ?"p-0":"px-6 py-3"
  )}>
  <div className={cn(
  pathname ==='/dashboard/pos'?"h-full":"max-w-[1600px] mx-auto"
@@ -187,7 +187,7 @@ export default function DashboardLayout({ children }) {
  confirmCountdown={3}
  onConfirm={handleLogout}
  >
- <div className="p-4 bg-red-50 rounded-2xl border border-red-100 flex items-start gap-3">
+ <div className="p-4 bg-red-50 rounded-lg border border-red-100 flex items-start gap-3">
  <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 shrink-0 mt-0.5">
  <X size={14} />
  </div>

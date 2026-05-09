@@ -53,7 +53,7 @@ export default function ProfilePage() {
  return (
  <div className="max-w-4xl mx-auto pb-10 space-y-5 animate-in fade-in slide-in-from-bottom-2 duration-500 font-figtree">
  {/* Main Identity Card */}
- <div className="bg-card-bg border border-openpos-border rounded-2xl overflow-hidden shadow-sm">
+ <div className="bg-card-bg border border-openpos-border rounded-lg overflow-hidden shadow-sm">
  <div className="h-24 bg-gradient-to-r from-openpos-blue/5 via-openpos-blue/[0.02] to-transparent relative">
  <div className="absolute top-3 right-5 flex items-center gap-1.5 px-2.5 py-1 bg-card-bg/90 backdrop-blur-md rounded-full border border-openpos-border/50">
  <span className="text-[12px]">🇰🇪</span>
@@ -64,12 +64,12 @@ export default function ProfilePage() {
  <div className="px-8 pb-8 relative">
  <div className="flex flex-col sm:flex-row items-end gap-5 -mt-10 mb-6">
  <div className="relative group">
- <div className="w-24 h-24 rounded-2xl bg-card-bg border-[4px] border-card-bg shadow-lg flex items-center justify-center overflow-hidden">
+ <div className="w-24 h-24 rounded-lg bg-card-bg border-[4px] border-card-bg shadow-lg flex items-center justify-center overflow-hidden">
  <div className="w-full h-full bg-openpos-blue/5 flex items-center justify-center text-openpos-blue text-2xl font-bold">
  {user.name.charAt(0)}
  </div>
  </div>
- <button className="absolute bottom-0 right-0 p-1.5 bg-openpos-blue text-white rounded-xl shadow-md transition-all border-2 border-card-bg">
+ <button className="absolute bottom-0 right-0 p-1.5 bg-openpos-blue text-white rounded-lg shadow-md transition-all border-2 border-card-bg">
  <Camera size={14} />
  </button>
  </div>
@@ -96,7 +96,7 @@ export default function ProfilePage() {
  {!isEditing ? (
  <button 
  onClick={() => setIsEditing(true)}
- className="bg-openpos-bg-subtle text-admin-value px-4 py-2 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all"
+ className="bg-openpos-bg-subtle text-admin-value px-4 py-2 rounded-lg font-bold text-[10px] uppercase tracking-widest transition-all"
  >
  Manage Identity
  </button>
@@ -104,14 +104,14 @@ export default function ProfilePage() {
  <div className="flex gap-2">
  <button 
  onClick={() => setIsEditing(false)}
- className="px-4 py-2 rounded-xl font-bold text-[10px] uppercase tracking-widest text-admin-dim transition-all"
+ className="px-4 py-2 rounded-lg font-bold text-[10px] uppercase tracking-widest text-admin-dim transition-all"
  >
  Cancel
  </button>
  <button 
  onClick={handleSave}
  disabled={isLoading}
- className="bg-openpos-blue text-white px-5 py-2 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all shadow-md shadow-openpos-blue/20 flex items-center gap-1.5"
+ className="bg-openpos-blue text-white px-5 py-2 rounded-lg font-bold text-[10px] uppercase tracking-widest transition-all shadow-md shadow-openpos-blue/20 flex items-center gap-1.5"
  >
  {isLoading ? <Loader2 size={12} className="animate-spin" /> : <Save size={12} />}
  Update
@@ -129,7 +129,7 @@ export default function ProfilePage() {
  <div className="group">
  <label className="text-[8px] font-bold text-admin-dim uppercase tracking-widest ml-1 mb-1 block">Official Name</label>
  <div className={cn(
-"flex items-center gap-3 px-4 py-2.5 rounded-xl border transition-all",
+"flex items-center gap-3 px-4 py-2.5 rounded-lg border transition-all",
  isEditing ?"bg-card-bg border-openpos-blue/30 shadow-sm shadow-openpos-blue/5":"bg-openpos-bg-subtle border-transparent"
  )}>
  <User size={14} className="text-admin-dim"/>
@@ -145,7 +145,7 @@ export default function ProfilePage() {
  <div className="group">
  <label className="text-[8px] font-bold text-admin-dim uppercase tracking-widest ml-1 mb-1 block">System Email</label>
  <div className={cn(
-"flex items-center gap-3 px-4 py-2.5 rounded-xl border transition-all",
+"flex items-center gap-3 px-4 py-2.5 rounded-lg border transition-all",
  isEditing ?"bg-card-bg border-openpos-blue/30 shadow-sm shadow-openpos-blue/5":"bg-openpos-bg-subtle border-transparent"
  )}>
  <Mail size={14} className="text-admin-dim"/>
@@ -167,7 +167,7 @@ export default function ProfilePage() {
  <div className="group">
  <label className="text-[8px] font-bold text-admin-dim uppercase tracking-widest ml-1 mb-1 block">Phone Number</label>
  <div className={cn(
-"flex items-center gap-3 px-4 py-2.5 rounded-xl border transition-all",
+"flex items-center gap-3 px-4 py-2.5 rounded-lg border transition-all",
  isEditing ?"bg-card-bg border-openpos-blue/30 shadow-sm shadow-openpos-blue/5":"bg-openpos-bg-subtle border-transparent"
  )}>
  <Phone size={14} className="text-admin-dim"/>
@@ -183,7 +183,7 @@ export default function ProfilePage() {
  <div className="group">
  <label className="text-[8px] font-bold text-admin-dim uppercase tracking-widest ml-1 mb-1 block">Duty Station</label>
  <div className={cn(
-"flex items-center gap-3 px-4 py-2.5 rounded-xl border transition-all",
+"flex items-center gap-3 px-4 py-2.5 rounded-lg border transition-all",
  isEditing ?"bg-card-bg border-openpos-blue/30 shadow-sm shadow-openpos-blue/5":"bg-openpos-bg-subtle border-transparent"
  )}>
  <MapPin size={14} className="text-admin-dim"/>
@@ -202,7 +202,7 @@ export default function ProfilePage() {
  </div>
 
  {/* Security Section */}
- <div className="bg-card-bg border border-openpos-border rounded-2xl overflow-hidden shadow-sm">
+ <div className="bg-card-bg border border-openpos-border rounded-lg overflow-hidden shadow-sm">
  <div className="px-8 py-4 border-b border-openpos-border bg-openpos-bg-subtle/30 flex items-center justify-between">
  <h3 className="text-[9px] font-bold text-admin-value uppercase tracking-[2.5px]">System Security</h3>
  <div className="flex items-center gap-1.5 text-[9px] font-bold text-openpos-blue bg-openpos-blue/10 px-2.5 py-1 rounded-lg uppercase tracking-widest">
@@ -217,7 +217,7 @@ export default function ProfilePage() {
  ].map((item, i) => (
  <div key={i} className="px-8 py-4 flex items-center justify-between transition-all cursor-pointer group">
  <div className="flex items-center gap-3">
- <div className="w-10 h-10 rounded-xl bg-openpos-bg-subtle flex items-center justify-center text-admin-dim transition-all">
+ <div className="w-10 h-10 rounded-lg bg-openpos-bg-subtle flex items-center justify-center text-admin-dim transition-all">
  <item.icon size={18} />
  </div>
  <div>

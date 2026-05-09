@@ -115,7 +115,7 @@ export default function CategoriesPage() {
  <p className="text-[13px] font-medium text-admin-label mt-1">Organize your products and services into groups.</p>
  </div>
  <div className="flex items-center gap-3 w-full sm:w-auto">
- <div className="flex items-center bg-card-bg border border-openpos-border rounded-xl overflow-hidden shadow-sm">
+ <div className="flex items-center bg-card-bg border border-openpos-border rounded-lg overflow-hidden shadow-sm">
  <button 
  onClick={() => exportCategories('PDF')}
  className="px-4 py-2.5 text-admin-dim transition-all flex items-center gap-2 border-r border-openpos-border"
@@ -133,7 +133,7 @@ export default function CategoriesPage() {
  </div>
  <button 
  onClick={() => { resetForm(); setShowAddModal(true); }}
- className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all"
+ className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-lg font-bold text-[13px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all"
  >
  <Plus size={18} />
  New Category
@@ -152,7 +152,7 @@ export default function CategoriesPage() {
  <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-admin-dim group-focus-within:text-openpos-blue transition-colors"size={14} />
  <input 
  placeholder="Search categories..."
- className="bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-10 pr-4 py-2 text-[11px] font-bold text-admin-value outline-none w-64 transition-all"
+ className="bg-openpos-bg-subtle border border-openpos-border rounded-lg pl-10 pr-4 py-2 text-[11px] font-bold text-admin-value outline-none w-64 transition-all"
  />
  </div>
  </div>
@@ -162,19 +162,19 @@ export default function CategoriesPage() {
  <table className="w-full text-left whitespace-nowrap border-collapse text-[11px]">
  <thead>
  <tr className="bg-openpos-bg-subtle/50 border-b border-openpos-border text-[9px] font-bold text-admin-dim uppercase tracking-widest">
- <th className="px-6 py-4">Categorization Identity</th>
- <th className="px-6 py-4 text-center">Classification</th>
- <th className="px-6 py-4 text-center">Inventory Density</th>
- <th className="px-6 py-4">Internal Specification</th>
- <th className="px-6 py-4 text-right">Management</th>
+ <th className="px-6 py-3">Categorization Identity</th>
+ <th className="px-6 py-3 text-center">Classification</th>
+ <th className="px-6 py-3 text-center">Inventory Density</th>
+ <th className="px-6 py-3">Internal Specification</th>
+ <th className="px-6 py-3 text-right">Management</th>
  </tr>
  </thead>
  <tbody className="divide-y divide-openpos-border">
  {categories.map((cat) => (
  <tr key={cat.id} className="group transition-colors cursor-default">
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <div className="flex items-center gap-4">
- <div className="w-10 h-10 rounded-xl overflow-hidden bg-openpos-bg-subtle shrink-0 relative border border-openpos-border shadow-sm transition-transform">
+ <div className="w-10 h-10 rounded-lg overflow-hidden bg-openpos-bg-subtle shrink-0 relative border border-openpos-border shadow-sm transition-transform">
  {cat.image ? (
  <Image src={cat.image} alt={cat.name} fill className="object-cover"/>
  ) : (
@@ -184,7 +184,7 @@ export default function CategoriesPage() {
  <span className="text-[12px] font-bold text-admin-value transition-colors uppercase tracking-tight">{cat.name}</span>
  </div>
  </td>
- <td className="px-6 py-4 text-center">
+ <td className="px-6 py-3 text-center">
  <span className={cn(
 "px-2.5 py-1 rounded-md text-[9px] font-bold uppercase tracking-widest border",
  cat.type ==='Service'?"bg-openpos-blue/5 text-openpos-blue border-openpos-blue/20":"bg-openpos-blue/10 text-openpos-blue border-openpos-blue/10"
@@ -192,16 +192,16 @@ export default function CategoriesPage() {
  {cat.type}
  </span>
  </td>
- <td className="px-6 py-4 text-center">
+ <td className="px-6 py-3 text-center">
  <div className="flex flex-col items-center">
  <span className="text-[11px] font-bold text-admin-value bg-openpos-bg-subtle px-2.5 py-1 rounded-lg border border-openpos-border shadow-sm">{cat.count.toLocaleString()}</span>
  <span className="text-[8px] font-bold text-admin-dim uppercase tracking-widest mt-1 opacity-70">Linked Items</span>
  </div>
  </td>
- <td className="px-6 py-4">
+ <td className="px-6 py-3">
  <p className="text-[10px] text-admin-dim font-bold uppercase tracking-tight line-clamp-1 max-w-[300px] opacity-80">{cat.desc ||'No system specification defined'}</p>
  </td>
- <td className="px-6 py-4 text-right">
+ <td className="px-6 py-3 text-right">
  <div className="flex items-center justify-end gap-1.5">
  <button 
  onClick={() => handleEdit(cat)}
@@ -244,15 +244,15 @@ export default function CategoriesPage() {
  name="name"
  value={formData.name}
  onChange={handleInputChange}
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none transition-all"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none transition-all"
  placeholder="e.g. Pastries"
  />
  </div>
 
  <div className="space-y-1.5">
  <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Identity Image</label>
- <div className="flex items-center gap-4 p-4 bg-openpos-bg-subtle rounded-2xl border border-openpos-border">
- <div className="w-16 h-16 rounded-xl bg-card-bg border border-openpos-border overflow-hidden flex items-center justify-center shrink-0 relative group">
+ <div className="flex items-center gap-4 p-4 bg-openpos-bg-subtle rounded-lg border border-openpos-border">
+ <div className="w-16 h-16 rounded-lg bg-card-bg border border-openpos-border overflow-hidden flex items-center justify-center shrink-0 relative group">
  {formData.image ? (
  <>
  <Image src={formData.image} alt="Preview"fill className="object-cover"/>
@@ -268,7 +268,7 @@ export default function CategoriesPage() {
  )}
  </div>
  <div className="flex-1">
- <label className="flex flex-col items-center justify-center w-full h-12 border-2 border-dashed border-openpos-border rounded-xl cursor-pointer transition-all group">
+ <label className="flex flex-col items-center justify-center w-full h-12 border-2 border-dashed border-openpos-border rounded-lg cursor-pointer transition-all group">
  <div className="flex items-center gap-2">
  <Upload size={14} className="text-admin-dim transition-colors"/>
  <span className="text-[10px] font-bold text-admin-dim transition-colors uppercase tracking-widest">
@@ -289,7 +289,7 @@ export default function CategoriesPage() {
  key={type}
  onClick={() => setFormData(prev => ({ ...prev, type }))}
  className={cn(
-"py-3 rounded-xl text-[11px] font-bold border transition-all uppercase tracking-widest",
+"py-3 rounded-lg text-[11px] font-bold border transition-all uppercase tracking-widest",
  formData.type === type 
  ?"bg-openpos-blue/10 border-openpos-blue text-openpos-blue shadow-sm"
  :"bg-openpos-bg-subtle border-transparent text-admin-dim"
@@ -308,7 +308,7 @@ export default function CategoriesPage() {
  rows="3"
  value={formData.desc}
  onChange={handleInputChange}
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none transition-all resize-none"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none transition-all resize-none"
  placeholder="Brief category details..."
  />
  </div>
@@ -327,7 +327,7 @@ export default function CategoriesPage() {
  confirmCountdown={5}
  onConfirm={confirmDelete}
  >
- <div className="p-4 bg-openpos-red/5 border border-openpos-red/10 rounded-2xl">
+ <div className="p-4 bg-openpos-red/5 border border-openpos-red/10 rounded-lg">
  <p className="text-[11px] text-openpos-red font-bold uppercase tracking-tight leading-relaxed">
  This will permanently remove the category. Products currently assigned to this category will become unclassified.
  </p>

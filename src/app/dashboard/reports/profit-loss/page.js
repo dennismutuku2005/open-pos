@@ -45,7 +45,7 @@ export default function ProfitLossPage() {
  <div className="flex items-center gap-3">
  <button 
  onClick={handleRefresh}
- className="p-2.5 bg-card-bg border border-openpos-border rounded-xl text-admin-dim transition-all"
+ className="p-2.5 bg-card-bg border border-openpos-border rounded-lg text-admin-dim transition-all"
  >
  <RefreshCw size={16} className={cn(loading &&"animate-spin")} />
  </button>
@@ -55,7 +55,7 @@ export default function ProfitLossPage() {
  setTimeout(() => setLoading(false), 2000);
  }}
  disabled={loading}
- className="bg-openpos-blue text-white px-6 py-2.5 rounded-xl font-bold text-[11px] flex items-center gap-2 transition-all uppercase tracking-widest min-w-[160px] justify-center"
+ className="bg-openpos-blue text-white px-6 py-2.5 rounded-lg font-bold text-[11px] flex items-center gap-2 transition-all uppercase tracking-widest min-w-[160px] justify-center"
  >
  {loading ? (
  <Loader2 size={16} className="animate-spin" />

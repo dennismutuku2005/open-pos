@@ -113,7 +113,7 @@ export default function ExpensesPage() {
  <p className="text-[13px] font-medium text-admin-label mt-1">Track and categorize all non-inventory operational costs.</p>
  </div>
  <div className="flex items-center gap-3 w-full sm:w-auto">
- <div className="flex items-center bg-card-bg border border-openpos-border rounded-xl overflow-hidden shadow-sm">
+ <div className="flex items-center bg-card-bg border border-openpos-border rounded-lg overflow-hidden shadow-sm">
  <button 
  onClick={() => exportExpenses('PDF')}
  className="px-4 py-2.5 text-admin-dim transition-all flex items-center gap-2 border-r border-openpos-border"
@@ -131,7 +131,7 @@ export default function ExpensesPage() {
  </div>
  <button 
  onClick={handleAdd}
- className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
+ className="flex-1 sm:flex-none bg-openpos-blue text-white px-5 py-2.5 rounded-lg font-bold text-[13px] flex items-center justify-center gap-2 shadow-lg shadow-openpos-blue/20 transition-all uppercase tracking-widest"
  >
  <Plus size={18} />
  Log Expense
@@ -153,8 +153,8 @@ export default function ExpensesPage() {
  subtitle="Chronological transaction history"
  headerAction={
  <div className="flex items-center gap-2">
- <button className="p-2 bg-openpos-bg-subtle border border-openpos-border text-admin-dim rounded-xl transition-all"><Printer size={14} /></button>
- <button className="p-2 bg-openpos-bg-subtle border border-openpos-border text-admin-dim rounded-xl transition-all"><Filter size={14} /></button>
+ <button className="p-2 bg-openpos-bg-subtle border border-openpos-border text-admin-dim rounded-lg transition-all"><Printer size={14} /></button>
+ <button className="p-2 bg-openpos-bg-subtle border border-openpos-border text-admin-dim rounded-lg transition-all"><Filter size={14} /></button>
  </div>
  }
  >
@@ -174,9 +174,7 @@ export default function ExpensesPage() {
  <tr key={exp.id} className="group transition-colors cursor-default">
  <td className="p-5">
  <div className="flex items-center gap-3">
- <div className="w-9 h-9 rounded-lg bg-openpos-blue/5 flex items-center justify-center text-openpos-blue shrink-0 border border-openpos-blue/10">
- <Receipt size={16} strokeWidth={1.5} />
- </div>
+ 
  <div>
  <h3 className="text-[13px] font-bold text-admin-value uppercase tracking-tight">{exp.description}</h3>
  <p className="text-[10px] font-bold text-admin-dim uppercase tracking-tight mt-0.5">{exp.date}</p>
@@ -239,7 +237,7 @@ export default function ExpensesPage() {
  <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Date</label>
  <input 
  type="date"
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none transition-all"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none transition-all"
  value={formData.date}
  onChange={(e) => setFormData(prev => ({ ...prev, date: e.target.value }))}
  />
@@ -247,7 +245,7 @@ export default function ExpensesPage() {
  <div className="space-y-1.5">
  <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Category</label>
  <select 
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none cursor-pointer"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none cursor-pointer"
  value={formData.category}
  onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
  >
@@ -258,7 +256,7 @@ export default function ExpensesPage() {
  <div className="space-y-1.5">
  <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest ml-1">Expense Detail</label>
  <input 
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl px-4 py-3 text-[12px] font-bold outline-none transition-all"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg px-4 py-3 text-[12px] font-bold outline-none transition-all"
  placeholder="e.g. Electricity Bill, Internet"
  value={formData.description}
  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
@@ -270,7 +268,7 @@ export default function ExpensesPage() {
  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-admin-dim font-bold text-[12px]">KES</span>
  <input 
  type="number"
- className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-xl pl-12 pr-4 py-3 text-[12px] font-bold outline-none transition-all"
+ className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg pl-12 pr-4 py-3 text-[12px] font-bold outline-none transition-all"
  placeholder="0.00"
  value={formData.amount}
  onChange={(e) => setFormData(prev => ({ ...prev, amount: e.target.value }))}
@@ -292,7 +290,7 @@ export default function ExpensesPage() {
  confirmCountdown={5}
  onConfirm={confirmDelete}
  >
- <div className="p-4 bg-openpos-red/5 border border-openpos-red/10 rounded-2xl">
+ <div className="p-4 bg-openpos-red/5 border border-openpos-red/10 rounded-lg">
  <p className="text-[11px] text-openpos-red font-bold uppercase tracking-tight leading-relaxed">
  This action is permanent and will remove this expense from your financial reports and spending history.
  </p>

@@ -159,7 +159,7 @@ export default function POSPage() {
  <div className="space-y-4">
  {cart.map((item, idx) => (
  <div key={idx} className="flex gap-4">
- <div className="w-14 h-14 bg-openpos-bg-subtle rounded-xl overflow-hidden shrink-0 border border-openpos-border relative">
+ <div className="w-14 h-14 bg-openpos-bg-subtle rounded-lg overflow-hidden shrink-0 border border-openpos-border relative">
  <Image src={item.image} alt={item.name} fill className="object-cover"/>
  </div>
  <div className="flex-1 min-w-0 py-0.5">
@@ -190,12 +190,12 @@ export default function POSPage() {
  <button 
  onClick={() => setPaymentMethod('mpesa')}
  className={cn(
-"w-full flex items-center justify-between p-4 rounded-2xl border-2 transition-all",
+"w-full flex items-center justify-between p-4 rounded-lg border-2 transition-all",
  paymentMethod ==='mpesa'?"border-openpos-blue bg-openpos-blue/5":"border-openpos-border bg-card-bg"
  )}
  >
  <div className="flex items-center gap-3">
- <div className="w-10 h-10 rounded-xl bg-blue-100 text-openpos-blue flex items-center justify-center">
+ <div className="w-10 h-10 rounded-lg bg-blue-100 text-openpos-blue flex items-center justify-center">
  <Smartphone size={20} />
  </div>
  <div className="text-left">
@@ -209,12 +209,12 @@ export default function POSPage() {
  <button 
  onClick={() => setPaymentMethod('cash')}
  className={cn(
-"w-full flex items-center justify-between p-4 rounded-2xl border-2 transition-all",
+"w-full flex items-center justify-between p-4 rounded-lg border-2 transition-all",
  paymentMethod ==='cash'?"border-openpos-blue bg-openpos-blue/5":"border-openpos-border bg-card-bg"
  )}
  >
  <div className="flex items-center gap-3">
- <div className="w-10 h-10 rounded-xl bg-blue-100 text-openpos-blue flex items-center justify-center">
+ <div className="w-10 h-10 rounded-lg bg-blue-100 text-openpos-blue flex items-center justify-center">
  <Banknote size={20} />
  </div>
  <div className="text-left">
@@ -238,8 +238,8 @@ export default function POSPage() {
  <h3 className="text-[14px] font-bold text-admin-value uppercase tracking-widest">M-Pesa Details</h3>
  </div>
  
- <div className="bg-openpos-bg-subtle/50 border border-openpos-border p-4 rounded-2xl flex items-center gap-4">
- <div className="w-12 h-12 bg-card-bg rounded-xl shadow-sm flex items-center justify-center border border-openpos-border">
+ <div className="bg-openpos-bg-subtle/50 border border-openpos-border p-4 rounded-lg flex items-center gap-4">
+ <div className="w-12 h-12 bg-card-bg rounded-lg shadow-sm flex items-center justify-center border border-openpos-border">
  <Smartphone className="text-openpos-blue"size={24} />
  </div>
  <div>
@@ -254,7 +254,7 @@ export default function POSPage() {
  <input 
  type="text"
  placeholder="e.g. 0712345678"
- className="w-full bg-card-bg border border-openpos-border rounded-xl pl-11 pr-4 py-3 text-[14px] font-bold outline-none shadow-sm transition-all"
+ className="w-full bg-card-bg border border-openpos-border rounded-lg pl-11 pr-4 py-3 text-[14px] font-bold outline-none shadow-sm transition-all"
  value={phoneNumber}
  onChange={(e) => setPhoneNumber(e.target.value)}
  autoFocus
@@ -297,7 +297,7 @@ export default function POSPage() {
  <p className="text-[12px] font-bold text-admin-dim uppercase tracking-widest">Sale ID: #{lastSaleId}</p>
  </div>
  
- <div className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-2xl p-4 space-y-3">
+ <div className="w-full bg-openpos-bg-subtle border border-openpos-border rounded-lg p-4 space-y-3">
  <div className="flex justify-between text-[12px] font-bold">
  <span className="text-admin-dim uppercase">Total Amount</span>
  <span className="text-admin-value">KES {total}</span>
@@ -315,14 +315,14 @@ export default function POSPage() {
  <div className="flex gap-3 w-full mt-4">
  <button 
  onClick={() => handleGenerateReceipt('download')}
- className="flex-1 bg-white border border-openpos-border text-openpos-blue rounded-xl py-3 flex items-center justify-center gap-2 font-bold text-[12px] uppercase shadow-sm transition-colors"
+ className="flex-1 bg-white border border-openpos-border text-openpos-blue rounded-lg py-3 flex items-center justify-center gap-2 font-bold text-[12px] uppercase shadow-sm transition-colors"
  >
  <Download size={16} />
  Download
  </button>
  <button 
  onClick={() => handleGenerateReceipt('print')}
- className="flex-1 bg-white border border-openpos-border text-openpos-blue rounded-xl py-3 flex items-center justify-center gap-2 font-bold text-[12px] uppercase shadow-sm transition-colors"
+ className="flex-1 bg-white border border-openpos-border text-openpos-blue rounded-lg py-3 flex items-center justify-center gap-2 font-bold text-[12px] uppercase shadow-sm transition-colors"
  >
  <Printer size={16} />
  Print
@@ -347,7 +347,7 @@ export default function POSPage() {
  <button onClick={() => setIsFullScreen(!isFullScreen)} className="w-8 h-8 bg-card-bg rounded-lg border border-openpos-border flex items-center justify-center text-openpos-blue shadow-sm">
  <Menu size={15} />
  </button>
- <div className="bg-card-bg rounded-xl px-3 py-1.5 border border-openpos-border shadow-sm flex items-center gap-2">
+ <div className="bg-card-bg rounded-lg px-3 py-1.5 border border-openpos-border shadow-sm flex items-center gap-2">
  <Calendar size={13} className="text-openpos-blue"/>
  <span className="text-[11px] font-bold text-admin-value">29 May 2024</span>
  <span className="text-openpos-border mx-0.5">|</span>
@@ -367,7 +367,7 @@ export default function POSPage() {
  <input 
  type="text"
  placeholder="Search items..."
- className="w-full bg-card-bg border border-openpos-border rounded-xl pl-4 pr-10 py-2.5 text-[12px] font-medium outline-none shadow-sm"
+ className="w-full bg-card-bg border border-openpos-border rounded-lg pl-4 pr-10 py-2.5 text-[12px] font-medium outline-none shadow-sm"
  value={searchQuery}
  onChange={(e) => setSearchQuery(e.target.value)}
  />
@@ -398,14 +398,14 @@ export default function POSPage() {
  {filteredProducts.map((product) => (
  <div 
  key={product.id}
- className="bg-card-bg border border-openpos-border rounded-2xl p-3 flex flex-col gap-3 shadow-sm cursor-pointer"
+ className="bg-card-bg border border-openpos-border rounded-lg p-3 flex flex-col gap-3 shadow-sm cursor-pointer"
  onClick={() => setCart(prev => {
  const exists = prev.find(i => i.id === product.id)
  if (exists) return prev.map(i => i.id === product.id ? { ...i, quantity: i.quantity + 1 } : i)
  return [...prev, { ...product, quantity: 1 }]
  })}
  >
- <div className="aspect-[4/3] relative rounded-xl overflow-hidden bg-openpos-bg-subtle">
+ <div className="aspect-[4/3] relative rounded-lg overflow-hidden bg-openpos-bg-subtle">
  <Image src={product.image} alt={product.name} fill className="object-cover"/>
  <button 
  className="absolute top-2 right-2 w-7 h-7 bg-card-bg/80 backdrop-blur rounded-lg flex items-center justify-center text-admin-dim shadow-sm transition-all"
@@ -457,7 +457,7 @@ export default function POSPage() {
  </div>
 
  {/* Scrollable Content Area */}
- <div className="flex-1 overflow-y-auto custom-scrollbar px-6 py-4">
+ <div className="flex-1 overflow-y-auto custom-scrollbar px-6 py-3">
  {renderRightColumnContent()}
  </div>
 
@@ -472,7 +472,7 @@ export default function POSPage() {
 
  <button 
  className={cn(
-"w-full text-white rounded-xl py-4 font-bold text-[13px] uppercase tracking-widest shadow-lg transition-all",
+"w-full text-white rounded-lg py-3 font-bold text-[13px] uppercase tracking-widest shadow-lg transition-all",
  getButtonColor()
  )}
  onClick={handleMainAction}
@@ -508,7 +508,7 @@ export default function POSPage() {
  >
  {infoModalProduct && (
  <div className="space-y-4">
- <div className="relative h-48 w-full bg-openpos-bg-subtle rounded-2xl overflow-hidden">
+ <div className="relative h-48 w-full bg-openpos-bg-subtle rounded-lg overflow-hidden">
  <Image src={infoModalProduct.image} alt={infoModalProduct.name} fill className="object-cover"/>
  </div>
  <div className="space-y-4">
@@ -530,7 +530,7 @@ export default function POSPage() {
  <span className="text-[12px] font-bold text-admin-value uppercase tracking-widest">{infoModalProduct.stock} in stock</span>
  </div>
  <button 
- className="px-6 py-2.5 bg-openpos-blue text-white rounded-xl font-bold text-[12px] uppercase tracking-widest shadow-lg transition-all"
+ className="px-6 py-2.5 bg-openpos-blue text-white rounded-lg font-bold text-[12px] uppercase tracking-widest shadow-lg transition-all"
  onClick={() => {
  setCart(prev => {
  const exists = prev.find(i => i.id === infoModalProduct.id)
