@@ -30,10 +30,10 @@ const AVAILABLE_POLICIES = Object.values(policiesData).flatMap(category =>
 import { useRouter } from'next/navigation'
 
 const mockStaff = [
- { id:'STF-001', name:'Dennis Mutuku', username:'dennis_root', type:'admin', status:'active', phone:'+254 700 123 456', createdAt:'2024-01-10', is_primary: true },
- { id:'STF-002', name:'Jane Kamau', username:'jane_sales', type:'user', status:'active', phone:'+254 711 222 333', createdAt:'2024-02-15', policies: ['view_sales','create_sales','view_inventory'] },
- { id:'STF-003', name:'John Omari', username:'john_stock', type:'user', status:'active', phone:'+254 722 333 444', createdAt:'2024-03-05', policies: ['manage_inventory','view_purchases'] },
- { id:'STF-004', name:'Sarah Wambui', username:'sarah_audit', type:'user', status:'suspended', phone:'+254 733 444 555', createdAt:'2024-03-20', policies: ['view_reports','view_audit_logs'] },
+  { id: 'STF-001', name: 'Dennis Mutuku', username: 'dennis_root', type: 'admin', status: 'active', phone: '+254 700 123 456', createdAt: '2024-01-10', is_primary: true, businesses: ['biz_1', 'biz_2', 'biz_3'] },
+  { id: 'STF-002', name: 'Jane Kamau', username: 'jane_sales', type: 'user', status: 'active', phone: '+254 711 222 333', createdAt: '2024-02-15', policies: ['view_sales', 'access_pos', 'view_own_sales'], businesses: ['biz_1'] },
+  { id: 'STF-003', name: 'John Omari', username: 'john_stock', type: 'user', status: 'active', phone: '+254 722 333 444', createdAt: '2024-03-05', policies: ['view_inventory', 'manage_inventory'], businesses: ['biz_2'] },
+  { id: 'STF-004', name: 'Sarah Wambui', username: 'sarah_audit', type: 'user', status: 'suspended', phone: '+254 733 444 555', createdAt: '2024-03-20', policies: ['view_reports'], businesses: ['biz_1', 'biz_2'] },
 ]
 
 export default function StaffManagementPage() {
@@ -60,15 +60,16 @@ export default function StaffManagementPage() {
  const [showPassword, setShowPassword] = useState(false)
 
  // Form states
- const [formData, setFormData] = useState({
- name:'',
- username:'',
- password:'',
- phone:'',
- type:'user',
- status:'active',
- policies: []
- })
+  const [formData, setFormData] = useState({
+    name: '',
+    username: '',
+    password: '',
+    phone: '',
+    type: 'user',
+    status: 'active',
+    policies: [],
+    businesses: []
+  })
 
  const fetchStaff = async () => {
  setIsRefreshing(true)
@@ -140,17 +141,18 @@ export default function StaffManagementPage() {
     }, 1500)
   }
 
- const resetForm = () => {
- setFormData({
- name:'',
- username:'',
- password:'',
- phone:'',
- type:'user',
- status:'active',
- policies: []
- })
- }
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      username: '',
+      password: '',
+      phone: '',
+      type: 'user',
+      status: 'active',
+      policies: [],
+      businesses: []
+    })
+  }
 
  const togglePolicy = (policyId) => {
  setFormData(prev => {
@@ -163,19 +165,20 @@ export default function StaffManagementPage() {
  })
  }
 
- const openEdit = (user) => {
- setEditingStaff(user)
- setFormData({
- name: user.name,
- username: user.username,
- password:'',
- phone: user.phone,
- type: user.type,
- status: user.status,
- policies: user.policies || []
- })
- setShowModal(true)
- }
+  const openEdit = (user) => {
+    setEditingStaff(user)
+    setFormData({
+      name: user.name,
+      username: user.username,
+      password: '',
+      phone: user.phone,
+      type: user.type,
+      status: user.status,
+      policies: user.policies || [],
+      businesses: user.businesses || []
+    })
+    setShowModal(true)
+  }
 
  const viewDetails = (user) => {
  setSelectedStaff(user)
@@ -447,6 +450,58 @@ export default function StaffManagementPage() {
  </select>
  </div>
  </div>
+ 
+  <div className="space-y-3 pt-2">
+    <label className="text-[10px] font-bold text-admin-dim uppercase tracking-widest flex items-center gap-2">
+      <Store size={12} className="text-openpos-blue"/>
+      Business Branch Access
+    </label>
+    <div className="grid grid-cols-1 gap-2">
+      {authService.getBusinesses().map(biz => {
+        const isSelected = formData.businesses?.includes(biz.id)
+        return (
+          <div
+            key={biz.id}
+            onClick={() => {
+              setFormData(prev => ({
+                ...prev,
+                businesses: isSelected 
+                  ? prev.businesses.filter(id => id !== biz.id)
+                  : [...(prev.businesses || []), biz.id]
+              }))
+            }}
+            className={cn(
+              "flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-all",
+              isSelected 
+                ? "bg-openpos-blue/5 border-openpos-blue/30 ring-1 ring-openpos-blue/10" 
+                : "bg-openpos-bg-subtle border-openpos-border"
+            )}
+          >
+            <div className="flex items-center gap-3">
+              <div className={cn(
+                "w-8 h-8 rounded-lg flex items-center justify-center font-bold text-[10px]",
+                isSelected ? "bg-openpos-blue text-white" : "bg-openpos-bg-subtle text-admin-dim"
+              )}>
+                {biz.name.charAt(0)}
+              </div>
+              <span className={cn(
+                "text-[11px] font-bold uppercase tracking-tight",
+                isSelected ? "text-openpos-blue" : "text-admin-value"
+              )}>
+                {biz.name}
+              </span>
+            </div>
+            <div className={cn(
+              "w-4 h-4 rounded-full border flex items-center justify-center transition-all",
+              isSelected ? "bg-openpos-blue border-openpos-blue" : "bg-card-bg border-openpos-border"
+            )}>
+              {isSelected && <BadgeCheck size={10} className="text-white"/>}
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  </div>
  
  {formData.type ==='user'? (
  <div className="space-y-3 pt-2 animate-in slide-in-from-top-2 duration-300">
