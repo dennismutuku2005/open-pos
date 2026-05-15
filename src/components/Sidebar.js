@@ -62,89 +62,98 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
  };
  }, [isMobile, isSidebarOpen]);
 
- const navigation = [
- { id:'dashboard', name:'Dashboard', href:'/dashboard', icon: LayoutDashboard },
- { id:'pos', name:'POS', href:'/dashboard/pos', icon: Smartphone, badge:'Live'},
- { 
- id:'sales', 
- name:'Sales', 
- icon: ShoppingBag,
- children: [
- { name:'Overview', href:'/dashboard/sales'},
- { name:'Transactions', href:'/dashboard/sales/list'},
- { name:'Analytics', href:'/dashboard/sales/analytics'},
- ]
- },
- 
- {
- id:'inventory',
- name:'Inventory',
- icon: Package,
- children: [
- { name:'Products', href:'/dashboard/products', badge:'12'},
- { name:'Categories', href:'/dashboard/categories'},
- { name:'Stock Corrections', href:'/dashboard/stock-adjustment'},
- ]
- },
- 
- {
- id:'stock',
- name:'Stock Management',
- icon: Layers,
- children: [
- { name:'In Stock', href:'/dashboard/stock/in-stock'},
- { name:'Out of Stock', href:'/dashboard/stock/out-of-stock'},
- { name:'Expired Products', href:'/dashboard/stock/expired'},
- ]
- },
+  const navigation = [
+    { id: 'dashboard', name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+    { id: 'pos', name: 'POS', href: '/dashboard/pos', icon: Smartphone, badge: 'Live', policy: 'access_pos' },
+    { 
+      id: 'sales', 
+      name: 'Sales', 
+      icon: ShoppingBag,
+      policy: 'view_sales',
+      children: [
+        { name: 'Overview', href: '/dashboard/sales' },
+        { name: 'Transactions', href: '/dashboard/sales/list' },
+        { name: 'Analytics', href: '/dashboard/sales/analytics' },
+      ]
+    },
+    
+    {
+      id: 'inventory',
+      name: 'Inventory',
+      icon: Package,
+      policy: 'view_inventory',
+      children: [
+        { name: 'Products', href: '/dashboard/products', badge: '12' },
+        { name: 'Categories', href: '/dashboard/categories' },
+        { name: 'Stock Corrections', href: '/dashboard/stock-adjustment' },
+      ]
+    },
+    
+    {
+      id: 'stock',
+      name: 'Stock Management',
+      icon: Layers,
+      policy: 'view_inventory',
+      children: [
+        { name: 'In Stock', href: '/dashboard/stock/in-stock' },
+        { name: 'Out of Stock', href: '/dashboard/stock/out-of-stock' },
+        { name: 'Expired Products', href: '/dashboard/stock/expired' },
+      ]
+    },
 
+    {
+      id: 'relations',
+      name: 'Relations',
+      icon: Users,
+      policy: 'view_customers',
+      children: [
+        { name: 'Customers', href: '/dashboard/customers' },
+        { name: 'Suppliers', href: '/dashboard/suppliers' },
+      ]
+    },
 
- {
- id:'relations',
- name:'Relations',
- icon: Users,
- children: [
- { name:'Customers', href:'/dashboard/customers'},
- { name:'Suppliers', href:'/dashboard/suppliers'},
- ]
- },
+    { id: 'purchases', name: 'Procurement', href: '/dashboard/purchases', icon: ShoppingBag, badge: '2 Pending', policy: 'view_purchases' },
+    
+    {
+      id: 'finance',
+      name: 'Finance',
+      href: '/dashboard/finance',
+      icon: Wallet,
+      policy: 'view_income',
+      children: [
+        { name: 'Finance Overview', href: '/dashboard/finance' },
+        { name: 'Daybook', href: '/dashboard/finance/daybook' },
+        { name: 'Balance Sheet', href: '/dashboard/finance/balance-sheet' },
+        { name: 'General Ledger', href: '/dashboard/finance/ledger' },
+      ]
+    },
+    
+    {
+      id: 'reports',
+      name: 'Reports',
+      icon: BarChart3,
+      policy: 'view_reports',
+      children: [
+        { name: 'Market Analytics', href: '/dashboard/reports/analytics' },
+        { name: 'Profit & Loss', href: '/dashboard/reports/profit-loss' },
+        { name: 'Inventory Perf.', href: '/dashboard/reports/inventory' },
+        { name: 'Activity Logs', href: '/dashboard/logs' },
+      ]
+    },
 
- { id:'purchases', name:'Procurement', href:'/dashboard/purchases', icon: ShoppingBag, badge:'2 Pending'},
- 
- {
- id:'finance',
- name:'Finance',
- href:'/dashboard/finance',
- icon: Wallet,
- children: [
- { name:'Finance Overview', href:'/dashboard/finance'},
- { name:'Daybook', href:'/dashboard/finance/daybook'},
- { name:'Balance Sheet', href:'/dashboard/finance/balance-sheet'},
- { name:'General Ledger', href:'/dashboard/finance/ledger'},
- ]
- },
- 
- {
- id:'reports',
- name:'Reports',
- icon: BarChart3,
- children: [
- { name:'Market Analytics', href:'/dashboard/reports/analytics'},
- { name:'Profit & Loss', href:'/dashboard/reports/profit-loss'},
- { name:'Inventory Perf.', href:'/dashboard/reports/inventory'},
- { name:'Activity Logs', href:'/dashboard/logs'},
- ]
- },
+    { id: 'staff', name: 'Staff Management', href: '/dashboard/staff', icon: Network, policy: 'manage_users' },
+    { id: 'expenses', name: 'Business Expenses', href: '/dashboard/expenses', icon: Receipt, policy: 'manage_expenses' },
 
- { id:'payments', name:'Payment Methods', href:'/dashboard/settings/payments', icon: CreditCard },
- { id:'staff', name:'Staff Management', href:'/dashboard/staff', icon: Network },
- { id:'expenses', name:'Business Expenses', href:'/dashboard/expenses', icon: Receipt },
+    { id: 'notifications', name: 'Notifications', href: '/dashboard/notifications', icon: Bell, badge: '3' },
+    
+    { id: 'profile', name: 'Profile', href: '/dashboard/settings/profile', icon: UserRoundCheck },
+    { id: 'settings', name: 'System Settings', href: '/dashboard/settings', icon: Settings, policy: 'system_config' },
+  ]
 
- { id:'notifications', name:'Notifications', href:'/dashboard/notifications', icon: Bell, badge:'3'},
- 
- { id:'profile', name:'Profile', href:'/dashboard/settings/profile', icon: UserRoundCheck },
- { id:'settings', name:'System Settings', href:'/dashboard/settings', icon: Settings },
- ]
+  const filteredNavigation = navigation.filter(item => {
+    if (!item.policy) return true;
+    return hasPolicy(item.policy);
+  });
 
  const sidebarClass = isMobile
  ? cn(
@@ -191,7 +200,7 @@ export function Sidebar({ isSidebarOpen, setIsSidebarOpen, isMobile, pathname, i
 "flex-1 overflow-y-auto custom-scrollbar space-y-1",
  showText ?"p-3":"px-2 py-3"
  )}>
- {navigation.map((item) => {
+  {filteredNavigation.map((item) => {
  const isActive = pathname === item.href || item.children?.some(child => child.href === pathname);
  const isExpanded = openMenus.includes(item.id);
 
