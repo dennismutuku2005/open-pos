@@ -15,14 +15,16 @@ import { cn } from'@/lib/utils'
 import { Card, StatCard } from'@/components/Card'
 import { Modal } from'@/components/Modal'
 import { toast } from'sonner'
+import authService from'@/lib/auth'
+import { useEffect } from 'react'
 
 // Mock Data
 const recentTransactions = [
- { id:'SAL-001', date:'2024-05-04 10:30', customer:'Walking Customer', total: 2450, items: 3, payment:'Cash'},
- { id:'SAL-002', date:'2024-05-04 11:15', customer:'John Doe', total: 1500, items: 1, payment:'M-Pesa'},
- { id:'SAL-003', date:'2024-05-04 12:45', customer:'Walking Customer', total: 4275, items: 5, payment:'Cash'},
- { id:'SAL-004', date:'2024-05-04 14:20', customer:'Jane Smith', total: 850, items: 2, payment:'Card'},
- { id:'SAL-005', date:'2024-05-04 15:50', customer:'Walking Customer', total: 3120, items: 4, payment:'M-Pesa'},
+  { id: 'SAL-001', date: '2024-05-04 10:30', customer: 'Walking Customer', total: 2450, items: 3, payment: 'Cash', businessId: 'biz_1', sellerId: 'user_1' },
+  { id: 'SAL-002', date: '2024-05-04 11:15', customer: 'John Doe', total: 1500, items: 1, payment: 'M-Pesa', businessId: 'biz_1', sellerId: 'user_1' },
+  { id: 'SAL-003', date: '2024-05-04 12:45', customer: 'Walking Customer', total: 4275, items: 5, payment: 'Cash', businessId: 'biz_2', sellerId: 'STF-002' },
+  { id: 'SAL-004', date: '2024-05-04 14:20', customer: 'Jane Smith', total: 850, items: 2, payment: 'Card', businessId: 'biz_1', sellerId: 'STF-002' },
+  { id: 'SAL-005', date: '2024-05-04 15:50', customer: 'Walking Customer', total: 3120, items: 4, payment: 'M-Pesa', businessId: 'biz_3', sellerId: 'STF-003' },
 ]
 
 const todaySellingData = [
@@ -36,9 +38,40 @@ const todaySellingData = [
 ]
 
 export default function SalesManagementPage() {
- const [sales, setSales] = useState(recentTransactions)
- const [showDeleteModal, setShowDeleteModal] = useState(false)
- const [deletingSale, setDeletingSale] = useState(null)
+  const [sales, setSales] = useState(recentTransactions)
+  const [filteredSales, setFilteredSales] = useState(recentTransactions)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [deletingSale, setDeletingSale] = useState(null)
+  const [activeBusiness, setActiveBusiness] = useState(null)
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const userData = authService.getUser()
+    const business = authService.getActiveBusiness()
+    setUser(userData)
+    setActiveBusiness(business)
+  }, [])
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setActiveBusiness(authService.getActiveBusiness());
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
+  useEffect(() => {
+    if (!activeBusiness || !user) return;
+
+    let filtered = recentTransactions.filter(s => s.businessId === activeBusiness.id);
+
+    // Policy Check: View Own Sales Only
+    if (authService.hasPolicy('view_own_sales') && user.type !== 'admin') {
+      filtered = filtered.filter(s => s.sellerId === user.id);
+    }
+
+    setFilteredSales(filtered);
+  }, [activeBusiness, user]);
 
  const handleDelete = (sale) => {
  setDeletingSale(sale)
@@ -47,6 +80,7 @@ export default function SalesManagementPage() {
 
  const confirmDelete = () => {
  setSales(prev => prev.filter(s => s.id !== deletingSale.id))
+ setFilteredSales(prev => prev.filter(s => s.id !== deletingSale.id))
  setShowDeleteModal(false)
  setDeletingSale(null)
  toast.success('Sale transaction record decommissioned')
@@ -182,7 +216,7 @@ export default function SalesManagementPage() {
  </tr>
  </thead>
  <tbody className="divide-y divide-openpos-border">
- {sales.map((sale) => (
+ {filteredSales.map((sale) => (
  <tr key={sale.id} className="group transition-colors cursor-default">
  <td className="px-6 py-3 font-bold text-admin-value uppercase tracking-tight transition-colors">{sale.id}</td>
  <td className="px-6 py-3">
@@ -211,12 +245,14 @@ export default function SalesManagementPage() {
  <button className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim transition-all">
  <Printer size={12} />
  </button>
+ {authService.hasPolicy('delete_sales') && (
  <button 
  onClick={() => handleDelete(sale)}
  className="p-2 bg-card-bg border border-openpos-border rounded-lg text-admin-dim transition-all"
  >
  <Trash2 size={12} />
  </button>
+ )}
  </div>
  </td>
  </tr>
