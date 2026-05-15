@@ -4,7 +4,7 @@ import React, { useState, useEffect, Suspense } from'react'
 import { usePathname, useRouter } from'next/navigation'
 import Link from'next/link'
 import {
- Menu, Bell, ChevronRight, X, LogOut, Search, Shield, Clock
+  Menu, Bell, ChevronRight, X, LogOut, Search, Shield, Clock, Store, ChevronDown
 } from'lucide-react'
 import { Sidebar } from'@/components/Sidebar'
 import { Modal } from'@/components/Modal'
@@ -13,6 +13,7 @@ import ProtectedRoute from'@/components/ProtectedRoute'
 import authService from'@/lib/auth'
 import { ThemeToggle } from'@/components/ThemeToggle'
 import { GlobalSearch } from'@/components/GlobalSearch'
+import { toast } from 'sonner'
 
 export default function DashboardLayout({ children }) {
  const router = useRouter()
@@ -21,6 +22,9 @@ export default function DashboardLayout({ children }) {
  const [isZenMode, setIsZenMode] = useState(false)
  const [showLogoutModal, setShowLogoutModal] = useState(false)
  const [user, setUser] = useState(null)
+ const [businesses, setBusinesses] = useState([])
+ const [activeBusiness, setActiveBusiness] = useState(null)
+ const [showBusinessDropdown, setShowBusinessDropdown] = useState(false)
  const [currentTime, setCurrentTime] = useState(new Date())
  const [mounted, setMounted] = useState(false)
  const pathname = usePathname()
@@ -32,9 +36,20 @@ export default function DashboardLayout({ children }) {
  }, []);
 
  useEffect(() => {
- const userData = authService.getUser()
- setUser(userData)
+   const userData = authService.getUser()
+   setUser(userData)
+   setBusinesses(authService.getBusinesses())
+   setActiveBusiness(authService.getActiveBusiness())
  }, [])
+
+ // Listen for storage events (business changes)
+ useEffect(() => {
+   const handleStorageChange = () => {
+     setActiveBusiness(authService.getActiveBusiness());
+   };
+   window.addEventListener('storage', handleStorageChange);
+   return () => window.removeEventListener('storage', handleStorageChange);
+ }, []);
 
  useEffect(() => {
  const handleResize = () => {
@@ -97,21 +112,86 @@ export default function DashboardLayout({ children }) {
  <Menu size={18} />
  </button>
  <div>
- <div className="flex items-center gap-3">
- <div className="w-5 h-5 rounded-full overflow-hidden border border-openpos-border shrink-0 shadow-sm">
- <img 
- src="https://flagcdn.com/w80/ke.png"
- alt="Kenya"
- className="w-full h-full object-cover"
- />
- </div>
- {getPageName() && (
- <h2 className="text-[12px] font-bold text-admin-value tracking-tight leading-none uppercase">
- {getPageName()}
- </h2>
- )}
- </div>
- </div>
+  <div className="flex items-center gap-3">
+    {/* Business Selector */}
+    <div className="relative">
+      <button 
+        onClick={() => setShowBusinessDropdown(!showBusinessDropdown)}
+        className="flex items-center gap-2 px-3 py-1.5 bg-openpos-blue/5 border border-openpos-blue/10 rounded-lg hover:bg-openpos-blue/10 transition-all group"
+      >
+        <div className="w-6 h-6 rounded-md bg-openpos-blue/10 flex items-center justify-center text-openpos-blue">
+          <Store size={14} />
+        </div>
+        <div className="flex flex-col items-start text-left">
+          <span className="text-[10px] font-bold text-admin-value uppercase tracking-tight leading-none">
+            {activeBusiness?.name || 'Select Business'}
+          </span>
+          <span className="text-[8px] font-bold text-openpos-blue uppercase tracking-widest mt-0.5 opacity-70">
+            {activeBusiness?.role || 'Staff'} Access
+          </span>
+        </div>
+        <ChevronDown size={12} className={cn("text-admin-dim transition-transform duration-300", showBusinessDropdown && "rotate-180")} />
+      </button>
+
+      {showBusinessDropdown && (
+        <>
+          <div 
+            className="fixed inset-0 z-40" 
+            onClick={() => setShowBusinessDropdown(false)}
+          />
+          <div className="absolute top-full left-0 mt-2 w-56 bg-card-bg border border-openpos-border rounded-xl shadow-2xl shadow-openpos-blue/10 z-50 py-2 animate-in fade-in zoom-in-95 duration-200">
+            <div className="px-3 py-2 border-b border-openpos-border mb-1">
+              <p className="text-[9px] font-bold text-admin-dim uppercase tracking-widest">Switch Business</p>
+            </div>
+            <div className="max-h-[300px] overflow-y-auto custom-scrollbar">
+              {businesses.map((biz) => (
+                <button
+                  key={biz.id}
+                  onClick={() => {
+                    authService.setActiveBusiness(biz.id);
+                    setActiveBusiness(biz);
+                    setShowBusinessDropdown(false);
+                    toast.success(`Switched to ${biz.name}`);
+                  }}
+                  className={cn(
+                    "w-full flex items-center gap-3 px-3 py-2.5 transition-all hover:bg-openpos-bg-subtle",
+                    activeBusiness?.id === biz.id ? "bg-openpos-blue/5 border-l-2 border-openpos-blue" : "border-l-2 border-transparent"
+                  )}
+                >
+                  <div className={cn(
+                    "w-8 h-8 rounded-lg flex items-center justify-center font-bold text-[10px]",
+                    activeBusiness?.id === biz.id ? "bg-openpos-blue text-white shadow-lg shadow-openpos-blue/20" : "bg-openpos-bg-subtle text-admin-dim"
+                  )}>
+                    {biz.name.charAt(0)}
+                  </div>
+                  <div className="flex flex-col items-start text-left">
+                    <span className={cn(
+                      "text-[11px] font-bold uppercase tracking-tight",
+                      activeBusiness?.id === biz.id ? "text-openpos-blue" : "text-admin-value"
+                    )}>
+                      {biz.name}
+                    </span>
+                    <span className="text-[9px] font-bold text-admin-dim uppercase tracking-tighter">
+                      {biz.role} Account
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+    
+    <div className="w-px h-6 bg-openpos-border mx-1 hidden sm:block" />
+
+    {getPageName() && (
+      <h2 className="text-[12px] font-bold text-admin-value tracking-tight leading-none uppercase hidden sm:block">
+        {getPageName()}
+      </h2>
+    )}
+  </div>
+</div>
  </div>
 
  <div className="flex items-center gap-6">
