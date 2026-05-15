@@ -19,12 +19,18 @@ class AuthService {
  // Simple demo logic: any non-empty username/password works
  if (username && password) {
  const mockUser = {
- id:'user_1',
- name:'Demo Admin',
+ id: 'user_1',
+ name: 'Demo Admin',
  username: username,
- phone:'+254 700 000 000',
- type:'admin', // superadmin bypasses all policy checks
+ phone: '+254 700 000 000',
+ type: 'admin', // superadmin bypasses all policy checks
  policies: [],
+ businesses: [
+   { id: 'biz_1', name: 'Main Branch POS', role: 'admin' },
+   { id: 'biz_2', name: 'Downtown Shop', role: 'admin' },
+   { id: 'biz_3', name: 'Westlands Outlet', role: 'admin' }
+ ],
+ activeBusinessId: 'biz_1',
  createdAt: new Date().toISOString()
  };
 
@@ -54,6 +60,27 @@ class AuthService {
  if (typeof window ==='undefined') return null;
  const userData = localStorage.getItem(this.userKey);
  return userData ? JSON.parse(userData) : null;
+ }
+ getBusinesses() {
+ const user = this.getUser();
+ return user?.businesses || [];
+ }
+
+ getActiveBusiness() {
+ const user = this.getUser();
+ if (!user) return null;
+ return user.businesses?.find(b => b.id === user.activeBusinessId) || user.businesses?.[0] || null;
+ }
+
+ setActiveBusiness(businessId) {
+ if (typeof window ==='undefined') return;
+ const user = this.getUser();
+ if (user) {
+ user.activeBusinessId = businessId;
+ this.setUser(user);
+ // Trigger a storage event for other components to update
+ window.dispatchEvent(new Event('storage'));
+ }
  }
 
  getToken() {
