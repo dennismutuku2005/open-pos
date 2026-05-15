@@ -16,29 +16,53 @@ import { Modal } from'@/components/Modal'
 import { Loader2 } from 'lucide-react'
 import { generateReport, generateExcelReport } from'@/lib/pdf'
 import { jsPDF } from'jspdf'
+import authService from'@/lib/auth'
+import { useRouter } from'next/navigation'
 
 // Mock Data
 const initialProducts = [
- { id: 1, name:'Logitech MX Master 3S', category:'Accessories', buyPrice: 8500, sellPrice: 12500, stock: 45, expiry:'2026-12-20', barcode:'8901234567890', image:'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&q=80', desc:'Advanced wireless mouse with silent clicks and 8K DPI tracking.'},
- { id: 2, name:'USB-C Hub Multiport', category:'Computing', buyPrice: 2800, sellPrice: 4500, stock: 22, expiry:'2025-11-15', barcode:'8901234567891', image:'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&q=80', desc:'7-in-1 USB C adapter with 4K HDMI, 100W PD, and SD card reader.'},
- { id: 3, name:'Portable SSD 1TB', category:'Storage', buyPrice: 11000, sellPrice: 15500, stock: 18, expiry:'2027-07-10', barcode:'8901234567892', image:'https://images.unsplash.com/photo-1597872200370-493dea23936a?w=400&q=80', desc:'High-speed external solid state drive with up to 1050MB/s read speed.'},
- { id: 4, name:'Mechanical Keyboard', category:'Accessories', buyPrice: 5500, sellPrice: 8900, stock: 12, expiry:'2026-06-30', barcode:'8901234567893', image:'https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=400&q=80', desc:'Hot-swappable mechanical keyboard with RGB backlighting and blue switches.'},
- { id: 5, name:'Webcam 4K Ultra HD', category:'Peripherals', buyPrice: 12000, sellPrice: 18000, stock: 15, expiry:'2025-08-12', barcode:'8901234567894', image:'https://images.unsplash.com/photo-1610483178766-8092dcc6f36a?w=400&q=80', desc:'Professional webcam for streaming and video conferencing with dual mics.'},
- { id: 6, name:'Bluetooth Earbuds', category:'Audio', buyPrice: 4000, sellPrice: 6500, stock: 25, expiry:'2026-06-25', barcode:'8901234567895', image:'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&q=80', desc:'True wireless earbuds with active noise cancellation and 24hr battery.'},
- { id: 7, name:'Monitor Arm Mount', category:'Furniture', buyPrice: 4500, sellPrice: 7200, stock: 30, expiry:'2027-07-05', barcode:'8901234567896', image:'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=400&q=80', desc:'Single monitor desk mount for screens up to 32 inches.'},
- { id: 8, name:'Smart Watch Series 9', category:'Wearables', buyPrice: 32000, sellPrice: 42000, stock: 5, expiry:'2025-06-18', barcode:'8901234567897', image:'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80', desc:'Latest smartwatch with fitness tracking, heart rate monitor and GPS.'},
+  { id: 1, name: 'Logitech MX Master 3S', category: 'Accessories', buyPrice: 8500, sellPrice: 12500, stock: 45, expiry: '2026-12-20', barcode: '8901234567890', image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&q=80', desc: 'Advanced wireless mouse with silent clicks and 8K DPI tracking.', businessId: 'biz_1' },
+  { id: 2, name: 'USB-C Hub Multiport', category: 'Computing', buyPrice: 2800, sellPrice: 4500, stock: 22, expiry: '2025-11-15', barcode: '8901234567891', image: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&q=80', desc: '7-in-1 USB C adapter with 4K HDMI, 100W PD, and SD card reader.', businessId: 'biz_1' },
+  { id: 3, name: 'Portable SSD 1TB', category: 'Storage', buyPrice: 11000, sellPrice: 15500, stock: 18, expiry: '2027-07-10', barcode: '8901234567892', image: 'https://images.unsplash.com/photo-1597872200370-493dea23936a?w=400&q=80', desc: 'High-speed external solid state drive with up to 1050MB/s read speed.', businessId: 'biz_2' },
+  { id: 4, name: 'Mechanical Keyboard', category: 'Accessories', buyPrice: 5500, sellPrice: 8900, stock: 12, expiry: '2026-06-30', barcode: '8901234567893', image: 'https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=400&q=80', desc: 'Hot-swappable mechanical keyboard with RGB backlighting and blue switches.', businessId: 'biz_2' },
+  { id: 5, name: 'Webcam 4K Ultra HD', category: 'Peripherals', buyPrice: 12000, sellPrice: 18000, stock: 15, expiry: '2025-08-12', barcode: '8901234567894', image: 'https://images.unsplash.com/photo-1610483178766-8092dcc6f36a?w=400&q=80', desc: 'Professional webcam for streaming and video conferencing with dual mics.', businessId: 'biz_1' },
 ]
 
 const categories = ['Accessories','Computing','Storage','Peripherals','Audio','Furniture','Wearables','Mobile']
 
 export default function ProductsPage() {
- const [products, setProducts] = useState(initialProducts)
- const [searchQuery, setSearchQuery] = useState('')
- const [showFormModal, setShowFormModal] = useState(false)
- const [showDeleteModal, setShowDeleteModal] = useState(false)
- const [editingProduct, setEditingProduct] = useState(null)
- const [deletingProduct, setDeletingProduct] = useState(null)
- const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter()
+  const [activeBusiness, setActiveBusiness] = useState(null)
+  const [products, setProducts] = useState(initialProducts)
+  const [filteredProducts, setFilteredProducts] = useState(initialProducts)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [showFormModal, setShowFormModal] = useState(false)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [editingProduct, setEditingProduct] = useState(null)
+  const [deletingProduct, setDeletingProduct] = useState(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  useEffect(() => {
+    if (!authService.hasPolicy('view_inventory')) {
+      router.push('/dashboard')
+    }
+    setActiveBusiness(authService.getActiveBusiness())
+  }, [router])
+
+  // Listen for storage events (business changes)
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setActiveBusiness(authService.getActiveBusiness());
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
+  useEffect(() => {
+    if (!activeBusiness) return;
+    const filtered = products.filter(p => p.businessId === activeBusiness.id);
+    setFilteredProducts(filtered);
+  }, [activeBusiness, products]);
  
  const [formData, setFormData] = useState({
  name:'',
@@ -258,7 +282,7 @@ export default function ProductsPage() {
  </tr>
  </thead>
  <tbody className="divide-y divide-openpos-border">
- {products.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.barcode.includes(searchQuery)).map((product) => (
+  {filteredProducts.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.barcode.includes(searchQuery)).map((product) => (
  <tr key={product.id} className="group transition-colors cursor-default">
  <td className="py-3.5 px-6">
  <div className="flex items-center gap-4">
