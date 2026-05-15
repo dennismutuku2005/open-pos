@@ -16,35 +16,56 @@ import { cn } from'@/lib/utils'
 import { toast } from'sonner'
 import { motion, AnimatePresence } from'framer-motion'
 import { generateReceipt } from'@/lib/pdf'
+import authService from'@/lib/auth'
+import { useRouter } from'next/navigation'
 
 // Mock Data
 const products = [
- { id: 1, name:'Logitech MX Master 3S', category:'Accessories', price: 12500, stock: 12, description:'Advanced wireless mouse with silent clicks and 8K DPI tracking.', image:'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&q=80'},
- { id: 2, name:'USB-C Hub Multiport', category:'Computing', price: 4500, stock: 24, description:'7-in-1 USB C adapter with 4K HDMI, 100W PD, and SD card reader.', image:'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&q=80'},
- { id: 3, name:'Portable SSD 1TB', category:'Storage', price: 15500, stock: 18, description:'High-speed external solid state drive with up to 1050MB/s read speed.', image:'https://images.unsplash.com/photo-1597872200370-493dea23936a?w=400&q=80'},
- { id: 4, name:'Mechanical Keyboard', category:'Accessories', price: 8900, stock: 8, description:'Hot-swappable mechanical keyboard with RGB backlighting and blue switches.', image:'https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=400&q=80'},
- { id: 5, name:'Webcam 4K Ultra HD', category:'Peripherals', price: 18000, stock: 15, description:'Professional webcam for streaming and video conferencing with dual mics.', image:'https://images.unsplash.com/photo-1610483178766-8092dcc6f36a?w=400&q=80'},
- { id: 6, name:'Bluetooth Earbuds', category:'Audio', price: 6500, stock: 30, description:'True wireless earbuds with active noise cancellation and 24hr battery.', image:'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&q=80'},
- { id: 7, name:'Monitor Arm Mount', category:'Furniture', price: 7200, stock: 10, description:'Single monitor desk mount for screens up to 32 inches.', image:'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=400&q=80'},
- { id: 8, name:'Power Bank 20000mAh', category:'Mobile', price: 5800, stock: 20, description:'Large capacity power bank with fast charging and multiple ports.', image:'https://images.unsplash.com/photo-1609592806457-99d4ad9b3f3a?w=400&q=80'},
- { id: 9, name:'Laptop Cooling Pad', category:'Computing', price: 3200, stock: 25, description:'Slim and quiet laptop cooler with adjustable height and blue LED.', image:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=400&q=80'},
- { id: 10, name:'Smart Watch Series 9', category:'Wearables', price: 42000, stock: 6, description:'Latest smartwatch with fitness tracking, heart rate monitor and GPS.', image:'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80'},
+  { id: 1, name: 'Logitech MX Master 3S', category: 'Accessories', price: 12500, stock: 12, description: 'Advanced wireless mouse with silent clicks and 8K DPI tracking.', image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&q=80', businessId: 'biz_1' },
+  { id: 2, name: 'USB-C Hub Multiport', category: 'Computing', price: 4500, stock: 24, description: '7-in-1 USB C adapter with 4K HDMI, 100W PD, and SD card reader.', image: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&q=80', businessId: 'biz_1' },
+  { id: 3, name: 'Portable SSD 1TB', category: 'Storage', price: 15500, stock: 18, description: 'High-speed external solid state drive with up to 1050MB/s read speed.', image: 'https://images.unsplash.com/photo-1597872200370-493dea23936a?w=400&q=80', businessId: 'biz_2' },
+  { id: 4, name: 'Mechanical Keyboard', category: 'Accessories', price: 8900, stock: 8, description: 'Hot-swappable mechanical keyboard with RGB backlighting and blue switches.', image: 'https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=400&q=80', businessId: 'biz_2' },
+  { id: 5, name: 'Webcam 4K Ultra HD', category: 'Peripherals', price: 18000, stock: 15, description: 'Professional webcam for streaming and video conferencing with dual mics.', image: 'https://images.unsplash.com/photo-1610483178766-8092dcc6f36a?w=400&q=80', businessId: 'biz_1' },
 ]
 
 export default function POSPage() {
- const [searchQuery, setSearchQuery] = useState('')
- const [cart, setCart] = useState([])
- const [selectedCategory, setSelectedCategory] = useState('All')
- const [showClearCartModal, setShowClearCartModal] = useState(false)
- const [isFullScreen, setIsFullScreen] = useState(false)
+  const router = useRouter()
+  const [activeBusiness, setActiveBusiness] = useState(null)
+  const [user, setUser] = useState(null)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [cart, setCart] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState('All')
+  const [showClearCartModal, setShowClearCartModal] = useState(false)
+  const [isFullScreen, setIsFullScreen] = useState(false)
 
- const categories = ['All', ...new Set(products.map(p => p.category))]
+  useEffect(() => {
+    if (!authService.hasPolicy('access_pos')) {
+      toast.error("Unauthorized Access")
+      router.push('/dashboard')
+    }
+    const userData = authService.getUser()
+    const business = authService.getActiveBusiness()
+    setUser(userData)
+    setActiveBusiness(business)
+  }, [router])
 
- const filteredProducts = products.filter(p => {
- const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase())
- const matchesCategory = selectedCategory ==='All'|| p.category === selectedCategory
- return matchesSearch && matchesCategory
- })
+  // Listen for storage events (business changes)
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setActiveBusiness(authService.getActiveBusiness());
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
+  const categories = ['All', ...new Set(products.map(p => p.category))]
+
+  const filteredProducts = products.filter(p => {
+    const matchesBusiness = p.businessId === activeBusiness?.id
+    const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase())
+    const matchesCategory = selectedCategory === 'All' || p.category === selectedCategory
+    return matchesBusiness && matchesSearch && matchesCategory
+  })
 
  // Checkout Flow State
  const [checkoutStep, setCheckoutStep] = useState('cart') // cart, payment, mpesa, processing, success
